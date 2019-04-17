@@ -6,6 +6,12 @@ BASEDIR=`pwd`
 ARCH=`uname -m`
 OS=`uname -s | tr A-Z a-z`
 
+case $ARCH in
+	x86_64)
+		ARCH=amd64
+		;;
+esac
+
 if [ ! -f linux-${KERNEL_VERSION}.tar.xz ]; then
 	wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${KERNEL_VERSION}.tar.xz
 fi

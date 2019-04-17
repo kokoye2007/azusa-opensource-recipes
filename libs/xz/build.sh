@@ -48,8 +48,6 @@ mksquashfs "dist/pkg/by-name/dev.xz.${XZ_VER}" "dist/dev.xz.${XZ_VER}.${OS}.${AR
 mksquashfs "dist/pkg/by-name/libs.xz.${XZ_VER}" "dist/libs.xz.${XZ_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
 mksquashfs "dist/pkg/by-name/core.xz.${XZ_VER}" "dist/core.xz.${XZ_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
 
-for foo in dist/*.squashfs; do
-	php ~/projects/tpkg-tools/src/convert.php "$foo"
-done
-
-
+if [ x"$HSM" != x ]; then
+	tpkg-convert dist/*.squashfs
+fi

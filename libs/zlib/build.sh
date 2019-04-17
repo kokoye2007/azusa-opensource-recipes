@@ -42,7 +42,6 @@ echo "Building squashfs..."
 mksquashfs "dist/pkg/by-name/dev.zlib.${ZLIB_VER}" "dist/dev.zlib.${ZLIB_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
 mksquashfs "dist/pkg/by-name/libs.zlib.${ZLIB_VER}" "dist/libs.zlib.${ZLIB_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
 
-for foo in dist/*.squashfs; do
-	php ~/projects/tpkg-tools/src/convert.php "$foo"
-done
-
+if [ x"$HSM" != x ]; then
+	tpkg-convert dist/*.squashfs
+fi

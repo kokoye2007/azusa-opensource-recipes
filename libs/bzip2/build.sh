@@ -46,7 +46,6 @@ rsync -a dist/work/include dist/work/lib dist/pkg/by-name/dev.bzip2.${BZIP2_VER}
 mksquashfs "dist/pkg/by-name/dev.bzip2.${BZIP2_VER}" "dist/dev.bzip2.${BZIP2_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
 mksquashfs "dist/pkg/by-name/core.bzip2.${BZIP2_VER}" "dist/core.bzip2.${BZIP2_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
 
-for foo in dist/*.squashfs; do
-	php ~/projects/tpkg-tools/src/convert.php "$foo"
-done
-
+if [ x"$HSM" != x ]; then
+	tpkg-convert dist/*.squashfs
+fi
