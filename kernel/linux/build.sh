@@ -46,7 +46,6 @@ mksquashfs dist/kernel "dist/kernel.linux.core.${KERNEL_VERSION}.${OS}.${ARCH}.s
 mksquashfs dist/modules "dist/kernel.linux.modules.${KERNEL_VERSION}.${OS}.${ARCH}.squashfs" -all-root
 mksquashfs dist/dev "dist/kernel.linux.dev.${KERNEL_VERSION}.${OS}.${ARCH}.squashfs" -all-root
 
-for foo in dist/*.squashfs; do
-	D=3 php ~/projects/tpkg-tools/src/convert.php "$foo"
-done
-
+if [ x"$HSM" != x ]; then
+	tpkg-convert dist/*.squashfs
+fi
