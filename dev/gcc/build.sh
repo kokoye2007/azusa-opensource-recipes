@@ -35,7 +35,7 @@ cd ..
 
 # fix some stuff
 mv dist/usr/include/* dist/pkg/main/dev.gcc.${GCC_VER}/include/
-mv dist/pkg/main/lib* dist/pkg/main/libs.gcc.${GCC_VER}/
+mv dist/pkg/main/lib{32,64} dist/pkg/main/libs.gcc.${GCC_VER}/
 
 echo "Building squashfs..."
 
