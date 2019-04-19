@@ -2,20 +2,12 @@
 set -e
 
 XZ_VER="5.2.4"
-ARCH=`uname -m`
-OS=`uname -s | tr A-Z a-z`
 BASEDIR=`pwd`
+PKG="libs.zlib"
 
-case $ARCH in
-	x86_64)
-		ARCH=amd64
-		;;
-esac
+source "$BASEDIR/../../common/init.sh"
 
-# fetch xz, compile, build
-if [ ! -f xz-${XZ_VER}.tar.bz2 ]; then
-	wget https://tukaani.org/xz/xz-${XZ_VER}.tar.bz2
-fi
+get https://tukaani.org/xz/xz-${XZ_VER}.tar.bz2
 
 if [ ! -d xz-${XZ_VER} ]; then
 	echo "Extracting xz-${XZ_VER} ..."
@@ -23,30 +15,37 @@ if [ ! -d xz-${XZ_VER} ]; then
 fi
 
 echo "Compiling xz-${XZ_VER} ..."
-cd xz-${XZ_VER}
-if [ -f Makefile ]; then
-	make distclean >make_distclean.log 2>&1
+if [ -d work ]; then
+	rm -fr work
 fi
+mkdir work
+cd work
 
 # configure & build
-./configure >configure.log 2>&1 --prefix=/usr --sysconfdir=/etc --exec-prefix=/pkg/by-name/core.xz.${XZ_VER} \
---includedir=/pkg/by-name/dev.xz.${XZ_VER}/include --libdir=/pkg/by-name/libs.xz.${XZ_VER} --datarootdir=/pkg/by-name/core.xz.${XZ_VER}/share \
---mandir=/pkg/by-name/dev.xz.${XZ_VER}/share/man --docdir=/pkg/by-name/dev.xz.${XZ_VER}/share/doc/xz
+../xz-${XZ_VER}/configure >configure.log 2>&1 --prefix=/usr --sysconfdir=/etc --exec-prefix=/pkg/main/core.xz.${XZ_VER} \
+--includedir=/pkg/main/dev.xz.${XZ_VER}/include --libdir=/pkg/main/libs.xz.${XZ_VER}/lib --datarootdir=/pkg/main/core.xz.${XZ_VER}/share \
+--mandir=/pkg/main/doc.xz.${XZ_VER}/man --docdir=/pkg/main/doc.xz.${XZ_VER}/doc
+
 make >make.log 2>&1
 mkdir -p ../dist
 make >make_install.log 2>&1 install DESTDIR="${BASEDIR}/dist"
 
 cd ..
 
+mkdir -p "dist/pkg/main/dev.xz.${XZ_VER}/lib"
+mv "dist/pkg/main/libs.xz.${XZ_VER}/lib"/*.a "dist/pkg/main/dev.xz.${XZ_VER}/lib"
+mv "dist/pkg/main/libs.xz.${XZ_VER}/lib/pkgconfig" "dist/pkg/main/dev.xz.${XZ_VER}/"
+
 echo "Building squashfs..."
 
 # build squashfs files
-# dist/pkg/by-name/dev.xz.${XZ_VER}
-# dist/pkg/by-name/libs.xz.${XZ_VER}
+# dist/pkg/main/dev.xz.${XZ_VER}
+# dist/pkg/main/libs.xz.${XZ_VER}
 
-mksquashfs "dist/pkg/by-name/dev.xz.${XZ_VER}" "dist/dev.xz.${XZ_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
-mksquashfs "dist/pkg/by-name/libs.xz.${XZ_VER}" "dist/libs.xz.${XZ_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
-mksquashfs "dist/pkg/by-name/core.xz.${XZ_VER}" "dist/core.xz.${XZ_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
+squash "dist/pkg/main/dev.xz.${XZ_VER}"
+squash "dist/pkg/main/doc.xz.${XZ_VER}"
+squash "dist/pkg/main/libs.xz.${XZ_VER}"
+squash "dist/pkg/main/core.xz.${XZ_VER}"
 
 if [ x"$HSM" != x ]; then
 	tpkg-convert dist/*.squashfs
