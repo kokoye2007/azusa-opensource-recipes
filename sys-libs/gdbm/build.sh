@@ -24,7 +24,8 @@ cd work
 # configure & build
 ../gdbm-${GDBM_VER}/configure >configure.log 2>&1 --prefix=/usr --sysconfdir=/etc --exec-prefix=/pkg/main/core.gdbm.${GDBM_VER} \
 --includedir=/pkg/main/dev.gdbm.${GDBM_VER}/include --libdir=/pkg/main/libs.gdbm.${GDBM_VER}/lib --datarootdir=/pkg/main/core.gdbm.${GDBM_VER} \
---mandir=/pkg/main/doc.gdbm.${GDBM_VER}/man --docdir=/pkg/main/doc.gdbm.${GDBM_VER}/doc
+--mandir=/pkg/main/doc.gdbm.${GDBM_VER}/man --docdir=/pkg/main/doc.gdbm.${GDBM_VER}/doc \
+--enable-libgdbm-compat
 
 make >make.log 2>&1
 mkdir -p ../dist
