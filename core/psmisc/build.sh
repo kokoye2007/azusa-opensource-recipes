@@ -2,10 +2,10 @@
 set -e
 
 PSMISC_VER=23.2
-BAPSMISCIR=`pwd`
+BASEDIR=`pwd`
 PKG="core.psmisc"
 
-source "$BAPSMISCIR/../../common/init.sh"
+source "$BASEDIR/../../common/init.sh"
 
 get https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.2.tar.xz
 
@@ -28,7 +28,7 @@ cd work
 
 make >make.log 2>&1
 mkdir -p ../dist
-make >make_install.log 2>&1 install DESTDIR="${BAPSMISCIR}/dist"
+make >make_install.log 2>&1 install DESTDIR="${BASEDIR}/dist"
 
 cd ..
 

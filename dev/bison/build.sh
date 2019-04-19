@@ -2,10 +2,10 @@
 set -e
 
 BISON_VER=3.3.2
-BABISONIR=`pwd`
+BASEDIR=`pwd`
 PKG="dev.bison"
 
-source "$BABISONIR/../../common/init.sh"
+source "$BASEDIR/../../common/init.sh"
 
 get http://ftp.gnu.org/gnu/bison/bison-${BISON_VER}.tar.xz
 
@@ -28,7 +28,7 @@ cd work
 
 make >make.log 2>&1
 mkdir -p ../dist
-make >make_install.log 2>&1 install DESTDIR="${BABISONIR}/dist"
+make >make_install.log 2>&1 install DESTDIR="${BASEDIR}/dist"
 
 cd ..
 
