@@ -14,10 +14,8 @@ if [ ! -d busybox-${BUSYBOX_VER} ]; then
 	tar xf busybox-${BUSYBOX_VER}.tar.bz2
 fi
 
-exit
-
 echo "Compiling busybox-${BUSYBOX_VER} ..."
-cp config-${BUSYBOX_VER} busybox-${BUSYBOX_VER}
+cp config-${BUSYBOX_VER} busybox-${BUSYBOX_VER}/.config
 
 cd busybox-${BUSYBOX_VER}
 make >make.log 2>&1
@@ -25,6 +23,7 @@ make >make_install.log 2>&1 install
 
 cd ..
 
+mkdir -p "dist/pkg/main/core.busybox.${BUSYBOX_VER}/"
 rsync -a busybox-${BUSYBOX_VER}/_install/ "dist/pkg/main/core.busybox.${BUSYBOX_VER}/"
 
 echo "Building squashfs..."

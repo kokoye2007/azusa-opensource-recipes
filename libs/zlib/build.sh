@@ -2,19 +2,12 @@
 set -e
 
 ZLIB_VER=1.2.11
-ARCH=`uname -m`
-OS=`uname -s | tr A-Z a-z`
+BASEDIR=`pwd`
+PKG="libs.zlib"
 
-case $ARCH in
-	x86_64)
-		ARCH=amd64
-		;;
-esac
+source "$BASEDIR/../../common/init.sh"
 
-# fetch zlib, compile, build
-if [ ! -f zlib-${ZLIB_VER}.tar.gz ]; then
-	wget http://zlib.net/zlib-${ZLIB_VER}.tar.gz
-fi
+get http://zlib.net/zlib-${ZLIB_VER}.tar.gz
 
 if [ ! -d zlib-${ZLIB_VER} ]; then
 	echo "Extracting zlib-${ZLIB_VER} ..."
@@ -22,25 +15,29 @@ if [ ! -d zlib-${ZLIB_VER} ]; then
 fi
 
 echo "Compiling zlib-${ZLIB_VER} ..."
-cd zlib-${ZLIB_VER}
-make distclean >make_distclean.log 2>&1
+if [ -d work ]; then
+	rm -fr work
+fi
+mkdir work
+cd work
 
 # configure & build
-./configure >configure.log 2>&1 --prefix=/pkg/by-name/dev.zlib.${ZLIB_VER} --libdir=/pkg/by-name/libs.zlib.${ZLIB_VER}
+../zlib-${ZLIB_VER}/configure >configure.log 2>&1 --prefix=/pkg/main/dev.zlib.${ZLIB_VER} --libdir=/pkg/main/libs.zlib.${ZLIB_VER}/lib
 make >make.log 2>&1
 mkdir -p ../dist
 make >make_install.log 2>&1 install DESTDIR=../dist
 
 cd ..
 
+mkdir -p "dist/pkg/main/dev.zlib.${ZLIB_VER}/lib"
+mv "dist/pkg/main/libs.zlib.${ZLIB_VER}/lib"/*.a "dist/pkg/main/dev.zlib.${ZLIB_VER}/lib"
+mv "dist/pkg/main/libs.zlib.${ZLIB_VER}/lib/pkgconfig" "dist/pkg/main/dev.zlib.${ZLIB_VER}/"
+
+
 echo "Building squashfs..."
 
-# build squashfs files
-# dist/pkg/by-name/dev.zlib.${ZLIB_VER}
-# dist/pkg/by-name/libs.zlib.${ZLIB_VER}
-
-mksquashfs "dist/pkg/by-name/dev.zlib.${ZLIB_VER}" "dist/dev.zlib.${ZLIB_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
-mksquashfs "dist/pkg/by-name/libs.zlib.${ZLIB_VER}" "dist/libs.zlib.${ZLIB_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
+squash "dist/pkg/main/dev.zlib.${ZLIB_VER}"
+squash "dist/pkg/main/libs.zlib.${ZLIB_VER}"
 
 if [ x"$HSM" != x ]; then
 	tpkg-convert dist/*.squashfs
