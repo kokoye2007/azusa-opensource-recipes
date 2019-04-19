@@ -15,9 +15,20 @@ esac
 
 get() {
 	BN=`basename $1`
-	if [ ! -f "$BN" ]; then
-		wget $1
+	if [ -f "$BN" ]; then
+		return
 	fi
+
+	# try to get from our system
+	wget https://pkg.tardigradeos.com/src/main/${PKG/.//}/${BN} || true
+	if [ -f "$BN" ]; then
+		return
+	fi
+
+	# failed download, get file, then upload...
+	wget "$1"
+
+	aws s3 cp "$BN" s3://tpkg//src/main/${PKG/.//}/${BN}
 }
 
 squash() {
