@@ -2,19 +2,12 @@
 set -e
 
 BZIP2_VER=1.0.6
-ARCH=`uname -m`
-OS=`uname -s | tr A-Z a-z`
+BASEDIR=`pwd`
+PKG="libs.bzip2"
 
-case $ARCH in
-	x86_64)
-		ARCH=amd64
-		;;
-esac
+source "$BASEDIR/../../common/init.sh"
 
-# fetch bzip2, compile, build
-if [ ! -f bzip2-${BZIP2_VER}.tar.gz ]; then
-	wget https://sourceware.org/pub/bzip2/bzip2-${BZIP2_VER}.tar.gz
-fi
+get https://sourceware.org/pub/bzip2/bzip2-${BZIP2_VER}.tar.gz
 
 if [ ! -d bzip2-${BZIP2_VER} ]; then
 	echo "Extracting bzip2-${BZIP2_VER} ..."
@@ -25,26 +18,37 @@ echo "Compiling bzip2-${BZIP2_VER} ..."
 cd bzip2-${BZIP2_VER}
 make distclean >make_distclean.log 2>&1
 
+# relative symlinks
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+
 # configure & build
-make >make.log 2>&1
-mkdir -p ../dist
+make >make.log 2>&1 -f Makefile-libbz2_so
+make >>make.log 2>&1 clean
+make >>make.log 2>&1
+
+# install
+mkdir -p ../dist/work
 make >make_install.log 2>&1 install PREFIX=../dist/work
+
+mkdir -p ../dist/pkg/main/{libs,core,dev}.bzip2.${BZIP2_VER}
+
+# shared libs
+mkdir ../dist/pkg/main/libs.bzip2.${BZIP2_VER}/lib
+cp -a libbz2.so* ../dist/pkg/main/libs.bzip2.${BZIP2_VER}/lib
+
+# copy stuff
+mv ../dist/work/bin ../dist/pkg/main/core.bzip2.${BZIP2_VER}/
+mv ../dist/work/man ../dist/pkg/main/core.bzip2.${BZIP2_VER}/
+mv ../dist/work/include ../dist/pkg/main/dev.bzip2.${BZIP2_VER}/
 
 cd ..
 
 
 echo "Building squashfs..."
 
-# build squashfs files
-# dist/pkg/by-name/core.bzip2.${BZIP2_VER} (bin, man)
-# dist/pkg/by-name/dev.bzip2.${BZIP2_VER} (include, lib)
-
-mkdir -p dist/pkg/by-name/
-rsync -a dist/work/bin dist/work/man dist/pkg/by-name/core.bzip2.${BZIP2_VER}/
-rsync -a dist/work/include dist/work/lib dist/pkg/by-name/dev.bzip2.${BZIP2_VER}/
-
-mksquashfs "dist/pkg/by-name/dev.bzip2.${BZIP2_VER}" "dist/dev.bzip2.${BZIP2_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
-mksquashfs "dist/pkg/by-name/core.bzip2.${BZIP2_VER}" "dist/core.bzip2.${BZIP2_VER}.${OS}.${ARCH}.squashfs" -all-root -b 4096
+squash "dist/pkg/main/core.bzip2.${BZIP2_VER}"
+squash "dist/pkg/main/libs.bzip2.${BZIP2_VER}"
+squash "dist/pkg/main/dev.bzip2.${BZIP2_VER}"
 
 if [ x"$HSM" != x ]; then
 	tpkg-convert dist/*.squashfs

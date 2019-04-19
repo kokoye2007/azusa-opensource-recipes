@@ -28,7 +28,7 @@ get() {
 	# failed download, get file, then upload...
 	wget "$1"
 
-	aws s3 cp "$BN" s3://tpkg//src/main/${PKG/.//}/${BN}
+	aws s3 cp "$BN" s3://tpkg/src/main/${PKG/.//}/${BN}
 }
 
 squash() {
