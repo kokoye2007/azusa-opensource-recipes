@@ -28,9 +28,10 @@ FILESDIR="${BASEDIR}/files"
 
 CHPATH=/tmp/build/${PKG}/${PVR}/work
 D=/tmp/build/${PKG}/${PVR}/dist
+T=/tmp/build/${PKG}/${PVR}/temp
 TPKGOUT=/tmp/tpkg
 
-mkdir -p "${CHPATH}" "${TPKGOUT}" "${D}"
+mkdir -p "${CHPATH}" "${TPKGOUT}" "${D}" "${T}"
 cd ${CHPATH}
 
 get() {
@@ -60,11 +61,22 @@ finalize() {
 	cd "${D}"
 
 	# fix common issues
+	if [ -d "pkg/main/${PKG}.libs.${PVR}/lib" ]; then
+		# check for any .a file, move to dev
+		count=`find "pkg/main/${PKG}.libs.${PVR}/lib" -name '*.a' | wc -l`
+		if [ $count -gt 0 ]; then
+			mkdir -p "pkg/main/${PKG}.dev.${PVR}/lib"
+			mv "pkg/main/${PKG}.libs.${PVR}/lib"/*.a "pkg/main/${PKG}.dev.${PVR}/lib"
+		fi
+	fi
+
 	if [ -d "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" ]; then
+		# pkgconfig should be in dev
 		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
 		mv "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
 	fi
 	if [ -d "pkg/main/${PKG}.core.${PVR}/info" ]; then
+		# info should be in doc
 		mkdir -p "pkg/main/${PKG}.doc.${PVR}"
 		mv "pkg/main/${PKG}.core.${PVR}/info" "pkg/main/${PKG}.doc.${PVR}"
 	fi
