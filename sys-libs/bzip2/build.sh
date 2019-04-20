@@ -3,7 +3,7 @@ set -e
 
 BZIP2_VER=1.0.6
 BASEDIR=`pwd`
-PKG="libs.bzip2"
+PKG="sys-libs.bzip2"
 
 source "$BASEDIR/../../common/init.sh"
 
@@ -30,25 +30,26 @@ make >>make.log 2>&1
 mkdir -p ../dist/work
 make >make_install.log 2>&1 install PREFIX=../dist/work
 
-mkdir -p ../dist/pkg/main/{libs,core,dev}.bzip2.${BZIP2_VER}
+mkdir -p ../dist/pkg/main/${PKG}.{libs,core,dev,doc}.${BZIP2_VER}
 
 # shared libs
-mkdir ../dist/pkg/main/libs.bzip2.${BZIP2_VER}/lib
-cp -a libbz2.so* ../dist/pkg/main/libs.bzip2.${BZIP2_VER}/lib
+mkdir ../dist/pkg/main/${PKG}.libs.${BZIP2_VER}/lib
+cp -a libbz2.so* ../dist/pkg/main/${PKG}.libs.${BZIP2_VER}/lib
 
 # copy stuff
-mv ../dist/work/bin ../dist/pkg/main/core.bzip2.${BZIP2_VER}/
-mv ../dist/work/man ../dist/pkg/main/core.bzip2.${BZIP2_VER}/
-mv ../dist/work/include ../dist/pkg/main/dev.bzip2.${BZIP2_VER}/
+mv ../dist/work/bin ../dist/pkg/main/${PKG}.core.${BZIP2_VER}/
+mv ../dist/work/man ../dist/pkg/main/${PKG}.doc.${BZIP2_VER}/
+mv ../dist/work/include ../dist/pkg/main/${PKG}.dev.${BZIP2_VER}/
 
 cd ..
 
 
 echo "Building squashfs..."
 
-squash "dist/pkg/main/core.bzip2.${BZIP2_VER}"
-squash "dist/pkg/main/libs.bzip2.${BZIP2_VER}"
-squash "dist/pkg/main/dev.bzip2.${BZIP2_VER}"
+squash "dist/pkg/main/${PKG}.core.${BZIP2_VER}"
+squash "dist/pkg/main/${PKG}.libs.${BZIP2_VER}"
+squash "dist/pkg/main/${PKG}.dev.${BZIP2_VER}"
+squash "dist/pkg/main/${PKG}.doc.${BZIP2_VER}"
 
 if [ x"$HSM" != x ]; then
 	tpkg-convert dist/*.squashfs
