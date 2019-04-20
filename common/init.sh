@@ -1,5 +1,7 @@
 # Common stuff, variables, etc
+set -e
 
+BASEDIR=`pwd`
 ARCH=`uname -m`
 OS=`uname -s | tr A-Z a-z`
 
@@ -22,7 +24,13 @@ P=${PF}
 PV=$(echo ${P} | cut -d- -f2-)
 PVR=$(echo ${PF} | cut -d- -f2-)
 PKG="${CATEGORY}.${PN}"
+FILESDIR="${BASEDIR}/files"
 
+CHPATH=/tmp/build/${PKG}/${PVR}/work
+TPKGOUT=/tmp/tpkg
+
+mkdir -p "${CHPATH}" "${TPKGOUT}"
+cd ${CHPATH}
 
 get() {
 	BN=`basename $1`
@@ -44,7 +52,7 @@ get() {
 
 squash() {
 	FN=`basename $1`
-	mksquashfs "$1" "dist/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
+	mksquashfs "$1" "${TPKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
 }
 
 finalize() {
@@ -65,6 +73,6 @@ finalize() {
 	done
 
 	if [ x"$HSM" != x ]; then
-		tpkg-convert dist/*.squashfs
+		tpkg-convert $TPKGOUT/*.squashfs
 	fi
 }

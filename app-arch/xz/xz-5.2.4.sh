@@ -1,8 +1,5 @@
 #!/bin/sh
-set -e
-
-BASEDIR=`pwd`
-source "$BASEDIR/../../common/init.sh"
+source "../../common/init.sh"
 
 get https://tukaani.org/xz/${P}.tar.bz2
 
@@ -24,10 +21,10 @@ cd work
 --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc
 
 make >make.log 2>&1
-mkdir -p ../dist
-make >make_install.log 2>&1 install DESTDIR="${BASEDIR}/dist"
+mkdir -p "${CHPATH}/dist"
+make >make_install.log 2>&1 install DESTDIR="${CHPATH}/dist"
 
-cd ..
+cd "${CHPATH}"
 
 mkdir -p "dist/pkg/main/${PKG}.dev.${PVR}/lib"
 mv "dist/pkg/main/${PKG}.libs.${PVR}/lib"/*.a "dist/pkg/main/${PKG}.dev.${PVR}/lib"
