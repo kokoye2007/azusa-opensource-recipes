@@ -3,7 +3,7 @@ set -e
 
 BZIP2_VER=1.0.6
 BASEDIR=`pwd`
-PKG="sys-libs.bzip2"
+PKG="app-arch.bzip2"
 
 source "$BASEDIR/../../common/init.sh"
 

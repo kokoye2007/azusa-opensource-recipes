@@ -12,6 +12,17 @@ case $ARCH in
 		;;
 esac
 
+# define variables - this should work most of the time
+# variable naming is based on gentoo
+PF=$(basename $0 .sh)
+PN=$(basename $(pwd))
+CATEGORY=$(basename $(dirname $(pwd)))
+# TODO fix P to not include revision if any
+P=${PF}
+PV=$(echo ${P} | cut -d- -f2-)
+PVR=$(echo ${PF} | cut -d- -f2-)
+PKG="${CATEGORY}.${PN}"
+
 
 get() {
 	BN=`basename $1`
@@ -20,7 +31,7 @@ get() {
 	fi
 
 	# try to get from our system
-	wget https://pkg.tardigradeos.com/src/main/${PKG/.//}/${BN} || true
+	wget https://pkg.tardigradeos.com/src/main/${CATEGORY}/${PN}/${BN} || true
 	if [ -f "$BN" ]; then
 		return
 	fi
@@ -34,4 +45,26 @@ get() {
 squash() {
 	FN=`basename $1`
 	mksquashfs "$1" "dist/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
+}
+
+finalize() {
+	# fix common issues
+	if [ -d "dist/pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" ]; then
+		mkdir -p "dist/pkg/main/${PKG}.dev.${PVR}"
+		mv "dist/pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" "dist/pkg/main/${PKG}.dev.${PVR}"
+	fi
+	if [ -d "dist/pkg/main/${PKG}.core.${PVR}/info" ]; then
+		mkdir -p "dist/pkg/main/${PKG}.doc.${PVR}"
+		mv "dist/pkg/main/${PKG}.core.${PVR}/info" "dist/pkg/main/${PKG}.doc.${PVR}"
+	fi
+
+	echo "Building squashfs..."
+
+	for foo in dist/pkg/main/${PKG}.*; do
+		squash "$foo"
+	done
+
+	if [ x"$HSM" != x ]; then
+		tpkg-convert dist/*.squashfs
+	fi
 }
