@@ -19,3 +19,4 @@ mkdir -p "${D}/pkg/main/${PKG}.${PVR}/"
 rsync -a ./_install/ "${D}/pkg/main/${PKG}.${PVR}/"
 
 finalize
+cleanup
