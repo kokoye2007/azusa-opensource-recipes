@@ -27,9 +27,10 @@ PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 
 CHPATH=/tmp/build/${PKG}/${PVR}/work
+D=/tmp/build/${PKG}/${PVR}/dist
 TPKGOUT=/tmp/tpkg
 
-mkdir -p "${CHPATH}" "${TPKGOUT}"
+mkdir -p "${CHPATH}" "${TPKGOUT}" "${D}"
 cd ${CHPATH}
 
 get() {
@@ -56,23 +57,30 @@ squash() {
 }
 
 finalize() {
+	cd "${D}"
+
 	# fix common issues
-	if [ -d "dist/pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" ]; then
-		mkdir -p "dist/pkg/main/${PKG}.dev.${PVR}"
-		mv "dist/pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" "dist/pkg/main/${PKG}.dev.${PVR}"
+	if [ -d "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" ]; then
+		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
+		mv "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
 	fi
-	if [ -d "dist/pkg/main/${PKG}.core.${PVR}/info" ]; then
-		mkdir -p "dist/pkg/main/${PKG}.doc.${PVR}"
-		mv "dist/pkg/main/${PKG}.core.${PVR}/info" "dist/pkg/main/${PKG}.doc.${PVR}"
+	if [ -d "pkg/main/${PKG}.core.${PVR}/info" ]; then
+		mkdir -p "pkg/main/${PKG}.doc.${PVR}"
+		mv "pkg/main/${PKG}.core.${PVR}/info" "pkg/main/${PKG}.doc.${PVR}"
 	fi
 
 	echo "Building squashfs..."
 
-	for foo in dist/pkg/main/${PKG}.*; do
+	for foo in pkg/main/${PKG}.*; do
 		squash "$foo"
 	done
 
 	if [ x"$HSM" != x ]; then
 		tpkg-convert $TPKGOUT/*.squashfs
 	fi
+}
+
+cleanup() {
+	echo "Cleaning up..."
+	rm -fr "/tmp/build/${PKG}/${PVR}"
 }
