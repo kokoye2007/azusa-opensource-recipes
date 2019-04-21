@@ -95,19 +95,15 @@ finalize() {
 		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
 		mv "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
 	fi
-	if [ -d "pkg/main/${PKG}.core.${PVR}/info" ]; then
-		# info should be in doc
-		mkdir -p "pkg/main/${PKG}.doc.${PVR}"
-		mv "pkg/main/${PKG}.core.${PVR}/info" "pkg/main/${PKG}.doc.${PVR}"
-		rmdir "pkg/main/${PKG}.core.${PVR}" || true
-	fi
-	if [ -d "pkg/main/${PKG}.core.${PVR}/share/info" ]; then
-		# info should be in doc
-		mkdir -p "pkg/main/${PKG}.doc.${PVR}"
-		mv "pkg/main/${PKG}.core.${PVR}/share/info" "pkg/main/${PKG}.doc.${PVR}"
-		rmdir "pkg/main/${PKG}.core.${PVR}/share" || true
-		rmdir "pkg/main/${PKG}.core.${PVR}" || true
-	fi
+	for foo in man info share/man share/info; do
+		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
+			# this should be in doc
+			mkdir -p "pkg/main/${PKG}.doc.${PVR}"
+			mv "pkg/main/${PKG}.core.${PVR}/$foo" "pkg/main/${PKG}.doc.${PVR}"
+			rmdir "pkg/main/${PKG}.core.${PVR}/$foo" || true
+			rmdir "pkg/main/${PKG}.core.${PVR}" || true
+		fi
+	done
 
 	echo "Building squashfs..."
 
