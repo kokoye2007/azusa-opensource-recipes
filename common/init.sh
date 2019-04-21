@@ -63,7 +63,13 @@ get() {
 
 squash() {
 	FN=`basename $1`
-	mksquashfs "$1" "${TPKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
+
+	if [ `id -u` -eq 0 ]; then
+		# running as root, so we don't need -all-root
+		mksquashfs "$1" "${TPKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -nopad -noappend
+	else
+		mksquashfs "$1" "${TPKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
+	fi
 }
 
 finalize() {
@@ -106,8 +112,24 @@ cleanup() {
 	rm -fr "/tmp/build/${PKG}/${PVR}"
 }
 
+callconf() {
+	# try to locate configure
+	if [ -x ./configure ]; then
+		./configure >configure.log 2>&1 "$@"
+		return
+	fi
+	if [ -x ${CHPATH}/${P}/configure ]; then
+		${CHPATH}/${P}/configure >configure.log 2>&1 "$@"
+		return
+	fi
+
+	echo "doconf: Could not locate configure"
+	exit 1
+}
+
 doconf() {
-	${CHPATH}/${P}/configure >configure.log 2>&1 --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
+	echo "Running configure..."
+	callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
 	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
 	--mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc "$@"
 }
