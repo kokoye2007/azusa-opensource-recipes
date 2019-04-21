@@ -124,11 +124,11 @@ cleanup() {
 callconf() {
 	# try to locate configure
 	if [ -x ./configure ]; then
-		./configure >configure.log 2>&1 "$@"
+		./configure "$@"
 		return
 	fi
 	if [ -x ${CHPATH}/${P}/configure ]; then
-		${CHPATH}/${P}/configure >configure.log 2>&1 "$@"
+		${CHPATH}/${P}/configure "$@"
 		return
 	fi
 
