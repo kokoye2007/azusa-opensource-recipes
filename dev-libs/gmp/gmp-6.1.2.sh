@@ -25,3 +25,5 @@ cd "${D}"
 mv pkg/main/${PKG}.core.${PVR}/include/gmp.h pkg/main/${PKG}.dev.${PVR}/include/
 rmdir pkg/main/${PKG}.core.${PVR}/include
 
+finalize
+cleanup
