@@ -25,5 +25,9 @@ cd "${D}"
 mv pkg/main/${PKG}.core.${PVR}/include/gmp.h pkg/main/${PKG}.dev.${PVR}/include/
 rmdir pkg/main/${PKG}.core.${PVR}/include
 
+mkdir -p pkg/main/${PKG}.doc.${PVR}
+mv pkg/main/${PKG}.core.${PVR}/share/info pkg/main/${PKG}.doc.${PVR}
+rmdir pkg/main/${PKG}.core.${PVR}/share
+rmdir pkg/main/${PKG}.core.${PVR}
+
 finalize
-cleanup
