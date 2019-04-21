@@ -21,8 +21,8 @@ PN=$(basename $(pwd))
 CATEGORY=$(basename $(dirname $(pwd)))
 # TODO fix P to not include revision if any
 P=${PF}
-PV=$(echo ${P} | cut -d- -f2-)
-PVR=$(echo ${PF} | cut -d- -f2-)
+PVR=${P#"${PN}-"}
+PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 
