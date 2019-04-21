@@ -40,21 +40,26 @@ extract() {
 }
 
 get() {
-	BN=`basename $1`
-	if [ -f "$BN" ]; then
+	if [ "x$2" = x"" ]; then
+		BN=`basename $1`
+	else
+		BN="$2"
+	fi
+
+	if [ -s "$BN" ]; then
 		extract "$BN"
 		return
 	fi
 
 	# try to get from our system
-	wget https://pkg.tardigradeos.com/src/main/${CATEGORY}/${PN}/${BN} || true
-	if [ -f "$BN" ]; then
+	wget -O "$BN" https://pkg.tardigradeos.com/src/main/${CATEGORY}/${PN}/${BN} || true
+	if [ -s "$BN" ]; then
 		extract "$BN"
 		return
 	fi
 
 	# failed download, get file, then upload...
-	wget "$1"
+	wget -O "$BN" "$1"
 
 	aws s3 cp "$BN" s3://tpkg/src/main/${PKG/.//}/${BN}
 
@@ -94,6 +99,12 @@ finalize() {
 		# info should be in doc
 		mkdir -p "pkg/main/${PKG}.doc.${PVR}"
 		mv "pkg/main/${PKG}.core.${PVR}/info" "pkg/main/${PKG}.doc.${PVR}"
+	fi
+	if [ -d "pkg/main/${PKG}.core.${PVR}/share/info" ]; then
+		# info should be in doc
+		mkdir -p "pkg/main/${PKG}.doc.${PVR}"
+		mv "pkg/main/${PKG}.core.${PVR}/share/info" "pkg/main/${PKG}.doc.${PVR}"
+		rmdir "pkg/main/${PKG}.core.${PVR}/share" || true
 	fi
 
 	echo "Building squashfs..."
