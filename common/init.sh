@@ -34,15 +34,22 @@ TPKGOUT=/tmp/tpkg
 mkdir -p "${CHPATH}" "${TPKGOUT}" "${D}" "${T}"
 cd ${CHPATH}
 
+extract() {
+	echo "Extracting $1 ..."
+	tar xf $1
+}
+
 get() {
 	BN=`basename $1`
 	if [ -f "$BN" ]; then
+		extract "$BN"
 		return
 	fi
 
 	# try to get from our system
 	wget https://pkg.tardigradeos.com/src/main/${CATEGORY}/${PN}/${BN} || true
 	if [ -f "$BN" ]; then
+		extract "$BN"
 		return
 	fi
 
@@ -50,6 +57,8 @@ get() {
 	wget "$1"
 
 	aws s3 cp "$BN" s3://tpkg/src/main/${PKG/.//}/${BN}
+
+	extract "$BN"
 }
 
 squash() {

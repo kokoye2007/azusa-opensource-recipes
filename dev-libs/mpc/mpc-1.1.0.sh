@@ -21,3 +21,5 @@ ${CHPATH}/${P}/configure >configure.log 2>&1 --prefix=/pkg/main/${PKG}.core.${PV
 make >make.log 2>&1
 make >make_install.log 2>&1 install DESTDIR="${D}"
 
+finalize
+cleanup
