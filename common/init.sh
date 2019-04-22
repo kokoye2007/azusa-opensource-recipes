@@ -31,6 +31,10 @@ D=/tmp/build/${PKG}/${PVR}/dist
 T=/tmp/build/${PKG}/${PVR}/temp
 TPKGOUT=/tmp/tpkg
 
+if [ -d "/tmp/build/${PKG}/${PVR}" ]; then
+	# cleanup
+	rm -fr "/tmp/build/${PKG}/${PVR}"
+fi
 mkdir -p "${CHPATH}" "${TPKGOUT}" "${D}" "${T}"
 cd ${CHPATH}
 
@@ -81,14 +85,23 @@ finalize() {
 	cd "${D}"
 
 	# fix common issues
-	if [ -d "pkg/main/${PKG}.libs.${PVR}/lib" ]; then
-		# check for any .a file, move to dev
-		count=`find "pkg/main/${PKG}.libs.${PVR}/lib" -name '*.a' | wc -l`
-		if [ $count -gt 0 ]; then
-			mkdir -p "pkg/main/${PKG}.dev.${PVR}/lib"
-			mv "pkg/main/${PKG}.libs.${PVR}/lib"/*.a "pkg/main/${PKG}.dev.${PVR}/lib"
+	if [ "$ARCH" = amd64 ]; then
+		if [ -d "pkg/main/${PKG}.libs.${PVR}/lib" ]; then
+			mv "pkg/main/${PKG}.libs.${PVR}/lib" "pkg/main/${PKG}.libs.${PVR}/lib64"
+			ln -s lib64 "pkg/main/${PKG}.libs.${PVR}/lib"
 		fi
 	fi
+
+	for foo in lib32 lib64 lib; do
+		if [ -d "pkg/main/${PKG}.libs.${PVR}/$foo" ]; then
+			# check for any .a file, move to dev
+			count=`find "pkg/main/${PKG}.libs.${PVR}/$foo" -name '*.a' | wc -l`
+			if [ $count -gt 0 ]; then
+				mkdir -p "pkg/main/${PKG}.dev.${PVR}/$foo"
+				mv "pkg/main/${PKG}.libs.${PVR}/$foo"/*.a "pkg/main/${PKG}.dev.${PVR}/$foo"
+			fi
+		fi
+	done
 
 	if [ -d "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" ]; then
 		# pkgconfig should be in dev
