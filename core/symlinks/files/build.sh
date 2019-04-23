@@ -18,7 +18,7 @@ for p in $(find /home/magicaltux/projects/tpkg-tools/repo/tpkg/dist/main/ -minde
 
 	for foo in $DIRS; do
 		if [ -d "${p}/$foo" ]; then
-			ln -snfv "${p}/$foo"/* "$foo/"
+			cp -rsf "${p}/$foo"/* "$foo" || true
 			case $foo in
 			lib*)
 				realpath "${p}/$foo" >>etc/ld.so.conf
