@@ -12,4 +12,8 @@ doconf --without-bash-malloc --with-installed-readline
 make
 make install DESTDIR="${D}"
 
+# add sh symlink
+cd "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+ln -snf bash sh
+
 finalize
