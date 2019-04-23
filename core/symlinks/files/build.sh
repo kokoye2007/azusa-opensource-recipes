@@ -21,7 +21,7 @@ for p in $(find /home/magicaltux/projects/tpkg-tools/repo/tpkg/dist/main/ -minde
 			ln -snfv "${p}/$foo"/* "$foo/"
 			case $foo in
 			lib*)
-				echo "${p}/$foo" >>etc/ld.so.conf
+				realpath "${p}/$foo" >>etc/ld.so.conf
 				;;
 			esac
 		fi
