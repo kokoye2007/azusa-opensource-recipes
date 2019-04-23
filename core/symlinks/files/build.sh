@@ -11,7 +11,7 @@ mkdir etc
 if [ $MULTILIB = yes ]; then
 	mkdir lib32 lib64
 	ln -s lib64 lib
-	LIBS=lib64 lib32 lib
+	LIBS="lib64 lib32 lib"
 
 	ln -s /pkg/main/sys-libs.glibc.core/lib/ld-linux-x86-64.so.2 lib64
 else

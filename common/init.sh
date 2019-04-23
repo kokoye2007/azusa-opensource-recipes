@@ -35,7 +35,7 @@ if [ -d "/tmp/build/${PKG}/${PVR}" ]; then
 	# cleanup
 	rm -fr "/tmp/build/${PKG}/${PVR}"
 fi
-mkdir -p "${CHPATH}" "${TPKGOUT}" "${D}" "${T}"
+mkdir -p "${CHPATH}" "${D}" "${T}"
 cd ${CHPATH}
 
 extract() {
@@ -72,6 +72,7 @@ get() {
 
 squash() {
 	FN=`basename $1`
+	mkdir -p "${TPKGOUT}"
 
 	if [ `id -u` -eq 0 ]; then
 		# running as root, so we don't need -all-root
