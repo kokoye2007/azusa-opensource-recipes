@@ -1,13 +1,23 @@
 #!/bin/sh
 set -e
 
-DIRS="bin sbin lib pkgconfig lib32 lib64 info include"
+DIRS="bin sbin pkgconfig info include"
+MULTILIB=yes
 
 cd $1
 mkdir -p $DIRS
-rmdir lib
-ln -s lib64 lib
 mkdir etc
+
+if [ $MULTILIB = yes ]; then
+	mkdir lib32 lib64
+	ln -s lib64 lib
+	LIBS=lib64 lib32 lib
+
+	ln -s /pkg/main/sys-libs.glibc.core/lib/ld-linux-x86-64.so.2 lib64
+else
+	LIBS=lib
+	mkdir lib
+fi
 
 for p in $(find /home/magicaltux/projects/tpkg-tools/repo/tpkg/dist/main/ -mindepth 2 -maxdepth 3 -type d -printf '%P\n' | grep -v busybox | grep -v symlinks); do
 	p=/pkg/main/${p//\//.}
@@ -15,15 +25,15 @@ for p in $(find /home/magicaltux/projects/tpkg-tools/repo/tpkg/dist/main/ -minde
 		continue
 	fi
 
-
 	for foo in $DIRS; do
 		if [ -d "${p}/$foo" ]; then
 			cp -rsf "${p}/$foo"/* "$foo" || true
-			case $foo in
-			lib*)
-				realpath "${p}/$foo" >>etc/ld.so.conf
-				;;
-			esac
+		fi
+	done
+
+	for foo in $LIBS; do
+		if [ -d "${p}/$foo" ]; then
+			realpath "${p}/$foo" >>etc/ld.so.conf
 		fi
 	done
 
