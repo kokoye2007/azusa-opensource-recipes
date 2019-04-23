@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz ${P}.tar.xz
+get https://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz
 
 cd "Python-${PV}"
 

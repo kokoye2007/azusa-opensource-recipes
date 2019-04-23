@@ -7,7 +7,7 @@ cd "${P}"
 
 doconf --disable-static --disable-kill
 
-make >make.log 2>&1
-make >make_install.log 2>&1 install DESTDIR="${D}"
+make
+make install DESTDIR="${D}"
 
 finalize

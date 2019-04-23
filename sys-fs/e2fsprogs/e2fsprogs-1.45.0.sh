@@ -7,7 +7,7 @@ cd "${T}"
 
 doconf --enable-elf-shlibs --disable-libblkid --disable-libuuid --disable-uuidd --disable-fsck
 
-make >make.log 2>&1
-make >make_install.log 2>&1 install DESTDIR="${D}"
+make
+make install DESTDIR="${D}"
 
 finalize
