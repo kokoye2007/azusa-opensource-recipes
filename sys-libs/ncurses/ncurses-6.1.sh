@@ -24,8 +24,11 @@ mv usr/share/pkgconfig "pkg/main/${PKG}.dev.${PVR}/"
 
 cd "pkg/main/${PKG}.libs.${PVR}/lib64"
 for lib in ncurses form panel menu ; do
-	echo "INPUT(-l${lib}w)" > lib${lib}.so
-	echo "INPUT(-l${lib}w)" > lib${lib}.so.6
+	# workaround for bash
+	ln -snf lib${lib}w.so lib${lib}.so
+	ln -snf lib${lib}w.so.6 lib${lib}.so.6
+	#echo "INPUT(-l${lib}w)" > lib${lib}.so
+	#echo "INPUT(-l${lib}w)" > lib${lib}.so.6
 done
 
 finalize
