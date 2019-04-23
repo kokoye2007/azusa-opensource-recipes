@@ -3,18 +3,13 @@ source "../../common/init.sh"
 
 get https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/${P}.tar.gz
 
-if [ ! -d ${P} ]; then
-	echo "Extracting ${P} ..."
-	tar xf ${P}.tar.gz
-	sed -i '/install.*STALIBNAME/d' ${P}/libcap/Makefile
-fi
+sed -i '/install.*STALIBNAME/d' ${P}/libcap/Makefile
 
-echo "Compiling ${P} ..."
 cd ${P}
 
 # configure & build
-make >make.log 2>&1
-make >make_install.log 2>&1 install RAISE_SETFCAP=no prefix="${D}/work"
+make
+make install RAISE_SETFCAP=no prefix="${D}/work"
 
 cd "${D}"
 
@@ -26,4 +21,3 @@ mv work/lib64 "pkg/main/${PKG}.libs.${PVR}"
 mv work/share/man "pkg/main/${PKG}.doc.${PVR}"
 
 finalize
-cleanup
