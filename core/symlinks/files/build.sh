@@ -26,13 +26,13 @@ for p in $(tpkg-ctrl tpkgdb/main?action=list | grep -v busybox | grep -v symlink
 	fi
 
 	for foo in $DIRS; do
-		if [ -d "${p}/$foo" ]; then
+		if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 			cp -rsf "${p}/$foo"/* "$foo" || true
 		fi
 	done
 
 	for foo in $LIBS; do
-		if [ -d "${p}/$foo" ]; then
+		if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 			echo "${p}/$foo" >>etc/ld.so.conf
 		fi
 	done
@@ -41,7 +41,7 @@ for p in $(tpkg-ctrl tpkgdb/main?action=list | grep -v busybox | grep -v symlink
 		for foo in "${p}/man"/*; do
 			m=`basename "$foo"`
 			mkdir -p "man/$m"
-			ln -snfv "$foo"/* "man/$m/"
+			ln -snf "$foo"/* "man/$m/"
 		done
 	fi
 
