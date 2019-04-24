@@ -19,8 +19,8 @@ else
 	mkdir lib
 fi
 
-for p in $(find /home/magicaltux/projects/tpkg-tools/repo/tpkg/dist/main/ -mindepth 2 -maxdepth 3 -type d -printf '%P\n' | grep -v busybox | grep -v symlinks); do
-	p=/pkg/main/${p//\//.}
+for p in $(tpkg-ctrl tpkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
+	p=/pkg/main/${p}
 	if [ ! -d "${p}" ]; then
 		continue
 	fi
@@ -33,7 +33,7 @@ for p in $(find /home/magicaltux/projects/tpkg-tools/repo/tpkg/dist/main/ -minde
 
 	for foo in $LIBS; do
 		if [ -d "${p}/$foo" ]; then
-			realpath "${p}/$foo" >>etc/ld.so.conf
+			echo "${p}/$foo" >>etc/ld.so.conf
 		fi
 	done
 
