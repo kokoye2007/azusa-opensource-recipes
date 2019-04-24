@@ -88,7 +88,14 @@ finalize() {
 	# fix common issues
 	if [ "$ARCH" = amd64 ]; then
 		if [ -d "pkg/main/${PKG}.libs.${PVR}/lib" ]; then
-			mv "pkg/main/${PKG}.libs.${PVR}/lib" "pkg/main/${PKG}.libs.${PVR}/lib64"
+			if [ -d "pkg/main/${PKG}.libs.${PVR}/lib64" ]; then
+				# move contents
+				mv "pkg/main/${PKG}.libs.${PVR}/lib"/* "pkg/main/${PKG}.libs.${PVR}/lib64/"
+				rmdir "pkg/main/${PKG}.libs.${PVR}/lib"
+			else
+				# rename
+				mv "pkg/main/${PKG}.libs.${PVR}/lib" "pkg/main/${PKG}.libs.${PVR}/lib64"
+			fi
 			ln -s lib64 "pkg/main/${PKG}.libs.${PVR}/lib"
 		fi
 	fi
