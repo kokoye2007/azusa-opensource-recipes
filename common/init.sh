@@ -4,6 +4,7 @@ set -e
 BASEDIR=`pwd`
 ARCH=`uname -m`
 OS=`uname -s | tr A-Z a-z`
+MULTILIB=no
 
 case $ARCH in
 	i?86)
@@ -11,6 +12,7 @@ case $ARCH in
 		;;
 	x86_64)
 		ARCH=amd64
+		MULTILIB=yes
 		;;
 esac
 
@@ -85,6 +87,13 @@ squash() {
 finalize() {
 	cd "${D}"
 
+	LIBS=lib
+	LIB=lib
+	if [ $MULTILIB = yes ]; then
+		LIBS="lib64 lib32"
+		LIB=lib64
+	fi
+
 	# fix common issues
 	if [ "$ARCH" = amd64 ]; then
 		if [ -d "pkg/main/${PKG}.libs.${PVR}/lib" ]; then
@@ -99,23 +108,36 @@ finalize() {
 			ln -s lib64 "pkg/main/${PKG}.libs.${PVR}/lib"
 		fi
 	fi
+	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" ]; then
+		# pkgconfig should be in dev
+		mkdir -p "pkg/main/${PKG}.dev.${PVR}/$LIB"
+		mv "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
+		ln -s ../pkgconfig "pkg/main/${PKG}.dev.${PVR}/$LIB"
+	fi
+	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
+		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
+		mv "pkg/main/${PKG}.core.${PVR}/include" "pkg/main/${PKG}.dev.${PVR}/include"
+		ln -s "/pkg/main/${PKG}.dev.${PVR}/include" "pkg/main/${PKG}.core.${PVR}/include"
+	fi
 
-	for foo in lib32 lib64 lib; do
+	for foo in $LIBS; do
 		if [ -d "pkg/main/${PKG}.libs.${PVR}/$foo" ]; then
 			# check for any .a file, move to dev
+			mkdir -p "pkg/main/${PKG}.dev.${PVR}/$foo"
+			if [ $foo = lib64 ]; then
+				ln -s lib64 "pkg/main/${PKG}.dev.${PVR}/lib"
+			fi
 			count=`find "pkg/main/${PKG}.libs.${PVR}/$foo" -name '*.a' | wc -l`
 			if [ $count -gt 0 ]; then
-				mkdir -p "pkg/main/${PKG}.dev.${PVR}/$foo"
 				mv "pkg/main/${PKG}.libs.${PVR}/$foo"/*.a "pkg/main/${PKG}.dev.${PVR}/$foo"
 			fi
+			# link whatever remains to dev
+			for bar in "pkg/main/${PKG}.libs.${PVR}/$foo"/*; do
+				ln -s "/$bar" "pkg/main/${PKG}.dev.${PVR}/$foo"
+			done
 		fi
 	done
 
-	if [ -d "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" ]; then
-		# pkgconfig should be in dev
-		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
-		mv "pkg/main/${PKG}.libs.${PVR}/lib/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
-	fi
 	for foo in man info share/man share/info; do
 		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
 			# this should be in doc
