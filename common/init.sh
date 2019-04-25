@@ -95,25 +95,27 @@ finalize() {
 	fi
 
 	# fix common issues
-	if [ "$ARCH" = amd64 ]; then
-		if [ -d "pkg/main/${PKG}.libs.${PVR}/lib" ]; then
-			if [ -d "pkg/main/${PKG}.libs.${PVR}/lib64" ]; then
-				# move contents
-				mv "pkg/main/${PKG}.libs.${PVR}/lib"/* "pkg/main/${PKG}.libs.${PVR}/lib64/"
-				rmdir "pkg/main/${PKG}.libs.${PVR}/lib"
-			else
-				# rename
-				mv "pkg/main/${PKG}.libs.${PVR}/lib" "pkg/main/${PKG}.libs.${PVR}/lib64"
+	if [ $MULTILIB = yes ]; then
+		for foo in core libs dev; do
+			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -L "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
+				if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
+					mv "pkg/main/${PKG}.$foo.${PVR}/lib"/* "pkg/main/${PKG}.$foo.${PVR}/$LIB/"
+					rmdir "pkg/main/${PKG}.$foo.${PVR}/lib"
+				else
+					mv "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
+				fi
+				ln -s "$LIB" "pkg/main/${PKG}.core.${PVR}/lib"
 			fi
-			ln -s lib64 "pkg/main/${PKG}.libs.${PVR}/lib"
-		fi
+		done
 	fi
+
 	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" ]; then
 		# pkgconfig should be in dev
 		mkdir -p "pkg/main/${PKG}.dev.${PVR}/$LIB"
 		mv "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
 		ln -s ../pkgconfig "pkg/main/${PKG}.dev.${PVR}/$LIB"
 	fi
+
 	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
 		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
 		mv "pkg/main/${PKG}.core.${PVR}/include" "pkg/main/${PKG}.dev.${PVR}/include"
