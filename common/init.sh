@@ -58,7 +58,7 @@ get() {
 	fi
 
 	# try to get from our system
-	wget -O "$BN" https://pkg.tardigradeos.com/src/main/${CATEGORY}/${PN}/${BN} || true
+	wget -O "$BN" https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN} || true
 	if [ -s "$BN" ]; then
 		extract "$BN"
 		return
@@ -104,7 +104,9 @@ finalize() {
 				else
 					mv "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
 				fi
-				ln -s "$LIB" "pkg/main/${PKG}.core.${PVR}/lib"
+				if [ -d "pkg/main/${PKG}.core.${PVR}" ]; then
+					ln -s "$LIB" "pkg/main/${PKG}.core.${PVR}/lib"
+				fi
 			fi
 		done
 	fi

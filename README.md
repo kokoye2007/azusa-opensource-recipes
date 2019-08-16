@@ -1,4 +1,4 @@
-# TardigradeOS package recipes
+# AzusaOS package recipes
 
 Scripts and patches used to build apkg files for various pieces of software.
 
