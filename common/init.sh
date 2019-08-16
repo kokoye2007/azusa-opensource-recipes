@@ -31,7 +31,7 @@ FILESDIR="${BASEDIR}/files"
 CHPATH=/tmp/build/${PKG}/${PVR}/work
 D=/tmp/build/${PKG}/${PVR}/dist
 T=/tmp/build/${PKG}/${PVR}/temp
-TPKGOUT=/tmp/tpkg
+APKGOUT=/tmp/apkg
 
 if [ -d "/tmp/build/${PKG}/${PVR}" ]; then
 	# cleanup
@@ -67,20 +67,20 @@ get() {
 	# failed download, get file, then upload...
 	wget -O "$BN" "$1"
 
-	aws s3 cp "$BN" s3://tpkg/src/main/${PKG/.//}/${BN}
+	aws s3 cp "$BN" s3://azusa-pkg/src/main/${PKG/.//}/${BN}
 
 	extract "$BN"
 }
 
 squash() {
 	FN=`basename $1`
-	mkdir -p "${TPKGOUT}"
+	mkdir -p "${APKGOUT}"
 
 	if [ `id -u` -eq 0 ]; then
 		# running as root, so we don't need -all-root
-		mksquashfs "$1" "${TPKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -nopad -noappend
+		mksquashfs "$1" "${APKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -nopad -noappend
 	else
-		mksquashfs "$1" "${TPKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
+		mksquashfs "$1" "${APKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
 	fi
 }
 
@@ -157,7 +157,7 @@ finalize() {
 	done
 
 	if [ x"$HSM" != x ]; then
-		tpkg-convert $TPKGOUT/*.squashfs
+		apkg-convert $APKGOUT/*.squashfs
 	fi
 }
 

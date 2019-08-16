@@ -19,7 +19,7 @@ else
 	mkdir lib
 fi
 
-for p in $(tpkg-ctrl tpkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
+for p in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	p=/pkg/main/${p}
 	if [ ! -d "${p}" ]; then
 		continue
