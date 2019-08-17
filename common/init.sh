@@ -30,14 +30,15 @@ PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 
-CHPATH=/tmp/build/${PKG}/${PVR}/work
-D=/tmp/build/${PKG}/${PVR}/dist
-T=/tmp/build/${PKG}/${PVR}/temp
+TMPBASE="$HOME/tmp/build"
+CHPATH="${TMPBASE}/${PKG}/${PVR}/work"
+D="${TMPBASE}/${PKG}/${PVR}/dist"
+T="${TMPBASE}/${PKG}/${PVR}/temp"
 APKGOUT=/tmp/apkg
 
-if [ -d "/tmp/build/${PKG}/${PVR}" ]; then
+if [ -d "${TMPBASE}/${PKG}/${PVR}" ]; then
 	# cleanup
-	rm -fr "/tmp/build/${PKG}/${PVR}"
+	rm -fr "${TMPBASE}/${PKG}/${PVR}"
 fi
 mkdir -p "${CHPATH}" "${D}" "${T}"
 cd ${CHPATH}
@@ -167,7 +168,7 @@ finalize() {
 
 cleanup() {
 	echo "Cleaning up..."
-	rm -fr "/tmp/build/${PKG}/${PVR}"
+	rm -fr "${TMPBASE}/${PKG}/${PVR}"
 }
 
 callconf() {
@@ -178,6 +179,12 @@ callconf() {
 	fi
 	if [ -x ${CHPATH}/${P}/configure ]; then
 		${CHPATH}/${P}/configure "$@"
+		return
+	fi
+
+	CONFPATH=`echo "${CHPATH}"/*/configure`
+	if [ -x "$CONFPATH" ]; then
+		"${CONFPATH}" "$@"
 		return
 	fi
 
