@@ -97,6 +97,15 @@ finalize() {
 		LIB=lib64
 	fi
 
+	# ensure lib dirs are in libs
+	for foo in lib lib32 lib64; do
+		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" ] && [ ! -d "pkg/main/${PKG}.libs.${PVR}/$foo" ]; then
+			mkdir -p "pkg/main/${PKG}.libs.${PVR}"
+			mv "pkg/main/${PKG}.core.${PVR}/$foo" "pkg/main/${PKG}.libs.${PVR}"
+			ln -s "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
+		fi
+	done
+
 	# fix common issues
 	if [ $MULTILIB = yes ]; then
 		for foo in core libs dev; do
@@ -118,7 +127,7 @@ finalize() {
 		# pkgconfig should be in dev
 		mkdir -p "pkg/main/${PKG}.dev.${PVR}/$LIB"
 		mv "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
-		ln -s ../pkgconfig "pkg/main/${PKG}.dev.${PVR}/$LIB"
+		ln -s "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.libs.${PVR}/$LIB"
 	fi
 
 	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
