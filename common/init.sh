@@ -116,6 +116,10 @@ finalize() {
 				else
 					mv "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
 				fi
+				if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
+					# create a symlink lib→lib64 (or whatever)
+					ln -s "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
+				fi
 				if [ -d "pkg/main/${PKG}.core.${PVR}" ]; then
 					ln -s "$LIB" "pkg/main/${PKG}.core.${PVR}/lib"
 				fi
