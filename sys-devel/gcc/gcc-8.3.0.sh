@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://mirrors-usa.go-parts.com/gcc/releases/${P}/${P}.tar.xz
+get http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/${P}/${P}.tar.xz
 
 cd "${T}"
 
