@@ -9,10 +9,12 @@ MULTILIB=no
 case $ARCH in
 	i?86)
 		ARCH=386
+		LIB_SUFFIX=
 		;;
 	x86_64)
 		ARCH=amd64
 		MULTILIB=yes
+		LIB_SUFFIX=64
 		;;
 esac
 
