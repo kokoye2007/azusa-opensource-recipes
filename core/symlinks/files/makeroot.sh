@@ -41,8 +41,6 @@ cp -f /pkg/main/core.apkg/apkg "$BASE/usr/azusa/apkg"
 if [ $USER = root ]; then
 	mknod -m 600 "$BASE/dev/console" c 5 1
 	mknod -m 666 "$BASE/dev/null" c 1 3
-	mknod -m 622 "$BASE/dev/console" c 5 1
-	mknod -m 666 "$BASE/dev/null" c 1 3
 	mknod -m 666 "$BASE/dev/zero" c 1 5
 	mknod -m 666 "$BASE/dev/ptmx" c 5 2
 	mknod -m 666 "$BASE/dev/tty" c 5 0
