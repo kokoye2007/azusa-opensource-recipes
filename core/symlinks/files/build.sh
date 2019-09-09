@@ -6,7 +6,8 @@ MULTILIB=yes
 
 cd $1
 mkdir -p $DIRS
-mkdir etc
+mkdir etc etc/ssl
+ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
 	mkdir lib32 lib64

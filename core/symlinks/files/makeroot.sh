@@ -9,7 +9,7 @@ if [ x"$BASE" = x -o ! -d "$BASE" ]; then
 	exit 1
 fi
 
-for foo in root sys proc etc dev dev/pts dev/shm tmp pkg usr usr/azusa usr/share home; do
+for foo in root sys proc etc etc/ssl dev dev/pts dev/shm tmp pkg usr usr/azusa usr/share home; do
 	if [ ! -d "$BASE/$foo" ]; then
 		mkdir "$BASE/$foo"
 	fi
