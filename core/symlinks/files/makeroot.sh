@@ -44,6 +44,7 @@ if [ $USER = root ]; then
 	mknod -m 666 "$BASE/dev/zero" c 1 5
 	mknod -m 666 "$BASE/dev/ptmx" c 5 2
 	mknod -m 666 "$BASE/dev/tty" c 5 0
+	mknod -m 666 "$BASE/dev/fuse" c 10 229
 	mknod -m 444 "$BASE/dev/random" c 1 8
 	mknod -m 444 "$BASE/dev/urandom" c 1 9
 	chown root:tty $BASE/dev/{console,ptmx,tty}
