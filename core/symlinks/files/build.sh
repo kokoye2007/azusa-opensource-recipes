@@ -31,6 +31,7 @@ for p in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlink
 		fi
 	done
 
+	# TODO: check if third element of package name is "libs"
 	for foo in $LIBS; do
 		if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 			echo "${p}/$foo" >>etc/ld.so.conf
@@ -47,6 +48,10 @@ for p in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlink
 
 	echo $p
 done
+
+# copy the "makeroot" script
+mkdir asuza
+cp "$FILESDIR/makeroot.sh" azusa
 
 echo "Generating ld.so.cache..."
 /pkg/main/sys-libs.glibc.core/sbin/ldconfig -X -C etc/ld.so.cache -f etc/ld.so.conf 
