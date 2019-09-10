@@ -9,7 +9,7 @@ if [ x"$BASE" = x -o ! -d "$BASE" ]; then
 	exit 1
 fi
 
-for foo in root sys proc etc etc/ssl dev dev/pts dev/shm tmp pkg usr usr/azusa usr/share home; do
+for foo in root sys proc etc etc/ssl dev dev/pts dev/shm tmp pkg usr usr/azusa usr/share home var var/run var/log; do
 	if [ ! -d "$BASE/$foo" ]; then
 		mkdir "$BASE/$foo"
 	fi
@@ -55,4 +55,35 @@ fi
 if [ ! -f "$BASE/etc/resolv.conf" ]; then
 	echo "nameserver 8.8.8.8" >"$BASE/etc/resolv.conf"
 	echo "nameserver 8.8.4.4" >>"$BASE/etc/resolv.conf"
+fi
+
+if [ ! -f "$BASE/etc/passwd" ]; then
+	echo "root:x:0:0:root:/root:/bin/bash" >"$BASE/etc/passwd"
+fi
+
+if [ ! -f "$BASE/etc/group" ]; then
+	cat >"$BASE/etc/group" <<"EOF"
+root:x:0:
+bin:x:1:
+sys:x:2:
+kmem:x:3:
+tty:x:4:
+tape:x:5:
+daemon:x:6:
+floppy:x:7:
+disk:x:8:
+lp:x:9:
+dialout:x:10:
+audio:x:11:
+video:x:12:
+utmp:x:13:
+usb:x:14:
+EOF
+fi
+
+# touch/etc
+touch "$BASE/var/run/utmp" "$BASE/var/log/"{btmp,lastlog,wtmp}
+chmod 664 "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
+if [ $USER = root ]; then
+	chgrp utmp "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
 fi
