@@ -20,8 +20,8 @@ else
 	mkdir lib
 fi
 
-for p in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
-	p=/pkg/main/${p}
+for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
+	p=/pkg/main/${pn}
 	if [ ! -d "${p}" ]; then
 		continue
 	fi
@@ -32,12 +32,14 @@ for p in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlink
 		fi
 	done
 
-	# TODO: check if third element of package name is "libs"
-	for foo in $LIBS; do
-		if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
-			echo "${p}/$foo" >>etc/ld.so.conf
-		fi
-	done
+	# check if third element of package name is "libs"
+	if [ x`echo "$pn" | cut -d. -f3` = x"libs" ]; then
+		for foo in $LIBS; do
+			if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
+				echo "${p}/$foo" >>etc/ld.so.conf
+			fi
+		done
+	fi
 
 	if [ -d "${p}/man" ]; then
 		for foo in "${p}/man"/*; do
