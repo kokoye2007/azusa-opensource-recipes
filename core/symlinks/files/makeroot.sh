@@ -78,6 +78,16 @@ audio:x:11:
 video:x:12:
 utmp:x:13:
 usb:x:14:
+man:x:15:
+wheel:x:16:
+news:x:17:
+uucp:x:18:
+console:x:19:
+cdrom:x:20:
+cdrw:x:21:
+input:x:22:
+nogroup:x:65533:
+nobody:x:65534:
 EOF
 fi
 
