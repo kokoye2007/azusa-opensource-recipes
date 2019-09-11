@@ -21,4 +21,4 @@ mv etc "pkg/main/${PKG}.core.${PVR}"
 #mv var "pkg/main/${PKG}.core.${PVR}"
 #rmdir sbin
 
-finalize
+archive

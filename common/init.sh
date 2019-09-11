@@ -169,6 +169,10 @@ finalize() {
 		fi
 	done
 
+	archive
+}
+
+archive() {
 	echo "Building squashfs..."
 
 	for foo in pkg/main/${PKG}.*; do
@@ -209,6 +213,6 @@ callconf() {
 doconf() {
 	echo "Running configure..."
 	callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
-	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
+	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
 	--mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc "$@"
 }

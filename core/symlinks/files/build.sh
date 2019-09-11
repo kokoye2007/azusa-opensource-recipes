@@ -14,7 +14,7 @@ if [ $MULTILIB = yes ]; then
 	ln -s lib64 lib
 	LIBS="lib64 lib32 lib"
 
-	ln -s `realpath /pkg/main/sys-libs.glibc.core/lib64/ld-linux-x86-64.so.2` lib64
+	ln -s `realpath /pkg/main/sys-libs.glibc.core`/lib64/ld-linux-x86-64.so.2 lib64
 	ln -s `realpath /pkg/main/sys-libs.glibc.libs`/lib64/*.o lib64
 	realpath /pkg/main/sys-libs.glibc.core/lib64 >etc/ld.so.conf
 else
