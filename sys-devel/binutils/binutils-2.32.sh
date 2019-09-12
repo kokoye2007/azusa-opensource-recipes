@@ -3,6 +3,9 @@ source "../../common/init.sh"
 
 get https://ftp.gnu.org/gnu/binutils/${P}.tar.xz
 
+# default libpath should include glibc path so gcc can find -lc
+export LIB_PATH=/lib:/pkg/main/sys-libs.glibc.libs/lib64
+
 cd "${T}"
 
 # configure & build
