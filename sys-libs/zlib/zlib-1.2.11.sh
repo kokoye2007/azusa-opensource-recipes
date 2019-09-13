@@ -12,7 +12,7 @@ echo "Compiling ${P} ..."
 cd "${T}"
 
 # configure & build
-${CHPATH}/${P}/configure >configure.log 2>&1 --prefix=/pkg/main/${PKG}.dev.${PVR} --libdir=/pkg/main/${PKG}.libs.${PVR}/lib
+${CHPATH}/${P}/configure >configure.log 2>&1 --prefix=/pkg/main/${PKG}.dev.${PVR} --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
 make
 make install DESTDIR=${D}
 

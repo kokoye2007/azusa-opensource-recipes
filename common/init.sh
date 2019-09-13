@@ -30,6 +30,9 @@ PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 
+# make pkg-config use our libs
+export PKG_CONFIG_LIBDIR=/pkg/main/core.symlinks/pkgconfig
+
 TMPBASE="$HOME/tmp/build"
 CHPATH="${TMPBASE}/${PKG}/${PVR}/work"
 D="${TMPBASE}/${PKG}/${PVR}/dist"
@@ -97,11 +100,13 @@ finalize() {
 		LIB=lib64
 	fi
 
-	# ensure lib dirs are in libs
+	# ensure lib dirs are in libs and not core
 	for foo in lib lib32 lib64; do
-		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" ] && [ ! -d "pkg/main/${PKG}.libs.${PVR}/$foo" ]; then
-			mkdir -p "pkg/main/${PKG}.libs.${PVR}"
-			mv "pkg/main/${PKG}.core.${PVR}/$foo" "pkg/main/${PKG}.libs.${PVR}"
+		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
+			echo "Moving core $foo directory to libs"
+			mkdir -p "pkg/main/${PKG}.libs.${PVR}/$foo"
+			mv "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}"
+			rm -fr "pkg/main/${PKG}.core.${PVR}/$foo"
 			ln -s "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
 		fi
 	done
@@ -109,21 +114,9 @@ finalize() {
 	# fix common issues
 	if [ $MULTILIB = yes ]; then
 		for foo in core libs dev; do
-			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -L "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
-				if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
-					mv "pkg/main/${PKG}.$foo.${PVR}/lib"/* "pkg/main/${PKG}.$foo.${PVR}/$LIB/"
-					rmdir "pkg/main/${PKG}.$foo.${PVR}/lib"
-				else
-					mv "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
-				fi
-				if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
-					# create a symlink lib→lib64 (or whatever)
-					#rm "pkg/main/${PKG}.$foo.${PVR}/lib"
-					ln -s "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
-				fi
-				#if [ -d "pkg/main/${PKG}.core.${PVR}" ]; then
-					#ln -s "$LIB" "pkg/main/${PKG}.core.${PVR}/lib"
-				#fi
+			# ensure we have a "lib" symlink to lib64 if it exists
+			if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
+				ln -snf "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
 			fi
 		done
 	fi
@@ -154,7 +147,7 @@ finalize() {
 			fi
 			# link whatever remains to dev
 			for bar in "pkg/main/${PKG}.libs.${PVR}/$foo"/*; do
-				ln -s "/$bar" "pkg/main/${PKG}.dev.${PVR}/$foo"
+				ln -snf "/$bar" "pkg/main/${PKG}.dev.${PVR}/$foo"
 			done
 		fi
 	done
