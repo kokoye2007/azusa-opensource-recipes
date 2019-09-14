@@ -7,7 +7,7 @@ get https://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-${PV
 
 cd "${T}"
 
-doconf
+doconf --enable-shared --enable-pic
 
 make
 make install DESTDIR="${D}"
