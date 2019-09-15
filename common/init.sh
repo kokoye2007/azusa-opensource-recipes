@@ -123,9 +123,14 @@ finalize() {
 
 	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" ]; then
 		# pkgconfig should be in dev
-		mkdir -p "pkg/main/${PKG}.dev.${PVR}/$LIB"
+		#mkdir -p "pkg/main/${PKG}.dev.${PVR}/$LIB"
 		mv "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
 		ln -s "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.libs.${PVR}/$LIB"
+	elif [ -d "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" ]; then
+		# pkgconfig should be in dev
+		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
+		mv "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
+		ln -s "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.core.${PVR}/share"
 	fi
 
 	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
