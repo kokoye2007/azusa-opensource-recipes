@@ -5,7 +5,7 @@ get https://www.x.org/pub/individual/xserver/${P}.tar.bz2
 
 cd "${T}"
 
-doconf --enable-glamor --enable-suid-wrapper --disable-systemd-logind --with-xkb-output=/var/lib/xkb --enable-dmx --enable-kdrive
+doconf --localstatedir=/var --enable-glamor --enable-suid-wrapper --disable-systemd-logind --with-xkb-output=/var/lib/xkb --enable-dmx --enable-kdrive
 # --enable-install-setuid
 
 make
