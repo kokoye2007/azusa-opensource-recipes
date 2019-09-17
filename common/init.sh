@@ -214,3 +214,10 @@ doconf() {
 	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
 	--mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc "$@"
 }
+
+doconf213() {
+	echo "Running configure..."
+	callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
+	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
+	--mandir=/pkg/main/${PKG}.doc.${PVR}/man "$@"
+}
