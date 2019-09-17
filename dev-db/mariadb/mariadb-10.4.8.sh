@@ -6,6 +6,9 @@ get https://downloads.mariadb.org/interstitial/${P}/source/${P}.tar.gz
 cd "${T}"
 
 # disable jemalloc because mariadb is unable to use pkgconfig to locate it
+
+# we will have to customize a lot of stuff for mariadb for it to be clean ... ...... :(
+
 # -DBUILD_CONFIG=mysql_release
 cmake "${CHPATH}/${P}" -DWITH_JEMALLOC=no -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} \
 	-DMYSQL_DATADIR=/var/lib/mysql -DSYSCONFDIR=/etc/mysql -DINSTALL_BINDIR=bin -DINSTALL_DOCDIR=/pkg/main/${PKG}.core.${PVR}/doc/ \
