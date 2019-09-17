@@ -105,9 +105,9 @@ finalize() {
 		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
 			echo "Moving core $foo directory to libs"
 			mkdir -p "pkg/main/${PKG}.libs.${PVR}/$foo"
-			mv "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo"
-			rm -fr "pkg/main/${PKG}.core.${PVR}/$foo"
-			ln -s "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
+			mv -v "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo"
+			rm -frv "pkg/main/${PKG}.core.${PVR}/$foo"
+			ln -sv "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
 		fi
 	done
 
@@ -116,43 +116,43 @@ finalize() {
 		for foo in core libs dev; do
 			# ensure we have a "lib" symlink to lib64 if it exists
 			if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
-				ln -snf "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
+				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
 			fi
 		done
 	fi
 
 	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" ]; then
 		# pkgconfig should be in dev
-		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
-		mv "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
-		ln -s "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.libs.${PVR}/$LIB"
+		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
+		mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
+		ln -sv "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.libs.${PVR}/$LIB"
 	elif [ -d "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" ]; then
 		# pkgconfig should be in dev
-		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
-		mv "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
-		ln -s "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.core.${PVR}/share"
+		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
+		mv -v "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
+		ln -sv "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.core.${PVR}/share"
 	fi
 
 	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
-		mkdir -p "pkg/main/${PKG}.dev.${PVR}"
-		mv "pkg/main/${PKG}.core.${PVR}/include" "pkg/main/${PKG}.dev.${PVR}/include"
-		ln -s "/pkg/main/${PKG}.dev.${PVR}/include" "pkg/main/${PKG}.core.${PVR}/include"
+		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
+		mv -v "pkg/main/${PKG}.core.${PVR}/include" "pkg/main/${PKG}.dev.${PVR}/include"
+		ln -sv "/pkg/main/${PKG}.dev.${PVR}/include" "pkg/main/${PKG}.core.${PVR}/include"
 	fi
 
 	for foo in $LIBS; do
 		if [ -d "pkg/main/${PKG}.libs.${PVR}/$foo" ]; then
 			# check for any .a file, move to dev
-			mkdir -p "pkg/main/${PKG}.dev.${PVR}/$foo"
+			mkdir -pv "pkg/main/${PKG}.dev.${PVR}/$foo"
 			if [ $foo = lib64 ]; then
-				ln -s lib64 "pkg/main/${PKG}.dev.${PVR}/lib"
+				ln -sv lib64 "pkg/main/${PKG}.dev.${PVR}/lib"
 			fi
 			count=`find "pkg/main/${PKG}.libs.${PVR}/$foo" -name '*.a' | wc -l`
 			if [ $count -gt 0 ]; then
-				mv "pkg/main/${PKG}.libs.${PVR}/$foo"/*.a "pkg/main/${PKG}.dev.${PVR}/$foo"
+				mv -v "pkg/main/${PKG}.libs.${PVR}/$foo"/*.a "pkg/main/${PKG}.dev.${PVR}/$foo"
 			fi
 			# link whatever remains to dev
 			for bar in "pkg/main/${PKG}.libs.${PVR}/$foo"/*; do
-				ln -snf "/$bar" "pkg/main/${PKG}.dev.${PVR}/$foo"
+				ln -snfv "/$bar" "pkg/main/${PKG}.dev.${PVR}/$foo"
 			done
 		fi
 	done
@@ -160,8 +160,8 @@ finalize() {
 	for foo in man info share/man share/info; do
 		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
 			# this should be in doc
-			mkdir -p "pkg/main/${PKG}.doc.${PVR}"
-			mv "pkg/main/${PKG}.core.${PVR}/$foo" "pkg/main/${PKG}.doc.${PVR}"
+			mkdir -pv "pkg/main/${PKG}.doc.${PVR}"
+			mv -v "pkg/main/${PKG}.core.${PVR}/$foo" "pkg/main/${PKG}.doc.${PVR}"
 			rmdir "pkg/main/${PKG}.core.${PVR}/$foo" || true
 			rmdir "pkg/main/${PKG}.core.${PVR}" || true
 		fi
