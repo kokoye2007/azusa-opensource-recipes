@@ -8,7 +8,6 @@ cd "${T}"
 # see http://llvm.org/docs/CMake.html
 
 # make it possible to run llvm tools within a non-azusa linux (TEMP)
-export LD_LIBRARY_PATH=/pkg/main/sys-devel.llvm.dev.${PV}/lib64
 export LLVM_DIR=/pkg/main/sys-devel.llvm.dev.${PV}/lib64/cmake/llvm
 
 cmake ${CHPATH}/${P}.src -DLLVM_CONFIG=/pkg/main/sys-devel.llvm.dev.${PV}/bin/llvm-config -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.dev.${PVR} -DLLVM_ENABLE_TERMINFO=ON \

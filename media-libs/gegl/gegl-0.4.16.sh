@@ -5,8 +5,6 @@ get https://download.gimp.org/pub/gegl/0.4/${P}.tar.bz2
 
 cd "${T}"
 
-export LD_LIBRARY_PATH=/pkg/main/dev-libs.glib.core/lib$LIB_SUFFIX
-
 doconf
 
 make

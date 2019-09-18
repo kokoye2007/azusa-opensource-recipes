@@ -3,8 +3,6 @@ source "../../common/init.sh"
 
 get https://static.rust-lang.org/dist/rustc-${PV}-src.tar.gz
 
-export LD_LIBRARY_PATH="/pkg/main/sys-devel.llvm.dev/lib64"
-
 cd "rustc-${PV}-src"
 
 cat << EOF > config.toml
