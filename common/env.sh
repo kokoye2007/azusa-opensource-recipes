@@ -9,7 +9,7 @@ if [ `cat /proc/filesystems | grep -c overlay` -eq 0 ]; then
 	exit 1
 fi
 
-tmp_dir=$(mktemp -d -t apkg-XXXXXXXXXX)
+tmp_dir=$(mktemp -d -t azusa-XXXXXXXXXX)
 
 echo "Temporary environment is in $tmp_dir"
 
