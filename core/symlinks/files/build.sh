@@ -10,8 +10,9 @@ mkdir etc etc/ssl
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
-	mkdir lib32 lib64
+	mkdir -p lib32 lib64 full/lib32 full/lib64
 	ln -s lib64 lib
+	ln -s lib64 full/lib
 	LIBS="lib64 lib32 lib"
 	LIB=lib64
 
@@ -20,7 +21,7 @@ if [ $MULTILIB = yes ]; then
 else
 	LIBS=lib
 	LIB=lib
-	mkdir lib
+	mkdir -p lib full/lib
 fi
 
 for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
@@ -40,6 +41,12 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 		for foo in $LIBS; do
 			if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 				echo "${p}/$foo" >>etc/ld.so.conf.tmp
+				# generate symlinks for full/lib64
+				for bar in "${p}/$foo"/*.so*; do
+					if [ -f "$bar" ]; then
+						ln -snf "$bar" full/$foo
+					fi
+				done
 			fi
 		done
 	fi

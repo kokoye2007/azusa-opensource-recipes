@@ -31,6 +31,8 @@ for foo in bin sbin lib lib32 lib64; do
 	ln -snf "/pkg/main/core.symlinks/$foo" "$BASE/usr/$foo"
 done
 
+ln -snf "/pkg/main/app-misc.ca-certificates/etc/ssl/certs" "$BASE/etc/ssl/certs"
+
 for foo in man info; do
 	ln -snf "/pkg/main/core.symlinks/$foo" "$BASE/usr/$foo"
 done
@@ -104,10 +106,4 @@ touch "$BASE/var/run/utmp" "$BASE/var/log/"{btmp,lastlog,wtmp}
 chmod 664 "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
 if [ $USER = root ]; then
 	chgrp utmp "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
-fi
-
-if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
-	# copy to new root
-	mkdir -p "$BASE/etc/ssl/certs/"
-	cp /etc/ssl/certs/ca-certificates.crt "$BASE/etc/ssl/certs/"
 fi
