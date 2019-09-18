@@ -33,7 +33,7 @@ FILESDIR="${BASEDIR}/files"
 # make pkg-config use our libs
 export PKG_CONFIG_LIBDIR=/pkg/main/core.symlinks/pkgconfig
 
-if [ -w /build ]; then
+if [ -w /build/ ]; then
 	TMPBASE="/build"
 else
 	TMPBASE="$HOME/tmp/build"
