@@ -15,7 +15,7 @@ if [ $MULTILIB = yes ]; then
 	LIBS="lib64 lib32 lib"
 	LIB=lib64
 
-	ln -s `realpath /pkg/main/sys-libs.glibc.core`/lib/ld-linux-x86-64.so.2 lib64
+	ln -s `realpath /pkg/main/sys-libs.glibc.libs`/lib64/ld-linux-x86-64.so.2 lib64
 	ln -s `realpath /pkg/main/sys-libs.glibc.libs`/lib64/*.o lib64
 else
 	LIBS=lib
@@ -55,7 +55,7 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 	echo $p
 done
 
-realpath /pkg/main/sys-libs.glibc.core/$LIB >>etc/ld.so.conf.tmp
+realpath /pkg/main/sys-libs.glibc.libs/$LIB >>etc/ld.so.conf.tmp
 tac etc/ld.so.conf.tmp >etc/ld.so.conf
 rm etc/ld.so.conf.tmp
 

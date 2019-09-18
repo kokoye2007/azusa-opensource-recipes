@@ -5,7 +5,7 @@ get http://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.xz
 
 cd "${T}"
 
-doconf
+doconf --with-readline=`realpath /pkg/main/sys-libs.readline.dev` --with-mpfr=`realpath /pkg/main/dev-libs.mpfr.dev`
 
 make
 make install DESTDIR="${D}"

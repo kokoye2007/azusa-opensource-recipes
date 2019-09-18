@@ -109,5 +109,5 @@ fi
 if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
 	# copy to new root
 	mkdir -p "$BASE/etc/ssl/certs/"
-	cp -v /etc/ssl/certs/ca-certificates.crt "$BASE/etc/ssl/certs/"
+	cp /etc/ssl/certs/ca-certificates.crt "$BASE/etc/ssl/certs/"
 fi
