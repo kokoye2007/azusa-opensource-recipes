@@ -16,6 +16,7 @@ cd "${D}"
 
 # move some stuff
 mv etc "pkg/main/${PKG}.core.${PVR}"
+mv lib "pkg/main/${PKG}.core.${PVR}"
 
 # fix: create a symlink to lib in core so ldd works
 ln -snf lib "pkg/main/${PKG}.core.${PVR}/lib64"
