@@ -13,12 +13,13 @@ if [ $MULTILIB = yes ]; then
 	mkdir lib32 lib64
 	ln -s lib64 lib
 	LIBS="lib64 lib32 lib"
+	LIB=lib64
 
 	ln -s `realpath /pkg/main/sys-libs.glibc.core`/lib/ld-linux-x86-64.so.2 lib64
 	ln -s `realpath /pkg/main/sys-libs.glibc.libs`/lib64/*.o lib64
-	realpath /pkg/main/sys-libs.glibc.core/lib64 >etc/ld.so.conf
 else
 	LIBS=lib
+	LIB=lib
 	mkdir lib
 fi
 
@@ -38,7 +39,7 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 	if [ x`echo "$pn" | cut -d. -f3` = x"libs" ]; then
 		for foo in $LIBS; do
 			if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
-				echo "${p}/$foo" >>etc/ld.so.conf
+				echo "${p}/$foo" >>etc/ld.so.conf.tmp
 			fi
 		done
 	fi
@@ -54,5 +55,10 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 	echo $p
 done
 
+realpath /pkg/main/sys-libs.glibc.core/$LIB >>etc/ld.so.conf.tmp
+tac etc/ld.so.conf.tmp >etc/ld.so.conf
+rm etc/ld.so.conf.tmp
+
 echo "Generating ld.so.cache..."
+# reorg ld.so.conf the other way around
 /pkg/main/sys-libs.glibc.core/sbin/ldconfig -X -C etc/ld.so.cache -f etc/ld.so.conf 

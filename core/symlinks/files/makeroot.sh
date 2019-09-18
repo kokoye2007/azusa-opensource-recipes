@@ -105,3 +105,9 @@ chmod 664 "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
 if [ $USER = root ]; then
 	chgrp utmp "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
 fi
+
+if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
+	# copy to new root
+	mkdir -p "$BASE/etc/ssl/certs/"
+	cp -v /etc/ssl/certs/ca-certificates.crt "$BASE/etc/ssl/certs/"
+fi

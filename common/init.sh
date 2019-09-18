@@ -64,7 +64,7 @@ get() {
 	fi
 
 	# try to get from our system
-	wget -O "$BN" `echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g'` || true
+	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" `echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g'` || true
 	if [ -s "$BN" ]; then
 		extract "$BN"
 		return
