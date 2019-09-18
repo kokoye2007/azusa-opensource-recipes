@@ -226,6 +226,11 @@ doconf() {
 	--mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc "$@"
 }
 
+doconflight() {
+	echo "Running configure..."
+	callconf --prefix=/pkg/main/${PKG}.core.${PVR} "$@"
+}
+
 doconf213() {
 	echo "Running configure..."
 	callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
