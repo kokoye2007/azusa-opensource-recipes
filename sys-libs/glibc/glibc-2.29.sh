@@ -7,7 +7,7 @@ get http://ftp.jaist.ac.jp/pub/GNU/libc/${P}.tar.xz
 cd "${T}"
 
 # configure & build
-doconf
+doconf --disable-werror --enable-kernel=3.2 --enable-stack-protector=strong --with-headers=/usr/include libc_cv_slibdir=/lib
 
 make
 make install DESTDIR="${D}"

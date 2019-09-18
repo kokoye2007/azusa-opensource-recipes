@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/unicode-org/icu/releases/download/release-64-2/icu4c-64_2-src.tgz
+get https://github.com/unicode-org/icu/releases/download/release-${PV//./-}/icu4c-${PV//./_}-src.tgz
 
 cd "icu/source"
 

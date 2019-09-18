@@ -114,6 +114,12 @@ finalize() {
 	# fix common issues
 	if [ $MULTILIB = yes ]; then
 		for foo in core libs dev; do
+			# if we have a "lib" dir and no lib64, move it
+			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
+				mv -v "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
+				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
+				continue
+			fi
 			# ensure we have a "lib" symlink to lib64 if it exists
 			if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
 				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
