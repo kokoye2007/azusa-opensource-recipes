@@ -204,6 +204,11 @@ callconf() {
 		return
 	fi
 
+	if [ x"$CONFPATH" != x ]; then
+		"${CONFPATH}" "$@"
+		return
+	fi
+
 	CONFPATH=`echo "${CHPATH}"/*/configure`
 	if [ -x "$CONFPATH" ]; then
 		"${CONFPATH}" "$@"
