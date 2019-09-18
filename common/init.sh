@@ -152,7 +152,7 @@ finalize() {
 			if [ $foo = lib64 ]; then
 				ln -sv lib64 "pkg/main/${PKG}.dev.${PVR}/lib"
 			fi
-			count=`find "pkg/main/${PKG}.libs.${PVR}/$foo" -name '*.a' | wc -l`
+			count=`find "pkg/main/${PKG}.libs.${PVR}/$foo" -maxdepth 0 -name '*.a' | wc -l`
 			if [ $count -gt 0 ]; then
 				mv -v "pkg/main/${PKG}.libs.${PVR}/$foo"/*.a "pkg/main/${PKG}.dev.${PVR}/$foo"
 			fi
