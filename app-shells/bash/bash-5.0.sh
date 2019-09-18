@@ -6,6 +6,9 @@ get http://ftp.gnu.org/gnu/bash/${P}.tar.gz
 echo "Compiling ${P} ..."
 cd "${T}"
 
+# force readline to be linkable (and everything, really)
+export LIBS="-L/pkg/main/core.symlinks/full/lib$LIB_SUFFIX"
+
 # configure & build
 doconf --without-bash-malloc --with-installed-readline
 
