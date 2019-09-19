@@ -5,7 +5,12 @@ get https://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz
 
 cd "Python-${PV}"
 
-doconf --enable-shared --with-system-expat --with-system-ffi --with-ensurepip=yes --enable-unicode=ucs4
+# ensure python can build its "bits" for the following packages
+PKGS="libffi expat ncurses openssl zlib sqlite3 readline"
+export CFLAGS="$(pkg-config --cflags $PKGS)"
+export LDFLAGS="$(pkg-config --libs-only-L $PKGS)"
+
+doconf --enable-shared --with-system-expat --with-system-ffi --with-ensurepip=install --enable-unicode=ucs4 --with-cxx-main=g++ --enable-optimizations
 
 make
 make install DESTDIR="${D}"
