@@ -8,9 +8,7 @@ cd "${T}"
 export SED=sed
 
 # make sure gcc can find stuff like -lz
-export LDFLAGS="-L/pkg/main/core.symlinks/full/lib$LIB_SUFFIX"
-
-export LD_LIBRARY_PATH=/pkg/main/dev-libs.isl.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.mpc.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX
+export LDFLAGS="$(pkg-config zlib --libs-only-L)"
 
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} --infodir=/pkg/main/${PKG}.doc.${PVR}/info --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/gcc \

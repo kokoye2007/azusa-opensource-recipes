@@ -8,6 +8,9 @@ export LIB_PATH=/lib:`realpath /pkg/main/sys-libs.glibc.libs/lib64`
 
 cd "${T}"
 
+# make sure -lz works
+export LDFLAGS="$(pkg-config zlib --libs-only-L)"
+
 # configure & build
 doconf --enable-gold --enable-ld=default --enable-plugins --enable-shared --enable-64-bit-bfd --with-system-zlib
 
