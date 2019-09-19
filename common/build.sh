@@ -3,6 +3,7 @@ set -e
 
 # go to root dir
 cd "$(dirname $0)/.."
+AZUSA_RECIPES_ROOT=`pwd`
 
 # Compile a given package ($1) within a jail
 PKG="$1"
@@ -13,9 +14,9 @@ echo "Preparing to build $PKG"
 
 source "common/env.sh"
 
-echo "Fetching azusa-opensource-recipes ..."
+echo "Copying azusa-opensource-recipes ..."
 
-chroot "$tmp_dir" /bin/bash -c "cd /root; git clone -q https://github.com/AzusaOS/azusa-opensource-recipes.git"
+rsync -a "$AZUSA_RECIPES_ROOT"/ "$tmp_dir/root/azusa-opensource-recipes/"
 
 echo "Build..."
 

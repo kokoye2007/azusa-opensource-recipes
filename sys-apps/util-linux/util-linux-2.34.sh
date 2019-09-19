@@ -18,7 +18,7 @@ export LDFLAGS="$(pkg-config --libs-only-L libpcre2-8)"
 
 doconf --libdir=/pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX \
 	--disable-chfn-chsh --disable-login --disable-nologin --disable-su --disable-setpriv --disable-runuser --disable-pylibmount --disable-static \
-	--without-python --without-systemd --without-systemdsystemunitdir usrlib_execdir="/pkg/main/${PKG}.libs.${PVR}/lib64"
+	--without-python --without-systemd --without-systemdsystemunitdir
 
 make
 make install DESTDIR="${D}"

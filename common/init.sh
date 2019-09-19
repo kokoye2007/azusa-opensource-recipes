@@ -182,6 +182,7 @@ finalize() {
 
 archive() {
 	echo "Building squashfs..."
+	cd "${D}"
 
 	for foo in pkg/main/${PKG}.*; do
 		squash "$foo"
