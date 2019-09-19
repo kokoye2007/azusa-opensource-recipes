@@ -71,6 +71,10 @@ if [ ! -f "$BASE/etc/passwd" ]; then
 	echo "root:x:0:0:root:/root:/bin/bash" >"$BASE/etc/passwd"
 fi
 
+if [ ! -f "$BASE/etc/hosts" ]; then
+	echo "127.0.0.1 localhost" >"$BASE/etc/hosts"
+fi
+
 if [ ! -f "$BASE/etc/os-release" ]; then
 	echo "NAME=Azusa" >"$BASE/etc/os-release"
 	echo "ID=azusa" >>"$BASE/etc/os-release"
