@@ -6,7 +6,7 @@ get https://c-ares.haxx.se/download/${P}.tar.gz
 cd "${T}"
 
 # configure & build
-doconf
+doconf --disable-static
 
 make
 make install DESTDIR="${D}"
