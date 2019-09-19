@@ -10,6 +10,7 @@ if [ `cat /proc/filesystems | grep -c overlay` -eq 0 ]; then
 fi
 
 tmp_dir=$(mktemp -d -t azusa-XXXXXXXXXX)
+chmod 0755 "$tmp_dir"
 
 echo "Temporary environment is in $tmp_dir"
 
