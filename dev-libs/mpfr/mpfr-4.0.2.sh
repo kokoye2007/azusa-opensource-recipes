@@ -6,7 +6,7 @@ get https://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
 cd "${T}"
 
 # configure & build
-doconf --disable-static --enable-thread-safe
+doconf --disable-static --enable-thread-safe --with-gmp=`realpath /pkg/main/dev-libs.gmp.dev`
 
 make
 make install DESTDIR="${D}"
