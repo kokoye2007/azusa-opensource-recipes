@@ -11,6 +11,9 @@ get https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.34/${P}.tar.xz
 
 cd "${T}"
 
+# fix linking of pcre2-8
+export LDFLAGS="$(pkg-config --libs-only-L libpcre2-8)"
+
 # libdir needs to start with $prefix in order to avoid weird bugs
 
 doconf --libdir=/pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX \
