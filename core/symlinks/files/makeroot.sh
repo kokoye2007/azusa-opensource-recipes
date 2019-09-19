@@ -73,6 +73,7 @@ fi
 
 if [ ! -f "$BASE/etc/hosts" ]; then
 	echo "127.0.0.1 localhost" >"$BASE/etc/hosts"
+	echo "::1 localhost" >>"$BASE/etc/hosts"
 fi
 
 if [ ! -f "$BASE/etc/os-release" ]; then
