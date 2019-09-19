@@ -71,6 +71,16 @@ if [ ! -f "$BASE/etc/passwd" ]; then
 	echo "root:x:0:0:root:/root:/bin/bash" >"$BASE/etc/passwd"
 fi
 
+if [ ! -f "$BASE/etc/os-release" ]; then
+	echo "NAME=Azusa" >"$BASE/etc/os-release"
+	echo "ID=azusa" >>"$BASE/etc/os-release"
+	echo "PRETTY_NAME=Azusa" >>"$BASE/etc/os-release"
+	echo "HOME_URL=\"https://www.azusa.jp/\"" >>"$BASE/etc/os-release"
+	#ANSI_COLOR="1;32"
+	#SUPPORT_URL="https://www.gentoo.org/support/"
+	#BUG_REPORT_URL="https://bugs.gentoo.org/"
+fi
+
 if [ ! -f "$BASE/etc/group" ]; then
 	cat >"$BASE/etc/group" <<"EOF"
 root:x:0:

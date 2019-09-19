@@ -7,6 +7,8 @@ cd "${T}"
 
 export SED=sed
 
+export LD_LIBRARY_PATH=/pkg/main/dev-libs.isl.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.mpc.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX
+
 # configure & build
 doconf --enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
 --with-mpfr-include=`realpath /pkg/main/dev-libs.mpfr.dev/include` --with-mpfr-lib=`realpath /pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX` \
@@ -21,11 +23,12 @@ if [ "$MULTILIB" = yes ]; then
 	ln -s lib$LIB_SUFFIX pkg/main/${PKG}.libs.${PVR}/lib
 fi
 
-make
+make -j8
 make install DESTDIR="${D}"
 
 ln -sv gcc "${D}/pkg/main/${PKG}.core.${PVR}/bin/cc"
 
 cd "${D}"
 
-finalize
+# do not use finalize because we depend on location of some files
+archive
