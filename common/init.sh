@@ -32,7 +32,6 @@ FILESDIR="${BASEDIR}/files"
 
 # make pkg-config use our libs
 export PKG_CONFIG_LIBDIR=/pkg/main/core.symlinks/pkgconfig
-export LD_LIBRARY_PATH=/pkg/main/core.symlinks/full/lib$LIB_SUFFIX
 
 if [ -w /build/ ]; then
 	TMPBASE="/build"
