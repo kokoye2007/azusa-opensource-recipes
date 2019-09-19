@@ -7,11 +7,6 @@ cd "${T}"
 
 export SED=sed
 
-# Fix C++ building for gcc
-GCC_VERSION=`gcc -dumpversion`
-GCC_MACHINE=`gcc -dumpmachine`
-export CXXFLAGS="-I/pkg/main/sys-devel.gcc.core.$GCC_VERSION/include/c++/$GCC_VERSION -I/pkg/main/sys-devel.gcc.core.$GCC_VERSION/include/c++/$GCC_VERSION/$GCC_MACHINE"
-
 # make sure gcc can find stuff like -lz
 export LDFLAGS="-L/pkg/main/core.symlinks/full/lib$LIB_SUFFIX"
 
