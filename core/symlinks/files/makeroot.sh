@@ -75,6 +75,10 @@ if [ ! -f "$BASE/etc/hosts" ]; then
 	echo "127.0.0.1 localhost" >"$BASE/etc/hosts"
 	echo "::1 localhost" >>"$BASE/etc/hosts"
 fi
+if [ ! -f "$BASE/etc/host.conf" ]; then
+	echo "order hosts, bind" >"$BASE/etc/host.conf"
+	echo "multi on" >>"$BASE/etc/host.conf"
+fi
 
 if [ ! -f "$BASE/etc/os-release" ]; then
 	echo "NAME=Azusa" >"$BASE/etc/os-release"
