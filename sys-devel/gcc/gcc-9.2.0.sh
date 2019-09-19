@@ -7,6 +7,11 @@ cd "${T}"
 
 export SED=sed
 
+# Fix C++ building for gcc
+GCC_VERSION=`gcc -dumpversion`
+GCC_MACHINE=`gcc -dumpmachine`
+export CXXFLAGS="-I/pkg/main/sys-devel.gcc.core.$GCC_VERSION/include/c++/$GCC_VERSION -I/pkg/main/sys-devel.gcc.core.$GCC_VERSION/include/c++/$GCC_VERSION/$GCC_MACHINE"
+
 export LD_LIBRARY_PATH=/pkg/main/dev-libs.isl.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.mpc.libs/lib$LIB_SUFFIX:/pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX
 
 # configure & build
