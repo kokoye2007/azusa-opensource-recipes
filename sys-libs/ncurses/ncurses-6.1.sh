@@ -11,8 +11,8 @@ cd "${T}"
 # NOTE: ncurses doesn't support --docdir
 
 # without widec
-${CHPATH}/${P}/configure --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
---includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib64 --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
+callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
+--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
 --mandir=/pkg/main/${PKG}.doc.${PVR}/man \
 --disable-widec --enable-pc-files --with-shared --without-normal --without-debug
 
@@ -22,8 +22,8 @@ make install DESTDIR="${D}"
 make distclean
 
 # with widec
-${CHPATH}/${P}/configure --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
---includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib64 --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
+callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
+--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
 --mandir=/pkg/main/${PKG}.doc.${PVR}/man \
 --enable-widec --enable-pc-files --with-shared --without-normal --without-debug
 
