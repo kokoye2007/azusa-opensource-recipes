@@ -2,6 +2,7 @@
 set -e
 
 BASEDIR=`pwd`
+ROOTDIR=$(realpath $BASEDIR/../..)
 ARCH=`uname -m`
 OS=`uname -s | tr A-Z a-z`
 MULTILIB=no
@@ -52,7 +53,14 @@ cd ${CHPATH}
 
 extract() {
 	echo "Extracting $1 ..."
-	tar xf $1
+	case $1 in
+		*.zip)
+			unzip -q $1
+			;;
+		*)
+			tar xf $1
+			;;
+	esac
 }
 
 get() {
