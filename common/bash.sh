@@ -5,4 +5,4 @@ cd "$(dirname $0)/.."
 
 source "common/env.sh"
 
-chroot "$tmp_dir" /bin/bash -i
+chroot "$tmp_dir" /bin/bash --login
