@@ -79,6 +79,30 @@ if [ ! -f "$BASE/etc/host.conf" ]; then
 	echo "order hosts, bind" >"$BASE/etc/host.conf"
 	echo "multi on" >>"$BASE/etc/host.conf"
 fi
+if [ ! -f "$BASE/etc/nsswitch.conf" ]; then
+	cat >"$BASE/etc/nsswitch.conf" <<EOF
+# /etc/nsswitch.conf
+#
+# Example configuration of GNU Name Service Switch functionality.
+#
+
+passwd:		db files
+group:		db files
+initgroups:	db [SUCCESS=continue] files
+shadow:		db files
+gshadow:	files
+
+hosts:		files dns
+networks:	files dns
+
+protocols:	db files
+services:	db files
+ethers:		db files
+rpc:		db files
+
+netgroup:	db files
+EOF
+fi
 
 if [ ! -f "$BASE/etc/os-release" ]; then
 	echo "NAME=Azusa" >"$BASE/etc/os-release"
