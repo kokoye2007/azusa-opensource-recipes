@@ -62,89 +62,26 @@ else
 	echo "Not populating /dev (please run as root)"
 fi
 
+# populate /etc
+find /pkg/main/core.baselayout/ -type f -printf '%P\n' | while read foo; do
+	if [ ! -f "$BASE/$foo" ]; then
+		# file is missing, copy it. But first...
+		foo_dir=`dirname "$foo"`
+		if [ ! -d "$BASE/$foo_dir" ]; then
+			# make dir if missing
+			mkdir -p "$BASE/$foo_dir"
+		fi
+		# then copy
+		cp "/pkg/main/core.baselayout/$foo" "$BASE/$foo"
+	fi
+done
+
 if [ ! -f "$BASE/etc/resolv.conf" ]; then
 	echo "nameserver 8.8.8.8" >"$BASE/etc/resolv.conf"
 	echo "nameserver 8.8.4.4" >>"$BASE/etc/resolv.conf"
 fi
 
-if [ ! -f "$BASE/etc/passwd" ]; then
-	echo "root:x:0:0:root:/root:/bin/bash" >"$BASE/etc/passwd"
-fi
-
-if [ ! -f "$BASE/etc/hosts" ]; then
-	echo "127.0.0.1 localhost" >"$BASE/etc/hosts"
-	echo "::1 localhost" >>"$BASE/etc/hosts"
-fi
-if [ ! -f "$BASE/etc/host.conf" ]; then
-	echo "order hosts, bind" >"$BASE/etc/host.conf"
-	echo "multi on" >>"$BASE/etc/host.conf"
-fi
-if [ ! -f "$BASE/etc/nsswitch.conf" ]; then
-	cat >"$BASE/etc/nsswitch.conf" <<EOF
-# /etc/nsswitch.conf
-#
-# Example configuration of GNU Name Service Switch functionality.
-#
-
-passwd:		db files
-group:		db files
-initgroups:	db [SUCCESS=continue] files
-shadow:		db files
-gshadow:	files
-
-hosts:		files dns
-networks:	files dns
-
-protocols:	db files
-services:	db files
-ethers:		db files
-rpc:		db files
-
-netgroup:	db files
-EOF
-fi
-
-if [ ! -f "$BASE/etc/os-release" ]; then
-	echo "NAME=Azusa" >"$BASE/etc/os-release"
-	echo "ID=azusa" >>"$BASE/etc/os-release"
-	echo "PRETTY_NAME=Azusa" >>"$BASE/etc/os-release"
-	echo "HOME_URL=\"https://www.azusa.jp/\"" >>"$BASE/etc/os-release"
-	#ANSI_COLOR="1;32"
-	#SUPPORT_URL="https://www.gentoo.org/support/"
-	#BUG_REPORT_URL="https://bugs.gentoo.org/"
-fi
-
-if [ ! -f "$BASE/etc/group" ]; then
-	cat >"$BASE/etc/group" <<"EOF"
-root:x:0:
-bin:x:1:
-sys:x:2:
-kmem:x:3:
-tty:x:4:
-tape:x:5:
-daemon:x:6:
-floppy:x:7:
-disk:x:8:
-lp:x:9:
-dialout:x:10:
-audio:x:11:
-video:x:12:
-utmp:x:13:
-usb:x:14:
-man:x:15:
-wheel:x:16:
-news:x:17:
-uucp:x:18:
-console:x:19:
-cdrom:x:20:
-cdrw:x:21:
-input:x:22:
-nogroup:x:65533:
-nobody:x:65534:
-EOF
-fi
-
-# touch/etc
+# touch stuff
 touch "$BASE/var/run/utmp" "$BASE/var/log/"{btmp,lastlog,wtmp}
 chmod 664 "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
 if [ $USER = root ]; then
