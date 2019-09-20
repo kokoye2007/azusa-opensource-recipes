@@ -6,6 +6,8 @@ get https://sourceware.org/pub/bzip2/${P}.tar.gz
 echo "Compiling ${P} ..."
 cd ${P}
 
+patch -p1 <"$FILESDIR/bzip2-1.0.6-saneso.patch"
+
 # relative symlinks
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 
