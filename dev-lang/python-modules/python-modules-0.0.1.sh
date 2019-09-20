@@ -2,7 +2,7 @@
 source ../../common/init.sh
 
 # this will compile & generate python-modules package for each listed version of python
-PYTHON_VERSIONS="2.7.16"
+PYTHON_VERSIONS="2.7.16 3.7.3"
 
 for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	echo "Generating for $PYTHON_VERSION ..."

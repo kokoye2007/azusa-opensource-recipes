@@ -12,7 +12,7 @@ fi
 tmp_dir=$(mktemp -d -t azusa-XXXXXXXXXX)
 chmod 0755 "$tmp_dir"
 
-unset LC_ALL LANG
+unset LC_ALL LANG TMPDIR
 
 echo "Temporary environment is in $tmp_dir"
 
