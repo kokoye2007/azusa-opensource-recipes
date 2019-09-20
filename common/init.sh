@@ -250,3 +250,9 @@ doconf213() {
 	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
 	--mandir=/pkg/main/${PKG}.doc.${PVR}/man "$@"
 }
+
+importpkg() {
+	pkg-config --exists --print-errors "$@"
+	export CFLAGS="$CFLAGS $(pkg-config --cflags-only-I "$@")"
+	export LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L "$@")"
+}

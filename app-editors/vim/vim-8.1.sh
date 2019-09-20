@@ -7,6 +7,11 @@ echo "#define SYS_VIMRC_FILE \"/pkg/main/${PKG}.core.${PVR}/etc/vimrc\"" >> vim8
 
 cd "${CHPATH}/vim81"
 
+CFLAGS="-I/pkg/main/sys-libs.gpm.dev/include"
+LDFLAGS="-L/pkg/main/sys-libs.gpm.dev/lib$LIB_SUFFIX"
+
+importpkg ncurses tinfo
+
 doconf
 
 make
