@@ -5,7 +5,7 @@ get https://archive.mozilla.org/pub/nspr/releases/v${PV}/src/${P}.tar.gz
 
 cd "${P}/${PN}"
 
-doconf
+doconf --enable-64bit
 
 make
 make install DESTDIR="${D}"
