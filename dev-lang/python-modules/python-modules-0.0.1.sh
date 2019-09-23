@@ -23,4 +23,29 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	done
 done
 
+for MOD in $PYTHON_MODS; do
+	# dev-python.setuptools.mod.41.2.0.py3.7.3.linux.amd64
+	MODPATH="${MOD//\//.}.mod"
+	FULL=`readlink "/pkg/main/$MODPATH"`
+	VERSION=`echo ${FULL//$MODPATH./} | sed -e 's/\.py.*//'`
+	echo "Grabbing module $MOD version $VERSION"
+
+	for PYTHON_VERSION in $PYTHON_VERSIONS; do
+		FULLPATH="/pkg/main/${MODPATH}.${VERSION}.py${PYTHON_VERSION}"
+		if [ ! -d "$FULLPATH/" ]; then
+			echo " * Python ${PYTHON_VERSION} is MISSING, please rebuild ${MOD}"
+		fi
+		echo " * Python ${PYTHON_VERSION}"
+		TARGET="${D}/pkg/main/${PKG}.${PYTHON_VERSION}"
+
+		find "$FULLPATH/" -type f -printf "%P\n" | while read foo; do
+			foo_dir=`dirname "$foo"`
+			if [ ! -d "$TARGET/$foo_dir" ]; then
+				mkdir -p "$TARGET/$foo_dir"
+			fi
+			ln -snf "$FULLPATH/$foo" "$TARGET/$foo"
+		done
+	done
+done
+
 finalize
