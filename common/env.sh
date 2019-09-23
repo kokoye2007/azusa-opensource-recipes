@@ -23,11 +23,14 @@ echo "Temporary environment is in $tmp_dir"
 mkdir "$tmp_dir/pkg/main" "$tmp_dir/build" "$tmp_dir/.pkg-main-rw" "$tmp_dir/.pkg-main-work"
 mount -t overlay overlay -o lowerdir=/pkg/main,upperdir="$tmp_dir/.pkg-main-rw",workdir="$tmp_dir/.pkg-main-work" "$tmp_dir/pkg/main"
 mount -t proc proc "$tmp_dir/proc"
+mkdir -p "$tmp_dir/dev/shm"
+mount -o mode=1777 -t tmpfs tmpfs "$tmp_dir/dev/shm"
 
 cleanuptmp() {
 	echo "Cleaning up $tmp_dir"
 	umount "$tmp_dir/proc" || true
 	umount "$tmp_dir/pkg/main" || true
+	umount "$tmp_dir/dev/shm" || true
 	rm -fr "$tmp_dir"
 }
 trap cleanuptmp EXIT

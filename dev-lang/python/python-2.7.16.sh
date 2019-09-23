@@ -12,7 +12,7 @@ importpkg libffi expat ncurses openssl zlib sqlite3 readline
 
 callconf --prefix="/pkg/main/dev-lang.python-modules.${PV}" --exec-prefix="/pkg/main/${PKG}.core.${PVR}" --sysconfdir=/etc --localstatedir=/var --includedir="\${exec_prefix}/include" --datarootdir="\${exec_prefix}/share" \
 	--infodir="/pkg/main/${PKG}.doc.${PVR}/info" --mandir="/pkg/main/${PKG}.doc.${PVR}/man" --docdir="/pkg/main/${PKG}.doc.${PVR}" \
-	--enable-shared --with-system-expat --with-system-ffi --with-ensurepip=install --enable-unicode=ucs4 --enable-optimizations
+	--enable-shared --with-system-expat --with-system-ffi --enable-unicode=ucs4 --enable-optimizations --with-threads --with-fpectl --with-computed-gotos --with-dbmliborder=gdbm:bdb --with-libc= --enable-loadable-sqlite-extensions --without-ensurepip
 
 make
 make install DESTDIR="${D}"
