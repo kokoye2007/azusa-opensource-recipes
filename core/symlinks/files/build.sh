@@ -26,7 +26,15 @@ fi
 
 for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	p=/pkg/main/${pn}
+	t=`echo "$pn" | cut -d. -f3`
+
+	if [ x"$t" = x"mod" ]; then
+		# skip modules (python/etc)
+		continue
+	fi
+
 	if [ ! -d "${p}" ]; then
+		# not available?
 		continue
 	fi
 
@@ -37,7 +45,7 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 	done
 
 	# check if third element of package name is "libs"
-	if [ x`echo "$pn" | cut -d. -f3` = x"libs" ]; then
+	if [ x"$t" = x"libs" ]; then
 		for foo in $LIBS; do
 			if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 				echo "${p}/$foo" >>etc/ld.so.conf.tmp
