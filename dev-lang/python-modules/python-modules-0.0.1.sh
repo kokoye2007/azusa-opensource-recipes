@@ -34,6 +34,7 @@ for MOD in $PYTHON_MODS; do
 		FULLPATH="/pkg/main/${MODPATH}.${VERSION}.py${PYTHON_VERSION}"
 		if [ ! -d "$FULLPATH/" ]; then
 			echo " * Python ${PYTHON_VERSION} is MISSING, please rebuild ${MOD}"
+			continue
 		fi
 		echo " * Python ${PYTHON_VERSION}"
 		TARGET="${D}/pkg/main/${PKG}.${PYTHON_VERSION}"
