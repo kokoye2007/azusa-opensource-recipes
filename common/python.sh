@@ -28,6 +28,21 @@ pythonsetup() {
 
 	# perform install for all relevant versions of python
 	for PYTHON_VERSION in $PYTHON_VERSIONS; do
+		if [ x"$PYTHON_RESTRICT" != x ]; then
+			# need to make sure PYTHON_VERSION starts with one of the values in PYTHON_RESTRICT
+			python_found=0
+			for foo in $PYTHON_RESTRICT; do
+				if [[ "$PYTHON_VERSION" =~ ^$foo ]]; then
+					python_found=1
+					break
+				fi
+			done
+
+			if [ $python_found -eq 0 ]; then
+				echo "Skipping Python $PYTHON_VERSION due to PYTHON_RESTRICT"
+				continue
+			fi
+		fi
 		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" setup.py install
 
 		# fetch the installed module from /.pkg-main-rw/
