@@ -6,6 +6,8 @@ get https://ftp.mozilla.org/pub/security/nss/releases/NSS_3_46_RTM/src/${P}.tar.
 
 cd "${P}/${PN}"
 
+importpkg nspr sqlite3 zlib
+
 ./build.sh --opt --system-nspr --system-sqlite
 
 cd ../dist
