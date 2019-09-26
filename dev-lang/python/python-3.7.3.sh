@@ -6,9 +6,7 @@ get https://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz
 cd "Python-${PV}"
 
 # ensure python can build its "bits" for the following packages
-CFLAGS="-I/pkg/main/app-arch.bzip2.dev/include -I/pkg/main/sys-libs.gdbm.dev/include"
-LDFLAGS="-L/pkg/main/app-arch.bzip2.libs/lib64 -L/pkg/main/sys-libs.gdbm.libs/lib64"
-importpkg libffi expat ncurses openssl zlib sqlite3 readline liblzma
+importpkg libffi expat ncurses openssl zlib sqlite3 readline liblzma app-arch/bzip2 sys-libs/gdbm
 
 callconf --prefix="/pkg/main/dev-lang.python-modules.${PV}" --exec-prefix="/pkg/main/${PKG}.core.${PVR}" --sysconfdir=/etc --localstatedir=/var --includedir="\${exec_prefix}/include" --datarootdir="\${exec_prefix}/share" \
 	--infodir="/pkg/main/${PKG}.doc.${PVR}/info" --mandir="/pkg/main/${PKG}.doc.${PVR}/man" --docdir="/pkg/main/${PKG}.doc.${PVR}" \

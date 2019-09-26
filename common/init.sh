@@ -252,7 +252,20 @@ doconf213() {
 }
 
 importpkg() {
-	pkg-config --exists --print-errors "$@"
-	export CFLAGS="$CFLAGS $(pkg-config --cflags-only-I "$@")"
-	export LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L "$@")"
+	local PKGCFG=""
+	for foo in "$@"; do
+		if [[ $foo == */* ]]; then
+			# standard import paths
+			export CFLAGS="$CFLAGS -I/pkg/main/${foo/\//.}.dev/include"
+			export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+		else
+			PKGCFG="$PKGCFG $foo"
+		fi
+	done
+
+	if [ x"$PKGCFG" != x ]; then
+		pkg-config --exists --print-errors "$PKGCFG"
+		export CFLAGS="$CFLAGS $(pkg-config --cflags-only-I "$PKGCFG")"
+		export LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L "$PKGCFG")"
+	fi
 }
