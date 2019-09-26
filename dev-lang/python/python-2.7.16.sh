@@ -20,4 +20,7 @@ make install DESTDIR="${D}"
 # move modules installed to exec-prefix back to prefix
 mv "${D}/pkg/main/dev-lang.python-modules.${PV}" "${D}/pkg/main/${PKG}.mod.${PVR}"
 
+# create symlink to fix confused easy install packages
+ln -snf "/pkg/main/dev-lang.python-modules.${PV}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.${PVR}/lib/python${PV%.*}/site-packages"
+
 finalize

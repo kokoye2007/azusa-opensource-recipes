@@ -23,4 +23,4 @@ doconf --libdir=/pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX \
 make
 make install DESTDIR="${D}"
 
-archive
+finalize
