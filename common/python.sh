@@ -3,7 +3,7 @@
 # currently active python versions (for modules, etc)
 PYTHON_VERSIONS="2.7.16 3.7.3"
 
-PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject"
+PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject dev-python/numpy"
 
 # (from gentoo, to clean/remove/reuse?)
 # Stub out ez_setup.py and distribute_setup.py to prevent packages
