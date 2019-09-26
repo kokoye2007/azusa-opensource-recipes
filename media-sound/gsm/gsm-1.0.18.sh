@@ -18,7 +18,7 @@ make install \
 	TOAST_INSTALL_MAN="${D}/pkg/main/${PKG}.doc.${PVR}/man/man1"
 
 # copy shared lib & remove static lib
-cp -v lib/libgsm.so* "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
+mv -v lib/libgsm.so* "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
 rm -fv "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"/*.a
 
 finalize
