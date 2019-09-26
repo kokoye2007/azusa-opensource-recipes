@@ -10,8 +10,7 @@ printf '\tkbs=\\177,\n' >> terminfo
 
 cd "${T}"
 
-export CFLAGS=$(pkg-config --cflags ncurses)
-export LIBS=$(pkg-config --libs ncurses)
+importpkg ncurses
 
 TERMINFO="/pkg/main/${PKG}.libs.${PVR}/terminfo" doconf213 --with-app-defaults=/etc/X11/app-defaults
 
