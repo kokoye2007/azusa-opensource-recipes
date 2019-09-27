@@ -5,7 +5,7 @@ get https://ffmpeg.org/releases/${P}.tar.bz2
 
 cd "${T}"
 
-importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora
+importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt
 
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} \
 	--libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \

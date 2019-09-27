@@ -6,7 +6,7 @@ get https://tukaani.org/xz/${P}.tar.bz2
 echo "Compiling ${P} ..."
 cd "${T}"
 
-doconf
+doconf --disable-static
 
 make
 make install DESTDIR="${D}"
