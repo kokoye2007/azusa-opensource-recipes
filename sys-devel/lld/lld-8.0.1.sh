@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
-get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
+acheck
 
 cd "${T}"
 

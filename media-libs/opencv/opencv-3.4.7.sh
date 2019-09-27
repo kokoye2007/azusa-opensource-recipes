@@ -7,7 +7,7 @@ cd "${T}"
 
 cmake "${CHPATH}/${P}" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DOPENCV_GENERATE_PKGCONFIG=YES -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR}
 
-make
+make -j8
 make install DESTDIR="${D}"
 
 finalize

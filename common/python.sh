@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # currently active python versions (for modules, etc)
-PYTHON_VERSIONS="2.7.16 3.7.3"
+PYTHON_VERSIONS="2.7.16 3.5.7 3.6.9 3.7.3 3.7.4"
 
 PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject dev-python/numpy"
 
@@ -46,6 +46,6 @@ pythonsetup() {
 		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" setup.py install
 
 		# fetch the installed module from /.pkg-main-rw/
-		mv "/.pkg-main-rw/dev-lang.python-modules.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
+		mv "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
 	done
 }

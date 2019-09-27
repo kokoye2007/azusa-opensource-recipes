@@ -1,11 +1,12 @@
 #!/bin/sh
 set -e
 
-DIRS="bin sbin pkgconfig info include"
+DIRS_core="bin sbin info"
+DIRS_dev="include cmake pkgconfig"
 MULTILIB=yes
 
 cd $1
-mkdir -p $DIRS
+mkdir -p $DIRS_core include
 mkdir etc etc/ssl
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
@@ -23,6 +24,9 @@ else
 	LIB=lib
 	mkdir -p lib full/lib
 fi
+mkdir -p "$LIB/cmake" "$LIB/pkgconfig"
+ln -snf "$LIB/cmake" cmake
+ln -snf "$LIB/pkgconfig" pkgconfig
 
 for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	p=/pkg/main/${pn}
@@ -38,11 +42,24 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 		continue
 	fi
 
-	for foo in $DIRS; do
-		if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
-			cp -rsf "${p}/$foo"/* "$foo" || true
-		fi
-	done
+	DIRS=""
+
+	case $t in
+		core)
+			DIRS="$DIRS_core"
+			;;
+		dev)
+			DIRS="$DIRS_dev"
+			;;
+	esac
+
+	if [ x"$DIRS" != x ]; then
+		for foo in $DIRS; do
+			if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
+				cp -rsf "${p}/$foo"/* "$foo" || true
+			fi
+		done
+	fi
 
 	# check if third element of package name is "libs"
 	if [ x"$t" = x"libs" ]; then
