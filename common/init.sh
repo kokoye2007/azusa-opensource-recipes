@@ -139,17 +139,19 @@ finalize() {
 		done
 	fi
 
-	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" ]; then
-		# pkgconfig should be in dev
-		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
-		mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
-		ln -sv "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.libs.${PVR}/$LIB"
-	elif [ -d "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" ]; then
-		# pkgconfig should be in dev
-		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
-		mv -v "pkg/main/${PKG}.core.${PVR}/share/pkgconfig" "pkg/main/${PKG}.dev.${PVR}"
-		ln -sv "/pkg/main/${PKG}.dev.${PVR}/pkgconfig" "pkg/main/${PKG}.core.${PVR}/share"
-	fi
+	for foo in pkgconfig cmake; do
+		if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" ]; then
+			# should be in dev
+			mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
+			mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" "pkg/main/${PKG}.dev.${PVR}"
+			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.libs.${PVR}/$LIB"
+		elif [ -d "pkg/main/${PKG}.core.${PVR}/share/$foo" ]; then
+			# should be in dev
+			mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
+			mv -v "pkg/main/${PKG}.core.${PVR}/share/$foo" "pkg/main/${PKG}.dev.${PVR}"
+			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/share"
+		fi
+	done
 
 	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
 		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
