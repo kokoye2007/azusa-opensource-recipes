@@ -270,6 +270,19 @@ importpkg() {
 	fi
 }
 
+importcmake() {
+	local CMAKELIBS=""
+	for foo in "$@"; do
+		if [ x"$CMAKELIBS" != x ]; then
+			CMAKELIBS="$CMAKELIBS:"
+		fi
+		CMAKELIBS="${CMAKELIBS}/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+	done
+	if [ x"$CMAKELIBS" != x ]; then
+		echo "-DCMAKE_LIBRARY_PATH=$CMAKELIBS"
+	fi
+}
+
 # azusa check
 acheck() {
 	# check if env is sane for building, and perform stuff

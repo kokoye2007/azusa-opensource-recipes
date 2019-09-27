@@ -2,23 +2,13 @@
 source "../../common/init.sh"
 
 get http://zlib.net/${P}.tar.gz
+acheck
 
-if [ ! -d ${P} ]; then
-	echo "Extracting ${P} ..."
-	tar xf ${P}.tar.gz
-fi
-
-echo "Compiling ${P} ..."
 cd "${T}"
 
 # configure & build
-${CHPATH}/${P}/configure >configure.log 2>&1 --prefix=/pkg/main/${PKG}.dev.${PVR} --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+callconf --prefix=/pkg/main/${PKG}.core.${PVR} --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
 make
 make install DESTDIR=${D}
-
-cd "${D}"
-mkdir -p "pkg/main/${PKG}.doc.${PVR}"
-mv "pkg/main/${PKG}.dev.${PVR}/share/man" "pkg/main/${PKG}.doc.${PVR}"
-rmdir "pkg/main/${PKG}.dev.${PVR}/share"
 
 finalize
