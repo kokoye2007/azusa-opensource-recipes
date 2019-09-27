@@ -269,3 +269,14 @@ importpkg() {
 		export LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L "$PKGCFG")"
 	fi
 }
+
+# azusa check
+acheck() {
+	# check if env is sane for building, and perform stuff
+	if [ ! -d /.pkg-main-rw ]; then
+		echo "This needs to be built in Azusa Build env"
+		exit
+	fi
+
+	# TODO check if /.pkg-main-rw is indeed empty, etc
+}
