@@ -14,8 +14,8 @@ callconf --prefix=/pkg/main/${PKG}.core.${PVR} \
 	--enable-shared --disable-static \
 	--enable-avisynth --enable-gmp --enable-version3 --enable-gcrypt --enable-openssl --enable-libgsm --enable-libmp3lame --enable-libmodplug \
 	--enable-libopencv --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libxvid \
-	--enable-libxml2
-#--enable-libass --enable-libbluray --enable-libdrm --enable-libkvazaar --enable-libx265 --enable-libxavs --enable-libxavs2
+	--enable-libxml2 --enable-libx265
+#--enable-libass --enable-libbluray --enable-libdrm --enable-libkvazaar --enable-libxavs --enable-libxavs2
 
 make
 make install DESTDIR="${D}"
