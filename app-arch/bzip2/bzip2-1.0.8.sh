@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://sourceware.org/pub/bzip2/${P}.tar.gz
+acheck
 
 echo "Compiling ${P} ..."
 cd ${P}
@@ -37,4 +38,4 @@ mv work/bin pkg/main/${PKG}.core.${PVR}/
 mv work/man pkg/main/${PKG}.doc.${PVR}/
 mv work/include pkg/main/${PKG}.dev.${PVR}/
 
-archive
+finalize

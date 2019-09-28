@@ -253,6 +253,22 @@ doconf213() {
 	--mandir=/pkg/main/${PKG}.doc.${PVR}/man "$@"
 }
 
+docmake() {
+	echo "Running cmake..."
+	cmake "${CHPATH}/${P}" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release "$@"
+}
+
+importcmakepkg() {
+	local PKGNAME="$1"
+	local PKGVARNAME="$2"
+
+	if [ x"$PKGVARNAME" = x ]; then
+		PKGVARNAME="$(echo "${PKGNAME#*/}" | tr a-z A-Z)"
+	fi
+
+	eval "export ${PKGVARNAME}_ROOT=/pkg/main/${PKGNAME/\//.}.dev"
+}
+
 importpkg() {
 	local PKGCFG=""
 	for foo in "$@"; do
@@ -269,19 +285,6 @@ importpkg() {
 		pkg-config --exists --print-errors "$PKGCFG"
 		export CPPFLAGS="$CPPFLAGS $(pkg-config --cflags-only-I "$PKGCFG")"
 		export LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L "$PKGCFG")"
-	fi
-}
-
-importcmake() {
-	local CMAKELIBS=""
-	for foo in "$@"; do
-		if [ x"$CMAKELIBS" != x ]; then
-			CMAKELIBS="$CMAKELIBS:"
-		fi
-		CMAKELIBS="${CMAKELIBS}/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
-	done
-	if [ x"$CMAKELIBS" != x ]; then
-		echo "-DCMAKE_LIBRARY_PATH=$CMAKELIBS"
 	fi
 }
 

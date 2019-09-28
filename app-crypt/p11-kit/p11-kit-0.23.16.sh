@@ -1,14 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/libpng/${P}.tar.xz
+get https://github.com/p11-glue/${PN}/releases/download/${PV}/${P}.tar.gz
 acheck
 
 cd "${T}"
 
-importpkg zlib
-
-doconf
+doconf --without-systemd
 
 make
 make install DESTDIR="${D}"
