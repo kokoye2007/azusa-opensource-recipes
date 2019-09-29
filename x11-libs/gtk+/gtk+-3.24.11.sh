@@ -6,7 +6,8 @@ acheck
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Dcolord=yes -Dgtk_doc=false -Dman=true -Dbroadway_backend=true "${CHPATH}/${P}"
+# TODO fix man (xslt)
+meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Dcolord=yes -Dgtk_doc=false -Dman=false -Dbroadway_backend=true "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

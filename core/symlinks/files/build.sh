@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-DIRS_core="bin sbin info"
+DIRS_core="bin sbin info share/gir-1.0"
 DIRS_dev="include cmake pkgconfig"
 MULTILIB=yes
 

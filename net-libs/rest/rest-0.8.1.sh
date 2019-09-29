@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-export XDG_DATA_DIRS="/pkg/main/dev-libs.gobject-introspection.core/share:/pkg/main/net-libs.libsoup.core/share"
+export XDG_DATA_DIRS="/usr/share:/pkg/main/dev-libs.gobject-introspection.core/share:/pkg/main/net-libs.libsoup.core/share"
 
 doconf
 

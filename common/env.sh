@@ -17,7 +17,7 @@ unset LC_ALL LANG TMPDIR
 echo "Temporary environment is in $tmp_dir"
 
 # initialize root
-/pkg/main/core.symlinks/azusa/makeroot.sh "$tmp_dir"
+/pkg/main/core.symlinks.core/azusa/makeroot.sh "$tmp_dir"
 
 # mount stuff
 mkdir "$tmp_dir/pkg/main" "$tmp_dir/build" "$tmp_dir/.pkg-main-rw" "$tmp_dir/.pkg-main-work"
