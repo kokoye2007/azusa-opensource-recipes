@@ -25,7 +25,7 @@ mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig"
 cat >"${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/udev.pc" <<EOF
 Name: udev
 Description: udev
-Version: 242
+Version: ${PV}
 
 udevdir=/pkg/main/${PKG}.core.${PVR}/lib/udev
 EOF
