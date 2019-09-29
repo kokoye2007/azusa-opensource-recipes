@@ -21,7 +21,36 @@ mkdir -p "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
 install -vm755 src/udev/{${libudev},libudev.so.1,libudev.so} "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
 
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig"
-install -vm644 src/libudev/libudev.pc src/udev/udev.pc "${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig"
+#install -vm644 src/libudev/libudev.pc src/udev/udev.pc "${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig"
+cat >"${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/udev.pc" <<EOF
+Name: udev
+Description: udev
+Version: 242
+
+udevdir=/pkg/main/${PKG}.core.${PVR}/lib/udev
+EOF
+
+cat >"${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/libudev.pc" <<EOF
+#  SPDX-License-Identifier: LGPL-2.1+
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+prefix=/pkg/main/${PKG}.core.${PVR}
+exec_prefix=/pkg/main/${PKG}.core.${PVR}
+libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+includedir=/pkg/main/${PKG}.dev.${PVR}/include
+
+Name: libudev
+Description: Library to access udev device information
+Version: ${PV}
+Libs: -L\${libdir} -ludev
+Cflags: -I\${includedir}
+EOF
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/bin"
 install -vm755 udevadm "${D}/pkg/main/${PKG}.core.${PVR}/bin"
@@ -41,4 +70,4 @@ mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/lib/udev/rules.d"
 
 install -vm644 ${S}/rules/*.rules "${D}/pkg/main/${PKG}.core.${PVR}/lib/udev/rules.d"
 
-finalize
+archive
