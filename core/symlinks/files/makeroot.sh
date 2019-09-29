@@ -43,6 +43,7 @@ done
 
 ln -snf /pkg/main/core.symlinks/pkgconfig "$BASE/usr/share/pkgconfig"
 ln -snf /pkg/main/core.symlinks/include "$BASE/usr/include"
+ln -snf /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
 
 # install apkg
 cp -f /pkg/main/core.apkg/apkg "$BASE/usr/azusa/apkg"
