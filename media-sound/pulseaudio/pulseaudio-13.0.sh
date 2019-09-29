@@ -6,7 +6,10 @@ acheck
 
 cd "${T}"
 
-importpkg sys-devel/libtool
+importpkg sys-devel/libtool sys-libs/libcap dev-libs/check dev-libs/libbsd zlib
+
+export LIBSPEEX_CFLAGS="$(pkg-config --cflags speex speexdsp)"
+export LIBSPEEX_LIBS="$(pkg-config --libs speex speexdsp)"
 
 doconf --sysconfdir=/etc --localstatedir=/var --disable-bluez4 --disable-bluez5 --disable-rpath --with-systemduserunitdir=no
 
