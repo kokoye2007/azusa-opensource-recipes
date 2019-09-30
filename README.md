@@ -21,6 +21,8 @@ Subcategories can be one of:
 * __dev__: development files, such as static libraries, headers, cmake files, etc
 * __doc__: documentation, such as man pages, etc
 * __mod__: module files to be used in other contexts, such as python/etc
+* __fonts__: for font files to be indexed
+* __sgml__: for DTD/etc to be indexed
 
 Typically a file can be adressed without specifying a version. For example it
 is possible to run Python with the following line:
