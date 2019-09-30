@@ -58,7 +58,7 @@ extract() {
 		*.zip)
 			unzip -q $1
 			;;
-		*)
+		*.tar.*|*.tgz|*.tbz2)
 			tar xf $1
 			;;
 	esac
