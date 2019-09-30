@@ -10,7 +10,8 @@ sed '/valgrind/d' -i egg/egg-testing.c
 
 cd "${T}"
 
-meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVR} -Dgtk_doc=false
+# TODO fix man
+meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVR} -Dgtk_doc=false -Dmanpage=false
 
 ninja
 DESTDIR="${D}" ninja install
