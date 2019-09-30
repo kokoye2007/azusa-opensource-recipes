@@ -2,8 +2,8 @@
 source "../../common/init.sh"
 
 get https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${PV/./}/ghostscript-${PV}.tar.xz
-#get https://downloads.sourceforge.net/gs-fonts/ghostscript-fonts-std-8.11.tar.gz
-#get https://downloads.sourceforge.net/gs-fonts/gnu-gs-fonts-other-6.0.tar.gz
+get https://downloads.sourceforge.net/gs-fonts/ghostscript-fonts-std-8.11.tar.gz
+get https://downloads.sourceforge.net/gs-fonts/gnu-gs-fonts-other-6.0.tar.gz
 acheck
 
 cd "ghostscript-${PV}"
@@ -27,5 +27,8 @@ make soinstall DESTDIR="${D}"
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}/include/ghostscript"
 install -v -m644 base/*.h "${D}/pkg/main/${PKG}.dev.${PVR}/include/ghostscript"
 ln -sfvn ghostscript "${D}/pkg/main/${PKG}.dev.${PVR}/include/ps"
+
+mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}"
+mv -v "${CHPATH}/fonts" "${D}/pkg/main/${PKG}.fonts.${PVR}"
 
 finalize
