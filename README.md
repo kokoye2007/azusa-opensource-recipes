@@ -35,4 +35,4 @@ done this way:
 	/pkg/main/dev-lang.python.core.2/bin/python
 
 Note that the special package core.symlinks offers a number of symlinks to the
-different existing packages, allowing access to latest versio of most packages.
+different existing packages, allowing access to latest version of most packages.
