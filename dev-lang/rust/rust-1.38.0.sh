@@ -44,10 +44,18 @@ EOF
 
 export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi"
 
+# to avoid errors such as
+# thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48
+mkdir "/pkg/main/${PKG}.core.${PVR}"
+
 python3 ./x.py build --exclude src/tools/miri
 
 export LIBSSH2_SYS_USE_PKG_CONFIG=1
-DESTDIR="${D}" python3 ./x.py install
+python3 ./x.py install
 unset LIBSSH2_SYS_USE_PKG_CONFIG
+
+# move path to D for packaging
+mkdir -p "${D}/pkg/main"
+mv "/.pkg-main-rw/${PKG}.core.${PVR}" "${D}/pkg/main/${PKG}.core.${PVR}"
 
 finalize
