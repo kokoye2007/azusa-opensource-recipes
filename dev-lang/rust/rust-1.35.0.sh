@@ -33,12 +33,12 @@ codegen-tests = false
 [target.x86_64-unknown-linux-gnu]
 # NB the output of llvm-config (i.e. help options) may be
 # dumped to the screen when config.toml is parsed.
-llvm-config = "/pkg/main/sys-devel.llvm.dev.8/bin/llvm-config"
+llvm-config = "/pkg/main/sys-devel.llvm.core.8/bin/llvm-config"
 
 [target.i686-unknown-linux-gnu]
 # NB the output of llvm-config (i.e. help options) may be
 # dumped to the screen when config.toml is parsed.
-llvm-config = "/pkg/main/sys-devel.llvm.dev.8/bin/llvm-config"
+llvm-config = "/pkg/main/sys-devel.llvm.core.8/bin/llvm-config"
 EOF
 
 export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi"
