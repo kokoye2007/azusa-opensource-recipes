@@ -111,13 +111,16 @@ for sapi in $SAPIS; do
 	callconf --prefix="/pkg/main/${PKG}.core.$sapi.${PVR}" --libdir="/pkg/main/${PKG}.libs.$sapi.${PVR}" --includedir="/pkg/main/${PKG}.dev.$sapi.${PVR}" "${CONFIGURE[@]}"
 
 	make -j12
-	make install DESTDIR="${D}"
+	make install INSTALL_ROOT="${D}"
 
 	# move phpize and php-config /pkg/main/dev-lang.php.core.embed.7.3.10/bin/ if sapi isn't "cli"
 	if [ x"$sapi" != x"cli" ]; then
-		cd "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+		cd "${D}/pkg/main/${PKG}.core.$sapi.${PVR}/bin"
 		mv phpize "phpize-$sapi"
 		mv php-config "php-config-$sapi"
+		if [ -f phpdbg ]; then
+			mv phpdbg "phpdbg-$sapi"
+		fi
 	fi
 done
 
