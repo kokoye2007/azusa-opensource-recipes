@@ -25,6 +25,7 @@ mount -t overlay overlay -o lowerdir=/pkg/main,upperdir="$tmp_dir/.pkg-main-rw",
 mount -t proc proc "$tmp_dir/proc"
 mkdir -p "$tmp_dir/dev/shm"
 mount -o mode=1777 -t tmpfs tmpfs "$tmp_dir/dev/shm"
+chroot "$tmp_dir" /bin/sh -c "dbus-uuidgen --ensure" || true
 
 cleanuptmp() {
 	echo "Cleaning up $tmp_dir"
