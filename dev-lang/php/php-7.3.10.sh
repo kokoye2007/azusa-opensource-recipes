@@ -107,7 +107,7 @@ for sapi in $SAPIS; do
 		cgi)
 			CONFIGURE+=("--without-pear")
 			CONFIGURE+=("--with-readline=shared,/pkg/main/sys-libs.readline.dev")
-			export LIBS=""
+			export LIBS="-ltinfo" # link php against libtinfo so ncurses/readline works
 			;;
 		*)
 			CONFIGURE+=("--without-pear")
