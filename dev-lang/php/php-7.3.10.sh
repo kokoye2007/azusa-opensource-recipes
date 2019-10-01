@@ -5,7 +5,8 @@ get https://www.php.net/distributions/${P}.tar.xz
 acheck
 
 # which PHP SAPIs to be compiled
-SAPIS="embed cli cgi fpm apache2 phpdbg"
+SAPIS="embed cli cgi fpm phpdbg"
+# apache2: fails because: apxs:Error: Config file /build/dev-lang.php/7.3.10/dist/etc/httpd.conf not found.
 
 for sapi in $SAPIS; do
 	echo
