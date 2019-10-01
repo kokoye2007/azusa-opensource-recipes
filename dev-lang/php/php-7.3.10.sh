@@ -36,6 +36,9 @@ for sapi in $SAPIS; do
 	if [ x"$sapi" != x"cli" ]; then
 		CONFIGURE+=("--disable-cli")
 	fi
+	if [ x"$sapi" != x"phpdbg" ]; then
+		CONFIGURE+=("--disable-phpdbg")
+	fi
 
 	CONFIGURE+=("--enable-libxml=shared")
 	CONFIGURE+=("--with-password-argon2=/pkg/main/app-crypt.argon2.dev")
