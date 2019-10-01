@@ -95,9 +95,6 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--enable-mysqlnd")
 
 	case $sapi in
-		*)
-			CONFIGURE+=("--without-pear")
-			;;
 		cli)
 			CONFIGURE+=("--with-pear=/pkg/main/${PKG}.mod.${PVR}/pear")
 			CONFIGURE+=("--with-readline")
@@ -105,6 +102,9 @@ for sapi in $SAPIS; do
 		cgi)
 			CONFIGURE+=("--without-pear")
 			CONFIGURE+=("--with-readline")
+			;;
+		*)
+			CONFIGURE+=("--without-pear")
 			;;
 	esac
 
