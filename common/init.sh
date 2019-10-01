@@ -192,6 +192,14 @@ finalize() {
 }
 
 archive() {
+	SUIDEXE="$(find "${D}" -user root -perm -4000 -ls)"
+	if [ x"$SUIDEXE" != x ]; then
+		echo "WARNING PACKAGE CONTAINS SUID FILES:"
+		echo "$SUIDEXE"
+		echo
+		sleep 5
+	fi
+
 	echo "Building squashfs..."
 	cd "${D}"
 
