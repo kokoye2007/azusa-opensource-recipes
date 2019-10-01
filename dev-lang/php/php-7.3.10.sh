@@ -5,8 +5,11 @@ get https://www.php.net/distributions/${P}.tar.xz
 acheck
 
 # which PHP SAPIs to be compiled
-SAPIS="embed cli cgi fpm phpdbg"
+SAPIS="cli cgi fpm embed phpdbg"
 # apache2: fails because: apxs:Error: Config file /build/dev-lang.php/7.3.10/dist/etc/httpd.conf not found.
+
+# getting readline to work is a bit of a pain...
+importpkg sys-libs/ncurses sys-libs/readline
 
 for sapi in $SAPIS; do
 	echo
@@ -78,7 +81,7 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--enable-phar")
 	CONFIGURE+=("--enable-posix=shared")
 	CONFIGURE+=("--enable-session")
-	#CONFIGURE+=("--with-recode")
+	#CONFIGURE+=("--with-recode=shared,/pkg/main/app-text.recode.dev")  # recode extension can not be configured together with: imap
 	CONFIGURE+=("--enable-shmop=shared")
 	CONFIGURE+=("--enable-simplexml")
 	CONFIGURE+=("--enable-soap=shared")
@@ -94,21 +97,23 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--with-xsl=shared,/pkg/main/dev-libs.libxslt.dev")
 	CONFIGURE+=("--enable-mysqlnd")
 
+	# cgi/cli: readline/libedit support
 	case $sapi in
 		cli)
 			CONFIGURE+=("--with-pear=/pkg/main/${PKG}.mod.${PVR}/pear")
-			CONFIGURE+=("--with-readline")
+			CONFIGURE+=("--with-readline=/pkg/main/sys-libs.readline.dev")
+			export LIBS="-ltinfo" # link php against libtinfo so ncurses/readline works
 			;;
 		cgi)
 			CONFIGURE+=("--without-pear")
-			CONFIGURE+=("--with-readline")
+			CONFIGURE+=("--with-readline=shared,/pkg/main/sys-libs.readline.dev")
+			export LIBS=""
 			;;
 		*)
 			CONFIGURE+=("--without-pear")
+			export LIBS=""
 			;;
 	esac
-
-	# TODO: cgi/cli: readline/libedit support
 
 	CONFIGURE+=("--with-config-file-path=/etc/php/php-$sapi")
 
