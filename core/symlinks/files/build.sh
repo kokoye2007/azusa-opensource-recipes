@@ -27,7 +27,7 @@ ln -snf "$LIB/pkgconfig" pkgconfig
 
 # build includes
 echo "Building include folder..."
-for foo in sys-libs/glibc sys-libs/libcxx; do
+for foo in sys-libs/glibc sys-libs/libcxx sys-kernel/linux; do
 	# use realpath to resolve path to full path with version
 	cp -rsfT $(realpath /pkg/main/${foo/\//.}.dev/include) ./include
 done
@@ -77,7 +77,7 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 				if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 					echo "${p}/$foo" >>etc/ld.so.conf.tmp
 					# generate symlinks for full/lib64
-					cp -rsfT "${p}/$foo" full/$foo/
+					cp >/dev/null 2>&1 -rsfT "${p}/$foo" full/$foo/ || true
 				fi
 			done
 			;;
