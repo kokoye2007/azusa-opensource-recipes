@@ -32,4 +32,7 @@ mkdir -pv "$SHELLDIR"
 
 make install
 
+mkdir "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+cp sys/unix/sysconf "${D}/pkg/main/${PKG}.core.${PVR}/etc/nethack.sysconf"
+
 finalize
