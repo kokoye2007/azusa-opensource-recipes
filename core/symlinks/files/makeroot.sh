@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # script to build a root directory for Azusa
 
