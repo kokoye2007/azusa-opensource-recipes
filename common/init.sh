@@ -52,6 +52,12 @@ fi
 mkdir -p "${CHPATH}" "${D}" "${T}"
 cd ${CHPATH}
 
+inherit() {
+	for foo in "$@"; do
+		source ${ROOTDIR}/common/$foo.sh
+	done
+}
+
 extract() {
 	echo "Extracting $1 ..."
 	case $1 in
