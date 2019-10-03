@@ -2,12 +2,8 @@
 cd "$(dirname $0)"
 source "../../common/init.sh"
 
-if [ `id -u` -ne 0 ]; then
-	echo "This needs to be compiled as root because reasons"
-	exit 1
-fi
-
 get https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.34/${P}.tar.xz
+acheck
 
 cd "${T}"
 
