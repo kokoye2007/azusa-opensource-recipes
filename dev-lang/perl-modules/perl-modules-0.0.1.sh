@@ -14,25 +14,20 @@ for PERL_VERSION in $PERL_VERSIONS; do
 
 	MODP="/pkg/main/dev-lang.perl.mod.${PERL_VERSION}"
 	cp -rsf "$MODP"/* "$TARGET"
-done
 
-for MOD in $PERL_MODS; do
-	MODPATH="${MOD//\//.}.mod"
-	FULL=`readlink "/pkg/main/$MODPATH"`
-	VERSION=`echo ${FULL//$MODPATH./} | sed -e 's/\.py.*//'`
-	echo "Grabbing module $MOD version $VERSION"
+	# locate packages
+	for pn in `apkg-ctrl apkgdb/main?action=list | grep "perl$PERL_VERSION"`; do
+		p=/pkg/main/${pn}
+		t=`echo "$pn" | cut -d. -f3`
 
-	for PERL_VERSION in $PERL_VERSIONS; do
-		FULLPATH="/pkg/main/${MODPATH}.${VERSION}.perl${PERL_VERSION}"
-		if [ ! -d "$FULLPATH/" ]; then
-			echo " * Perl ${PERL_VERSION} is MISSING, please rebuild ${MOD}"
+		if [ x"$t" != x"mod" ]; then
+			# skip if not a module
 			continue
 		fi
-		echo " * Perl ${PERL_VERSION}"
-		TARGET="${D}/pkg/main/${PKG}.core.${PERL_VERSION}"
-		mkdir -p "$TARGET"
 
-		cp -rsf "$FULLPATH"/* "$TARGET"
+		# copy
+		echo " * Module: $pn"
+		cp -rsfT "${p}" "${TARGET}"
 	done
 done
 
