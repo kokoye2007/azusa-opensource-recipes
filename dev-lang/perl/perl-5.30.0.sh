@@ -7,7 +7,7 @@ acheck
 cd "${P}"
 
 importpkg sys-libs/glibc app-arch/bzip2 zlib
-export LIBS="-lpthread -lm"
+export LIBS="-lz -lpthread -lm"
 
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0

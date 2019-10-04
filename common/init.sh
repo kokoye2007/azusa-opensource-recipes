@@ -307,7 +307,8 @@ importpkg() {
 acheck() {
 	# check if env is sane for building, and perform stuff
 	if [ ! -d /.pkg-main-rw ]; then
-		echo "This needs to be built in Azusa Build env"
+		echo "This needs to be built in Azusa Build env:"
+		echo "$ROOTDIR/common/build.sh ${CATEGORY}/${PN}/${PF}.sh"
 		exit
 	fi
 

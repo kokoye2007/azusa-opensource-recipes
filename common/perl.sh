@@ -15,9 +15,18 @@ perlsetup() {
 
 	# perform install for all relevant versions of python
 	for PERL_VERSION in $PERL_VERSIONS; do
-		"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Makefile.PL
-		make
-		make install
+		if [ -f Makefile.PL ]; then
+			"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Makefile.PL
+			make
+			make install
+		elif [ -f Build.PL ]; then
+			"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Build.PL
+			./Build
+			./Build install
+		else
+			echo "no build file"
+			exit 1
+		fi
 
 		# fetch the installed module from /.pkg-main-rw/
 		mv "/.pkg-main-rw/dev-lang.perl-modules.core.${PERL_VERSION}"* "${D}/pkg/main/${PKG}.mod.${PVR}.perl${PERL_VERSION}"
@@ -25,6 +34,8 @@ perlsetup() {
 			mv "/.pkg-main-rw/dev-lang.perl-modules.doc.${PERL_VERSION}"* "${D}/pkg/main/${PKG}.doc.${PVR}.perl${PERL_VERSION}"
 		fi
 
-		make distclean
+		if [ -f Makefile ]; then
+			make distclean
+		fi
 	done
 }
