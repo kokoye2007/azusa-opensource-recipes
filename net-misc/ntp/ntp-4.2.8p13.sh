@@ -10,7 +10,7 @@ sed -e 's/"(\\S+)"/"?([^\\s"]+)"?/' -i scripts/update-leap/update-leap.in
 
 cd "${T}"
 
-importpkg zlib
+importpkg zlib libcap
 
 doconf CFLAGS="-O2 -g -fPIC" --sysconfdir=/etc --enable-linuxcaps --with-lineeditlibs=readline
 
