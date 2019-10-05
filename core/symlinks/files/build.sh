@@ -37,11 +37,6 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 	p=/pkg/main/${pn}
 	t=`echo "$pn" | cut -d. -f3`
 
-	if [ x"$t" = x"mod" ]; then
-		# skip modules (python/etc)
-		continue
-	fi
-
 	if [ ! -d "${p}" ]; then
 		# not available?
 		continue
