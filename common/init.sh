@@ -146,6 +146,12 @@ finalize() {
 		done
 	fi
 
+	if [ -d "${D}/etc" ]; then
+		# move it to core
+		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
+		mv -Tv etc "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+	fi
+
 	for foo in pkgconfig cmake; do
 		if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" ]; then
 			# should be in dev
