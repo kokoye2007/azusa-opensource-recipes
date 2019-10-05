@@ -7,17 +7,19 @@ acheck
 cd "${P}"
 
 importpkg sys-libs/glibc app-arch/bzip2 zlib
-export LIBS="-lz -lpthread -lm"
 
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0
+
+# see: https://perldoc.perl.org/Config.html
 
 sh "${CHPATH}/${P}/Configure" -des -Dprefix="/pkg/main/${PKG}.core.${PVR}" -Dsiteprefix="/pkg/main/dev-lang.perl-modules.core.${PVR}" -Dvendorprefix="/pkg/main/${PKG}.core.${PVR}" \
 	-Dman1dir="/pkg/main/${PKG}.doc.${PVR}/man/man1" -Dman3dir="/pkg/main/${PKG}.doc.${PVR}/man/man3" \
 	-Dsiteman1dir="/pkg/main/dev-lang.perl-modules.doc.${PVR}/man/man1" -Dsiteman3dir="/pkg/main/dev-lang.perl-modules.doc.${PVR}/man/man3" \
 	-Dman1ext='1' -Dman3ext='3pm' \
-	-Dpager="/bin/less -isR" -Duseshrplib -Dusethreads -Uusenm -Doptimize="${CPPFLAGS} ${CFLAGS}" -Dldflags="${LDFLAGS}" -Duselargefiles -Dd_semctl_semun \
-	-Dcf_by='AZUSA' -Dmyhostname='localhost' -Dperladmin='root@localhost' -Ud_csh-Dsh=/bin/sh -Dtargetsh=/bin/sh
+	-Dpager="/bin/less -isR" -Duseshrplib -Dusethreads -Uusenm -Duselargefiles -Dd_semctl_semun \
+	-Doptimize="${CPPFLAGS} ${CFLAGS} -O2" -Dldflags="${LDFLAGS}" \
+	-Dcf_by='AZUSA' -Dmyhostname='localhost' -Dmydomain=".localdomain" -Dperladmin='root@localhost' -Ud_csh-Dsh=/bin/sh -Dtargetsh=/bin/sh
 
 make
 make install DESTDIR="${D}"
