@@ -29,9 +29,9 @@ chroot "$tmp_dir" /bin/sh -c "dbus-uuidgen --ensure=/etc/machine-id" || true
 
 cleanuptmp() {
 	echo "Cleaning up $tmp_dir"
-	umount "$tmp_dir/proc" || true
-	umount "$tmp_dir/pkg/main" || true
-	umount "$tmp_dir/dev/shm" || true
+	umount "$tmp_dir/proc" || umount -l "$tmp_dir/proc" || true
+	umount "$tmp_dir/pkg/main" || umount -l "$tmp_dir/pkg/main" || true
+	umount "$tmp_dir/dev/shm" || umount -l "$tmp_dir/dev/shm" || true
 	rm -fr "$tmp_dir"
 }
 trap cleanuptmp EXIT
