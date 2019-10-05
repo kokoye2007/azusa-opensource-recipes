@@ -46,3 +46,46 @@ pythonsetup() {
 		mv "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
 	done
 }
+
+pythonmesonsetup() {
+	# for pygobject, and maybe others?
+
+	acheck
+
+	mkdir -p "${D}/pkg/main"
+	local base="$PWD"
+
+	# perform install for all relevant versions of python
+	for PYTHON_VERSION in $PYTHON_VERSIONS; do
+		if [ x"$PYTHON_RESTRICT" != x ]; then
+			# need to make sure PYTHON_VERSION starts with one of the values in PYTHON_RESTRICT
+			python_found=0
+			for foo in $PYTHON_RESTRICT; do
+				if [[ "$PYTHON_VERSION" =~ ^$foo ]]; then
+					python_found=1
+					break
+				fi
+			done
+
+			if [ $python_found -eq 0 ]; then
+				echo "Skipping Python $PYTHON_VERSION due to PYTHON_RESTRICT"
+				continue
+			fi
+		fi
+
+		mkdir -p "${T}/build-${PYTHON_VERSION}"
+		cd "${T}/build-${PYTHON_VERSION}"
+		meson --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" -Dpython="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" "$base"
+		ninja
+		DESTDIR="${D}" ninja install
+
+		if [ -d "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/lib/pkgconfig" ]; then
+			mv "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/lib/pkgconfig" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/pkgconfig"
+			# try to remove lib if empty
+			rmdir "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/lib" || true
+		fi
+
+		# fetch the installed module from /.pkg-main-rw/
+		#mv "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
+	done
+}
