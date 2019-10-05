@@ -3,7 +3,7 @@
 # currently active python versions (for modules, etc)
 PYTHON_VERSIONS="2.7.16 3.5.7 3.6.9 3.7.4"
 
-PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject dev-python/numpy"
+PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject dev-python/numpy dev-util/scons"
 
 # (from gentoo, to clean/remove/reuse?)
 # Stub out ez_setup.py and distribute_setup.py to prevent packages
@@ -19,10 +19,7 @@ disable_ez_setup() {
 }
 
 pythonsetup() {
-	if [ ! -d /.pkg-main-rw ]; then
-		echo "This needs to be built in Azusa Build env"
-		exit
-	fi
+	acheck
 
 	mkdir -p "${D}/pkg/main"
 

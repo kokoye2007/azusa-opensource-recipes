@@ -16,11 +16,11 @@ perlsetup() {
 	# perform install for all relevant versions of python
 	for PERL_VERSION in $PERL_VERSIONS; do
 		if [ -f Makefile.PL ]; then
-			"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Makefile.PL
+			"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Makefile.PL "$@"
 			make
 			make install
 		elif [ -f Build.PL ]; then
-			"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Build.PL
+			"/pkg/main/dev-lang.perl.core.${PERL_VERSION}/bin/perl" Build.PL "$@"
 			./Build
 			./Build install
 		else

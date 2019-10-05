@@ -13,27 +13,19 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	# generate path from /pkg/main/dev-lang.python.mod.${PYTHON_VERSION}
 
 	MODP="/pkg/main/dev-lang.python.mod.${PYTHON_VERSION}"
-	cp -rsf "$MODP"/* "$TARGET"
-done
+	cp -rsfT "$MODP"/ "$TARGET"
 
-for MOD in $PYTHON_MODS; do
-	# dev-python.setuptools.mod.41.2.0.py3.7.3.linux.amd64
-	MODPATH="${MOD//\//.}.mod"
-	FULL=`readlink "/pkg/main/$MODPATH"`
-	VERSION=`echo ${FULL//$MODPATH./} | sed -e 's/\.py.*//'`
-	echo "Grabbing module $MOD version $VERSION"
+	for pn in `apkg-ctrl apkgdb/main?action=list | grep "py$PYTHON_VERSION"`; do
+		p=/pkg/main/${pn}
+		t=`echo "$pn" | cut -d. -f3`
 
-	for PYTHON_VERSION in $PYTHON_VERSIONS; do
-		FULLPATH="/pkg/main/${MODPATH}.${VERSION}.py${PYTHON_VERSION}"
-		if [ ! -d "$FULLPATH/" ]; then
-			echo " * Python ${PYTHON_VERSION} is MISSING, please rebuild ${MOD}"
+		if [ x"$t" != x"mod" ]; then
+			# skip if not a module
 			continue
 		fi
-		echo " * Python ${PYTHON_VERSION}"
-		TARGET="${D}/pkg/main/${PKG}.core.${PYTHON_VERSION}"
-		mkdir -p "$TARGET"
 
-		cp -rsf "$FULLPATH"/* "$TARGET"
+		echo " * Module: $pn"
+		cp -rsfT "$p" "$TARGET"
 	done
 done
 
