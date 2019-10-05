@@ -8,8 +8,15 @@ cd "${P}"
 
 importpkg sys-libs/glibc app-arch/bzip2 zlib
 
+# flags for linking system zlib
 export BUILD_ZLIB=False
+export ZLIB_LIB="/pkg/main/sys-libs.zlib.libs/lib$LIB_SUFFIX"
+export ZLIB_INCLUDE="/pkg/main/sys-libs.zlib.dev/include"
+
+# flags for linking system bzip2
 export BUILD_BZIP2=0
+export BZIP2_LIB="/pkg/main/app-arch.bzip2.libs/lib$LIB_SUFFIX"
+export BZIP2_INCLUDE="/pkg/main/app-arch.bzip2.dev/include"
 
 # see: https://perldoc.perl.org/Config.html
 
