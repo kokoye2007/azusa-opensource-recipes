@@ -19,7 +19,7 @@ get http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-12.0.2/jtreg-4.2-b13
 acheck
 
 unset JAVA_HOME
-importpkg x11 libjpeg media-libs/giflib zlib
+importpkg x11 libjpeg media-libs/giflib zlib lcms2
 
 bash configure --enable-unlimited-crypto \
 	--disable-warnings-as-errors \
