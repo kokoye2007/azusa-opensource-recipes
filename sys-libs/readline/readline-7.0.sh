@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://ftp.gnu.org/gnu/readline/${P}.tar.gz
+acheck
 
 cd "${T}"
 

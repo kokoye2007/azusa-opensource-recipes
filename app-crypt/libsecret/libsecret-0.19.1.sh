@@ -10,6 +10,8 @@ sed '/valgrind/d' -i egg/egg-testing.c
 
 cd "${T}"
 
+importpkg dev-libs/libgcrypt
+
 # TODO fix man
 meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVR} -Dgtk_doc=false -Dmanpage=false
 
