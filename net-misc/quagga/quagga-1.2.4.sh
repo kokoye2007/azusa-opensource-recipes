@@ -6,7 +6,9 @@ acheck
 
 cd "${T}"
 
-importpkg readline
+importpkg ncurses sys-libs/readline
+#export CC="gcc $CPPFLAGS"
+
 # configure & build
 doconf
 

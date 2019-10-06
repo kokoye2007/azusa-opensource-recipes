@@ -10,6 +10,8 @@ ln -snfv /pkg/main/sys-devel.libtool.libs/lib$LIB_SUFFIX/* /usr/lib$LIB_SUFFIX/
 
 cd "${T}"
 
+importpkg media-gfx/graphviz
+
 doconf
 
 make

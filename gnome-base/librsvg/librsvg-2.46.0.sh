@@ -6,6 +6,7 @@ acheck
 
 cd "${T}"
 
+importpkg uuid libbsd app-arch/bzip2
 doconf --enable-vala --disable-static
 
 make
