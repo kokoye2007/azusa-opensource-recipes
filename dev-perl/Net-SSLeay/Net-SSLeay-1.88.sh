@@ -6,6 +6,7 @@ get https://cpan.metacpan.org/authors/id/C/CH/CHRISN/${P}.tar.gz
 acheck
 
 cd "${P}"
+importpkg openssl zlib
 
-perlsetup
+perlsetup OPTIMIZE="$CPPFLAGS -O2" OPENSSL_PREFIX="/pkg/main/dev-libs.openssl.dev"
 finalize
