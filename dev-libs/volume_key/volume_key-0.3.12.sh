@@ -7,6 +7,8 @@ acheck
 
 cd "${T}"
 
+importpkg app-crypt/gpgme dev-libs/libgpg-error sys-apps/util-linux
+
 doconf --without-python --with-python3
 
 make

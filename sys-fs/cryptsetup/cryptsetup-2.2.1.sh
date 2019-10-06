@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg sys-apps/util-linux
+importpkg sys-apps/util-linux sys-fs/lvm2 dev-libs/popt dev-libs/json-c
 
 doconf
 
