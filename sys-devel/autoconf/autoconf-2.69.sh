@@ -6,9 +6,14 @@ acheck
 
 cd "${T}"
 
-doconf
+export EMACS=no
+doconf --program-suffix=-${PV}
 
 make
 make install DESTDIR="${D}"
+
+for foo in autom4te autoconf autoheader autoreconf ifnames autoscan autoupdate; do
+	ln -snfv "$foo-$PV" "${D}/pkg/main/${PKG}.core.${PVR}/bin/$foo"
+done
 
 finalize

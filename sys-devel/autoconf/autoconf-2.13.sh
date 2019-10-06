@@ -8,11 +8,13 @@ cd "${T}"
 
 doconflight
 
+# avoid install to fail
+rm /pkg/main/${PKG}.core.${PVR}
+
 make
+make install
 
-# make install won't handle DESTDIR
-make install # DESTDIR="${D}"
-
+# grab files from the installed path
 mkdir -pv "${D}/pkg/main"
 mv -v /.pkg-main-rw/${PKG}.core.${PVR} "${D}/pkg/main"
 
