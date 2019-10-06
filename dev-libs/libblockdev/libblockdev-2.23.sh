@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/storaged-project/libblockdev/releases/download/${PV}-1/${P}.tar.gz
+acheck
 
 cd "${T}"
 
