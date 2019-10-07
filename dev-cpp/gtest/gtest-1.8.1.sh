@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/google/googletest/archive/release-${PV}.tar.gz
+acheck
 
 cd "${T}"
 
