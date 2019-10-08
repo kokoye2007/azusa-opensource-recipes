@@ -45,10 +45,10 @@ bash configure --enable-unlimited-crypto \
 
 make images
 
-export JT_JAVA=$(echo $PWD/build/*/jdk)
-jtreg/bin/jtreg -jdk:$JT_JAVA -automatic -ignore:quiet -v1 \
-    test/jdk:tier1 test/langtools:tier1
-unset JT_JAVA
+#export JT_JAVA=$(echo $PWD/build/*/jdk)
+#jtreg/bin/jtreg -jdk:$JT_JAVA -automatic -ignore:quiet -v1 \
+#    test/jdk:tier1 test/langtools:tier1
+#unset JT_JAVA
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
 cp -Rv build/*/images/jdk/* "${D}/pkg/main/${PKG}.core.${PVR}"

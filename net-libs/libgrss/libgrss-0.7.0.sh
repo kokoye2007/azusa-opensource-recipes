@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get http://ftp.gnome.org/pub/gnome/sources/libgrss/0.7/${P}.tar.xz
+acheck
 
 cd "${P}"
 
@@ -10,6 +11,7 @@ autoreconf -fiv
 
 cd "${T}"
 
+importpkg dev-libs/icu
 doconf --disable-static
 
 make
