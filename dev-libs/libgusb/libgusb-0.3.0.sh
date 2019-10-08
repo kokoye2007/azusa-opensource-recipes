@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://people.freedesktop.org/~hughsient/releases/${P}.tar.xz
+acheck
 
 cd "${T}"
 
