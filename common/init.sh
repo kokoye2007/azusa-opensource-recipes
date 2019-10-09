@@ -124,7 +124,7 @@ finalize() {
 		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
 			echo "Moving core $foo directory to libs"
 			mkdir -p "pkg/main/${PKG}.libs.${PVR}/$foo"
-			mv -v "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo"
+			mv -v "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo" || true
 			rm -frv "pkg/main/${PKG}.core.${PVR}/$foo"
 			ln -sv "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
 		fi
