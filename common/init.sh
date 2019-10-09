@@ -124,7 +124,7 @@ finalize() {
 		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
 			echo "Moving core $foo directory to libs"
 			mkdir -p "pkg/main/${PKG}.libs.${PVR}/$foo"
-			mv -v "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo"
+			mv -v "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo" || true
 			rm -frv "pkg/main/${PKG}.core.${PVR}/$foo"
 			ln -sv "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
 		fi
@@ -276,7 +276,10 @@ doconf213() {
 
 docmake() {
 	echo "Running cmake..."
-	cmake "${CHPATH}/${P}" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release "$@"
+	if [ x"$CMAKE_ROOT" = x ]; then
+		CMAKE_ROOT="${CHPATH}/${P}"
+	fi
+	cmake "$CMAKE_ROOT" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release "$@"
 }
 
 importcmakepkg() {
