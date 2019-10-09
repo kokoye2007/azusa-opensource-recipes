@@ -6,7 +6,11 @@ acheck
 
 cd "${T}"
 
-doconf
+importpkg ogg vorbis dev-libs/boost
+
+# TODO use qt
+# TODO requires docbook xsl file
+CC=g++ doconf --with-words=little --disable-qt --with-boost=/pkg/main/dev-libs.boost.core
 
 make
 make install DESTDIR="${D}"

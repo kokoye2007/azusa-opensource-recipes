@@ -276,7 +276,10 @@ doconf213() {
 
 docmake() {
 	echo "Running cmake..."
-	cmake "${CHPATH}/${P}" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release "$@"
+	if [ x"$CMAKE_ROOT" = x ]; then
+		CMAKE_ROOT="${CHPATH}/${P}"
+	fi
+	cmake "$CMAKE_ROOT" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release "$@"
 }
 
 importcmakepkg() {
