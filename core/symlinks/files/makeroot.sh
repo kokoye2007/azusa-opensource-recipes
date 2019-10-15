@@ -47,7 +47,9 @@ ln -snf /pkg/main/core.symlinks.core/share/gir-1.0 "$BASE/usr/share/gir-1.0"
 ln -snf /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
 
 # install apkg
-cp -f /pkg/main/core.apkg/apkg "$BASE/usr/azusa/apkg"
+cp -fT /pkg/main/core.apkg/apkg "$BASE/usr/azusa/apkg"
+cp -fT /pkg/main/core.azusa-init.core/azusa-init "$BASE/usr/azusa/azusa-init"
+cp -fT /pkg/main/sys-apps.busybox/bin/busybox "$BASE/usr/azusa/busybox"
 
 # initialize dev
 if [ $USER = root ]; then

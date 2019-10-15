@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://busybox.net/downloads/${P}.tar.bz2
+acheck
 
 echo "Compiling ${P} ..."
 cd "${P}"
