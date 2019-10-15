@@ -21,7 +21,7 @@ else
 	LIB=lib
 	mkdir -p lib full/lib
 fi
-mkdir -p "$LIB/cmake" "$LIB/pkgconfig"
+mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules"
 ln -snf "$LIB/cmake" cmake
 ln -snf "$LIB/pkgconfig" pkgconfig
 
@@ -41,6 +41,13 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 		# not available?
 		continue
 	fi
+
+	case $pn in
+		sys-kernel.linux.modules.*)
+			# link to lib
+			ln -snf "${p}/lib/modules"/* "$LIB/modules"
+			;;
+	esac
 
 	case $t in
 		core)
