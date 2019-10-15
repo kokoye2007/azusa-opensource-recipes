@@ -7,7 +7,7 @@ cd ${P}
 
 cp $FILESDIR/config-${PVR} ./.config
 
-make -j4
+make -j8
 
 echo "Building dist..."
 FULLVER=`make -s kernelrelease`
