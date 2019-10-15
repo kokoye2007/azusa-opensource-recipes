@@ -5,7 +5,7 @@ get https://cdn.kernel.org/pub/linux/kernel/v5.x/${P}.tar.xz
 
 cd ${P}
 
-cp $FILESDIR/config-${PVR} ./.config
+cp -v $FILESDIR/config-${PVR} ./.config
 
 make -j8
 
