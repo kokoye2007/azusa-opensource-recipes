@@ -57,10 +57,15 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 				fi
 			done
 			;;
-		dev|mod)
+		dev)
 			for foo in cmake pkgconfig; do
 				if [ -d "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "$LIB/${foo}"
+				fi
+			done
+			for foo in bin sbin; do
+				if [ -d "${p}/${foo}" ]; then
+					cp -rsfT "${p}/${foo}" "${foo}"
 				fi
 			done
 
@@ -69,10 +74,19 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 				cp -rsfT "${p}/include" "full/include"
 			fi
 			;;
+		mod)
+			for foo in cmake pkgconfig; do
+				if [ -d "${p}/${foo}" ]; then
+					cp -rsfT "${p}/${foo}" "$LIB/${foo}"
+				fi
+			done
+			;;
 		doc)
-			if [ -d "${p}/man" ]; then
-				cp -rsfT "${p}/man" man
-			fi
+			for foo in man info; do
+				if [ -d "${p}/$foo" ]; then
+					cp -rsfT "${p}/$foo" $foo
+				fi
+			done
 			;;
 		libs)
 			for foo in $LIBS; do
@@ -82,6 +96,9 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 					cp >/dev/null 2>&1 -rsfT "${p}/$foo" full/$foo/ || true
 				fi
 			done
+			;;
+		*)
+			echo -e "\rRejected package: $pn\033[K"
 			;;
 	esac
 	# TODO: fonts, sgml
