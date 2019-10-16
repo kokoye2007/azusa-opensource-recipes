@@ -64,7 +64,7 @@ for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlin
 				fi
 			done
 			for foo in bin sbin; do
-				if [ -d "${p}/${foo}" ]; then
+				if [ -d "${p}/${foo}" -a ! -L "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "${foo}"
 				fi
 			done
