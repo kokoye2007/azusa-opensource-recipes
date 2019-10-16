@@ -34,8 +34,8 @@ bash configure --enable-unlimited-crypto \
 	--with-version-pre="" \
 	--with-version-opt="" \
 	--with-boot-jdk="$BOOT_JDK" \
-	--x-includes="/pkg/main/core.symlinks.core/full/include" \
-	--x-libraries="/pkg/main/core.symlinks.core/full/lib$LIB_SUFFIX" \
+	--x-includes="/pkg/main/azusa.symlinks.core/full/include" \
+	--x-libraries="/pkg/main/azusa.symlinks.core/full/lib$LIB_SUFFIX" \
 	--with-cups-include="/pkg/main/net-print.cups.dev/include" \
 	--with-fontconfig-include="/pkg/main/media-libs.fontconfig.dev/include" \
 	--with-extra-cflags="$CPPFLAGS" --with-extra-cxxflags="$CPPFLAGS" --with-extra-ldflags="$LDFLAGS"

@@ -32,7 +32,7 @@ PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 
 # make pkg-config use our libs
-export PKG_CONFIG_LIBDIR=/pkg/main/core.symlinks.core/pkgconfig
+export PKG_CONFIG_LIBDIR=/pkg/main/azusa.symlinks.core/pkgconfig
 export XDG_DATA_DIRS="/usr/share"
 
 if [ -w /build/ ]; then
