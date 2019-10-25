@@ -32,7 +32,7 @@ for foo in sys-libs/glibc sys-libs/libcxx sys-kernel/linux; do
 	cp -rsfT $(realpath /pkg/main/${foo/\//.}.dev/include) ./include
 done
 
-for pn in $(apkg-ctrl apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
+for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
 	p=/pkg/main/${pn}
 	t=`echo "$pn" | cut -d. -f3`
