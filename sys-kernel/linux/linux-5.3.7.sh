@@ -17,7 +17,7 @@ echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
 
 echo "Building kernel..."
 
-make -j8 vmlinux >kernel.log 2>&1
+make -j8 bzImage >kernel.log 2>&1
 
 echo "Building modules..."
 
