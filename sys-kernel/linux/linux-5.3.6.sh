@@ -1,15 +1,29 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://cdn.kernel.org/pub/linux/kernel/v5.x/${P}.tar.xz
+if [ ! -d "/pkg/main/${PKG}.src.${PV}" ]; then
+	get https://cdn.kernel.org/pub/linux/kernel/v5.x/${P}.tar.xz
 
-cd ${P}
+	mkdir -p "${D}/pkg/main"
+	mv "${P}" "${D}/pkg/main/${PKG}.src.${PV}"
 
-cp -v $FILESDIR/config-${PVR} ./.config
+	finalize
+	exit
+fi
 
-make -j8
+cd "${T}"
+cp -v $FILESDIR/config-${PVR} ".config"
+echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
 
-echo "Building dist..."
+echo "Building kernel..."
+
+make -j8 vmlinux >kernel.log 2>&1
+
+echo "Building modules..."
+
+make -j8 modules >modules.log 2>&1
+
+echo "Running dist..."
 FULLVER=`make -s kernelrelease`
 IMGFILE=`make -s image_name`
 
