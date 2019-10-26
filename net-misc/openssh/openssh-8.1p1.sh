@@ -7,7 +7,7 @@ acheck
 cd "${T}"
 
 # configure & build
-doconf --with-zlib=`realpath /pkg/main/sys-libs.zlib.dev` --with-ssl-dir=`realpath /pkg/main/dev-libs.openssl.dev`
+doconf --sysconfdir=/etc/ssh --with-zlib=`realpath /pkg/main/sys-libs.zlib.dev` --with-ssl-dir=`realpath /pkg/main/dev-libs.openssl.dev`
 
 make
 make install DESTDIR="${D}"
