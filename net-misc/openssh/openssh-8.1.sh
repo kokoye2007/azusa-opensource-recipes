@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/${P}.tar.gz
+acheck
 
 cd "${T}"
 
