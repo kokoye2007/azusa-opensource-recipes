@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg json-c
 
-doconf
+doconf --sysconfdir=/etc/syslog-ng
 
 make
 make install DESTDIR="${D}"

@@ -1,0 +1,8 @@
+name: syslog replacement with advanced filtering features
+homepage: http://www.balabit.com/network-security/syslog-ng
+license: GPL-2+ LGPL-2.1+
+
+daemons:
+- name: syslog-ng
+  command: sbin/syslog-ng -F
+  reload: SIGHUP
