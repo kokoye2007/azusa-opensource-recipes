@@ -5,3 +5,6 @@ license: "|| ( AFL-2.1 GPL-2 )"
 daemons:
 - name: dbus
   command: bin/dbus-daemon --system
+  checks:
+  - path: /var/run/dbus
+    mode: 0775
