@@ -1,5 +1,5 @@
 name: syslog replacement with advanced filtering features
-homepage: http://www.balabit.com/network-security/syslog-ng
+homepage: https://www.syslog-ng.com/products/open-source-log-management/
 license: GPL-2+ LGPL-2.1+
 
 daemons:
