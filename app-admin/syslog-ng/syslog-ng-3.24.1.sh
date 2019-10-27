@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg json-c
 
-doconf --sysconfdir=/etc/syslog-ng
+doconf --sysconfdir=/etc/syslog-ng --disable-java
 
 make
 make install DESTDIR="${D}"
