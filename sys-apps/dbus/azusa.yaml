@@ -1,6 +1,6 @@
 name: A message bus system, a simple way for applications to talk to each other
 homepage: https://dbus.freedesktop.org/
-license: || ( AFL-2.1 GPL-2 )
+license: "|| ( AFL-2.1 GPL-2 )"
 
 daemons:
 - name: dbus
