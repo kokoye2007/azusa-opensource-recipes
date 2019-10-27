@@ -212,6 +212,11 @@ archive() {
 		sleep 5
 	fi
 
+	if [ -f "${BASEDIR}/azusa.yaml" ]; then
+		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
+		cp -vT "${BASEDIR}/azusa.yaml" "${D}/pkg/main/${PKG}.core.${PVR}/azusa.yaml"
+	fi
+
 	echo "Building squashfs..."
 	cd "${D}"
 

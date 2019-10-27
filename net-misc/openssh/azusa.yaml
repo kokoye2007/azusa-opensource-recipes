@@ -1,0 +1,11 @@
+name: OpenBSD Secure Shell server
+homepage: https://www.openssh.com/
+license: BSD GPL-2
+
+daemons:
+- name: sshd
+  after: [network, auditd]
+  envfile: /etc/default/ssh
+  prepare: bin/ssh-keygen -A
+  command: sbin/sshd -D
+  reload: SIGHUP
