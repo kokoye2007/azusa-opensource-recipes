@@ -1,0 +1,17 @@
+name: Various useful Linux utilities
+homepage: https://www.kernel.org/pub/linux/utils/util-linux/ https://github.com/karelzak/util-linux
+license: GPL-2 LGPL-2.1 BSD-4 MIT public-domain
+
+daemons:
+- name: agetty-tty1
+  command: sbin/agetty 38400 tty1 linux
+- name: agetty-tty2
+  command: sbin/agetty 38400 tty2 linux
+- name: agetty-tty3
+  command: sbin/agetty 38400 tty3 linux
+- name: agetty-tty4
+  command: sbin/agetty 38400 tty4 linux
+- name: agetty-tty5
+  command: sbin/agetty 38400 tty5 linux
+- name: agetty-tty6
+  command: sbin/agetty 38400 tty6 linux
