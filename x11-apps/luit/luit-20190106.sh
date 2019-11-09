@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/app/${P}.tar.bz2
+get https://invisible-mirror.net/archives/${PN}/${P}.tgz
 acheck
 
 cd "${T}"
 
-doconf --localstatedir=/var
+doconflight
 
 make
 make install DESTDIR="${D}"
