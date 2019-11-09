@@ -12,8 +12,8 @@ if [ ! -d "/pkg/main/${PKG}.src.${PV}" ]; then
 fi
 
 cd "${T}"
-cp -v $FILESDIR/config-${PVR} ".config"
 echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
+cp -v $FILESDIR/config-${PVR} ".config"
 
 echo "Building kernel..."
 
