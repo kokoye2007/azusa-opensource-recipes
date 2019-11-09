@@ -25,7 +25,22 @@ apatch "${PATCHES[@]}"
 
 cd "${T}"
 
-docmake -DUSE_PAM=ON -DUSE_CONSOLEKIT=ON
+CMAKEOPTS=(
+	-DUSE_PAM=ON
+	-DUSE_CONSOLEKIT=ON
+	-DX11_X11_INCLUDE_PATH=/pkg/main/x11-libs.libX11.dev/include
+	-DX11_X11_LIB=/pkg/main/x11-libs.libX11.libs/lib$LIB_SUFFIX
+	-DFREETYPE_INCLUDE_DIRS=/pkg/main/media-libs.freetype.dev/include
+	-DFREETYPE_LIBRARY=/pkg/main/media-libs.freetype.libs/lib$LIB_SUFFIX
+	-DJPEG_INCLUDE_DIR=/pkg/main/media-libs.libjpeg-turbo.dev/include
+	-DJPEG_LIBRARY=/pkg/main/media-libs.libjpeg-turbo.libs/lib$LIB_SUFFIX
+	-DZLIB_INCLUDE_DIR=/pkg/main/sys-libs.zlib.dev/include
+	-DZLIB_LIBRARY=/pkg/main/sys-libs.zlib.libs/lib$LIB_SUFFIX
+	-DPNG_PNG_INCLUDE_DIR=/pkg/main/media-libs.libpng.dev/include
+	-DPNG_LIBRARY=/pkg/main/media-libs.libpng.libs/lib$LIB_SUFFIX
+)
+
+docmake "${CMAKEOPTS[@]}"
 
 make
 make install DESTDIR="${D}"
