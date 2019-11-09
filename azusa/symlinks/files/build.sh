@@ -37,6 +37,11 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 	p=/pkg/main/${pn}
 	t=`echo "$pn" | cut -d. -f3`
 
+	if [ "$t" == "src" ]; then
+		# do not even do access to sources
+		continue
+	fi
+
 	if [ ! -d "${p}" ]; then
 		# not available?
 		continue
