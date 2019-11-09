@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconf
+docmake -DURIPARSER_BUILD_TESTS=OFF
 
 make
 make install DESTDIR="${D}"
