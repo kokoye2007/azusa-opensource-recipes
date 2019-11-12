@@ -328,3 +328,19 @@ acheck() {
 
 	# TODO check if /.pkg-main-rw is indeed empty, etc
 }
+
+# apply patches
+apatch() {
+	for foo in "$@"; do
+		if [ ! -f "$foo" ]; then
+			echo "Missing patch file: $foo"
+			exit 1
+		fi
+		for dp in 1 0 2; do
+			patch -p"$dp" -N -f -i "$foo" && continue 2 || true
+		done
+		# failed to apply patch
+		echo "Failed to apply patch"
+		exit 1
+	done
+}
