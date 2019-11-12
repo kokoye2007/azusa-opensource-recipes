@@ -4,6 +4,14 @@ Scripts and patches used to build apkg files for various pieces of software.
 
 We start from the ground up, with stuff requiring the less dependencies.
 
+## Requesting an update
+
+If a given package has an update released by its developer and it has not been
+ported here, please [open an issue](https://github.com/AzusaOS/azusa-opensource-recipes/issues/new)
+and specify the package name, released version number and any relevant information.
+
+The same applies for missing packages.
+
 # Standard package naming
 
 Currently package names mimic names found in Gentoo's portage, with some
@@ -23,6 +31,8 @@ Subcategories can be one of:
 * __mod__: module files to be used in other contexts, such as python/etc
 * __fonts__: for font files to be indexed
 * __sgml__: for DTD/etc to be indexed
+* __src__: source files for a given packages, not needed except for compiling (headers should be in dev)
+* __misc__: other files such as reference art, generally not needed to run a package
 
 Typically a file can be adressed without specifying a version. For example it
 is possible to run Python with the following line:
