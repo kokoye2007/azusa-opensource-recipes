@@ -336,8 +336,9 @@ apatch() {
 			echo "Missing patch file: $foo"
 			exit 1
 		fi
+		echo " * Applying patch $foo"
 		for dp in 1 0 2; do
-			patch -p"$dp" -N -f -i "$foo" && continue 2 || true
+			patch -p"$dp" -Nt -i "$foo" && continue 2 || true
 		done
 		# failed to apply patch
 		echo "Failed to apply patch"
