@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sqlite.org/2019/sqlite-autoconf-3290000.tar.gz
+get https://sqlite.org/2020/sqlite-autoconf-3310100.tar.gz
+acheck
 
 cd "${T}"
 
