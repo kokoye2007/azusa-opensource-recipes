@@ -9,7 +9,7 @@ cd "${T}"
 export TIRPC_CFLAGS="-I/pkg/main/net-libs.libtirpc.dev/include/tirpc"
 
 # configure & build
-doconf --enable-securedir=/etc/security
+doconf --enable-securedir="/pkg/main/${PKG}.libs.${PVR}/security"
 
 make
 make install DESTDIR="${D}"
