@@ -13,4 +13,7 @@ doconf --disable-maintainer-mode --disable-static --with-icu
 make
 make install DESTDIR="${D}"
 
+# fix for ffmpeg (and probably others)
+ln -v -s . "${D}/pkg/main/${PKG}.dev.${PVR}/include/libxml2/libxml2"
+
 finalize
