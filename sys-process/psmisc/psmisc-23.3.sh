@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.2.tar.xz
+acheck
+
+importpkg ncurses
 
 cd "${T}"
 
