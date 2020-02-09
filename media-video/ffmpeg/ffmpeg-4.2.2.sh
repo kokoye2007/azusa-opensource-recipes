@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug
+importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug icu-uc
 
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} \
 	--libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \
