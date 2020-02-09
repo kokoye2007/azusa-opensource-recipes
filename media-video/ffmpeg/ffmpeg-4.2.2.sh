@@ -2,10 +2,11 @@
 source "../../common/init.sh"
 
 get https://ffmpeg.org/releases/${P}.tar.bz2
+acheck
 
 cd "${T}"
 
-importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt
+importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug
 
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} \
 	--libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \

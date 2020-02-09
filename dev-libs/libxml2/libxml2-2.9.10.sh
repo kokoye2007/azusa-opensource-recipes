@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg python-2.7
+importpkg python-2.7 icu-uc
 
 doconf --disable-maintainer-mode --disable-static --with-icu
 
