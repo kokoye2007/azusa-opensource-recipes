@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz
+acheck
 
 cd "node-v${PV}"
 
