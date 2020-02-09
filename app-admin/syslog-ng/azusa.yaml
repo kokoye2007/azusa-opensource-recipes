@@ -1,4 +1,4 @@
-name: syslog replacement with advanced filtering features
+description: syslog replacement with advanced filtering features
 homepage: https://www.syslog-ng.com/products/open-source-log-management/
 license: GPL-2+ LGPL-2.1+
 

@@ -1,4 +1,4 @@
-name: Linux dynamic and persistent device naming support (aka userspace devfs)
+description: Linux dynamic and persistent device naming support (aka userspace devfs)
 homepage: https://www.freedesktop.org/wiki/Software/systemd
 license: LGPL-2.1 MIT GPL-2
 

@@ -1,4 +1,4 @@
-name: OpenBSD Secure Shell server
+description: OpenBSD Secure Shell server
 homepage: https://www.openssh.com/
 license: BSD GPL-2
 
