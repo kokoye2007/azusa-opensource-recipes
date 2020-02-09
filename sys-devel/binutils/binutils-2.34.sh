@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get https://ftp.gnu.org/gnu/binutils/${P}.tar.xz
+acheck
+
+importpkg zlib
 
 # default libpath should include glibc path so gcc can find -lc
 export LIB_PATH=/lib:`realpath /pkg/main/sys-libs.glibc.libs/lib64`
