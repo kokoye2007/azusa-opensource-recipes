@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://releases.llvm.org/${PV}/${P}.src.tar.xz
+get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 acheck
 
 cd "${T}"
@@ -14,7 +14,7 @@ cmake ${CHPATH}/${P}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} -DL
 	-DLLVM_ENABLE_FFI=ON -DFFI_INCLUDE_DIR=`realpath /pkg/main/dev-libs.libffi.dev/include` -DFFI_LIBRARY_DIR=`realpath /pkg/main/dev-libs.libffi.libs/lib64`
 
 #cmake --build .
-make -j8
+make
 
 cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVR}" -P cmake_install.cmake
 
