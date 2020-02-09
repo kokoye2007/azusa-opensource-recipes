@@ -7,6 +7,9 @@ acheck
 cd "${T}"
 
 importpkg icu-uc
+# importpkg will set CPPFLAGS but that's not read by llvm
+export CFLAGS="${CPPFLAGS}"
+export CXXFLAGS="${CPPFLAGS}"
 
 # see http://llvm.org/docs/CMake.html
 
@@ -16,7 +19,7 @@ cmake ${CHPATH}/${P}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} -DL
 	-DLLVM_ENABLE_FFI=ON -DFFI_INCLUDE_DIR=`realpath /pkg/main/dev-libs.libffi.dev/include` -DFFI_LIBRARY_DIR=`realpath /pkg/main/dev-libs.libffi.libs/lib64`
 
 #cmake --build .
-make
+make -j8
 
 cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVR}" -P cmake_install.cmake
 
