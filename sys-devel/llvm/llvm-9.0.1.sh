@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg icu-uc
+
 # see http://llvm.org/docs/CMake.html
 
 cmake ${CHPATH}/${P}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} -DLLVM_ENABLE_TERMINFO=ON \
