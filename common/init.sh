@@ -109,7 +109,7 @@ squash() {
 	fi
 }
 
-finalize() {
+organize() {
 	cd "${D}"
 
 	LIBS=lib
@@ -199,8 +199,6 @@ finalize() {
 			rmdir "pkg/main/${PKG}.core.${PVR}" || true
 		fi
 	done
-
-	archive
 }
 
 archive() {
@@ -227,6 +225,11 @@ archive() {
 	if [ x"$HSM" != x ]; then
 		apkg-convert $APKGOUT/*.squashfs
 	fi
+}
+
+finalize() {
+	organize
+	archive
 }
 
 cleanup() {
