@@ -1,0 +1,3 @@
+description: A NTP (RFC-1305 and RFC-4330) client for unix-alike systems
+homepage: https://github.com/troglobit/ntpclient
+license: GPL-2
