@@ -11,27 +11,33 @@ if [ ! -d "/pkg/main/${PKG}.src.${PV}" ]; then
 	exit
 fi
 
-cd "${T}"
-echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
-cp -v $FILESDIR/config-${PVR} ".config"
+TGT="amd64 386 arm64"
 
-echo "Building kernel..."
+for GOARCH in $TGT; do
+	mkdir -p "${T}/$GOARCH"
 
-make -j8 bzImage >kernel.log 2>&1
+	cd "${T}/$GOARCH"
+	echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
+	cp -v $FILESDIR/config-${PVR}-$GOARCH ".config"
 
-echo "Building modules..."
+	echo "Building kernel for $GOARCH..."
 
-make -j8 modules >modules.log 2>&1
+	make -j8 bzImage >kernel.log 2>&1
 
-echo "Running dist..."
-FULLVER=`make -s kernelrelease`
-IMGFILE=`make -s image_name`
+	echo " * Building modules..."
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-echo "${PVR}" >"${D}/pkg/main/${PKG}.core.${PVR}/version.txt"
-cp "$IMGFILE" "${D}/pkg/main/${PKG}.core.${PVR}/linux-${PVR}.img"
-cp ".config" "${D}/pkg/main/${PKG}.core.${PVR}/linux-${PVR}.config"
-make modules_install INSTALL_MOD_PATH="${D}/pkg/main/${PKG}.modules.${PVR}"
-make headers_install INSTALL_HDR_PATH="${D}/pkg/main/${PKG}.dev.${PVR}"
+	make -j8 modules >modules.log 2>&1
+
+	echo " * Running dist..."
+	FULLVER=`make -s kernelrelease`
+	IMGFILE=`make -s image_name`
+
+	mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH"
+	echo "${PVR}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/version.txt"
+	cp "$IMGFILE" "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/linux-${PVR}.img"
+	cp ".config" "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/linux-${PVR}.config"
+	make modules_install INSTALL_MOD_PATH="${D}/pkg/main/${PKG}.modules.${PVR}.linux.$GOARCH"
+	make headers_install INSTALL_HDR_PATH="${D}/pkg/main/${PKG}.dev.${PVR}.linux.$GOARCH"
+done
 
 finalize

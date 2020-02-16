@@ -8,15 +8,15 @@ if [ x"$KVER" = x ]; then
 	exit 1
 fi
 
-for T in $TGT; do
-	if [ ! -f files/config-$KVER-$T ]; then
-		echo "Preparing config for $KVER-$T"
+for GOARCH in $TGT; do
+	if [ ! -f files/config-$KVER-$GOARCH ]; then
+		echo "Preparing config for $KVER-$GOARCH"
 		KDIR=`mktemp -d -t lk-XXXXXXXXXX`
 		echo "include /pkg/main/sys-kernel.linux.src.$KVER/Makefile" >"$KDIR/Makefile"
 
 		# find best config
 		BEST=""
-		for foo in files/config-*-$T; do
+		for foo in files/config-*-$GOARCH; do
 			if [ -f $foo ]; then
 				BEST="$foo"
 			fi
@@ -39,7 +39,7 @@ for T in $TGT; do
 
 		make -C "$KDIR" olddefconfig
 		make -C "$KDIR" menuconfig
-		cp -v "$KDIR/.config" "files/config-$KVER-$T"
+		cp -v "$KDIR/.config" "files/config-$KVER-$GOARCH"
 
 		rm -fr "$KDIR"
 	fi
