@@ -7,7 +7,7 @@ if [ ! -d "/pkg/main/${PKG}.src.${PV}" ]; then
 	mkdir -p "${D}/pkg/main"
 	mv "${P}" "${D}/pkg/main/${PKG}.src.${PV}"
 
-	finalize
+	archive
 	exit
 fi
 
@@ -22,11 +22,13 @@ for GOARCH in $TGT; do
 
 	echo "Building kernel for $GOARCH..."
 
-	make -j8 bzImage >kernel.log 2>&1
+	source "$FILESDIR/env.sh"
+
+	make -j8 bzImage #>kernel.log 2>&1 </dev/null
 
 	echo " * Building modules..."
 
-	make -j8 modules >modules.log 2>&1
+	make -j8 modules #>modules.log 2>&1 </dev/null
 
 	echo " * Running dist..."
 	FULLVER=`make -s kernelrelease`
