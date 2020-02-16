@@ -24,15 +24,24 @@ for GOARCH in $TGT; do
 
 	source "$FILESDIR/env.sh"
 
-	make -j8 bzImage #>kernel.log 2>&1 </dev/null
+	# make default old config
+	make -s olddefconfig
+
+	# ensure some config
+	./source/scripts/config --set-str LOCALVERSION "-azusa" --enable LOCALVERSION_AUTO --set-str DEFAULT_HOSTNAME "localhost"
+
+	FULLVER=`make -s kernelrelease`
+	IMGFILE=`make -s image_name`
+
+	echo " * Building `basename "$IMGFILE"`..."
+
+	make -j8 -s `basename "$IMGFILE"`
 
 	echo " * Building modules..."
 
-	make -j8 modules #>modules.log 2>&1 </dev/null
+	make -j8 -s modules #>modules.log 2>&1 </dev/null
 
-	echo " * Running dist..."
-	FULLVER=`make -s kernelrelease`
-	IMGFILE=`make -s image_name`
+	echo " * Copying files..."
 
 	mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH"
 	echo "${PVR}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/version.txt"
