@@ -45,10 +45,12 @@ for GOARCH in $TGT; do
 
 	mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH"
 	echo "${PVR}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/version.txt"
+	echo "${FULLVER}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/release.txt"
+	basename "${IMGFILE}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/image.txt"
 	cp "$IMGFILE" "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/linux-${PVR}.img"
 	cp ".config" "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/linux-${PVR}.config"
-	make modules_install INSTALL_MOD_PATH="${D}/pkg/main/${PKG}.modules.${PVR}.linux.$GOARCH"
-	make headers_install INSTALL_HDR_PATH="${D}/pkg/main/${PKG}.dev.${PVR}.linux.$GOARCH"
+	make -s modules_install INSTALL_MOD_PATH="${D}/pkg/main/${PKG}.modules.${PVR}.linux.$GOARCH"
+	make -s headers_install INSTALL_HDR_PATH="${D}/pkg/main/${PKG}.dev.${PVR}.linux.$GOARCH"
 done
 
 finalize

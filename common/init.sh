@@ -100,12 +100,17 @@ get() {
 squash() {
 	FN=`basename $1`
 	mkdir -p "${APKGOUT}"
+	# check fn: 
+	if [ `echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm64)$'` -eq 0 ]; then
+		# add
+		FN="${FN}.${OS}.${ARCH}"
+	fi
 
 	if [ `id -u` -eq 0 ]; then
 		# running as root, so we don't need -all-root
-		mksquashfs "$1" "${APKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -nopad -noappend
+		mksquashfs "$1" "${APKGOUT}/${FN}.squashfs" -nopad -noappend
 	else
-		mksquashfs "$1" "${APKGOUT}/${FN}.${OS}.${ARCH}.squashfs" -all-root -nopad -noappend
+		mksquashfs "$1" "${APKGOUT}/${FN}.squashfs" -all-root -nopad -noappend
 	fi
 }
 
