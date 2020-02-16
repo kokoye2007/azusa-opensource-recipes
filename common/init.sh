@@ -211,8 +211,9 @@ archive() {
 	fi
 
 	if [ -f "${BASEDIR}/azusa.yaml" ]; then
-		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-		cp -vT "${BASEDIR}/azusa.yaml" "${D}/pkg/main/${PKG}.core.${PVR}/azusa.yaml"
+		if [ -d "${D}/pkg/main/${PKG}.core.${PVR}" ]; then
+			cp -vT "${BASEDIR}/azusa.yaml" "${D}/pkg/main/${PKG}.core.${PVR}/azusa.yaml"
+		fi
 	fi
 
 	echo "Building squashfs..."

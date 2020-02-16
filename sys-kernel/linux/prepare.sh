@@ -37,7 +37,7 @@ for GOARCH in $TGT; do
 
 		source files/env.sh
 
-		make -C "$KDIR" olddefconfig
+		make -C "$KDIR" oldconfig
 		make -C "$KDIR" menuconfig
 		cp -v "$KDIR/.config" "files/config-$KVER-$GOARCH"
 
