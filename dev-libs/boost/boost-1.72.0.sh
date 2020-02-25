@@ -23,10 +23,10 @@ using python : 2.7 : python2.7 : /pkg/main/dev-lang.python.core.2.7/include/pyth
 using python : 3.7 : python3.7 : /pkg/main/dev-lang.python.core.3.7/include/python3.7m : /pkg/main/dev-lang.python.libs.3.7/lib$LIB_SUFFIX ;
 EOF
 
-ICU_PATH="/pkg/main/dev-libs.icu.core"
-ICU_LINK="$(pkg-config --libs icu-uc)"
+#ICU_PATH="/pkg/main/dev-libs.icu.core"
+#ICU_LINK="$(pkg-config --libs icu-uc)"
 
-./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" -sICU_PATH="$ICU_PATH" -sICU_LINK="$ICU_LINK" stage threading=multi link=shared -j8
-./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" -sICU_PATH="$ICU_PATH" -sICU_LINK="$ICU_LINK" install link=shared --prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" linflags="-lstdc++" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" stage threading=multi link=shared -j8
+./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" linflags="-lstdc++" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" install link=shared --prefix="${D}/pkg/main/${PKG}.core.${PVR}"
 
 finalize
