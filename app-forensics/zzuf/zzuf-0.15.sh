@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://caca.zoy.org/files/libcaca/${P}.tar.gz
+get https://github.com/samhocevar/zzuf/releases/download/v${PV}/${P}.tar.gz
 acheck
 
 cd "${T}"
 
-doconf --disable-java --disable-static --disable-doc
+doconf
 
 make
 make install DESTDIR="${D}"
