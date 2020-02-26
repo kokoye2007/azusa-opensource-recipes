@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get ftp://sourceware.org/pub/libffi/${P}.tar.gz
+acheck
 
 cd "${P}"
 

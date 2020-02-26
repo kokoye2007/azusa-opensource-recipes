@@ -1,7 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libexpat/libexpat/releases/download/R_${PV//./_}/${P}.tar.bz2
+get https://dist.libuv.org/dist/v${PV}/libuv-v${PV}.tar.gz
+acheck
+
+cd "libuv-v${PV}"
+
+sh autogen.sh
 
 cd "${T}"
 

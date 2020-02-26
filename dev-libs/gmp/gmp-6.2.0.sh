@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://ftp.gnu.org/gnu/gmp/${P}.tar.xz
+acheck
 
 cd "${T}"
 
