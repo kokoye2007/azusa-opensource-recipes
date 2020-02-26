@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get ftp://ftp.isc.org/isc/bind9/${PV}/${P}.tar.gz
+acheck
 
 cd "${T}"
 
