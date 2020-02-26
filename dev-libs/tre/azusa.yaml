@@ -1,0 +1,3 @@
+description: Lightweight, robust, and efficient POSIX compliant regexp matching library
+homepage: https://laurikari.net/tre/ https://github.com/laurikari/tre/
+license: BSD-2
