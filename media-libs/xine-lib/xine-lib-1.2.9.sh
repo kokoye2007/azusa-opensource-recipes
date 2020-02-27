@@ -14,7 +14,7 @@ sed -e 's/\(xcb-shape >= 1.0\)/xcb \1/' \
 
 cd "${T}"
 
-importpkg zlib ncurses x11 xext sys-libs/gpm
+importpkg zlib ncurses x11 xext xv sys-libs/gpm
 
 doconf --disable-vcd --with-external-dvdnav
 
