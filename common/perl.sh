@@ -1,14 +1,14 @@
 #!/bin/sh
 
 # currently active perl versions (for modules, etc)
-PERL_VERSIONS="5.30.0"
+PERL_VERSIONS="5.30.1"
 
 PERL_MODS=""
 
 perlsetup() {
 	if [ ! -d /.pkg-main-rw ]; then
 		echo "This needs to be built in Azusa Build env"
-		exit
+		exit 1
 	fi
 
 	mkdir -p "${D}/pkg/main"
