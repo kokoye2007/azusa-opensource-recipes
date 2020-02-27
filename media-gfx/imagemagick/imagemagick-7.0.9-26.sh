@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg sys-devel/libtool app-arch/bzip2 sys-apps/util-linux
+importpkg sys-devel/libtool app-arch/bzip2 sys-apps/util-linux dev-libs/libbsd
 
 doconf --sysconfdir=/etc --enable-hdri --with-modules --with-perl --disable-static
 
