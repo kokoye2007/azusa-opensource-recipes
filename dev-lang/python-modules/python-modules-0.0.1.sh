@@ -30,8 +30,8 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 	# /pkg/main/dev-lang.python-modules.core.3.7/lib/python3.7/site-packages/setuptools.pth
 	# re-generate setuptools.pth file
-	if [ -d "${TARGET}/lib/python3.7/site-packages" ]; then
-		cd "${TARGET}/lib/python3.7/site-packages"
+	if [ -d "${TARGET}/lib/python${PYTHON_VERSION:0:3}/site-packages" ]; then
+		cd "${TARGET}/lib/python${PYTHON_VERSION:0:3}/site-packages"
 		rm -f setuptools.pth
 		find . -maxdepth 1 -name '*.egg' >setuptools.pth
 	fi

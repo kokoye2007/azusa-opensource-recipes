@@ -42,7 +42,7 @@ pythonsetup() {
 		fi
 		echo "Running for python-$PYTHON_VERSION"
 		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
-		export PYTHONPATH="/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION:0:3}"
+		export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION:0:3}:$PYTHONHOME/lib/python${PYTHON_VERSION:0:3}/lib-dynload"
 		if [ x"$PYTHON_VERSION" == x"3.5.9" ]; then
 			# symlink to make python happy
 			ln -snfT "/pkg/main/dev-lang.python-modules.core.3.5.9/lib/python3.5/config-3.5m" "/pkg/main/dev-lang.python.core.3.5.9/lib/python3.5/config-3.5m"

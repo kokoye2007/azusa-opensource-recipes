@@ -2,7 +2,7 @@
 source ../../common/init.sh
 source ${ROOTDIR}/common/python.sh
 
-PYTHON_RESTRICT="2"
+PYTHON_RESTRICT="3"
 
 get https://github.com/pygobject/pycairo/releases/download/v${PV}/${P}.tar.gz
 
