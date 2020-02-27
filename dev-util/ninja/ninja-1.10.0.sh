@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/ninja-build/ninja/archive/v${PV}.tar.gz
+acheck
 
 cd "${P}"
 
