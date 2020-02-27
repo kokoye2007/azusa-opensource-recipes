@@ -354,3 +354,9 @@ apatch() {
 		exit 1
 	done
 }
+
+aautoreconf() {
+	echo "Running autoreconf tools..."
+	libtoolize --force --install
+	autoreconf -fi -I /pkg/main/azusa.symlinks.core/share/aclocal/
+}

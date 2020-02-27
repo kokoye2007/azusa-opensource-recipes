@@ -16,8 +16,7 @@ apatch $PATCHES
 
 acheck
 
-libtoolize --force --install
-autoreconf -fi -I /pkg/main/azusa.symlinks.core/share/aclocal/
+aautoreconf
 
 cd "${T}"
 importpkg expat sys-libs/gdbm dev-libs/libdaemon

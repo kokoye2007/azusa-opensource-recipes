@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://mirrors.edge.kernel.org/pub/software/scm/git/${P}.tar.xz
+acheck
 
 cd "${P}"
 
