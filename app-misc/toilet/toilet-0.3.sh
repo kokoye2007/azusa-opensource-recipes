@@ -7,6 +7,7 @@ acheck
 cd "${P}"
 
 sed -i -e 's:-g -O2 -fno-strength-reduce -fomit-frame-pointer::' configure
+sed -i -e 's:$(srcdir)/$^:$^:' doc/Makefile.in doc/Makefile.am
 
 cd "${T}"
 

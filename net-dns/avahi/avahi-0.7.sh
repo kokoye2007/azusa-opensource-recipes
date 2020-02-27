@@ -20,7 +20,7 @@ libtoolize --force --install
 autoreconf -fi -I /pkg/main/azusa.symlinks.core/share/aclocal/
 
 cd "${T}"
-importpkg expat sys-libs/gdbm
+importpkg expat sys-libs/gdbm dev-libs/libdaemon
 
 export PYTHON=/pkg/main/dev-lang.python.core/bin/python3
 doconf --sysconfdir=/etc --localstatedir=/var --disable-qt3 --disable-qt4 --disable-qt5 --disable-gtk --disable-gtk3 --disable-static --disable-mono --disable-monodoc --with-distro=none --with-systemdsystemunitdir=no --enable-gdbm --enable-dbus --disable-python
