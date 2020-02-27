@@ -1,0 +1,3 @@
+description: Libraries/utilities to handle ELF objects (drop in replacement for libelf)
+homepage: http://elfutils.org/
+license: "|| ( GPL-2+ LGPL-3+ ) utils? ( GPL-3+ )"

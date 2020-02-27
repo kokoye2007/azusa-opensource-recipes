@@ -1,0 +1,3 @@
+description: Small C library to run an HTTP server as part of another application
+homepage: https://www.gnu.org/software/libmicrohttpd/
+license: LGPL-2.1
