@@ -7,7 +7,7 @@ MY_P="${MY_PN}-${PV}"
 get https://pypi.org/packages/source/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz
 acheck
 
-cd "Cython-${PV}"
+cd "${MY_P}"
 
 pythonsetup
 archive
