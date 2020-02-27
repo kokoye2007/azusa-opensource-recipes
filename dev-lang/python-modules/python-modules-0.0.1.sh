@@ -33,7 +33,7 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	if [ -d "${TARGET}/lib/python${PYTHON_VERSION:0:3}/site-packages" ]; then
 		cd "${TARGET}/lib/python${PYTHON_VERSION:0:3}/site-packages"
 		rm -f setuptools.pth
-		find . -maxdepth 1 -name '*.egg' >setuptools.pth
+		find . -maxdepth 1 -name '*.egg' | sort -r | sort -u --field-separator=- -k 1,1 >setuptools.pth
 	fi
 done
 
