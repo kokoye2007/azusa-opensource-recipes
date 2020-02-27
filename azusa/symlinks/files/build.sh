@@ -4,7 +4,7 @@ set -e
 MULTILIB=yes
 
 cd $1
-mkdir -p bin sbin info share/gir-1.0 include etc etc/ssl include full/include
+mkdir -p bin sbin info share/gir-1.0 share/aclocal include etc etc/ssl include full/include
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
@@ -56,7 +56,7 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 
 	case $t in
 		core)
-			for foo in bin sbin info share/gir-1.0; do
+			for foo in bin sbin info share/gir-1.0 share/aclocal; do
 				if [ -d "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "${foo}"
 				fi
