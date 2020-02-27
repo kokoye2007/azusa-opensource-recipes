@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/${PV}/${P}.tar.bz2
+acheck
 
 cd "${T}"
 

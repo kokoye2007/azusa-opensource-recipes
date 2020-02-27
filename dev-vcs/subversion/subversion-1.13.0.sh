@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/expat uuid
+importpkg dev-libs/expat uuid net-libs/serf
 
 doconf --disable-static --with-lz4=internal --with-utf8proc=internal
 
