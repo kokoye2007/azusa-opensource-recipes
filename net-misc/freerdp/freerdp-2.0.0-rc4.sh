@@ -9,7 +9,7 @@ apatch "$FILESDIR/freerdp-2.0.0-rc4-fix-avcodec.patch"
 
 cd "${T}"
 
-CMAKE_ROOT="${CHPATH}/FreeRDP-${PV}" docmake -DWITH_LIBSYSTEMD=OFF
+CMAKE_ROOT="${CHPATH}/FreeRDP-${PV}" docmake -DWITH_LIBSYSTEMD=OFF -DCMAKE_C_FLAGS="-I/pkg/main/x11-base.xorg-proto.dev/include"
 
 make
 make install DESTDIR="${D}"
