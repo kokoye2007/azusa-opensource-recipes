@@ -293,6 +293,13 @@ docmake() {
 	if [ x"$CMAKE_ROOT" = x ]; then
 		CMAKE_ROOT="${CHPATH}/${P}"
 	fi
+
+	# export a bunch of package ENV vars so cmake is easier to use
+	export LibRHash_ROOT=/pkg/main/app-crypt.rhash.dev ZLIB_ROOT=/pkg/main/sys-libs.zlib.dev LibArchive_ROOT=/pkg/main/app-arch.libarchive.dev JsonCpp_ROOT=/pkg/main/dev-libs.jsoncpp.dev LibUV_ROOT=/pkg/main/dev-libs.libuv.dev
+	export X11_ROOT=/pkg/main/x11-libs.libX11.dev ALSA_ROOT=/pkg/main/media-libs.alsa-lib.dev XKBFile_ROOT=/pkg/main/x11-libs.libxkbfile.dev XShm_ROOT=/pkg/main/x11-libs.libXext.dev Xinerama_ROOT=/pkg/main/x11-libs.libXinerama.dev
+	export Xext_ROOT=/pkg/main/x11-libs.libXext.dev Xcursor_ROOT=/pkg/main/x11-libs.libXcursor.dev Xv_ROOT=/pkg/main/x11-libs.libXv.dev Xi_ROOT=/pkg/main/x11-libs.libXi.dev Xrender_ROOT=/pkg/main/x11-libs.libXrender.dev
+	export XRandR_ROOT=/pkg/main/x11-libs.libXrandr.dev Xfixes_ROOT=/pkg/main/x11-libs.libXfixes.dev
+
 	cmake "$CMAKE_ROOT" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release "$@"
 }
 

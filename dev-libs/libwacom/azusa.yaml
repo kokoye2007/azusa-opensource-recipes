@@ -1,0 +1,3 @@
+description: Library for identifying Wacom tablets and their model-specific features
+homepage: https://github.com/linuxwacom/libwacom
+license: MIT

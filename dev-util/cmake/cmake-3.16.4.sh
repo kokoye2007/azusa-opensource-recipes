@@ -4,9 +4,11 @@ source "../../common/init.sh"
 get https://github.com/Kitware/CMake/releases/download/v${PV}/${P}.tar.gz
 acheck
 
-cd "${T}"
+cd "${P}"
 
-export LibRHash_ROOT=/pkg/main/app-crypt.rhash.dev ZLIB_ROOT=/pkg/main/sys-libs.zlib.dev LibArchive_ROOT=/pkg/main/app-arch.libarchive.dev JsonCpp_ROOT=/pkg/main/dev-libs.jsoncpp.dev LibUV_ROOT=/pkg/main/dev-libs.libuv.dev
+apatch "$FILESDIR/cmake-enforce-CMP0074-3.16.4.patch"
+
+cd "${T}"
 
 # configure & build
 if [ -f /bin/cmake ]; then
