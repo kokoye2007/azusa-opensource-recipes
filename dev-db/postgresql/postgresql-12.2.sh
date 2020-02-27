@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg sys-libs/ncurses sys-libs/readline zlib
+
 doconf --enable-thread-safety
 
 make
