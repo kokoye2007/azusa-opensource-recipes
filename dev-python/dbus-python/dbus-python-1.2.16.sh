@@ -7,5 +7,5 @@ acheck
 
 cd "${P}"
 
-pythonsetup
+pythonconfsetup
 archive
