@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/LMDB/lmdb/archive/LMDB_${PV}.tar.gz
+acheck
 
 cd "lmdb-LMDB_${PV}/libraries/liblmdb"
 
