@@ -1,7 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/readline/${P}.tar.gz
+get https://ftp.gnu.org/gnu/${PN}/${PN}-8.0.tar.gz
+
+cd "${PN}-8.0"
+
+for foo in `seq -f '%03.f' 1 4`; do
+	get https://ftp.gnu.org/gnu/readline/readline-8.0-patches/readline80-$foo
+	patch -p0 <"readline80-$foo"
+done
+
 acheck
 
 cd "${T}"

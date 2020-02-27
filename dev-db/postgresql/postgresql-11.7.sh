@@ -2,8 +2,11 @@
 source "../../common/init.sh"
 
 get http://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2
+acheck
 
 cd "${T}"
+
+importpkg readline ncurses zlib
 
 doconf --enable-thread-safety
 

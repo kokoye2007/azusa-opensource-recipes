@@ -1,13 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/readline/${P}.tar.gz
+get http://isl.gforge.inria.fr/${P}.tar.xz
 acheck
 
 cd "${T}"
 
+importpkg gmp
+
 # configure & build
-doconf --disable-static
+doconf 
 
 make
 make install DESTDIR="${D}"
