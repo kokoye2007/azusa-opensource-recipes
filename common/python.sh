@@ -40,6 +40,13 @@ pythonsetup() {
 				continue
 			fi
 		fi
+		echo "Running for python-$PYTHON_VERSION"
+		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
+		export PYTHONPATH="/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION:0:3}"
+		if [ x"$PYTHON_VERSION" == x"3.5.9" ]; then
+			# symlink to make python happy
+			ln -snfT "/pkg/main/dev-lang.python-modules.core.3.5.9/lib/python3.5/config-3.5m" "/pkg/main/dev-lang.python.core.3.5.9/lib/python3.5/config-3.5m"
+		fi
 		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" setup.py install
 
 		# fetch the installed module from /.pkg-main-rw/
