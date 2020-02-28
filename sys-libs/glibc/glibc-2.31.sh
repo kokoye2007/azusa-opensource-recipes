@@ -8,7 +8,7 @@ acheck
 cd "${T}"
 
 # configure & build
-doconf --disable-werror --enable-kernel=4.19 --enable-stack-protector=strong --with-headers=/usr/include libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+doconf --disable-werror --enable-kernel=4.14 --enable-stack-protector=strong --with-headers=/usr/include libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
 
 make
 make install DESTDIR="${D}"
