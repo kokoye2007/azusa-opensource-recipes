@@ -7,7 +7,7 @@ acheck
 cd "${T}"
 
 # configure & build
-doconf --enable-cxx --disable-static --build=x86_64-unknown-linux-gnu
+doconf --enable-cxx --disable-static
 
 make
 make install DESTDIR="${D}"

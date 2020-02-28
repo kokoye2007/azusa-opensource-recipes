@@ -1,7 +1,25 @@
 #!/bin/sh
 set -e
 
-MULTILIB=yes
+ARCH=`uname -m`
+OS=`uname -s | tr A-Z a-z`
+MULTILIB=no
+
+case $ARCH in
+	i?86)
+		ARCH=386
+		LIB_SUFFIX=
+		;;
+	x86_64)
+		ARCH=amd64
+		MULTILIB=yes
+		LIB_SUFFIX=64
+		;;
+	aarch64)
+		ARCH=arm64
+		LIB_SUFFIX=
+		;;
+esac
 
 cd $1
 mkdir -p bin sbin info share/gir-1.0 share/aclocal include etc etc/ssl include full/include
