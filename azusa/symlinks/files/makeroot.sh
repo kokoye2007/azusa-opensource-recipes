@@ -47,9 +47,9 @@ ln -snf /pkg/main/azusa.symlinks.core/share/gir-1.0 "$BASE/usr/share/gir-1.0"
 ln -snf /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
 
 # install apkg
-cp -fT /pkg/main/core.apkg/apkg "$BASE/usr/azusa/apkg"
-cp -fT /pkg/main/core.azusa-init.core/azusa-init "$BASE/usr/azusa/azusa-init"
-cp -fT /pkg/main/sys-apps.busybox/bin/busybox "$BASE/usr/azusa/busybox"
+cp -fT /pkg/main/azusa.apkg.core/apkg "$BASE/usr/azusa/apkg"
+cp -fT /pkg/main/azusa.init/init "$BASE/usr/azusa/azusa-init"
+cp -fT /pkg/main/sys-apps.busybox.core/bin/busybox "$BASE/usr/azusa/busybox"
 
 # initialize dev
 if [ $USER = root ]; then
@@ -67,7 +67,7 @@ else
 fi
 
 # populate /etc
-find /pkg/main/core.baselayout/ -type f -printf '%P\n' | while read foo; do
+find /pkg/main/azusa.baselayout.core/ -type f -printf '%P\n' | while read foo; do
 	if [ ! -f "$BASE/$foo" ]; then
 		# file is missing, copy it. But first...
 		foo_dir=`dirname "$foo"`
