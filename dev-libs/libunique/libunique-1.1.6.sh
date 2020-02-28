@@ -6,8 +6,7 @@ acheck
 
 cd "${P}"
 patch -p1 -i "$FILESDIR/libunique-1.1.6-upstream_fixes-1.patch"
-libtoolize --force --install
-autoreconf -fi
+aautoreconf
 
 cd "${T}"
 
