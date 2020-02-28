@@ -1,5 +1,5 @@
 #!/bin/sh
-source "../../common/init.sh"
+source "common/init.sh"
 inherit perl
 acheck
 
