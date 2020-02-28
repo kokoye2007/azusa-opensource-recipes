@@ -75,7 +75,7 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 	case $t in
 		core)
 			for foo in bin sbin info share/gir-1.0 share/aclocal; do
-				if [ -d "${p}/${foo}" ]; then
+				if [ -d "${p}/${foo}" -a ! -L "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "${foo}"
 				fi
 			done
