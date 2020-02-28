@@ -38,6 +38,8 @@ else
 	LIBS=lib
 	LIB=lib
 	mkdir -p lib full/lib
+
+	cp -rsfT `realpath /pkg/main/sys-libs.glibc.libs/lib` lib
 fi
 mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules"
 ln -snf "$LIB/cmake" cmake
