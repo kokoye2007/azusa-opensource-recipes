@@ -76,7 +76,7 @@ find /pkg/main/azusa.baselayout.core/ -type f -printf '%P\n' | while read foo; d
 			mkdir -p "$BASE/$foo_dir"
 		fi
 		# then copy
-		cp "/pkg/main/core.baselayout/$foo" "$BASE/$foo"
+		cp "/pkg/main/azusa.baselayout.core/$foo" "$BASE/$foo"
 	fi
 done
 
