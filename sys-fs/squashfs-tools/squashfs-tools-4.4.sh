@@ -11,4 +11,7 @@ importpkg zlib
 make
 make install INSTALL_DIR="${D}/pkg/main/${PKG}.core.${PVR}/bin"
 
+# make sure we use the new mksquashfs binary
+export PATH="${D}/pkg/main/${PKG}.core.${PVR}/bin:$PATH"
+
 finalize
