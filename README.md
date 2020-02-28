@@ -4,6 +4,11 @@ Scripts and patches used to build apkg files for various pieces of software.
 
 We start from the ground up, with stuff requiring the less dependencies.
 
+## Running apkg
+
+	curl -s https://raw.githubusercontent.com/TrisTech/make-go/master/get.sh | /bin/sh -s apkg
+	./apkg
+
 ## Requesting an update
 
 If a given package has an update released by its developer and it has not been

@@ -17,6 +17,10 @@ case $ARCH in
 		MULTILIB=yes
 		LIB_SUFFIX=64
 		;;
+	aarch64)
+		ARCH=arm64
+		LIB_SUFFIX=
+		;;
 esac
 
 # define variables - this should work most of the time
