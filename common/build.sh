@@ -7,8 +7,24 @@ AZUSA_RECIPES_ROOT=`pwd`
 
 # Compile a given package ($1) within a jail
 PKG="$1"
-PKG_DIR=`dirname "$PKG"`
-PKG_SCRIPT=`basename "$PKG"`
+
+if [ -f "$PKG" ]; then
+	PKG_DIR=`dirname "$PKG"`
+	PKG_SCRIPT=`basename "$PKG"`
+elif [ -d "$PKG" ]; then
+	# try to locate script (latest version)
+	PKG_DIR="$PKG"
+	PKG_SCRIPT=""
+	for foo in "$PKG_DIR"/*.sh; do
+		if [ -f "$foo" ]; then
+			PKG_SCRIPT="$foo"
+		fi
+	done
+	PKG_SCRIPT=`basename "$PKG_SCRIPT"`
+else
+	echo "$PKG not found"
+	exit 1
+fi
 
 echo "Preparing to build $PKG"
 

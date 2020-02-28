@@ -4,6 +4,8 @@ source "../../common/init.sh"
 get https://static.rust-lang.org/dist/rustc-${PV}-src.tar.gz
 acheck
 
+importpkg zlib
+
 cd "rustc-${PV}-src"
 
 cat << EOF > config.toml
