@@ -67,6 +67,9 @@ extract() {
 		*.tar.*|*.tgz|*.tbz2)
 			tar xf $1
 			;;
+		*.gz)
+			gunzip $1
+			;;
 	esac
 }
 
