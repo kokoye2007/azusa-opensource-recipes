@@ -6,7 +6,10 @@ acheck
 
 cd "${T}"
 
-doconf
+importpkg zlib app-arch/bzip2 sys-libs/readline
+
+doconf --enable-unicode-properties --enable-pcre16 --enable-pcre32 --enable-pcregrep-libz --enable-pcregrep-libbz2 --disable-static
+# --enable-pcretest-libreadline
 
 make
 make install DESTDIR="${D}"
