@@ -2,13 +2,14 @@
 source "../../common/init.sh"
 
 get http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/${P}/${P}.tar.xz
+acheck
 
 cd "${T}"
 
 export SED=sed
 
 # make sure gcc can find stuff like -lz
-export LDFLAGS="$(pkg-config zlib --libs-only-L)"
+importpkg zlib
 
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} --infodir=/pkg/main/${PKG}.doc.${PVR}/info --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/gcc \
