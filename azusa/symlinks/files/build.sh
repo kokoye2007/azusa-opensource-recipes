@@ -106,7 +106,7 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 			;;
 		doc)
 			for foo in man info; do
-				if [ -d "${p}/$foo" ]; then
+				if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 					cp -rsfT "${p}/$foo" $foo
 				fi
 			done
