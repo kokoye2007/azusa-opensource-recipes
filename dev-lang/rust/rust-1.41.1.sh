@@ -15,6 +15,10 @@ targets = "X86"
 # When using system llvm prefer shared libraries
 link-shared = true
 
+cflags="${CPPFLAGS} -O2"
+cxxflags="${CPPFLAGS} -O2"
+ldflags="${LDFLAGS}"
+
 [build]
 # omit docs to save time and space (default is to build them)
 docs = false
