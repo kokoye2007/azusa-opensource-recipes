@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/${P}/${P}.tar.xz
+cd "${P}"
+get http://distfiles.gentoo.org/distfiles/gcc-9.2.0-patches-5.tar.bz2
+apatch patch/*.patch
 acheck
 
 cd "${T}"
@@ -14,7 +17,7 @@ importpkg zlib
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} --infodir=/pkg/main/${PKG}.doc.${PVR}/info --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/gcc \
 --with-gcc-major-version-only \
---enable-languages=c,c++ --disable-bootstrap --disable-libmpx --with-system-zlib \
+--enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
 --with-mpfr-include=`realpath /pkg/main/dev-libs.mpfr.dev/include` --with-mpfr-lib=`realpath /pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX` \
 --with-mpc-include=`realpath /pkg/main/dev-libs.mpc.dev/include` --with-mpc-lib=`realpath /pkg/main/dev-libs.mpc.libs/lib$LIB_SUFFIX` \
 --with-gmp-include=`realpath /pkg/main/dev-libs.gmp.dev/include` --with-gmp-lib=`realpath /pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX` \
