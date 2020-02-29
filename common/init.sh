@@ -113,6 +113,10 @@ organize() {
 		LIB=lib64
 	fi
 
+	# remove any .la file
+	# see: https://wiki.gentoo.org/wiki/Project:Quality_Assurance/Handling_Libtool_Archives
+	find "${D}" -name '*.la' -delete
+
 	# ensure lib dirs are in libs and not core
 	for foo in lib lib32 lib64; do
 		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVR}/$foo" ]; then

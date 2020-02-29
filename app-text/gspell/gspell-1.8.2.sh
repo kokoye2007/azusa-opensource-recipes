@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg uuid app-arch/bzip2 libbsd app-text/aspell
+importpkg app-text/aspell
 
 doconf
 

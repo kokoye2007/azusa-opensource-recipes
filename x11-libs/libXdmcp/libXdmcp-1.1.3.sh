@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get https://www.x.org/pub/individual/lib/${P}.tar.bz2
+acheck
+
+importpkg libbsd
 
 cd "${T}"
 

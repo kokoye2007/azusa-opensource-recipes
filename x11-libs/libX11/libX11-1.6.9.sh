@@ -6,9 +6,9 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/libbsd
+#importpkg dev-libs/libbsd
 
-doconf --enable-ipv6 --without-fop --localstatedir=/var --disable-static
+doconf --enable-ipv6 --without-fop --localstatedir=/var --disable-static --disable-silent-rules
 
 make
 make install DESTDIR="${D}"
