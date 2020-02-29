@@ -17,7 +17,7 @@ if [ -f /bin/cmake ]; then
 	# CMake_RUN_CLANG_TIDY:BOOL=OFF
 else
 	cmakeenv
-	callconf --no-qt-gui --prefix=/pkg/main/${PKG}.core.${PVR} --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc --system-libs
+	callconf --no-qt-gui --prefix=/pkg/main/${PKG}.core.${PVR} --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc
 fi
 
 make
