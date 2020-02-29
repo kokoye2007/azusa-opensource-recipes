@@ -114,6 +114,10 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 			done
 			;;
 		libs)
+			LACNT=`find ${p} -name '*.la' | wc -l`
+			if [ $LACNT -gt 0 ]; then
+				echo -e "\rNeeds rebuild (.la files found): $pn\033[K"
+			fi
 			for foo in $LIBS; do
 				if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 					echo "${p}/$foo" >>etc/ld.so.conf.tmp

@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get http://ftp.riken.jp/net/apache/apr/${P}.tar.bz2
+acheck
+
+importpkg expat
 
 cd "${T}"
 
