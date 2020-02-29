@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg sys-libs/ncurses
 
-doconf
+doconf --disable-hwloc --enable-taskstats --enable-cgroup --enable-linux-affinity --enable-unicode
 
 make
 make install DESTDIR="${D}"
