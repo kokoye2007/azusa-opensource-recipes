@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+get https://github.com/SELinuxProject/selinux/releases/download/20191204/${P}.tar.gz
+acheck
 
 cd "${T}"
 
