@@ -14,7 +14,7 @@ PN=$(basename $(pwd))
 CATEGORY=$(basename $(dirname $(pwd)))
 # TODO fix P to not include revision if any
 P=${PF}
-PVR=${P#"${PN}-"}
+PVR="${P#"${PN}-"}.${OS}.${ARCH}"
 PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
@@ -92,7 +92,7 @@ squash() {
 	FN=`basename $1`
 	mkdir -p "${APKGOUT}"
 	# check fn: 
-	if [ `echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm64)$'` -eq 0 ]; then
+	if [ `echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm|arm64)$'` -eq 0 ]; then
 		# add
 		FN="${FN}.${OS}.${ARCH}"
 	fi
@@ -103,6 +103,11 @@ squash() {
 	else
 		mksquashfs "$1" "${APKGOUT}/${FN}.squashfs" -all-root -nopad -noappend
 	fi
+}
+
+get_target() {
+	# $1 is one of "core", "libs", etc
+	echo "${PKG}.$1.${PVR}"
 }
 
 organize() {
