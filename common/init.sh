@@ -1,10 +1,10 @@
 # Common stuff, variables, etc
 set -e
 
-if [ x"$BASEDIR" = x ]; then
-	BASEDIR=`pwd`
+BASEDIR=`pwd`
+if [ x"$ROOTDIR" = x ]; then
+	ROOTDIR=$(realpath $BASEDIR/../..)
 fi
-ROOTDIR=$(realpath $BASEDIR/../..)
 source "$ROOTDIR/common/arch.sh"
 
 # define variables - this should work most of the time
