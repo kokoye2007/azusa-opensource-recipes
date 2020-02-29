@@ -2,13 +2,13 @@
 cd "$(dirname $0)"
 source "../../common/init.sh"
 
-get https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.34/${P}.tar.xz
+get https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.35/${P}.tar.xz
 acheck
 
 cd "${T}"
 
-# fix linking of pcre2-8
-export LDFLAGS="$(pkg-config --libs-only-L libpcre2-8)"
+# ncurses for -ltinfo
+importpkg libpcre2-8 sys-libs/ncurses
 
 # libdir needs to start with $prefix in order to avoid weird bugs
 
