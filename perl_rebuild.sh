@@ -1,4 +1,5 @@
 #!/bin/sh
+BASEDIR="`pwd`"
 source "common/init.sh"
 inherit perl
 acheck

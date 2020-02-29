@@ -1,0 +1,3 @@
+description: A TCP/HTTP reverse proxy for high availability environments
+homepage: http://www.haproxy.org
+license: GPL-2 LGPL-2.1
