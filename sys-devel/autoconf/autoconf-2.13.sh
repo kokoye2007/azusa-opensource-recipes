@@ -9,7 +9,7 @@ cd "${T}"
 doconflight
 
 # avoid install to fail
-rm /pkg/main/${PKG}.core.${PVR}
+rm /pkg/main/${PKG}.core.${PVR} || true
 
 make
 make install
