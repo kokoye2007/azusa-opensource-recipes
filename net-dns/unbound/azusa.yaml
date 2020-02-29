@@ -1,0 +1,3 @@
+description: A validating, recursive and caching DNS resolver
+homepage: https://unbound.net/ https://nlnetlabs.nl/projects/unbound/about/
+license: BSD GPL-2
