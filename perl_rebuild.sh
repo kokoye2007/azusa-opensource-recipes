@@ -27,6 +27,6 @@ for PERL_VERSION in $PERL_VERSIONS; do
 			continue
 		fi
 		echo "Will attempt to build dev-perl/$BASE"
-		"$ROOTDIR/common/build.sh" "dev-perl/$BASE/$(basename "$VERS")" || true
+		yes 'n' | "$ROOTDIR/common/build.sh" "dev-perl/$BASE/$(basename "$VERS")" || true
 	done
 done
