@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+get https://people.redhat.com/sgrubb/libcap-ng/${P}.tar.gz
+acheck
 
 cd "${T}"
 
