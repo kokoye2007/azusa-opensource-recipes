@@ -4,9 +4,9 @@ source "../../common/init.sh"
 get https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/${P}.tar.gz
 acheck
 
-sed -i '/install.*STALIBNAME/d' ${P}/libcap/Makefile
-
 cd ${P}
+
+sed -i '/install.*STALIBNAME/d' libcap/Makefile
 
 # configure & build
 make
