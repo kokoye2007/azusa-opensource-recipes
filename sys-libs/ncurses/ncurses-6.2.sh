@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://invisible-mirror.net/archives/ncurses/${P}.tar.gz
 acheck
 
-sed -i '/LIBTOOL_INSTALL/d' ncurses-${PVR}/c++/Makefile.in
+sed -i '/LIBTOOL_INSTALL/d' ncurses-${PV}/c++/Makefile.in
 
 cd "${T}"
 
