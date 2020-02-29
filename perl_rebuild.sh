@@ -11,10 +11,6 @@ for PERL_VERSION in $PERL_VERSIONS; do
 	for foo in $ROOTDIR/dev-perl/*; do
 		echo "$foo"
 		BASE=`basename "$foo"`
-		if [ "$BASE" = "azusa" ]; then
-			# not a real module
-			continue
-		fi
 		if [ `echo "$MODS" | grep -c "$BASE\\.mod"` -gt 0 ]; then
 			# already have
 			continue
