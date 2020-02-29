@@ -10,16 +10,11 @@ cd ${P}
 
 # configure & build
 make
-make install RAISE_SETFCAP=no prefix="${D}/work"
+make install RAISE_SETFCAP=no prefix="${D}/pkg/main/${PKG}.core.${PVR}"
 
 cd "${D}"
 
-mkdir -p "pkg/main/${PKG}.libs.${PVR}" "pkg/main/${PKG}.dev.${PVR}" "pkg/main/${PKG}.core.${PVR}" "pkg/main/${PKG}.doc.${PVR}"
-mv work/sbin "pkg/main/${PKG}.core.${PVR}"
-mv work/include "pkg/main/${PKG}.dev.${PVR}"
-mv work/lib64 "pkg/main/${PKG}.libs.${PVR}"
-rm -fr "pkg/main/${PKG}.libs.${PVR}/lib64/pkgconfig"
-mv work/share/man "pkg/main/${PKG}.doc.${PVR}"
+rm -fr "pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX/pkgconfig"
 
 mkdir -p "pkg/main/${PKG}.dev.${PVR}/pkgconfig"
 cat >"pkg/main/${PKG}.dev.${PVR}/pkgconfig/libcap.pc" <<EOF
