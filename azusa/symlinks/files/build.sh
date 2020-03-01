@@ -22,7 +22,7 @@ case $ARCH in
 esac
 
 cd $1
-mkdir -p bin sbin info share/gir-1.0 share/aclocal include etc etc/ssl include full/include
+mkdir -p bin sbin info share/gir-1.0 share/aclocal etc etc/ssl full/include
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
@@ -49,10 +49,10 @@ ln -snf "$LIB/pkgconfig" pkgconfig
 
 # build includes
 echo "Building include folder..."
-for foo in sys-libs/glibc sys-libs/libcxx sys-kernel/linux; do
-	# use realpath to resolve path to full path with version
-	cp -rsfT $(realpath /pkg/main/${foo/\//.}.dev/include) ./include
-done
+#for foo in sys-libs/glibc; do
+#	# use realpath to resolve path to full path with version
+#	cp -rsfT $(realpath /pkg/main/${foo/\//.}.dev/include) ./include
+#done
 
 for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
@@ -98,7 +98,7 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 
 			# generate full/include
 			if [ -d "${p}/include" ]; then
-				cp -rsfT "${p}/include" "full/include"
+				cp 2>/dev/null -rsfT "${p}/include" "full/include" || true
 			fi
 			;;
 		mod)

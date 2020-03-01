@@ -42,7 +42,6 @@ for foo in ld.so.cache ld.so.conf; do
 done
 
 ln -snf /pkg/main/azusa.symlinks.core/pkgconfig "$BASE/usr/share/pkgconfig"
-ln -snf /pkg/main/azusa.symlinks.core/include "$BASE/usr/include"
 ln -snf /pkg/main/azusa.symlinks.core/share/gir-1.0 "$BASE/usr/share/gir-1.0"
 ln -snf /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
 
