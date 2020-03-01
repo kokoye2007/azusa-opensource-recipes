@@ -17,7 +17,7 @@ importpkg zlib
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} --infodir=/pkg/main/${PKG}.doc.${PVR}/info --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/gcc \
 --libdir=/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX --with-slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \
--with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVR}/include/c++ \
+--with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVR}/include/c++ --with-sysroot=/pkg/main/sys-libs.glibc.dev \
 --with-gcc-major-version-only \
 --enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
 --with-mpfr-include=`realpath /pkg/main/dev-libs.mpfr.dev/include` --with-mpfr-lib=`realpath /pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX` \
