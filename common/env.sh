@@ -27,8 +27,6 @@ mkdir -p "$tmp_dir/dev/shm"
 mount -o mode=1777 -t tmpfs tmpfs "$tmp_dir/dev/shm"
 chroot "$tmp_dir" /bin/sh -c "dbus-uuidgen --ensure=/etc/machine-id" || true
 
-cp -rsfT `realpath /pkg/main/sys-libs.glibc.libs/lib64` "$tmp_dir/pkg/main/azusa.symlinks.core/lib64"
-
 cleanuptmp() {
 	echo "Cleaning up $tmp_dir"
 	umount "$tmp_dir/proc" || umount -l "$tmp_dir/proc" || true
