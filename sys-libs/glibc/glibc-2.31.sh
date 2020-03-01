@@ -13,11 +13,26 @@ doconf --disable-werror --enable-kernel=4.14 --enable-stack-protector=strong --w
 make
 make install DESTDIR="${D}"
 
-# link lib into dev so dev can be used as sysroot value
+# make dev a sysroot for gcc
 ln -snfTv "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX"
 if [ x"$LIB_SUFFIX" != x ]; then
 	ln -snfTv "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVR}/lib"
 fi
 ln -snfTv . "${D}/pkg/main/${PKG}.dev.${PVR}/usr"
+
+# linux includes
+for foo in /pkg/main/sys-kernel.linux.dev/include/*; do
+	BASE=`basename "$foo"`
+	if [ -d "${D}/pkg/main/${PKG}.dev.${PVR}/include/$BASE" ]; then
+		# already a dir there, need to do a cp operation
+		cp -rsfT "$foo" "${D}/pkg/main/${PKG}.dev.${PVR}/include/$BASE"
+	else
+		ln -snfvT "$foo" "${D}/pkg/main/${PKG}.dev.${PVR}/include/$BASE"
+	fi
+done
+
+# c++ includes + libs
+ln -snfv /pkg/main/sys-libs.libcxx.dev/include/c++ "${D}/pkg/main/${PKG}.dev.${PVR}/include/"
+ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libc++.so"
 
 archive

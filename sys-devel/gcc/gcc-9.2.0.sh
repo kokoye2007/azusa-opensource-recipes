@@ -14,6 +14,8 @@ export SED=sed
 # make sure gcc can find stuff like -lz
 importpkg zlib
 
+export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp
+
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVR} --infodir=/pkg/main/${PKG}.doc.${PVR}/info --mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/gcc \
 --libdir=/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX --with-slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \
