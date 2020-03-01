@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg zlib x11-libs/cairo
+
 # TODO fix man building (xsltproc fails)
 meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}"
 
