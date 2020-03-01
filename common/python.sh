@@ -52,8 +52,8 @@ pythonsetup() {
 		# fetch the installed module from /.pkg-main-rw/
 		mv "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
 		if [ -d "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"* ]; then
-			# maybe installed bin folder. Move to "core"
-			mv "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"* "${D}/pkg/main/${PKG}.core.${PVR}.py${PYTHON_VERSION}"
+			# maybe installed bin folder. Move it too
+			mv "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
 		fi
 	done
 }
