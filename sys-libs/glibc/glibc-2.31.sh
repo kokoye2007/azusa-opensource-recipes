@@ -37,6 +37,9 @@ ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main
 
 # add link to ld.so.conf and ld.so.cache since binutils will be looking for it here
 mkdir "${D}/pkg/main/${PKG}.dev.${PVR}/etc"
-ln -snf /pkg/main/azusa.symlinks.core/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVR}/etc"
+ln -snf /pkg/main/azusa.symlinks.core/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVR}/etc/"
+
+# add a link to /pkg in sysroot, because binutils will always prefix sysroot to paths found in ld.so.conf
+ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVR}/pkg"
 
 archive
