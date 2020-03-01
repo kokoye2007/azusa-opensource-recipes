@@ -3,7 +3,7 @@ source "../../common/init.sh"
 
 # change PN during get so we use the same file as qemu
 PN=qemu
-get https://download.qemu.org/${P}.tar.xz
+get https://download.qemu.org/qemu-${PV}.tar.xz
 PN=qemu-console
 acheck
 
