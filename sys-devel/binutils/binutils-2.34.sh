@@ -7,7 +7,7 @@ acheck
 importpkg zlib
 
 # default libpath should include glibc path so gcc can find -lc
-export LIB_PATH=/lib:`realpath /pkg/main/sys-libs.glibc.libs/lib$LIB_SUFFIX`
+export LIB_PATH=/lib:/pkg/main/sys-devel.gcc.libs/lib$LIB_SUFFIX:/pkg/main/sys-libs.glibc.libs/lib$LIB_SUFFIX
 
 cd "${T}"
 
