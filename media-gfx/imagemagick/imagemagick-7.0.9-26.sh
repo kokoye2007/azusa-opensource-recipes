@@ -11,7 +11,7 @@ importpkg sys-devel/libtool app-arch/bzip2 sys-apps/util-linux dev-libs/libbsd
 doconf --sysconfdir=/etc --enable-hdri --with-modules --with-perl --disable-static
 
 # required during build
-ln -s /pkg/main/sys-devel.libtool.libs/lib64/libltdl.la /usr/lib64/libltdl.la
+ln -s /pkg/main/sys-devel.libtool.libs/lib$LIB_SUFFIX/libltdl.la /usr/lib$LIB_SUFFIX/libltdl.la
 
 make
 make install DESTDIR="${D}"

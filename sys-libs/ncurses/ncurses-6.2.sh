@@ -33,11 +33,4 @@ make install DESTDIR="${D}"
 
 cd "${D}"
 
-#cd "pkg/main/${PKG}.libs.${PVR}/lib64"
-#for lib in ncurses form panel menu ; do
-	# workaround for bash
-	#echo "INPUT(-l${lib}w)" > lib${lib}.so
-	#echo "INPUT(-l${lib}w)" > lib${lib}.so.6
-#done
-
 finalize
