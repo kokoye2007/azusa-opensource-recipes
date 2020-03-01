@@ -3,7 +3,7 @@ source "../../common/init.sh"
 
 get https://downloads.sourceforge.net/asciidoc/${P}.tar.gz
 
-cd "${T}"
+cd "${P}"
 
 doconf --sysconfdir=/etc
 

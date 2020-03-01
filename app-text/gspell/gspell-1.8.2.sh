@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg app-text/aspell
+importpkg app-text/aspell zlib
 
 doconf
 
