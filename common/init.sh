@@ -88,6 +88,14 @@ get() {
 	extract "$BN"
 }
 
+prepare() {
+	echo "Checking for config.sub / config.guess"
+	find "${CHPATH}" -name config.sub -o -name config.guess | while read foo; do
+		rm -fv "$foo"
+		ln -snfTv /pkg/main/sys-devel.gnuconfig.core/share/gnuconfig/`basename "$foo"` "$foo"
+	done
+}
+
 squash() {
 	FN=`basename $1`
 	mkdir -p "${APKGOUT}"
