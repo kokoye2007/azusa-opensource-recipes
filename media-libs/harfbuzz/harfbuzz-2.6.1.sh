@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://www.freedesktop.org/software/harfbuzz/release/${P}.tar.xz
+acheck
 
 cd "${T}"
 
