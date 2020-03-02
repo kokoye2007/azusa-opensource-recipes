@@ -1,0 +1,3 @@
+description: lossless data compressor based on the LZMA algorithm
+homepage: https://www.nongnu.org/lzip/lzip.html
+license: GPL-2+
