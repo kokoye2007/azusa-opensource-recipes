@@ -47,13 +47,6 @@ mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules"
 ln -snf "$LIB/cmake" cmake
 ln -snf "$LIB/pkgconfig" pkgconfig
 
-# build includes
-echo "Building include folder..."
-#for foo in sys-libs/glibc; do
-#	# use realpath to resolve path to full path with version
-#	cp -rsfT $(realpath /pkg/main/${foo/\//.}.dev/include) ./include
-#done
-
 for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
 	p=/pkg/main/${pn}
@@ -137,6 +130,10 @@ done
 echo
 
 realpath /pkg/main/sys-libs.glibc.libs/$LIB >>etc/ld.so.conf.tmp
+# include all of gcc's stupid libs
+for foo in `realpath /pkg/main/sys-devel.gcc.libs`/*; do
+	echo "$foo" >>etc/ld.so.conf.tmp
+done
 tac etc/ld.so.conf.tmp >etc/ld.so.conf
 rm etc/ld.so.conf.tmp
 
