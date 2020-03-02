@@ -12,7 +12,7 @@ CPPFLAGS="-DHAVE_GC_IS_HEAP_PTR -DHAVE_GC_MOVE_DISAPPEARING_LINK"
 
 cd "${T}"
 
-importpkg sys-devel/libtool dev-libs/gmp dev-libs/libunistring
+importpkg sys-devel/libtool dev-libs/gmp dev-libs/libunistring dev-libs/libatomic_ops
 
 doconf --disable-rpath --disable-error-on-warning --disable-static --enable-posix --with-threads --enable-networking --enable-regex
 
