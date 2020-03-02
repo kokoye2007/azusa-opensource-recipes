@@ -5,6 +5,8 @@ get https://download.gimp.org/pub/gegl/0.4/${P}.tar.bz2
 
 cd "${T}"
 
+importpkg libjpeg
+
 doconf
 
 make
