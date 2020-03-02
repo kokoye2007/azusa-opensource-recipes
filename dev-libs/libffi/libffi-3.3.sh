@@ -18,4 +18,12 @@ doconf --disable-static --with-gcc-arch=native
 make
 make install DESTDIR="${D}"
 
+if [ $MULTILIB = no ]; then
+	# fix libffi lib location
+	if [ -d "${D}/pkg/main/${PKG}.libs.${PVR}/lib64" ]; then
+		mv -v "${D}/pkg/main/${PKG}.libs.${PVR}/lib64"/* "${D}/pkg/main/${PKG}.libs.${PVR}/lib"
+		rmdir "${D}/pkg/main/${PKG}.libs.${PVR}/lib64"
+	fi
+fi
+
 finalize

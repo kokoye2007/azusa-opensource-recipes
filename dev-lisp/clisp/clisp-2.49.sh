@@ -8,6 +8,7 @@ cd "${P}"
 
 sed -i -e '/socket/d' -e '/"streams"/d' tests/tests.lisp
 patch -Np1 -i "$FILESDIR/clisp-2.49-readline7_fixes-1.patch"
+aautoreconf
 
 importpkg dev-libs/libsigsegv ncurses libffi
 

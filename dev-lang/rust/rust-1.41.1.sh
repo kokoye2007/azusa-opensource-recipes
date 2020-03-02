@@ -50,6 +50,10 @@ EOF
 
 export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi"
 
+# attempt to make libssh2 work, see https://github.com/rust-lang/rust/issues/69552
+#export LIBSSH2_SYS_USE_PKG_CONFIG=1
+export DEP_Z_INCLUDE=`pkg-config --variable=includedir zlib`
+
 # to avoid errors such as
 # thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48
 mkdir "/pkg/main/${PKG}.core.${PVR}"
