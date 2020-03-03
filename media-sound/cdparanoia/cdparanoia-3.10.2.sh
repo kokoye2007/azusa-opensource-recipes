@@ -10,6 +10,7 @@ get https://dev.gentoo.org/~ssuominen/${MY_P}-patches-2.tbz2
 apatch patches/*.patch
 
 acheck
+prepare
 
 mv configure.guess config.guess
 mv configure.sub config.sub
