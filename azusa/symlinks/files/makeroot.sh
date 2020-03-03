@@ -84,6 +84,9 @@ if [ ! -f "$BASE/etc/resolv.conf" ]; then
 	echo "nameserver 8.8.4.4" >>"$BASE/etc/resolv.conf"
 fi
 
+# protect shadow
+chmod 0600 "$BASE/etc/shadow"
+
 # touch stuff
 touch "$BASE/var/run/utmp" "$BASE/var/log/"{btmp,lastlog,wtmp}
 chmod 664 "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
