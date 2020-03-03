@@ -11,4 +11,8 @@ docmake -DBUILD_STATIC_LIBS=OFF
 make
 make install DESTDIR="${D}"
 
+# required
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}"
+ln -snfTv "/pkg/main/${PKG}.core.${PVR}/bin" "${D}/pkg/main/${PKG}.dev.${PVR}/bin"
+
 finalize
