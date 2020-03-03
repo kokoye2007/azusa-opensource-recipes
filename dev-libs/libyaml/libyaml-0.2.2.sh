@@ -5,7 +5,8 @@ get https://github.com/yaml/libyaml/archive/${PV}/libyaml-dist-${PV}.tar.gz
 
 cd "${P}"
 
-./bootstrap
+#./bootstrap
+aautoreconf
 
 cd "${T}"
 
