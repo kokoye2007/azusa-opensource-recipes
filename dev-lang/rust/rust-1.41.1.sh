@@ -48,7 +48,7 @@ llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
 llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
 EOF
 
-export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi"
+export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
 
 # attempt to make libssh2 work, see https://github.com/rust-lang/rust/issues/69552
 #export LIBSSH2_SYS_USE_PKG_CONFIG=1

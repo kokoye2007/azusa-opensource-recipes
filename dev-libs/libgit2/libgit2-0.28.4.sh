@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-docmake
+docmake -DUSE_SSH=ON -DTHREADSAFE=ON -DUSE_HTTPS=ON -DBUILD_CLAR=OFF -DUSE_EXT_HTTP_PARSER=ON -DUSE_BUNDLED_ZLIB=OFF
 
 make
 make install DESTDIR="${D}"
