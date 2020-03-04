@@ -2,6 +2,8 @@
 source "../../common/init.sh"
 inherit python
 
+PYTHON_RESTRICT="3"
+
 get ftp://xmlsoft.org/libxml2/${P}.tar.gz
 acheck
 
@@ -18,7 +20,15 @@ make install DESTDIR="${D}"
 ln -v -s . "${D}/pkg/main/${PKG}.dev.${PVR}/include/libxml2/libxml2"
 
 organize
-pythonpackage
+
+# run python
+cd "${CHPATH}/${P}/python"
+
+# fix includes_dir to include both ${D}/pkg/main/${PKG}.dev.${PVR}/include and /pkg/main/sys-libs.glibc.dev/include
+sed -i -e "s#^includes_dir = \\[#includes_dir = ['${D}/pkg/main/${PKG}.dev.${PVR}/include', '/pkg/main/sys-libs.glibc.dev/include',#" setup.py
+export LDFLAGS="${LDFLAGS} -L${D}/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX"
+
+pythonsetup
 
 # because we use icu with libxml2, we need to add the include path to icu in cflags, or dependencies will not build
 ICU_PATH=`realpath /pkg/main/dev-libs.icu.dev/include`

@@ -51,3 +51,8 @@ done this way:
 
 Note that the special package azusa.symlinks offers a number of symlinks to the
 different existing packages, allowing access to latest version of most packages.
+
+# TODO
+
+* Improve packages instruction syntax
+* Call tests prior to archive
