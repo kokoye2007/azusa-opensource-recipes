@@ -2,8 +2,11 @@
 source "../../common/init.sh"
 
 get https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+acheck
 
 cd "${P}"
+
+importpkg tinfo
 
 doconf --with-socket-dir=/var/run/screen --with-pty-group=5 --with-sys-screenrc=/etc/screenrc
 
