@@ -60,8 +60,8 @@ pythonsetup() {
 
 pythonpackage() {
 	for PYTHON_VERSION in $PYTHON_VERSIONS; do
-		if [ -d "/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" ]; then
-			mv "/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
+		if [ -d "/.pkg-main-rw/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" ]; then
+			mv "/.pkg-main-rw/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
 		fi
 		if [ -d "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"* ]; then
 			# maybe installed bin folder. Move it too
