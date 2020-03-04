@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconf
+doconf --with-vendor-info=AZUSA --enable-introspection --enable-startup-notification --enable-vala --enable-gladeui2
 
 make
 make install DESTDIR="${D}"

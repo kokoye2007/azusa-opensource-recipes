@@ -1,12 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
+inherit python
 
 get ftp://xmlsoft.org/libxml2/${P}.tar.gz
 acheck
 
 cd "${T}"
 
-importpkg python-2.7 icu-uc
+importpkg python-3.8 icu-uc
 
 doconf --disable-maintainer-mode --disable-static --with-icu
 
@@ -17,6 +18,7 @@ make install DESTDIR="${D}"
 ln -v -s . "${D}/pkg/main/${PKG}.dev.${PVR}/include/libxml2/libxml2"
 
 organize
+pythonpackage
 
 # because we use icu with libxml2, we need to add the include path to icu in cflags, or dependencies will not build
 ICU_PATH=`realpath /pkg/main/dev-libs.icu.dev/include`

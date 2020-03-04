@@ -9,17 +9,27 @@ cd "Python-${PV}"
 # ensure python can build its "bits" for the following packages
 importpkg libffi expat ncurses openssl zlib sqlite3 readline liblzma app-arch/bzip2 sys-libs/gdbm
 
-callconf --prefix="/pkg/main/dev-lang.python-modules.core.${PV}" --exec-prefix="/pkg/main/${PKG}.core.${PVR}" --sysconfdir=/etc --localstatedir=/var --includedir="\${exec_prefix}/include" --datarootdir="\${exec_prefix}/share" \
+MODDIR="/pkg/main/dev-lang.python-modules.core.${PV}.${OS}.${ARCH}"
+
+callconf --prefix="$MODDIR" --exec-prefix="/pkg/main/${PKG}.core.${PVR}" --sysconfdir=/etc --localstatedir=/var --includedir="\${exec_prefix}/include" --datarootdir="\${exec_prefix}/share" \
 	--infodir="/pkg/main/${PKG}.doc.${PVR}/info" --mandir="/pkg/main/${PKG}.doc.${PVR}/man" --docdir="/pkg/main/${PKG}.doc.${PVR}" \
 	--enable-shared --with-system-expat --with-system-ffi --enable-optimizations --with-computed-gotos --with-dbmliborder=gdbm:bdb --with-libc= --enable-loadable-sqlite-extensions --without-ensurepip
 
 make
 make install DESTDIR="${D}"
 
+cd "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+if [ ! -f python ]; then
+	# create symlink
+	if [ -L python3 ]; then
+		cp -aTv python3 python
+	fi
+fi
+
 # move modules installed to exec-prefix back to prefix
-mv "${D}/pkg/main/dev-lang.python-modules.core.${PV}" "${D}/pkg/main/${PKG}.mod.${PVR}"
+mv "${D}${MODDIR}" "${D}/pkg/main/${PKG}.mod.${PVR}"
 
 # create symlink to fix confused easy install packages
-ln -snf "/pkg/main/dev-lang.python-modules.core.${PV}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.${PVR}/lib/python${PV%.*}/site-packages"
+ln -snf "${MODDIR}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.${PVR}/lib/python${PV%.*}/site-packages"
 
 finalize
