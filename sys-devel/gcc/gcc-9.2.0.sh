@@ -32,5 +32,8 @@ make install DESTDIR="${D}"
 
 ln -sv gcc "${D}/pkg/main/${PKG}.core.${PVR}/bin/cc"
 
+# remove any .la file
+find "${D}" -name '*.la' -delete
+
 # do not use finalize because we depend on location of some files
 archive
