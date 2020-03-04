@@ -51,8 +51,13 @@ EOF
 export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
 
 # attempt to make libssh2 work, see https://github.com/rust-lang/rust/issues/69552
-#export LIBSSH2_SYS_USE_PKG_CONFIG=1
-export DEP_Z_INCLUDE=`pkg-config --variable=includedir zlib`
+export LIBSSH2_SYS_USE_PKG_CONFIG=1
+export LIBGIT2_SYS_USE_PKG_CONFIG=1
+
+# Alternatively, this works too:
+#export DEP_Z_INCLUDE=`pkg-config --variable=includedir zlib`
+#export DEP_OPENSSL_INCLUDE=`pkg-config --variable=includedir openssl`
+#export DEP_SSH2_INCLUDE=`pkg-config --variable=includedir libssh2`
 
 # to avoid errors such as
 # thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48
