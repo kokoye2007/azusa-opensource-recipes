@@ -16,7 +16,7 @@ cmake ${CHPATH}/${P}.src -DLLVM_CONFIG=/pkg/main/sys-devel.llvm.dev.${PV}/bin/ll
 	-DLLVM_ENABLE_FFI=ON -DFFI_INCLUDE_DIR=`realpath /pkg/main/dev-libs.libffi.dev/include` -DFFI_LIBRARY_DIR=`realpath /pkg/main/dev-libs.libffi.libs/lib64`
 
 #cmake --build .
-make -j8
+make -j"$NPROC"
 
 cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.dev.${PVR}" -P cmake_install.cmake
 

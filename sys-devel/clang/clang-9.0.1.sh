@@ -16,7 +16,7 @@ cmake ${CHPATH}/clang-${PV}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${P
 	-DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON -DCMAKE_CXX_STANDARD_LIBRARIES="-ldl" \
 	-DLLVM_ENABLE_FFI=ON -DFFI_INCLUDE_DIR=/pkg/main/dev-libs.libffi.dev/include -DFFI_LIBRARY_DIR=/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX
 
-make -j8
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 #cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.dev.${PVR}" -P cmake_install.cmake

@@ -9,7 +9,7 @@ importcmakepkg sys-libs/zlib
 
 docmake -DBUILD_SHARED_LIBS=ON -DOPENCV_GENERATE_PKGCONFIG=YES
 
-make -j8
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 finalize

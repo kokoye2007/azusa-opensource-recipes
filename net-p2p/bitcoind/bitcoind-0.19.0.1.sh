@@ -15,7 +15,7 @@ export LDFLAGS="$LDFLAGS -L/pkg/main/sys-libs.db.libs.4.8/lib$LIB_SUFFIX"
 doconf --with-boost-libdir="/pkg/main/dev-libs.boost.libs/lib$LIB_SUFFIX" --enable-asm --without-qtdbus --without-qrencode --enable-wallet --with-daemon --disable-bench --without-libs --without-gui --without-rapidcheck --disable-fuzz --disable-ccache --disable-static --with-system-libsecp256k1 --with-system-univalue
 #--with-miniupnpc --enable-upnp-default --enable-zmq --disable-util-cli --disable-util-tx --disable-util-wallet
 
-make -j8
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 finalize

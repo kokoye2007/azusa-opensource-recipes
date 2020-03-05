@@ -18,7 +18,7 @@ callconf --prefix="/pkg/main/${PKG}.core.${PVR}" --interp-prefix="/pkg/main/${PK
 	--audio-drv-list= --enable-malloc-trim --with-pkgversion=-console \
 	--disable-sdl --disable-sdl-image --disable-xkbcommon --disable-gtk --disable-vte --disable-xen --disable-xen-pci-passthrough --disable-opengl --disable-virglrenderer
 
-make -j8
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 finalize

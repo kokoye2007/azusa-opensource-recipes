@@ -60,7 +60,7 @@ CMAKE_ROOT="${CHPATH}/${P}.src"
 
 docmake "${CMAKE_OPTS[@]}"
 
-make -j8
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 #cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVR}" -P cmake_install.cmake

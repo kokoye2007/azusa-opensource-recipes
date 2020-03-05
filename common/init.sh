@@ -18,6 +18,9 @@ PVR="${P#"${PN}-"}.${OS}.${ARCH}"
 PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
+if [ x"$NPROC" = x ]; then
+	NPROC=`nproc 2>/dev/null || echo 1`
+fi
 
 # make pkg-config use our libs
 export PKG_CONFIG_LIBDIR=/pkg/main/azusa.symlinks.core/pkgconfig

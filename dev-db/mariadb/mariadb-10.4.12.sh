@@ -30,7 +30,7 @@ cmake "${CHPATH}/${P}" -DWITH_JEMALLOC=no -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG
 	-DCURSES_LIBRARY=/pkg/main/sys-libs.ncurses.libs/lib$LIB_SUFFIX/libncurses.so \
 	-DCURSES_INCLUDE_PATH=/pkg/main/sys-libs.ncurses.dev/include
 
-make -j6
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 finalize

@@ -35,11 +35,11 @@ for GOARCH in $TGT; do
 
 	echo " * Building `basename "$IMGFILE"`..."
 
-	make -j8 -s `basename "$IMGFILE"`
+	make -j"$NPROC" -s `basename "$IMGFILE"`
 
 	echo " * Building modules..."
 
-	make -j8 -s modules #>modules.log 2>&1 </dev/null
+	make -j"$NPROC" -s modules #>modules.log 2>&1 </dev/null
 
 	echo " * Copying files..."
 
