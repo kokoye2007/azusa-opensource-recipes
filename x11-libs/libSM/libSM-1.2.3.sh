@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg uuid
+importpkg sys-apps/util-linux
 
 doconf --localstatedir=/var --disable-static
 
