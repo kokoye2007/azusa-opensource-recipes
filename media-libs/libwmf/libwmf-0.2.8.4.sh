@@ -24,9 +24,9 @@ aautoreconf
 
 cd "${T}"
 
-importpkg zlib
+importpkg zlib libpng icu-uc
 
-doconf
+doconf --disable-gd --disable-static --with-libxml2 --with-freetype --with-jpeg --with-layers --with-png --with-sys-gd --with-zlib
 
 make
 make install DESTDIR="${D}"
