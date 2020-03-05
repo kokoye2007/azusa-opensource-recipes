@@ -61,7 +61,7 @@ export LIBGIT2_SYS_USE_PKG_CONFIG=1
 
 # to avoid errors such as
 # thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48
-mkdir "/pkg/main/${PKG}.core.${PVR}"
+mkdir -p "/pkg/main/${PKG}.core.${PVR}"
 
 python3 ./x.py build --exclude src/tools/miri
 

@@ -6,6 +6,7 @@ get ftp://anduin.linuxfromscratch.org/BLFS/popt/${P}.tar.gz
 
 cd "${T}"
 
+prepare
 doconf --disable-static
 
 make
