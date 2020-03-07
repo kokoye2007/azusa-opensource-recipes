@@ -8,7 +8,7 @@ cd "${D}/pkg/main/${PKG}.core.${PVR}"
 mkdir "azusa"
 cp "$FILESDIR/makeroot.sh" azusa/
 
-mkdir -p bin sbin info share/gir-1.0 share/aclocal share/sgml etc etc/ssl full/include
+mkdir -p bin sbin info share/gir-1.0 share/aclocal etc etc/ssl etc/xml full/include
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
@@ -33,6 +33,7 @@ mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules"
 ln -snf "$LIB/cmake" cmake
 ln -snf "$LIB/pkgconfig" pkgconfig
 ln -snf . usr
+xmlcatalog --noout --create etc/xml/catalog
 
 for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
@@ -112,18 +113,24 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 			done
 			;;
 		sgml)
-			cp -rsfT "${p}" "share/sgml"
+			# locate authority files, add to etc/xml/catalog
+			find "${p}" -name '*.xmlcatalog' | while read foo; do
+				replace="file://${foo%.xmlcatalog}" # strip .xmlcatalog
+				replace="${replace%/}" # optionally strip /
+				cat "$foo" | while read bar; do
+					typ=`echo "$bar" | awk '{print $1}'`
+					orig=`echo "$bar" | awk '{print $2}'`
+					xmlcatalog --noout --add "$typ" "$orig" "$replace" etc/xml/catalog
+				done
+			done
 			;;
 		*)
 			echo -e "\rRejected package: $pn\033[K"
 			;;
 	esac
-	# TODO: fonts, sgml
+	# TODO: fonts
 done
 echo
-
-echo "Generating xmlcatalogs..."
-/pkg/main/app-text.build-docbook-catalog.core/sbin/build-docbook-catalog -r "${D%/}" -e "/pkg/main/${PKG}.core.${PVR}/etc/xml" -d "/pkg/main/${PKG}.core.${PVR}/share/sgml/docbook"
 
 realpath /pkg/main/sys-libs.glibc.libs/$LIB >>etc/ld.so.conf.tmp
 # include all of gcc's stupid libs
