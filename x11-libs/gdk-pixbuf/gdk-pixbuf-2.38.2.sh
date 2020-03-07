@@ -8,7 +8,7 @@ cd "${T}"
 importpkg media-libs/libpng media-libs/libjpeg-turbo
 
 # TODO fix man building (xsltproc fails)
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}" -Dman=false
+meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

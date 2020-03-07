@@ -6,8 +6,7 @@ acheck
 
 cd "${T}"
 
-# TODO fix man building (xsltproc fails)
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}" -Dman=false -Dsystemd=false
+meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}" -Dsystemd=false
 
 ninja
 DESTDIR="${D}" ninja install
