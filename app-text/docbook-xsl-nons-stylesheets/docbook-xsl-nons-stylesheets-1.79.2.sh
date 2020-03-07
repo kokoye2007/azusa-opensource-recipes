@@ -6,7 +6,7 @@ acheck
 
 cd docbook-xsl-nons-${PV}
 
-patch -Np1 -i "$FILESDIR/docbook-xsl-nons-1.79.2-stack_fix-1.patch"
+apatch "$FILESDIR/docbook-xsl-nons-1.79.2-stack_fix-1.patch"
 
 mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}"
 
@@ -19,11 +19,13 @@ cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
 ln -s VERSION "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/VERSION.xsl"
 
 # generate sgml authority record
-echo "rewriteSystem https://cdn.docbook.org/release/xsl-nons/${PV}" >"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog"
-echo "rewriteURI https://cdn.docbook.org/release/xsl-nons/${PV}" >>"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog"
-echo "rewriteSystem https://cdn.docbook.org/release/xsl-nons/current" >>"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog"
-echo "rewriteURI https://cdn.docbook.org/release/xsl-nons/current" >>"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog"
-echo "rewriteSystem http://docbook.sourceforge.net/release/xsl/current" >>"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog"
-echo "rewriteURI http://docbook.sourceforge.net/release/xsl/current" >>"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog"
+cat >"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog" <<EOF
+rewriteSystem https://cdn.docbook.org/release/xsl-nons/${PV}
+rewriteURI https://cdn.docbook.org/release/xsl-nons/${PV}
+rewriteSystem https://cdn.docbook.org/release/xsl-nons/current
+rewriteURI https://cdn.docbook.org/release/xsl-nons/current
+rewriteSystem http://docbook.sourceforge.net/release/xsl/current
+rewriteURI http://docbook.sourceforge.net/release/xsl/current
+EOF
 
 finalize
