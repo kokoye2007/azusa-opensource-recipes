@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get http://www.libsdl.org/release/SDL-${PV}.tar.gz
+acheck
 
 cd "SDL-${PV}"
 

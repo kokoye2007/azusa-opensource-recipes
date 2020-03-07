@@ -310,6 +310,19 @@ cmakeenv() {
 	export Z3_ROOT=/pkg/main/sci-mathematics.z3.dev PCRE_ROOT=/pkg/main/dev-libs.libpcre.dev
 }
 
+domeson() {
+	echo "Running meson..."
+	if [ x"$MESON_ROOT" = x ]; then
+		MESON_ROOT="${CHPATH}/${P}"
+	fi
+
+	meson "$MESON_ROOT" --prefix="/pkg/main/${PKG}.core.${PVR}" -Dbuildtype=release "$@"
+
+	echo "Building with ninja..."
+	ninja
+	DESTDIR="${D}" ninja install
+}
+
 docmake() {
 	echo "Running cmake..."
 	if [ x"$CMAKE_ROOT" = x ]; then
