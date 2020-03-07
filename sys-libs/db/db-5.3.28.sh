@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get http://anduin.linuxfromscratch.org/BLFS/bdb/${P}.tar.gz
+acheck
+
+prepare
 
 cd "${P}"
 
