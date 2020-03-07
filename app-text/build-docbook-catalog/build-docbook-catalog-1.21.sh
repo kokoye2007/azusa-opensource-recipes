@@ -5,6 +5,6 @@ acheck
 
 cd "$P"
 
-make install EPREFIX=/pkg/main/${PKG}.core.${PVR} DESTDIR="${D}"
+make install PREFIX=/pkg/main/${PKG}.core.${PVR} DESTDIR="${D}"
 
 finalize

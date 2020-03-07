@@ -22,7 +22,7 @@ case $ARCH in
 esac
 
 cd $1
-mkdir -p bin sbin info share/gir-1.0 share/aclocal etc etc/ssl full/include
+mkdir -p bin sbin info share/gir-1.0 share/aclocal share/sgml etc etc/ssl full/include
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
@@ -46,6 +46,7 @@ fi
 mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules"
 ln -snf "$LIB/cmake" cmake
 ln -snf "$LIB/pkgconfig" pkgconfig
+ln -snf . usr
 
 for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
@@ -101,6 +102,9 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 				fi
 			done
 			;;
+		modules)
+			# sys-kernel.linux.modules
+			;;
 		doc)
 			for foo in man info; do
 				if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
@@ -121,6 +125,9 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 				fi
 			done
 			;;
+		sgml)
+			cp -rsfT "${p}" "share/sgml"
+			;;
 		*)
 			echo -e "\rRejected package: $pn\033[K"
 			;;
@@ -128,6 +135,9 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 	# TODO: fonts, sgml
 done
 echo
+
+echo "Generating xmlcatalogs..."
+/pkg/main/app-text.build-docbook-catalog.core/sbin/build-docbook-catalog -r "$PWD"
 
 realpath /pkg/main/sys-libs.glibc.libs/$LIB >>etc/ld.so.conf.tmp
 # include all of gcc's stupid libs
