@@ -1,6 +1,6 @@
 source ../../common/init.sh
 
-get https://dev.gentoo.org/~haubi/distfiles/${P}.tar.xz
+get https://github.com/AzusaOS/${PN}/archive/v${PV}.tar.gz
 acheck
 
 cd "$P"
