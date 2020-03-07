@@ -6,4 +6,4 @@ acheck
 
 npm install -g --prefix "${D}/pkg/main/${PKG}.core.${PVR}" "${P}.tgz"
 
-finalize
+archive
