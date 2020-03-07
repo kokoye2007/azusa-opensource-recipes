@@ -1,0 +1,3 @@
+description: D-Bus abstraction for enumerating power devices, querying history and statistics
+homepage: https://upower.freedesktop.org/
+license: GPL-2
