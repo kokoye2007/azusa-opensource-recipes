@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg x11 zlib
 
-doconf
+doconf --enable-introspection --enable-startup-notification --disable-vala --enable-gladeui2 --with-vendor-info=AZUSA
 
 make
 make install DESTDIR="${D}"

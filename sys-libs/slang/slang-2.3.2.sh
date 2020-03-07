@@ -6,11 +6,11 @@ acheck
 
 cd "${P}"
 
-importpkg sys-libs/libtermcap-compat oniguruma ncurses libpcre zlib
+importpkg sys-libs/libtermcap-compat oniguruma ncurses libpcre zlib sys-libs/readline libpng
 
-export CFLAGS="-O2"
+export CFLAGS="${CPPFLAGS} -O2"
 
-doconf
+doconf --with-readline=gnu --with-pcre --with-onig --with-png --with-z
 
 make
 make install DESTDIR="${D}"

@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg sys-apps/util-linux app-arch/bzip2 dev-libs/libbsd
+importpkg sys-apps/util-linux app-arch/bzip2 dev-libs/libbsd net-print/cups
 
 doconf
 

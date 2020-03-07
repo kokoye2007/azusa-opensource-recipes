@@ -5,7 +5,9 @@ get http://brianstafford.info/libesmtp/${P}.tar.bz2
 
 cd "${T}"
 
-doconf
+importpkg dev-libs/openssl
+
+doconf --with-openssl=/pkg/main/dev-libs.openssl.dev
 
 make
 make install DESTDIR="${D}"

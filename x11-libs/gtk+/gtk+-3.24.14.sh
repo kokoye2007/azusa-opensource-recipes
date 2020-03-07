@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg x11-libs/cairo
+
 # TODO fix man (xslt)
 meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Dcolord=yes -Dbroadway_backend=true "${CHPATH}/${P}"
 

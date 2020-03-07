@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://download.gimp.org/pub/gegl/0.4/${P}.tar.bz2
+acheck
 
 cd "${T}"
 
