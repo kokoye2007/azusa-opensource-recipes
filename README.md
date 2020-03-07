@@ -56,3 +56,4 @@ different existing packages, allowing access to latest version of most packages.
 
 * Improve packages instruction syntax
 * Call tests prior to archive
+* Run checksum and/or signature check on downloaded files
