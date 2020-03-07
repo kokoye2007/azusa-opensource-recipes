@@ -118,8 +118,8 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 				replace="file://${foo%.xmlcatalog}" # strip .xmlcatalog
 				replace="${replace%/}" # optionally strip /
 				cat "$foo" | while read bar; do
-					typ=`echo "$bar" | awk '{print $1}'`
-					orig=`echo "$bar" | awk '{print $2}'`
+					typ=`echo "$bar" | cut -d' ' -f1`
+					orig=`echo "$bar" | cut -d' ' -f2-`
 					xmlcatalog --noout --add "$typ" "$orig" "$replace" etc/xml/catalog
 				done
 			done
