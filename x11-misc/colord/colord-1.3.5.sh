@@ -8,7 +8,8 @@ importpkg media-libs/lcms
 
 cd "${T}"
 
-doconf --disable-bash-completion --disable-examples --disable-static --enable-libcolordcompat --with-daemon-user=colord --enable-print-profiles --enable-gusb --enable-reverse --enable-introspection --enable-polkit --enable-sane --enable-udev --enable-vala --disable-systemd-login
+# TODO enable sane?
+doconf --disable-bash-completion --disable-examples --disable-static --enable-libcolordcompat --with-daemon-user=colord --disable-print-profiles --enable-gusb --enable-reverse --enable-introspection --enable-polkit --disable-sane --enable-udev --enable-vala --disable-systemd-login --disable-argyllcms-sensor
 
 make
 make install DESTDIR="${D}"
