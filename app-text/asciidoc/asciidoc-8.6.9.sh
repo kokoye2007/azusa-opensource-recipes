@@ -7,7 +7,7 @@ acheck
 cd "${P}"
 
 # change python
-sed -e '1 s,^#.*,#/pkg/main/dev-lang.python.core.2.7/bin/python2.7,' -i *.py
+sed -e '1 s,^#.*,#!/pkg/main/dev-lang.python.core.2.7/bin/python2.7,' -i *.py
 
 doconf
 
