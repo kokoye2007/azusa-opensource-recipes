@@ -45,7 +45,7 @@ find "${D}" -name pt_chown -exec chmod -s {} +
 mkdir -pv "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n"
 sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/localedata/SUPPORTED > "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"
 
-locale_list=`echo "C.UTF-8 UTF-8"; echo "POSIX.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"`
+locale_list=`echo "C.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"`
 
 mkdir -p "${D}/pkg/main/${PKG}.i18n.${PVR}"
 
@@ -61,7 +61,7 @@ echo "$locale_list" | while read foo; do
 	charset=`echo "$foo" | cut -f2 -d' '`
 	locale_short=${locale%%.*}
 	echo " * Generating locale $locale_short ($charset)"
-	localedef -c --no-archive -i "$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVR}/share/locale/locale.alias" --prefix "${D}" "${locale}"
+	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVR}/share/locale/locale.alias" --prefix "${D}" "${locale}"
 done
 
 # fix link to point to symlinks, this way we can generate locale-archive with other i18n paths
