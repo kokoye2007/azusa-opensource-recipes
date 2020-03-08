@@ -8,7 +8,7 @@ cd "${P}"
 patch -p1 <"$FILESDIR/sgml-common-0.6.3-manpage-1.patch"
 autoreconf -f -i
 
-cd "${T}"
+#cd "${T}"
 
 doconf --sysconfdir=/etc
 

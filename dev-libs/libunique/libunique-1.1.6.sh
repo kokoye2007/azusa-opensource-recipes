@@ -8,7 +8,7 @@ cd "${P}"
 patch -p1 -i "$FILESDIR/libunique-1.1.6-upstream_fixes-1.patch"
 aautoreconf
 
-cd "${T}"
+#cd "${T}"
 
 doconf --disable-dbus --disable-static
 
