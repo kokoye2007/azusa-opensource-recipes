@@ -11,7 +11,7 @@ cd texlive-build
 
 TEXMF="/pkg/main/app-text.texlive-texmf.misc.${PV}/"
 
-importpkg zlib libpng gmp mpfr icu-uc app-text/libpaper x11-base/xorg-proto x11-libs/libX11
+importpkg zlib libpng gmp mpfr icu-uc app-text/libpaper x11-base/xorg-proto x11-libs/libX11 x11-libs/libXext x11-libs/libXaw
 
 CONFIGURE=(
 	--disable-native-texlive-build

@@ -6,7 +6,8 @@ acheck
 
 cd "${T}"
 
-cmake -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} "${CHPATH}/googletest-release-${PV}"
+CMAKE_ROOT="${CHPATH}/googletest-release-${PV}"
+docmake
 
 make
 make install DESTDIR="${D}"

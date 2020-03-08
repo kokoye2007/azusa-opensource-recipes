@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconflight
+doconflight --program-suffix=-${PV}
 
 # avoid install to fail
 rm /pkg/main/${PKG}.core.${PVR} || true
