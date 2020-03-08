@@ -306,7 +306,7 @@ cmakeenv() {
 	export Xext_ROOT=/pkg/main/x11-libs.libXext.dev Xcursor_ROOT=/pkg/main/x11-libs.libXcursor.dev Xv_ROOT=/pkg/main/x11-libs.libXv.dev Xi_ROOT=/pkg/main/x11-libs.libXi.dev Xrender_ROOT=/pkg/main/x11-libs.libXrender.dev
 	export XRandR_ROOT=/pkg/main/x11-libs.libXrandr.dev Xfixes_ROOT=/pkg/main/x11-libs.libXfixes.dev Freetype_ROOT=/pkg/main/media-libs.freetype.dev
 	export JPEG_ROOT=/pkg/main/media-libs.libjpeg-turbo.dev PNG_ROOT=/pkg/main/media-libs.libpng.dev TIFF_ROOT=/pkg/main/media-libs.tiff.dev OpenJPEG_ROOT=/pkg/main/media-libs.openjpeg.dev
-	export Boost_ROOT=/pkg/main/dev-libs.boost.dev HTTP_Parser_ROOT=/pkg/main/net-libs.http-parser.dev
+	export Boost_ROOT=/pkg/main/dev-libs.boost.dev HTTP_Parser_ROOT=/pkg/main/net-libs.http-parser.dev Xapian_ROOT=/pkg/main/dev-libs.xapian.dev
 	export Z3_ROOT=/pkg/main/sci-mathematics.z3.dev PCRE_ROOT=/pkg/main/dev-libs.libpcre.dev
 }
 

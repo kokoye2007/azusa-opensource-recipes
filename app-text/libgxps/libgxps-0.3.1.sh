@@ -5,9 +5,8 @@ get http://ftp.gnome.org/pub/gnome/sources/libgxps/0.3/${P}.tar.xz
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}"
+importpkg zlib
 
-ninja
-DESTDIR="${D}" ninja install
+domeson
 
 finalize

@@ -2,10 +2,11 @@
 source "../../common/init.sh"
 
 get http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_${PV}.tar.gz
+acheck
 
 cd "${P}"
 
-autoreconf -fi
+aautoreconf
 
 cd "${T}"
 

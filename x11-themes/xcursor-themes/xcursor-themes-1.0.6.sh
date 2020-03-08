@@ -6,8 +6,13 @@ acheck
 
 cd "${T}"
 
-doconf --disable-static
+doconf
 
 make install DESTDIR="${D}"
+
+# will install in ${D}/pkg/main/x11-libs.libXcursor.core.*/share/
+if [ -d "${D}/pkg/main/x11-libs.libXcursor.core".* ]; then
+	mv -v "${D}/pkg/main/x11-libs.libXcursor.core".* "${D}/pkg/main/${PKG}.mod.${PVR}"
+fi
 
 finalize
