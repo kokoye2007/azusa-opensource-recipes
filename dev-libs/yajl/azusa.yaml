@@ -1,0 +1,3 @@
+description: Small event-driven (SAX-style) JSON parser
+homepage: https://lloyd.github.com/yajl/
+license: ISC
