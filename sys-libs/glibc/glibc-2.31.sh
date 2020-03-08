@@ -7,11 +7,65 @@ acheck
 
 cd "${T}"
 
-# configure & build
-doconf --disable-werror --enable-kernel=4.14 --enable-stack-protector=strong --with-headers=/usr/include libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+CONFIGURE=(
+	--disable-werror
+	--enable-kernel=4.14
+	--enable-stack-protector=strong
+	--enable-stackguard-randomization
+	--with-headers=/pkg/main/sys-kernel.linux.dev/include
+	--without-cvs
+	--disable-werror
+	--enable-bind-now
+	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
+	--enable-crypt
+#	--enable-systemtap
+	--enable-nscd
+	--disable-timezone-tools
+	libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+)
 
-make
+if [ "$ARCH" == "amd64" ]; then
+	CONFIGURE+=(--enable-cet)
+fi
+
+# configure & build
+doconf "${CONFIGURE[@]}"
+
+make -j"$NPROC"
 make install DESTDIR="${D}"
+
+# compatibility libraries for the NIS/NIS+ support, do not need .so or .a, only .so.X (gentoo)
+find "${D}" -name "libnsl.a" -delete
+find "${D}" -name "libnsl.so" -delete
+
+# With devpts under Linux mounted properly, we do not need the pt_chown suid bit (gentoo)
+find "${D}" -name pt_chown -exec chmod -s {} +
+
+# generate share/i18n/SUPPORTED (Debian-style locale updating)
+mkdir -pv "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n"
+sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/localedata/SUPPORTED > "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"
+
+locale_list=`echo "C.UTF-8 UTF-8"; echo "POSIX.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"`
+
+mkdir -p "${D}/pkg/main/${PKG}.i18n.${PVR}"
+
+# we create this link temporarily this way so we can grab the generated files in the right location
+ln -snf "${D}/pkg/main/${PKG}.i18n.${PVR}" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
+
+# install "C" locale
+cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/locales/C"
+
+# generate locales
+echo "$locale_list" | while read foo; do
+	locale=`echo "$foo" | cut -f1 -d' '`
+	charset=`echo "$foo" | cut -f2 -d' '`
+	locale_short=${locale%%.*}
+	echo " * Generating locale $locale_short ($charset)"
+	localedef -c --no-archive -i "$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVR}/share/locale/locale.alias" --prefix "${D}" "${locale}"
+done
+
+# fix link to point to symlinks, this way we can generate locale-archive with other i18n paths
+ln -snfT "/pkg/main/azusa.symlinks.core/lib$LIB_SUFFIX/locale" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
 
 # make dev a sysroot for gcc
 ln -snfTv "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX"
@@ -38,6 +92,9 @@ ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main
 # add link to ld.so.conf and ld.so.cache since binutils will be looking for it here
 mkdir "${D}/pkg/main/${PKG}.dev.${PVR}/etc"
 ln -snf /pkg/main/azusa.symlinks.core/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVR}/etc/"
+
+# move etc/rpc
+mv -v "${D}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVR}/etc/"
 
 # add a link to /pkg in sysroot, because binutils will always prefix sysroot to paths found in ld.so.conf
 ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVR}/pkg"

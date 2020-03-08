@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg zlib
+
 doconf
 
 make

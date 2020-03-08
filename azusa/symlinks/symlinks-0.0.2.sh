@@ -92,6 +92,9 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 		modules)
 			# sys-kernel.linux.modules
 			;;
+		data)
+			# private data, do not touch
+			;;
 		doc)
 			for foo in man info; do
 				if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then

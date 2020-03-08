@@ -49,17 +49,32 @@ inherit() {
 	done
 }
 
+detect_src() {
+	if [ x"$S" = x ]; then
+		local foo
+		for foo in */; do
+			if [ -d "$foo" ]; then
+				S="${PWD}/${foo%/}"
+				break
+			fi
+		done
+	fi
+}
+
 extract() {
 	echo "Extracting $1 ..."
 	case $1 in
 		*.zip)
 			unzip -q $1
+			detect_src
 			;;
 		*.tar.*|*.tgz|*.tbz2)
 			tar xf $1
+			detect_src
 			;;
 		*.gz)
 			gunzip $1
+			detect_src
 			;;
 	esac
 }
@@ -260,8 +275,8 @@ callconf() {
 		./configure "$@"
 		return
 	fi
-	if [ -x ${CHPATH}/${P}/configure ]; then
-		${CHPATH}/${P}/configure "$@"
+	if [ -x "${S}/configure" ]; then
+		"${S}/configure" "$@"
 		return
 	fi
 
@@ -313,7 +328,7 @@ cmakeenv() {
 domeson() {
 	echo "Running meson..."
 	if [ x"$MESON_ROOT" = x ]; then
-		MESON_ROOT="${CHPATH}/${P}"
+		MESON_ROOT="${S}"
 	fi
 
 	meson "$MESON_ROOT" --prefix="/pkg/main/${PKG}.core.${PVR}" -Dbuildtype=release "$@"
@@ -326,7 +341,7 @@ domeson() {
 docmake() {
 	echo "Running cmake..."
 	if [ x"$CMAKE_ROOT" = x ]; then
-		CMAKE_ROOT="${CHPATH}/${P}"
+		CMAKE_ROOT="${S}"
 	fi
 
 	cmakeenv
