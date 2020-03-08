@@ -40,8 +40,8 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 	p=/pkg/main/${pn}
 	t=`echo "$pn" | cut -d. -f3`
 
-	if [ "$t" == "src" ]; then
-		# do not even do access to sources
+	if [ "$t" == "src" ] || [ "$t" == "data" ] || [ "$t" == "i18n" ]; then
+		# do not even do access to sources, data or i18n
 		continue
 	fi
 
@@ -59,7 +59,7 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 
 	case $t in
 		core)
-			for foo in bin sbin info share/gir-1.0 share/aclocal; do
+			for foo in bin sbin share/gir-1.0 share/aclocal; do
 				if [ -d "${p}/${foo}" -a ! -L "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "${foo}"
 				fi
@@ -135,16 +135,11 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 done
 echo
 
-realpath /pkg/main/sys-libs.glibc.libs/$LIB >>etc/ld.so.conf.tmp
-# include all of gcc's stupid libs
-for foo in `realpath /pkg/main/sys-devel.gcc.libs`/*; do
-	echo "$foo" >>etc/ld.so.conf.tmp
-done
+# reverse order in ld.so.conf so newer versions are on top and taken in priority
 tac etc/ld.so.conf.tmp >etc/ld.so.conf
 rm etc/ld.so.conf.tmp
 
 echo "Generating ld.so.cache..."
-# reorg ld.so.conf the other way around
 /pkg/main/sys-libs.glibc.core/sbin/ldconfig -X -C etc/ld.so.cache -f etc/ld.so.conf 
 
 archive

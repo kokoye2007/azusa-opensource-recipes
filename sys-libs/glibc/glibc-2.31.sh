@@ -17,6 +17,7 @@ CONFIGURE=(
 	--disable-werror
 	--enable-bind-now
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
+	--with-pkgversion="AZUSA ${PVR}"
 	--enable-crypt
 #	--enable-systemtap
 	--enable-nscd
@@ -47,10 +48,10 @@ sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/lo
 
 locale_list=`echo "C.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"`
 
-mkdir -p "${D}/pkg/main/${PKG}.i18n.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.data.locale.${PVR}"
 
 # we create this link temporarily this way so we can grab the generated files in the right location
-ln -snf "${D}/pkg/main/${PKG}.i18n.${PVR}" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
+ln -snfT "${D}/pkg/main/${PKG}.data.locale.${PVR}" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
 
 # install "C" locale
 cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/locales/C"
@@ -64,8 +65,13 @@ echo "$locale_list" | while read foo; do
 	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVR}/share/locale/locale.alias" --prefix "${D}" "${locale}"
 done
 
+# generate locale archive
+for foo in "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"/*/; do
+	localedef --add-to-archive "${foo%/}" --replace --prefix "${D}" && rm -fr "${foo%/}"
+done
+
 # fix link to point to symlinks, this way we can generate locale-archive with other i18n paths
-ln -snfT "/pkg/main/azusa.symlinks.core/lib$LIB_SUFFIX/locale" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
+ln -snfT "/pkg/main/${PKG}.data.locale.${PVR}" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
 
 # make dev a sysroot for gcc
 ln -snfTv "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX"
