@@ -14,10 +14,12 @@ acheck
 
 cd "${T}"
 
-# configure & build
-doconf --disable-static
+importpkg ncursesw
 
-make
-make install DESTDIR="${D}"
+# configure & build
+doconf --disable-static --with-curses
+
+make SHLIB_LIBS="-lncursesw"
+make install DESTDIR="${D}" SHLIB_LIBS="-lncursesw"
 
 finalize

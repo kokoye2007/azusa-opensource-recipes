@@ -14,11 +14,13 @@ acheck
 
 cd "${T}"
 
-# configure & build
-doconf --disable-static
+importpkg ncursesw
 
-make
-make install DESTDIR="${D}"
+# configure & build
+doconf --disable-static --with-curses
+
+make SHLIB_LIBS="-lncursesw"
+make install DESTDIR="${D}" SHLIB_LIBS="-lncursesw"
 
 # pkg/main/sys-libs.readline.libs.8.0/lib64/pkgconfig
 sed -i -e '/^Requires.private:/d' "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/pkgconfig/readline.pc"
