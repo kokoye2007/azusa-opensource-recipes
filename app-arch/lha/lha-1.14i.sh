@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get https://osdn.net/projects/lha/downloads/22231/lha-1.14i-ac20050924p1.tar.gz
+acheck
+
+prepare
 
 cd "${T}"
 
