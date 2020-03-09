@@ -1,6 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
+TZ=`date +%Y%m%d`
+PVR="${PV}.${TZ}.${OS}.${ARCH}"
+
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
 cd "${D}/pkg/main/${PKG}.core.${PVR}"
 
