@@ -29,6 +29,7 @@ CONFIGURE=(
 	-plugindir "/pkg/main/${PKG}.libs.${PVR}/plugins"
 	-docdir "/pkg/main/${PKG}.libs.${PVR}/doc"
 	-examplesdir "/pkg/main/${PKG}.doc.${PVR}/examples"
+	-no-compile-examples
 
 	-platform linux-g++
 	-no-feature-statx # gentoo bug 672856
