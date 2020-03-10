@@ -138,6 +138,10 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 done
 echo
 
+# include all of gcc's stupid libs
+for foo in `realpath /pkg/main/sys-devel.gcc.libs`/*; do
+	echo "$foo" >>etc/ld.so.conf.tmp
+done
 # reverse order in ld.so.conf so newer versions are on top and taken in priority
 tac etc/ld.so.conf.tmp >etc/ld.so.conf
 rm etc/ld.so.conf.tmp
