@@ -1,0 +1,8 @@
+linking ../../../../plugins/platformthemes/libqgtk3.so
+compiling .moc/moc_qofonoservice_linux_p.cpp
+/bin/ld: cannot find -lz
+/bin/ld: cannot find -lXext
+/bin/ld: cannot find -lX11
+collect2: error: ld returned 1 exit status
+make[5]: *** [Makefile:134: ../../../../plugins/platformthemes/libqgtk3.so] Error 1
+
