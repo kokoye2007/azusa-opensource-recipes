@@ -1,0 +1,12 @@
+diff -rbBU3 a/qtbase/mkspecs/features/qt_example_installs.prf b/qtbase/mkspecs/features/qt_example_installs.prf
+--- a/qtbase/mkspecs/features/qt_example_installs.prf	2020-03-11 00:58:11.000916782 +0900
++++ b/qtbase/mkspecs/features/qt_example_installs.prf	2020-03-11 00:58:28.560720456 +0900
+@@ -139,6 +139,8 @@
+     CONFIG -= have_target qt staticlib dll
+     SOURCES =
+     OBJECTIVE_SOURCES =
++    WAYLANDSERVERSOURCES =
++    WAYLANDCLIENTSOURCES =
+     INSTALLS -= target
+ } else {
+     CONFIG += relative_qt_rpath  # Examples built as part of Qt should be relocatable

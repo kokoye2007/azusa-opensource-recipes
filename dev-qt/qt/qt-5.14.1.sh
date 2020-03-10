@@ -4,8 +4,10 @@ source "../../common/init.sh"
 get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/single/qt-everywhere-src-${PV}.tar.xz
 acheck
 
-# gentoo bug 620444 - ensure local headers are used
-find "${S}" -type f -name "*.pr[fio]" | xargs sed -i -e 's|INCLUDEPATH += |&$$QTWEBENGINE_ROOT/include |'
+cd "${S}"
+
+apatch "$FILESDIR/qt-5.14.1-wayland-examples-no-build-fix.patch"
+
 # fix missing qt_version_tag symbol w/ LTO, bug 674382
 sed -i -e 's/^gcc:ltcg/gcc/' "${S}/qtbase/src/corelib/global/global.pri"
 
@@ -86,6 +88,7 @@ CONFIGURE=(
 	PCRE2_PREFIX=/pkg/main/dev-libs.libpcre2.dev
 	OPENSSL_PREFIX=/pkg/main/dev-libs.openssl.dev
 
+	# gui
 	HARFBUZZ_PREFIX=/pkg/main/media-libs.harfbuzz.dev
 	# LIBMD4C_PREFIX
 	# OpenVG → mesa?
