@@ -2,7 +2,7 @@ Configure summary:
 
 Build type: linux-g++ (x86_64, CPU features: mmx sse sse2)
 Compiler: gcc 9.2.0
-Configuration: sse2 aesni sse3 ssse3 sse4_1 sse4_2 avx avx2 avx512f avx512bw avx512cd avx512dq avx512er avx512ifma avx512pf avx512vbmi avx512vl compile_examples enable_new_dtags f16c largefile precompile_header rdrnd shani silent x86SimdAlways shared shared rpath release c++11 c++14 c++1z concurrent dbus reduce_exports reduce_relocations stl
+Configuration: sse2 aesni sse3 ssse3 sse4_1 sse4_2 avx avx2 avx512f avx512bw avx512cd avx512dq avx512er avx512ifma avx512pf avx512vbmi avx512vl enable_new_dtags f16c largefile precompile_header rdrnd shani x86SimdAlways shared shared rpath release c++11 c++14 c++1z concurrent dbus reduce_exports reduce_relocations stl
 Build options:
   Mode ................................... release
   Optimize release build for size ........ no

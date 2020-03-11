@@ -6,7 +6,12 @@ acheck
 
 cd "${S}"
 
-apatch "$FILESDIR/qt-5.14.1-wayland-examples-no-build-fix.patch"
+apatch "$FILESDIR/${P}"-*.patch
+importpkg libevent
+
+# bug 620444 - ensure local headers are used
+# + adding importpkg headers too
+find "${S}/qtwebengine" -type f -name "*.pr[fio]" | xargs sed -i -e 's|INCLUDEPATH += |&$$QTWEBENGINE_ROOT/include '"${CPPFLAGS}"' |' || die
 
 # fix missing qt_version_tag symbol w/ LTO, bug 674382
 sed -i -e 's/^gcc:ltcg/gcc/' "${S}/qtbase/src/corelib/global/global.pri"
@@ -16,10 +21,20 @@ sed -i -e 's/^gcc:ltcg/gcc/' "${S}/qtbase/src/corelib/global/global.pri"
 # add: eval(QMAKE_LFLAGS_RELEASE += $$(LDFLAGS))
 cat >>"$S/qtbase/mkspecs/common/gcc-base.conf" <<EOF
 eval(QMAKE_CFLAGS_RELEASE += \$\$(CPPFLAGS))
+eval(QMAKE_CXXFLAGS_RELEASE += \$\$(CPPFLAGS))
 eval(QMAKE_LFLAGS_RELEASE += \$\$(LDFLAGS))
 EOF
 
-importpkg libevent
+export CFLAGS="${CPPFLAGS} -O2"
+export CXXFLAGS="${CPPFLAGS} -O2"
+
+# fix libevent include because Qt provides no way to pass CPPFLAGS to chromium
+# and will not honor WEBENGINE_LIBEVENT_PREFIX either, or same for X11, etc
+#mv /pkg/main/sys-libs.glibc.dev/include /pkg/main/sys-libs.glibc.dev/include.orig
+#ln -snfT /pkg/main/azusa.symlinks.core/full/include /pkg/main/sys-libs.glibc.dev/include
+#rsync -a --force /pkg/main/sys-libs.glibc.dev/include.orig/ /pkg/main/azusa.symlinks.core/full/include/
+rsync --ignore-existing -a /pkg/main/azusa.symlinks.core/full/include/ /pkg/main/sys-libs.glibc.dev/include/
+rsync --ignore-existing -a /pkg/main/azusa.symlinks.core/full/lib$LIB_SUFFIX/ /pkg/main/sys-libs.glibc.dev/lib$LIB_SUFFIX/
 
 cd "${T}"
 
@@ -117,10 +132,11 @@ make -j"$NPROC" || /bin/bash -i
 #	2> >(while IFS='' read -r line; do echo -e "\e[01;31m$line\e[0m" >&2; done)
 make install DESTDIR="${D}"
 
+mkdir -p "${D}/pkg/main"
+mv /.pkg-main-rw/${PKG}.* "${D}/pkg/main"
+
 organize
 
 echo "TODO → split Qt into per-module files"
-/bin/bash -i
-
 
 archive
