@@ -23,6 +23,9 @@ apatch "${PATCHES[@]}"
 
 cd "${T}"
 
+importpkg sys-libs/pam
+export CXXFLAGS="${CPPFLAGS} -O2"
+
 docmake -DENABLE_PAM=YES -DNO_SYSTEMD=YES -DUSE_ELOGIND=NO -DBUILD_MAN_PAGES=ON -DDBUS_CONFIG_FILENAME="org.freedesktop.sddm.conf"
 
 make

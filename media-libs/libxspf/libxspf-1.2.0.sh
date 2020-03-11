@@ -5,6 +5,8 @@ get http://downloads.xiph.org/releases/xspf/${P}.tar.bz2
 
 cd "${T}"
 
+importpkg expat
+
 doconf
 
 make
