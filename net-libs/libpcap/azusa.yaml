@@ -1,0 +1,3 @@
+description: A system-independent library for user-level network packet capture
+homepage: https://www.tcpdump.org/ https://github.com/the-tcpdump-group/libpcap
+license: BSD
