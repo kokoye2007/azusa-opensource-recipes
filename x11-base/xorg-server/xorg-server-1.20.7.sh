@@ -2,13 +2,13 @@
 source "../../common/init.sh"
 
 get https://www.x.org/pub/individual/xserver/${P}.tar.bz2
+acheck
 
 cd "${T}"
 
 importpkg app-arch/bzip2 dev-libs/libbsd sys-libs/libunwind app-arch/xz
 
-doconf --enable-glamor --enable-suid-wrapper --disable-systemd-logind --with-xkb-output=/var/lib/xkb --enable-dmx --enable-kdrive 
-#--enable-install-setuid
+doconf --enable-glamor --enable-suid-wrapper --disable-systemd-logind --with-xkb-output=/var/lib/xkb --enable-dmx --enable-kdrive --enable-install-setuid
 
 make
 make install DESTDIR="${D}"
