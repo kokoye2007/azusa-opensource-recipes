@@ -15,15 +15,8 @@ sed -i \
 	-e '/^Icon/s/\.png//' \
 	-e '/^Categories/s/Application;//' \
 	gqview.desktop
-mv configure.in configure.ac
 
-#autoreconf --force --install --verbose
-glib-gettextize --copy --force
-aclocal
-autoconf --force
-autoheader
-automake --add-missing --copy --force-missing
-libtoolize
+aautoreconf
 
 doconf
 
