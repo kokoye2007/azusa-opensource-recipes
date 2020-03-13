@@ -1,14 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tar.xz
+get https://fukuchi.org/works/${PN}/${P}.tar.bz2
 acheck
 
 cd "${T}"
 
-importpkg zlib
-
-doconf
+doconf --disable-static
 
 make
 make install DESTDIR="${D}"
