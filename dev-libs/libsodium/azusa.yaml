@@ -1,0 +1,3 @@
+description: A portable fork of NaCl, a higher-level cryptographic library
+homepage: https://github.com/jedisct1/libsodium
+license: ISC

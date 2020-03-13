@@ -419,6 +419,10 @@ apatch() {
 
 aautoreconf() {
 	echo "Running autoreconf tools..."
+	local EXTRAOPT=()
+	if [ -d "$S/m4" ]; then
+		EXTRAOPT+=(-I "$S/m4")
+	fi
 	libtoolize --force --install
-	autoreconf -fi -I /pkg/main/azusa.symlinks.core/share/aclocal/
+	autoreconf -fi -I /pkg/main/azusa.symlinks.core/share/aclocal/ "${EXTRAOPT[@]}"
 }
