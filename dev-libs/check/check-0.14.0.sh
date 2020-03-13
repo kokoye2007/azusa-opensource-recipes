@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/libcheck/check/releases/download/${PV}/${P}.tar.gz
+acheck
 
 cd "${T}"
 
