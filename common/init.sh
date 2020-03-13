@@ -331,6 +331,7 @@ cmakeenv() {
 	export JPEG_ROOT=/pkg/main/media-libs.libjpeg-turbo.dev PNG_ROOT=/pkg/main/media-libs.libpng.dev TIFF_ROOT=/pkg/main/media-libs.tiff.dev OpenJPEG_ROOT=/pkg/main/media-libs.openjpeg.dev
 	export Boost_ROOT=/pkg/main/dev-libs.boost.dev HTTP_Parser_ROOT=/pkg/main/net-libs.http-parser.dev Xapian_ROOT=/pkg/main/dev-libs.xapian.dev
 	export Z3_ROOT=/pkg/main/sci-mathematics.z3.dev PCRE_ROOT=/pkg/main/dev-libs.libpcre.dev PAM_ROOT=/pkg/main/sys-libs.pam.dev
+	export LZO_ROOT=/pkg/main/dev-libs.lzo.dev SDL2_ROOT=/pkg/main/media-libs.libsdl2.dev
 	export ECM_DIR=/pkg/main/kde-frameworks.extra-cmake-modules.core/share/ECM/cmake
 }
 
@@ -376,6 +377,14 @@ importpkg() {
 			# standard import paths
 			export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev/include"
 			export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+		elif [ "$foo" = "X" ]; then
+			# import all of X11
+			local sub=("x11-base/xorg-proto")
+			for foo in "${ROOTDIR}/x11-libs"/lib*; do
+				lib=`basename "$foo"`
+				sub+=("x11-libs/$lib")
+			done
+			importpkg "${sub[@]}"
 		else
 			PKGCFG="$PKGCFG $foo"
 		fi
