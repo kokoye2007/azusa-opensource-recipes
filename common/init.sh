@@ -183,6 +183,14 @@ organize() {
 		mv -Tv etc "${D}/pkg/main/${PKG}.core.${PVR}/etc"
 	fi
 
+	if [ "$PN" != "font-util" ]; then
+		if [ -d "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts ]; then
+			# looks like fonts were installed in the wrong place.
+			mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}"
+			mv -v "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts/* "${D}/pkg/main/${PKG}.fonts.${PVR}"
+		fi
+	fi
+
 	for foo in pkgconfig cmake; do
 		if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" ]; then
 			# should be in dev
