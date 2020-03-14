@@ -10,23 +10,36 @@ BOOST_BUILD_PATH="${CHPATH}/boost_${PV//./_}"
 
 cd "$BOOST_BUILD_PATH"
 
-export CPPFLAGS="$CPPFLAGS -I/pkg/main/dev-lang.python.core.2.7/include/python2.7"
+export CPPFLAGS="$CPPFLAGS -I/pkg/main/dev-lang.python.core.3.8/include/python3.8"
 
 # configure & build
-./bootstrap.sh --with-icu=/pkg/main/dev-libs.icu.core --with-python=python2.7 --with-python-root=/pkg/main/dev-lang.python.core.2.7/ --with-python-version=2.7 --prefix="/pkg/main/${PKG}.core.${PVR}" --libdir="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" --includedir="/pkg/main/${PKG}.dev.${PVR}/include"
+./bootstrap.sh --with-icu=/pkg/main/dev-libs.icu.core --with-python=python3.8 --with-python-root=/pkg/main/dev-lang.python.core.3.8/ --with-python-version=3.8 --prefix="/pkg/main/${PKG}.core.${PVR}" --libdir="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" --includedir="/pkg/main/${PKG}.dev.${PVR}/include"
 
 # create user-config.jam
 cat >>user-config.jam <<EOF
-using gcc : $(gcc -dumpversion) : /bin/gcc : <cflags>"${CFLAGS}" <cxxflags>"${CPPFLAGS} ${CXXFLAGS}" <linkflags>"${CPPFLAGS} ${LDFLAGS}" ;
+using gcc : $(gcc -dumpversion) : /bin/gcc : <cflags>"${CFLAGS}" <cxxflags>"${CPPFLAGS} ${CXXFLAGS}" <linkflags>"${CPPFLAGS} ${LDFLAGS} -lstdc++" ;
 using mpi ;
-using python : 2.7 : python2.7 : /pkg/main/dev-lang.python.core.2.7/include/python2.7 : /pkg/main/dev-lang.python.libs.2.7/lib$LIB_SUFFIX ;
-using python : 3.7 : python3.7 : /pkg/main/dev-lang.python.core.3.7/include/python3.7m : /pkg/main/dev-lang.python.libs.3.7/lib$LIB_SUFFIX ;
+using python : 3.8 : python3.8 : /pkg/main/dev-lang.python.core.3.8/include/python3.8 : /pkg/main/dev-lang.python.libs.3.8/lib$LIB_SUFFIX ;
 EOF
 
 #ICU_PATH="/pkg/main/dev-libs.icu.core"
 #ICU_LINK="$(pkg-config --libs icu-uc)"
 
-./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" stage threading=multi link=shared -j"$NPROC"
-./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" install link=shared --prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+B2_OPTS=(
+	-q -d+2
+	--ignore-site-config
+	-sICU_PATH="/pkg/main/dev-libs.icu.dev"
+	--user-config="${BOOST_BUILD_PATH}/user-config.jam"
+	--without-stacktrace
+	--layout=system
+	--no-cmake-config
+	cxxflags="$CPPFLAGS -std=c++14"
+	library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX"
+	threading=multi
+	link=shared
+)
+
+./b2 "${B2_OPTS[@]}" stage -j"$NPROC"
+./b2 "${B2_OPTS[@]}" install --prefix="${D}/pkg/main/${PKG}.core.${PVR}" --libdir="${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" --includedir="${D}/pkg/main/${PKG}.dev.${PVR}/include"
 
 finalize
