@@ -26,7 +26,7 @@ EOF
 #ICU_PATH="/pkg/main/dev-libs.icu.core"
 #ICU_LINK="$(pkg-config --libs icu-uc)"
 
-./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" linflags="-lstdc++" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" stage threading=multi link=shared -j"$NPROC"
-./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" linflags="-lstdc++" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" install link=shared --prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" stage threading=multi link=shared -j"$NPROC"
+./b2 --ignore-site-config --user-config="${BOOST_BUILD_PATH}/user-config.jam" cxxflags="$CPPFLAGS" library-path="/pkg/main/dev-libs.icu.libs/lib$LIB_SUFFIX" install link=shared --prefix="${D}/pkg/main/${PKG}.core.${PVR}"
 
 finalize

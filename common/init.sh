@@ -356,7 +356,7 @@ docmake() {
 
 	cmakeenv
 
-	cmake "$CMAKE_ROOT" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON "$@"
+	cmake "$CMAKE_ROOT" -DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DLIB_SUFFIX="$LIB_SUFFIX" "$@"
 }
 
 importcmakepkg() {
