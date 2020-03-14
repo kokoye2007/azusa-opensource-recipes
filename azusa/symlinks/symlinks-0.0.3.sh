@@ -43,8 +43,8 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 	p=/pkg/main/${pn}
 	t=`echo "$pn" | cut -d. -f3`
 
-	if [ "$t" == "src" ] || [ "$t" == "data" ] || [ "$t" == "i18n" ]; then
-		# do not even do access to sources, data or i18n
+	if [ "$t" == "src" ] || [ "$t" == "data" ] || [ "$t" == "i18n" ] || [ "$t" == "fonts" ]; then
+		# do not even do access to sources, data or i18n, or fonts
 		continue
 	fi
 

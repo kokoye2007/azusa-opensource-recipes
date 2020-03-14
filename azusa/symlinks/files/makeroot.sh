@@ -41,9 +41,11 @@ for foo in ld.so.cache ld.so.conf xml; do
 	ln -snf "/pkg/main/azusa.symlinks.core/etc/$foo" "$BASE/etc/$foo"
 done
 
-ln -snf /pkg/main/azusa.symlinks.core/pkgconfig "$BASE/usr/share/pkgconfig"
-ln -snf /pkg/main/azusa.symlinks.core/share/gir-1.0 "$BASE/usr/share/gir-1.0"
-ln -snf /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
+ln -snfT /pkg/main/azusa.symlinks.core/pkgconfig "$BASE/usr/share/pkgconfig"
+ln -snfT /pkg/main/azusa.symlinks.core/share/gir-1.0 "$BASE/usr/share/gir-1.0"
+ln -snfT /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
+ln -snfT /pkg/main/azusa.fontcache.data.symlinks "$BASE/usr/share/fonts"
+ln -snfT /pkg/main/azusa.fontcache.data.cache/fontconfig "$BASE/var/cache/fontconfig"
 
 # install apkg
 cp -fT /pkg/main/azusa.apkg.core/apkg "$BASE/usr/azusa/apkg"
