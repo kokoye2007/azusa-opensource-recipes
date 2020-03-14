@@ -18,7 +18,7 @@ for GOARCH in $TGT; do
 
 	cd "${T}/$GOARCH"
 	echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
-	cp -v $FILESDIR/config-${PVR}-$GOARCH ".config"
+	cp -v $FILESDIR/config-${PV}-$GOARCH ".config"
 
 	echo "Building kernel for $GOARCH..."
 
@@ -29,6 +29,9 @@ for GOARCH in $TGT; do
 
 	# ensure some config
 	./source/scripts/config --set-str LOCALVERSION "-azusa" --enable LOCALVERSION_AUTO --set-str DEFAULT_HOSTNAME "localhost"
+
+	# re-copy file
+	cp .config $FILESDIR/config-${PV}-$GOARCH
 
 	FULLVER=`make -s kernelrelease`
 	IMGFILE=`make -s image_name`
@@ -43,14 +46,14 @@ for GOARCH in $TGT; do
 
 	echo " * Copying files..."
 
-	mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH"
-	echo "${PVR}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/version.txt"
-	echo "${FULLVER}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/release.txt"
-	basename "${IMGFILE}" >"${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/image.txt"
-	cp "$IMGFILE" "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/linux-${PVR}.img"
-	cp ".config" "${D}/pkg/main/${PKG}.core.${PVR}.linux.$GOARCH/linux-${PVR}.config"
-	make -s modules_install INSTALL_MOD_PATH="${D}/pkg/main/${PKG}.modules.${PVR}.linux.$GOARCH"
-	make -s headers_install INSTALL_HDR_PATH="${D}/pkg/main/${PKG}.dev.${PVR}.linux.$GOARCH"
+	mkdir -p "${D}/pkg/main/${PKG}.core.${PV}.linux.$GOARCH"
+	echo "${PV}" >"${D}/pkg/main/${PKG}.core.${PV}.linux.$GOARCH/version.txt"
+	echo "${FULLVER}" >"${D}/pkg/main/${PKG}.core.${PV}.linux.$GOARCH/release.txt"
+	basename "${IMGFILE}" >"${D}/pkg/main/${PKG}.core.${PV}.linux.$GOARCH/image.txt"
+	cp "$IMGFILE" "${D}/pkg/main/${PKG}.core.${PV}.linux.$GOARCH/linux-${PV}.img"
+	cp ".config" "${D}/pkg/main/${PKG}.core.${PV}.linux.$GOARCH/linux-${PV}.config"
+	make -s modules_install INSTALL_MOD_PATH="${D}/pkg/main/${PKG}.modules.${PV}.linux.$GOARCH"
+	make -s headers_install INSTALL_HDR_PATH="${D}/pkg/main/${PKG}.dev.${PV}.linux.$GOARCH"
 done
 
 finalize
