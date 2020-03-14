@@ -11,7 +11,7 @@ cd "${D}/pkg/main/${PKG}.core.${PVR}"
 mkdir "azusa"
 cp "$FILESDIR/makeroot.sh" azusa/
 
-mkdir -p bin sbin info share/gir-1.0 share/aclocal etc etc/ssl etc/xml full/include
+mkdir -p bin sbin info share/gir-1.0 share/dbus-1 share/aclocal etc etc/ssl etc/xml full/include
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
 
 if [ $MULTILIB = yes ]; then
@@ -62,7 +62,7 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 
 	case $t in
 		core)
-			for foo in bin sbin share/gir-1.0 share/aclocal; do
+			for foo in bin sbin share/gir-1.0 share/dbus-1 share/aclocal; do
 				if [ -d "${p}/${foo}" -a ! -L "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "${foo}"
 				fi

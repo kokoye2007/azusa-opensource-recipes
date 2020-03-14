@@ -43,6 +43,7 @@ done
 
 ln -snfT /pkg/main/azusa.symlinks.core/pkgconfig "$BASE/usr/share/pkgconfig"
 ln -snfT /pkg/main/azusa.symlinks.core/share/gir-1.0 "$BASE/usr/share/gir-1.0"
+ln -snfT /pkg/main/azusa.symlinks.core/share/dbus-1 "$BASE/usr/share/dbus-1"
 ln -snfT /pkg/main/x11-misc.shared-mime-info.core/share/mime "$BASE/usr/share/mime"
 ln -snfT /pkg/main/azusa.fontcache.data.symlinks "$BASE/usr/share/fonts"
 ln -snfT /pkg/main/azusa.fontcache.data.cache/fontconfig "$BASE/var/cache/fontconfig"
