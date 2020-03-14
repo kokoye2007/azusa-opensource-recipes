@@ -66,7 +66,7 @@ else
 fi
 
 # populate /etc
-find /pkg/main/azusa.baselayout.core/ -type f -printf '%P\n' | while read foo; do
+find /pkg/main/azusa.baselayout.core/ '(' -type f -o -type l ')' -printf '%P\n' | while read foo; do
 	if [ ! -f "$BASE/$foo" ]; then
 		# file is missing, copy it. But first...
 		foo_dir=`dirname "$foo"`
@@ -75,7 +75,7 @@ find /pkg/main/azusa.baselayout.core/ -type f -printf '%P\n' | while read foo; d
 			mkdir -p "$BASE/$foo_dir"
 		fi
 		# then copy
-		cp "/pkg/main/azusa.baselayout.core/$foo" "$BASE/$foo"
+		cp -a "/pkg/main/azusa.baselayout.core/$foo" "$BASE/$foo"
 	fi
 done
 
