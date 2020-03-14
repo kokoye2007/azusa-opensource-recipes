@@ -375,8 +375,12 @@ importpkg() {
 	for foo in "$@"; do
 		if [[ $foo == */* ]]; then
 			# standard import paths
-			export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev/include"
-			export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+			if [ -d "/pkg/main/${foo/\//.}.dev/include" ]; then
+				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev/include"
+			fi
+			if [ -d "/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX" ]; then
+				export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+			fi
 		elif [ "$foo" = "X" ]; then
 			# import all of X11
 			local sub=("x11-base/xorg-proto")
