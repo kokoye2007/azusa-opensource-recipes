@@ -1,0 +1,3 @@
+description: A high-performance event loop/event model with lots of feature
+homepage: http://software.schmorp.de/pkg/libev.html
+license: "|| ( BSD GPL-2 )"

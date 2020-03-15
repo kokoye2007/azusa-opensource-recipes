@@ -330,8 +330,8 @@ cmakeenv() {
 	export XRandR_ROOT=/pkg/main/x11-libs.libXrandr.dev Xfixes_ROOT=/pkg/main/x11-libs.libXfixes.dev Freetype_ROOT=/pkg/main/media-libs.freetype.dev
 	export JPEG_ROOT=/pkg/main/media-libs.libjpeg-turbo.dev PNG_ROOT=/pkg/main/media-libs.libpng.dev TIFF_ROOT=/pkg/main/media-libs.tiff.dev OpenJPEG_ROOT=/pkg/main/media-libs.openjpeg.dev
 	export Boost_ROOT=/pkg/main/dev-libs.boost.dev HTTP_Parser_ROOT=/pkg/main/net-libs.http-parser.dev Xapian_ROOT=/pkg/main/dev-libs.xapian.dev
-	export Z3_ROOT=/pkg/main/sci-mathematics.z3.dev PCRE_ROOT=/pkg/main/dev-libs.libpcre.dev PAM_ROOT=/pkg/main/sys-libs.pam.dev
-	export LZO_ROOT=/pkg/main/dev-libs.lzo.dev SDL2_ROOT=/pkg/main/media-libs.libsdl2.dev
+	export Z3_ROOT=/pkg/main/sci-mathematics.z3.dev PCRE_ROOT=/pkg/main/dev-libs.libpcre.dev PAM_ROOT=/pkg/main/sys-libs.pam.dev Iconv_ROOT=/pkg/main/sys-libs.glibc.dev
+	export LZO_ROOT=/pkg/main/dev-libs.lzo.dev SDL2_ROOT=/pkg/main/media-libs.libsdl2.dev Gettext_ROOT=/pkg/main/sys-devel.gettext.dev
 	export ECM_DIR=/pkg/main/kde-frameworks.extra-cmake-modules.core/share/ECM/cmake
 }
 

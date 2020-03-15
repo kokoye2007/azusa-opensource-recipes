@@ -14,9 +14,6 @@ doconf --enable-securedir="/pkg/main/${PKG}.libs.${PVR}/security"
 make
 make install DESTDIR="${D}"
 
-cd "${D}"
-
-mv etc pkg/main/${PKG}.core.${PVR}
 #mv sbin pkg/main/${PKG}.core.${PVR}
 
 # typically PAM includes are in a "security" folder, link it so it works

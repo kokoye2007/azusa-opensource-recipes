@@ -105,4 +105,7 @@ mv -v "${D}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVR}/etc/"
 # add a link to /pkg in sysroot, because binutils will always prefix sysroot to paths found in ld.so.conf
 ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVR}/pkg"
 
+# symlink share/zoneinfo to /pkg/main/sys-libs.timezone-data.core
+ln -snfT /pkg/main/sys-libs.timezone-data.core "${D}/pkg/main/${PKG}.core.${PVR}/share/zoneinfo"
+
 archive
