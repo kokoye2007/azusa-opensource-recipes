@@ -53,8 +53,8 @@ EOF
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/bin"
 install -vm755 udevadm "${D}/pkg/main/${PKG}.core.${PVR}/bin"
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"/lib/{systemd,udev}
-install -vm755 systemd-udevd "${D}/pkg/main/${PKG}.core.${PVR}/lib/systemd"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"/{systemd,udev}
+install -vm755 systemd-udevd "${D}/pkg/main/${PKG}.core.${PVR}/systemd"
 install -vm755 src/udev/{ata_id,cdrom_id,mtd_probe,scsi_id,v4l_id} "${D}/pkg/main/${PKG}.core.${PVR}/udev"
 
 mkdir -pv "${D}/pkg/main/${PKG}.doc.${PVR}/man"

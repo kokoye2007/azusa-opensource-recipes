@@ -4,6 +4,6 @@ license: LGPL-2.1 MIT GPL-2
 
 daemons:
 - name: udevd
-  command: lib/systemd/systemd-udevd
+  command: systemd/systemd-udevd
   stop: bin/udevadm control --exit
   reload: bin/udevadm control --reload
