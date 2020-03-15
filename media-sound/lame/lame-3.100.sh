@@ -2,10 +2,11 @@
 source "../../common/init.sh"
 
 get https://download.sourceforge.net/${PN}/${P}.tar.gz
+acheck
 
 cd "${T}"
 
-#importpkg ncurses
+importpkg ncurses
 export LIBS="$(pkg-config --libs ncurses)"
 
 doconf --disable-static --enable-nasm

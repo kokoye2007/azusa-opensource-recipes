@@ -4,11 +4,9 @@ source "../../common/init.sh"
 get http://archive.xfce.org/src/apps/${PN}/${PV%.*}/${P}.tar.bz2
 acheck
 
-importpkg zlib
-
 cd "${T}"
 
-doconf
+doconf --disable-static
 
 make
 make install DESTDIR="${D}"
