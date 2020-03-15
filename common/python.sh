@@ -57,11 +57,11 @@ pythonsetup() {
 		fi
 		if [ -d "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"* ]; then
 			# maybe installed lib folder here. Move it too
-			mv -v "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
+			cp -arv "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
 		fi
 		if [ -d "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"* ]; then
 			# maybe installed bin folder. Move it too
-			mv -v "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
+			cp -arv "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}/"
 		fi
 	done
 }
