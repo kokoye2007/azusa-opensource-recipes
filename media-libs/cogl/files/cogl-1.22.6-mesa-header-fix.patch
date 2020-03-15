@@ -1,0 +1,34 @@
+diff -rbBU5 cogl-1.22.6.orig/configure.ac cogl-1.22.6/configure.ac
+--- cogl-1.22.6.orig/configure.ac	2020-03-16 03:46:51.550927628 +0900
++++ cogl-1.22.6/configure.ac	2020-03-16 03:54:39.355855379 +0900
+@@ -688,10 +688,16 @@
+                              [COGL_EGL_INCLUDES="$COGL_EGL_INCLUDE
+ #include <EGL/eglext.h>"],
+                              [],
+                              [$COGL_EGL_INCLUDES])
+ 
++            AC_CHECK_HEADERS([EGL/eglmesaext.h],
++                             [COGL_EGL_INCLUDES="$COGL_EGL_INCLUDE
++#include <EGL/eglmesaext.h>"],
++                             [],
++                             [$COGL_EGL_INCLUDES])
++
+             # Check for a GLES 1.x Common Profile library with/without EGL.
+             #
+             # Note: historically GLES 1 libraries shipped with the
+             # EGL and GLES symbols all bundled in one library. Now
+             # the Khronos Implementers Guide defines two naming
+@@ -1224,11 +1230,12 @@
+             COGL_EXTRA_LDFLAGS="$COGL_EXTRA_LDFLAGS -lEGL"
+           ]
+           )
+ 
+         COGL_EGL_INCLUDES="#include <EGL/egl.h>
+-#include <EGL/eglext.h>"
++#include <EGL/eglext.h>
++#include <EGL/eglmesaext.h>"
+         AC_SUBST([COGL_EGL_INCLUDES])
+       ])
+ 
+ AS_IF([test "x$NEED_EGL" = "xyes"],
+       [

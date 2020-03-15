@@ -4,6 +4,10 @@ source "../../common/init.sh"
 get http://ftp.gnome.org/pub/gnome/sources/cogl/1.22/${P}.tar.xz
 acheck
 
+cd "${S}"
+apatch "$FILESDIR/${P}"-*.patch
+aautoreconf
+
 cd "${T}"
 
 importpkg dev-libs/wayland media-libs/mesa
