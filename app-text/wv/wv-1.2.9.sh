@@ -10,7 +10,7 @@ cd "${T}"
 importpkg dev-libs/icu libpng
 export CFLAGS="-O2" # prefent wv from adding -ansi which will choke on icu headers
 
-doconf --disable-static --with-libwmf || /bin/bash -i
+doconf --disable-static --with-libwmf
 
 make
 make install DESTDIR="${D}"
