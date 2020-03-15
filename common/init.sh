@@ -186,10 +186,10 @@ organize() {
 		mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVR}/etc"
 	fi
 
-	if [ -d "${D}/lib/udev/rules.d" ]; then
-		# we got udev rules, move these to core
+	if [ -d "${D}/lib/udev" ]; then
+		# we got udev rules/etc, move these to core
 		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-		mv -Tv "${D}/lib/udev/rules.d" "${D}/pkg/main/${PKG}.core.${PVR}/udev-rules.d"
+		mv -Tv "${D}/lib/udev" "${D}/pkg/main/${PKG}.core.${PVR}/udev"
 	fi
 
 	if [ "$PN" != "font-util" ]; then

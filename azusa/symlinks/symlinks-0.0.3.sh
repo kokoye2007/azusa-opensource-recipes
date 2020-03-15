@@ -32,7 +32,7 @@ else
 	#cp -rsfT `realpath /pkg/main/sys-libs.glibc.libs/lib` lib
 	cp -rsf /pkg/main/sys-libs.glibc.libs/lib/ld-linux* lib
 fi
-mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules"
+mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules" "$LIB/udev"
 ln -snf "$LIB/cmake" cmake
 ln -snf "$LIB/pkgconfig" pkgconfig
 ln -snf . usr
@@ -65,6 +65,11 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 			for foo in bin sbin share/gir-1.0 share/dbus-1 share/aclocal; do
 				if [ -d "${p}/${foo}" -a ! -L "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "${foo}"
+				fi
+			done
+			for foo in udev; do
+				if [ -d "${p}/${foo}" ]; then
+					cp -rsfT "${p}/${foo}" "$LIB/${foo}"
 				fi
 			done
 			;;
