@@ -1,3 +1,9 @@
 description: X.Org X servers
 homepage: https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/xserver/xorg-server
 license: MIT
+
+daemons:
+- name: xorg
+  provides: [X11]
+  command: bin/Xorg :0
+  reload: SIGTERM

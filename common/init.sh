@@ -101,7 +101,10 @@ get() {
 	# failed download, get file, then upload...
 	wget -O "$BN" "$1"
 
-	aws s3 cp "$BN" s3://azusa-pkg/src/main/${PKG/.//}/${BN}
+	if [ -f "$HOME/.aws/credentials" ]; then
+		# upload if possible to aws
+		aws s3 cp "$BN" s3://azusa-pkg/src/main/${PKG/.//}/${BN}
+	fi
 
 	extract "$BN"
 }
@@ -180,7 +183,13 @@ organize() {
 	if [ -d "${D}/etc" ]; then
 		# move it to core
 		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-		mv -Tv etc "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+		mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+	fi
+
+	if [ -d "${D}/lib/udev/rules.d" ]; then
+		# we got udev rules, move these to core
+		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
+		mv -Tv "${D}/lib/udev/rules.d" "${D}/pkg/main/${PKG}.core.${PVR}/udev-rules.d"
 	fi
 
 	if [ "$PN" != "font-util" ]; then
