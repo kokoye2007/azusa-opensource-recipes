@@ -5,5 +5,10 @@ license: LGPL-2.1 MIT GPL-2
 daemons:
 - name: udevd
   command: sbin/udevd
+  post:
+    - bin/udevadm trigger --attr-match=dev --action=add
+    - bin/udevadm trigger --subsystem-match=net --action=add
+    - bin/udevadm trigger --type=subsystems --action=add
+    - bin/udevadm trigger --type=devices --action=add
   stop: bin/udevadm control --exit
   reload: bin/udevadm control --reload
