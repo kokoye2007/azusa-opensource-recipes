@@ -48,7 +48,7 @@ CONFIGURE=(
 
 doconf "${CONFIGURE[@]}"
 
-make || /bin/bash -i
+make
 make install DESTDIR="${D}"
 
 # move xorg modules

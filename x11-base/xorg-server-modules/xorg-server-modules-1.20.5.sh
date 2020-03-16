@@ -28,6 +28,12 @@ for pn in `curl -s http://localhost:100/apkgdb/main?action=list | grep "^x11-"`;
 		echo " * Module: $pn"
 		cp -rsfT "${p}/lib$LIB_SUFFIX/xorg/modules" "${TARGET}"
 	fi
+	if [ -d "${p}/share/X11" ]; then
+		# copy
+		echo " * Module: $pn (share/X11)"
+		mkdir -pv "${D}/pkg/main/${PKG}.libs.${PVR}/share/X11"
+		cp -rsfT "${p}/share/X11" "${D}/pkg/main/${PKG}.libs.${PVR}/share/X11"
+	fi
 done
 
 archive
