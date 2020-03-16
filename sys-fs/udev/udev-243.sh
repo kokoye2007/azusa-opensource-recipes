@@ -2,6 +2,8 @@
 source "../../common/init.sh"
 
 get https://github.com/systemd/systemd/archive/v${PV}/systemd-${PV}.tar.gz
+echo "udev disabled, use eudev"
+exit 1
 acheck
 
 cd "${T}"

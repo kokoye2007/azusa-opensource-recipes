@@ -17,5 +17,8 @@ for foo in */*; do
 	if [ -L "$p.libs" ]; then
 		continue
 	fi
+	if [ -L "$p.fonts" ]; then
+		continue
+	fi
 	echo "not found: $foo"
 done

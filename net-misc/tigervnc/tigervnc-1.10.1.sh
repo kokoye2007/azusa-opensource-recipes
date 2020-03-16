@@ -7,9 +7,10 @@ acheck
 cd "${T}"
 
 importpkg X
-export CFLAGS="${CPPFLAGS} -O2"
 
-docmake -DX11_X11_INCLUDE_PATH=/pkg/main/x11-libs.libX11.dev/include -DGETTEXT_INCLUDE_DIR=/pkg/main/sys-libs.glibc.dev/include
+echo "CMAKE_INCLUDE_PATH=$CMAKE_INCLUDE_PATH"
+docmake -DGETTEXT_INCLUDE_DIR=/pkg/main/sys-libs.glibc.dev/include -DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_INCLUDE_PATH}" -DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_LIBRARY_PATH}"
+# -DX11_X11_INCLUDE_PATH=/pkg/main/x11-libs.libX11.dev/include
 
 make
 make install DESTDIR="${D}"

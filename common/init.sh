@@ -213,6 +213,12 @@ organize() {
 			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/share"
 		fi
 	done
+	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/udev" ]; then
+		# should be in core
+		mkdir -pv "pkg/main/${PKG}.core.${PVR}"
+		mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/udev" "pkg/main/${PKG}.core.${PVR}/"
+		ln -sv "/pkg/main/${PKG}.core.${PVR}/udev" "pkg/main/${PKG}.libs.${PVR}/$LIB"
+	fi
 
 	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
 		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
@@ -386,9 +392,11 @@ importpkg() {
 			# standard import paths
 			if [ -d "/pkg/main/${foo/\//.}.dev/include" ]; then
 				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev/include"
+				CMAKE_INCLUDE_PATH="${CMAKE_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev/include"
 			fi
 			if [ -d "/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX" ]; then
 				export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+				CMAKE_LIBRARY_PATH="${CMAKE_LIBRARY_PATH};/pkg/main/${foo/\//.}.dev/include"
 			fi
 		elif [ "$foo" = "X" ]; then
 			# import all of X11
