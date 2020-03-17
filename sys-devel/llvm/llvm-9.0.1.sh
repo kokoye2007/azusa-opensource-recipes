@@ -16,6 +16,7 @@ CMAKE_OPTS=(
 	-DLLVM_LIBDIR_SUFFIX=$LIB_SUFFIX
 
 	-DBUILD_SHARED_LIBS=ON
+	-DLLVM_INCLUDE_TESTS=OFF
 
 	# ffi requires extra info to be passed
 	-DLLVM_ENABLE_FFI=ON
@@ -60,7 +61,7 @@ CMAKE_ROOT="${CHPATH}/${P}.src"
 
 docmake "${CMAKE_OPTS[@]}"
 
-make -j"$NPROC"
+make -j"$NPROC" || /bin/bash -i
 make install DESTDIR="${D}"
 
 #cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVR}" -P cmake_install.cmake
