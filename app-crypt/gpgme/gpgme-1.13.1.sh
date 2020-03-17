@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/libassuan
+importpkg dev-libs/libassuan dev-libs/libgpg-error
 
 doconf
 
