@@ -1,0 +1,11 @@
+--- clang-9.0.1.src/tools/c-index-test/CMakeLists.txt.orig	2020-03-17 13:24:57.912566837 +0900
++++ clang-9.0.1.src/tools/c-index-test/CMakeLists.txt	2020-03-17 13:25:10.762414572 +0900
+@@ -43,7 +43,7 @@
+   if ((CMAKE_OSX_SYSROOT) AND (EXISTS ${CMAKE_OSX_SYSROOT}/${LIBXML2_INCLUDE_DIR}))
+     include_directories(SYSTEM ${CMAKE_OSX_SYSROOT}/${LIBXML2_INCLUDE_DIR})
+   else()
+-    include_directories(SYSTEM ${LIBXML2_INCLUDE_DIR})
++    include_directories(SYSTEM ${LIBXML2_INCLUDE_DIRS})
+   endif()
+   target_link_libraries(c-index-test PRIVATE ${LIBXML2_LIBRARIES})
+ endif()
