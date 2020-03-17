@@ -8,6 +8,8 @@ apatch patch/*.patch
 get http://www.catb.org/~esr/terminfo/termtypes.tc.gz
 mv termtypes.tc termcap
 apatch patch/tc.file/*.patch
+
+apatch $FILESDIR/${P}-relative-lib-symlink.patch
 acheck
 
 make CFLAGS="-O2 -I."

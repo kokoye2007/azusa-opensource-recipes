@@ -1,0 +1,12 @@
+diff -rbBU3 termcap-2.0.8.orig/Makefile termcap-2.0.8/Makefile
+--- termcap-2.0.8.orig/Makefile	2020-03-17 16:58:06.487475680 +0900
++++ termcap-2.0.8/Makefile	2020-03-17 16:58:17.067343452 +0900
+@@ -61,7 +61,7 @@
+ 	else \
+ 	  cp -f $(STATIC_LIB) $(prefix)/lib; \
+ 	  rm -f $(prefix)/lib/libtermcap.so; \
+-	  ln -s $(prefix)/lib/$(SHARED_LIB) \
++	  ln -s $(SHARED_LIB) \
+ 		$(prefix)/lib/libtermcap.so; \
+ 	  cp -f termcap.h $(prefix)/include; \
+ 	fi
