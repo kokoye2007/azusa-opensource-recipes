@@ -171,7 +171,11 @@ organize() {
 			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
 				mv -v "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
 				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
-				continue
+			fi
+			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -L "pkg/main/${PKG}.$foo.${PVR}/lib"  -a -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
+				# move stuff
+				mv -v "pkg/main/${PKG}.$foo.${PVR}/lib"/* "pkg/main/${PKG}.$foo.${PVR}/$LIB"
+				rmdir "pkg/main/${PKG}.$foo.${PVR}/lib"
 			fi
 			# ensure we have a "lib" symlink to lib64 if it exists
 			if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then

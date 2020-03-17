@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://releases.llvm.org/${PV}/${P}.src.tar.xz
+get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 acheck
 
 cd "${T}"
 
 # see http://llvm.org/docs/CMake.html
 
-cmake ${CHPATH}/${P}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR}
+docmake
 
 make
 make install DESTDIR="${D}"
