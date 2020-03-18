@@ -7,7 +7,9 @@ acheck
 
 cd "${S}"
 
-importpkg gpgme libbsd
+importpkg app-crypt/gpgme libbsd dev-libs/icu app-arch/libarchive sys-apps/acl sys-libs/pam sys-libs/libunwind net-print/cups zlib sys-libs/ldb net-nds/openldap dev-libs/libgpg-error sys-libs/ncurses
+
+export LDFLAGS="${LDFLAGS}"
 
 CONFIGURE=(
 	--enable-fhs
@@ -26,11 +28,11 @@ CONFIGURE=(
 	--with-acl-support
 	--with-dnsupdate
 	--with-ads
+	--with-ldap
 	#--with-cephfs
 	--with-cluster-support
 	--enable-cups
 	# --with-dmapi # for xfs?
-	--with-fam
 	--with-gpgme
 	--enable-iprint
 	--with-pam
@@ -46,6 +48,6 @@ CONFIGURE=(
 	--builtin-libraries=NONE
 )
 
-dowaf ""${CONFIGURE[@]}""
+dowaf "${CONFIGURE[@]}"
 
 finalize
