@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg sys-fs/eudev
+
 doconf --sysconfdir=/etc --localstatedir=/var --enable-library --disable-systemd
 
 make

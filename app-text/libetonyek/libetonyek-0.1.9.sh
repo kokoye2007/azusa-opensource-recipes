@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/boost media-libs/glm
+importpkg dev-libs/boost media-libs/glm app-text/liblangtag
 
 doconf --disable-werror --with-mdds=1.4 --disable-static --with-docs
 

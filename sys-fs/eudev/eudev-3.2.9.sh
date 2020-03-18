@@ -13,7 +13,4 @@ doconf --enable-manpages --disable-static --config-cache --enable-hwdb --with-ro
 make
 make install DESTDIR="${D}"
 
-cd "$D"
-mv etc "pkg/main/${PKG}.core.${PVR}"
-
 finalize

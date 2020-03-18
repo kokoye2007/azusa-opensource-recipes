@@ -210,10 +210,16 @@ organize() {
 			mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
 			mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" "pkg/main/${PKG}.dev.${PVR}"
 			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.libs.${PVR}/$LIB"
-		elif [ -d "pkg/main/${PKG}.core.${PVR}/share/$foo" ]; then
+		fi
+		if [ -d "pkg/main/${PKG}.core.${PVR}/share/$foo" ]; then
 			# should be in dev
 			mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
-			mv -v "pkg/main/${PKG}.core.${PVR}/share/$foo" "pkg/main/${PKG}.dev.${PVR}"
+			if [ ! -d "pkg/main/${PKG}.core.${PVR}/share/$foo" ]; then
+				mv -v "pkg/main/${PKG}.core.${PVR}/share/$foo" "pkg/main/${PKG}.dev.${PVR}"
+			else
+				mv -v "pkg/main/${PKG}.core.${PVR}/share/$foo"/* "pkg/main/${PKG}.dev.${PVR}/$foo"
+				rmdir -v "pkg/main/${PKG}.core.${PVR}/share/$foo"
+			fi
 			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/share"
 		fi
 	done
