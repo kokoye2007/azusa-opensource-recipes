@@ -361,6 +361,7 @@ cmakeenv() {
 	export Boost_ROOT=/pkg/main/dev-libs.boost.dev HTTP_Parser_ROOT=/pkg/main/net-libs.http-parser.dev Xapian_ROOT=/pkg/main/dev-libs.xapian.dev
 	export Z3_ROOT=/pkg/main/sci-mathematics.z3.dev PCRE_ROOT=/pkg/main/dev-libs.libpcre.dev PAM_ROOT=/pkg/main/sys-libs.pam.dev Iconv_ROOT=/pkg/main/sys-libs.glibc.dev
 	export LZO_ROOT=/pkg/main/dev-libs.lzo.dev SDL2_ROOT=/pkg/main/media-libs.libsdl2.dev Gettext_ROOT=/pkg/main/sys-devel.gettext.dev
+	export GnuTLS_ROOT=/pkg/main/net-libs.gnutls.dev Lua_ROOT=/pkg/main/dev-lang.lua.dev Php_ROOT=/pkg/main/dev-lang.php.dev.embed Aspell_ROOT=/pkg/main/app-text.aspell.dev
 	export ECM_DIR=/pkg/main/kde-frameworks.extra-cmake-modules.core/share/ECM/cmake
 }
 

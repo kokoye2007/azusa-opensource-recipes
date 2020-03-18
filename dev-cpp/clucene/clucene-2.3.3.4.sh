@@ -2,14 +2,15 @@
 source "../../common/init.sh"
 
 get https://downloads.sourceforge.net/clucene/clucene-core-${PV}.tar.gz
+acheck
 
-cd "clucene-core-${PV}"
+cd "${S}"
 
-patch -p1 <"$FILESDIR/clucene-2.3.3.4-contribs_lib-1.patch"
+apatch "$FILESDIR/clucene-2.3.3.4-contribs_lib-1.patch"
 
 cd "${T}"
 
-cmake "${CHPATH}/clucene-core-${PV}" -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} -DBUILD_CONTRIBS_LIB=ON
+docmake -DBUILD_CONTRIBS_LIB=ON
 
 make
 make install DESTDIR="${D}"
