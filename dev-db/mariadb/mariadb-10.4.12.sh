@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu
+importpkg dev-libs/libpcre dev-libs/libpcre2 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu
 
 # mariadb won't honor CPPFLAGS
 export CFLAGS="${CPPFLAGS} -O2"
@@ -81,7 +81,7 @@ CMAKEOPTS=(
 )
 
 # -DBUILD_CONFIG=mysql_release
-docmake "${CMAKEOPTS[@]}"
+docmake "${CMAKEOPTS[@]}" || /bin/bash -i
 
 make -j"$NPROC"
 make install DESTDIR="${D}"
