@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/boost
+importpkg dev-libs/boost zlib
 
 doconf --disable-werror --enable-python --enable-spreadsheet-model --disable-static --with-tools
 
