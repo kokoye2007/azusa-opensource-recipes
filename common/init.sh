@@ -186,8 +186,14 @@ organize() {
 
 	if [ -d "${D}/etc" ]; then
 		# move it to core
-		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-		mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+		if [ -d "${D}/pkg/main/${PKG}.core.${PVR}/etc" ]; then
+			# already ahve etc, try to merge
+			mv -v "${D}/etc"/* "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+			rmdir "${D}/etc"
+		else
+			mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
+			mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+		fi
 	fi
 
 	if [ -d "${D}/lib/udev" ]; then
@@ -314,6 +320,11 @@ cleanup() {
 
 callconf() {
 	# try to locate configure
+	if [ x"$CONFPATH" != x ]; then
+		"${CONFPATH}" "$@"
+		return
+	fi
+
 	if [ -x ./configure ]; then
 		./configure "$@"
 		return
@@ -322,9 +333,8 @@ callconf() {
 		"${S}/configure" "$@"
 		return
 	fi
-
-	if [ x"$CONFPATH" != x ]; then
-		"${CONFPATH}" "$@"
+	if [ -x "${CHPATH}/configure" ]; then
+		"${CHPATH}/configure" "$@"
 		return
 	fi
 
@@ -419,6 +429,10 @@ acheck() {
 		echo "$ROOTDIR/common/build.sh ${CATEGORY}/${PN}/${PF}.sh"
 		exit
 	fi
+
+	# disable networking
+	# TODO we should actually disable the whole net stack in local container
+	echo -n >/etc/resolv.conf
 
 	# TODO check if /.pkg-main-rw is indeed empty, etc
 }

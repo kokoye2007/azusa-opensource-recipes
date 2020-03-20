@@ -1,0 +1,3 @@
+description: Libtpms-based TPM emulator
+homepage: https://github.com/stefanberger/swtpm
+license: BSD
