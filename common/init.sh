@@ -31,7 +31,7 @@ if [ -w /build/ ]; then
 else
 	TMPBASE="$HOME/tmp/build"
 fi
-CHPATH="${TMPBASE}/${PKG}/${PVR}/work"
+CHPATH="${TMPBASE}/${PN}-${PVR}/work"
 D="${TMPBASE}/${PKG}/${PVR}/dist"
 T="${TMPBASE}/${PKG}/${PVR}/temp"
 APKGOUT=/tmp/apkg

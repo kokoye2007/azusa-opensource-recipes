@@ -1,5 +1,6 @@
 #!/bin/sh
 source "../../common/init.sh"
+inherit asciidoc
 
 get https://download.gimp.org/pub/gegl/0.4/${P}.tar.bz2
 acheck
@@ -7,9 +8,6 @@ acheck
 cd "${T}"
 
 importpkg libjpeg
-
-# make asciidoc work
-ln -snfT /pkg/main/app-text.asciidoc.core/etc/asciidoc /etc/asciidoc
 
 doconf
 

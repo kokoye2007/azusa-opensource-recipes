@@ -1,5 +1,6 @@
 #!/bin/sh
 source "../../common/init.sh"
+inherit asciidoc
 
 get https://www.kernel.org/pub/linux/kernel/people/kdave/${PN}/${PN}-v${PV}.tar.xz
 acheck
@@ -7,9 +8,6 @@ acheck
 cd "${PN}-v${PV}"
 
 importpkg dev-libs/lzo sys-apps/util-linux zlib libzstd sys-fs/e2fsprogs
-
-# make asciidoc work
-ln -snfT /pkg/main/app-text.asciidoc.core/etc/asciidoc /etc/asciidoc
 
 export CFLAGS="${CPPFLAGS} -O2"
 
