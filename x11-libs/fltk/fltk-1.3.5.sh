@@ -6,11 +6,32 @@ acheck
 
 cd "${P}"
 
-importpkg X zlib libpng libjpeg fontconfig
+importpkg X zlib libpng libjpeg fontconfig media-libs/mesa x11-libs/cairo x11-libs/pixman
 
-doconf --disable-static
+CONF=(
+	--enable-cairo
+	--enable-gl
+	--enable-threads
+	--enable-xft
+	--enable-xinerama
+	--disable-localjpeg
+	--disable-localpng
+	--disable-localzlib
+	--enable-largefile
+	--enable-shared
+	--enable-xcursor
+	--enable-xdbe
+	--enable-xfixes
+	DSOFLAGS="${LDFLAGS}"
+	LDFLAGS="${LDFLAGS}"
+)
 
-make
+doconf "${CONF[@]}"
+
+make -j"$NPROC"
 make install DESTDIR="${D}"
+
+# remove static libs
+find "${D}" -name '*.a' -delete
 
 finalize

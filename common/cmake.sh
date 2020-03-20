@@ -13,6 +13,7 @@ cmakeenv() {
 	export GnuTLS_ROOT=/pkg/main/net-libs.gnutls.dev Lua_ROOT=/pkg/main/dev-lang.lua.dev Php_ROOT=/pkg/main/dev-lang.php.dev.embed Aspell_ROOT=/pkg/main/app-text.aspell.dev
 	export Curses_ROOT=/pkg/main/sys-libs.ncurses.dev OpenGL_ROOT=/pkg/main/media-libs.mesa.dev LibGPGError_ROOT=/pkg/main/dev-libs.libgpg-error.dev
 	export Gcrypt_ROOT=/pkg/main/dev-libs.libgcrypt.dev Argon2_ROOT=/pkg/main/app-crypt.argon2.dev QREncode_ROOT=/pkg/main/media-gfx.qrencode.dev
+	export LibGcrypt_ROOT="${Gcrypt_ROOT}"
 	export YubiKey_ROOT=/pkg/main/sys-auth.libyubikey.dev
 	export ECM_DIR=/pkg/main/kde-frameworks.extra-cmake-modules.core/share/ECM/cmake
 }
@@ -23,12 +24,16 @@ docmake() {
 		CMAKE_ROOT="${S}"
 	fi
 
-	cmakeenv
-
-	cmake "$CMAKE_ROOT" \
+	set -- "$CMAKE_ROOT" \
 		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \
-		-DLIB_SUFFIX="$LIB_SUFFIX" \
-		"$@" || return $?
+		-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}" \
+		-DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH}" \
+		-DCMAKE_C_FLAGS="${CPPFLAGS} -O2" \
+		-DCMAKE_CXX_FLAGS="${CPPFLAGS} -O2" \
+		"$@"
+
+	echo "Running: cmake $@"
+	cmake "$@" || return $?
 }

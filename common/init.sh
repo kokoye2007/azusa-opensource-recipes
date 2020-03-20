@@ -395,11 +395,11 @@ importpkg() {
 			# standard import paths
 			if [ -d "/pkg/main/${foo/\//.}.dev/include" ]; then
 				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev/include"
-				CMAKE_INCLUDE_PATH="${CMAKE_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev/include"
+				export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev/include"
 			fi
 			if [ -d "/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX" ]; then
 				export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
-				CMAKE_LIBRARY_PATH="${CMAKE_LIBRARY_PATH};/pkg/main/${foo/\//.}.dev/include"
+				export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
 			fi
 		elif [ "$foo" = "X" ]; then
 			# import all of X11

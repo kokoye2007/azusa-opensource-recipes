@@ -1,0 +1,3 @@
+description: Unprivileged sandboxing tool, namespaces-powered chroot-like solution
+homepage: https://github.com/projectatomic/bubblewrap
+license: LGPL-2+
