@@ -4,9 +4,7 @@ source "../../common/init.sh"
 get https://github.com/Kitware/CMake/releases/download/v${PV}/${P}.tar.gz
 acheck
 
-cd "${P}"
-
-apatch "$FILESDIR/cmake-enforce-CMP0074-3.16.4.patch"
+importpkg app-crypt/rhash sys-libs/zlib app-arch/libarchive dev-libs/jsoncpp dev-libs/libuv
 
 cd "${T}"
 

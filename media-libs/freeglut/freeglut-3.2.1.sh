@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://download.sourceforge.net/${PN}/${P}.tar.gz
 acheck
 
-importpkg media-libs/mesa X
+importpkg media-libs/mesa X media-libs/glu
 
 cd "${T}"
 
