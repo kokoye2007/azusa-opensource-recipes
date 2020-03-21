@@ -31,14 +31,15 @@ if [ -w /build/ ]; then
 else
 	TMPBASE="$HOME/tmp/build"
 fi
-CHPATH="${TMPBASE}/${PN}-${PVR}/work"
-D="${TMPBASE}/${PKG}/${PVR}/dist"
-T="${TMPBASE}/${PKG}/${PVR}/temp"
+PKGBASE="${TMPBASE}/${PN}-${PVR}"
+CHPATH="${PKGBASE}/work"
+D="${PKGBASE}/dist"
+T="${PKGBASE}/temp"
 APKGOUT=/tmp/apkg
 
-if [ -d "${TMPBASE}/${PKG}/${PVR}" ]; then
+if [ -d "${PKGBASE}" ]; then
 	# cleanup
-	rm -fr "${TMPBASE}/${PKG}/${PVR}"
+	rm -fr "${PKGBASE}"
 fi
 mkdir -p "${CHPATH}" "${D}" "${T}"
 cd ${CHPATH}
