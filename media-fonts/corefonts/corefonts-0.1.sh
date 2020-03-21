@@ -10,7 +10,7 @@ for foo in *.exe *.EXE; do cabextract "$foo"; done
 
 cabextract Viewer1.cab
 
-mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}/ttf"
-cp -v *.ttf *.TTF "${D}/pkg/main/${PKG}.fonts.${PVR}/ttf"
+mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}/ttf"
+cp -v *.ttf *.TTF "${D}/pkg/main/${PKG}.fonts.${PVRF}/ttf"
 
 finalize

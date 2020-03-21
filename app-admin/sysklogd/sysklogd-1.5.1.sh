@@ -10,7 +10,7 @@ cd "${P}"
 
 make 
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/sbin" "${D}/pkg/main/${PKG}.doc.${PVR}/man"/man{5,8}
-make install BINDIR="${D}/pkg/main/${PKG}.core.${PVR}/sbin" MANDIR="${D}/pkg/main/${PKG}.doc.${PVR}/man" MAN_USER=`id -u` MAN_GROUP=`id -g`
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/sbin" "${D}/pkg/main/${PKG}.doc.${PVRF}/man"/man{5,8}
+make install BINDIR="${D}/pkg/main/${PKG}.core.${PVRF}/sbin" MANDIR="${D}/pkg/main/${PKG}.doc.${PVRF}/man" MAN_USER=`id -u` MAN_GROUP=`id -g`
 
 finalize

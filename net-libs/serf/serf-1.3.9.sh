@@ -14,7 +14,7 @@ sed -i "/get_contents()/s/,/.decode()&/"    SConstruct
 
 importpkg zlib openssl expat uuid
 
-scons PREFIX="/pkg/main/${PKG}.core.${PVR}" CPPFLAGS="$CPPFLAGS" LINKFLAGS="$LDFLAGS"
-scons PREFIX="${D}/pkg/main/${PKG}.core.${PVR}" install
+scons PREFIX="/pkg/main/${PKG}.core.${PVRF}" CPPFLAGS="$CPPFLAGS" LINKFLAGS="$LDFLAGS"
+scons PREFIX="${D}/pkg/main/${PKG}.core.${PVRF}" install
 
 finalize

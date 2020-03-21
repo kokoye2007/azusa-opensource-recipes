@@ -13,7 +13,7 @@ sed -i \
 	configure
 
 doconflight --enable-dependency-linking
-# --with-coin-instdir="/pkg/main/${PKG}.core.${PVR}"
+# --with-coin-instdir="/pkg/main/${PKG}.core.${PVRF}"
 
 # do not biuld in parallel
 #make -C src libCbc.la

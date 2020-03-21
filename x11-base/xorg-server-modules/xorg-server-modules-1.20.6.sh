@@ -3,11 +3,11 @@ source "../../common/init.sh"
 
 cd "${T}"
 
-TARGET="${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/xorg/modules"
+TARGET="${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/xorg/modules"
 mkdir -p "${TARGET}"
 
 # copy original modules
-cp -rsfT "/pkg/main/x11-base.xorg-server.mod.${PVR}/lib$LIB_SUFFIX/xorg/modules" "$TARGET"
+cp -rsfT "/pkg/main/x11-base.xorg-server.mod.${PVRF}/lib$LIB_SUFFIX/xorg/modules" "$TARGET"
 
 # locate packages
 for pn in `curl -s http://localhost:100/apkgdb/main?action=list | grep "^x11-"`; do
@@ -31,8 +31,8 @@ for pn in `curl -s http://localhost:100/apkgdb/main?action=list | grep "^x11-"`;
 	if [ -d "${p}/share/X11" ]; then
 		# copy
 		echo " * Module: $pn (share/X11)"
-		mkdir -pv "${D}/pkg/main/${PKG}.libs.${PVR}/share/X11"
-		cp -rsfT "${p}/share/X11" "${D}/pkg/main/${PKG}.libs.${PVR}/share/X11"
+		mkdir -pv "${D}/pkg/main/${PKG}.libs.${PVRF}/share/X11"
+		cp -rsfT "${p}/share/X11" "${D}/pkg/main/${PKG}.libs.${PVRF}/share/X11"
 	fi
 done
 

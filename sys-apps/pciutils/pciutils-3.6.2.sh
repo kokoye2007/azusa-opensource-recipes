@@ -8,7 +8,7 @@ cd "${P}"
 
 importpkg zlib sys-fs/udev
 
-make PREFIX=/pkg/main/${PKG}.core.${PVR} SHARED=yes ZLIB=yes OPT="-O2 ${CPPFLAGS}"
-make install DESTDIR="${D}" PREFIX=/pkg/main/${PKG}.core.${PVR} SHARED=yes ZLIB=yes
+make PREFIX=/pkg/main/${PKG}.core.${PVRF} SHARED=yes ZLIB=yes OPT="-O2 ${CPPFLAGS}"
+make install DESTDIR="${D}" PREFIX=/pkg/main/${PKG}.core.${PVRF} SHARED=yes ZLIB=yes
 
 finalize

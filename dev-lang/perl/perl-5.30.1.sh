@@ -20,9 +20,9 @@ export BZIP2_INCLUDE="/pkg/main/app-arch.bzip2.dev/include"
 
 # see: https://perldoc.perl.org/Config.html
 
-sh "${CHPATH}/${P}/Configure" -des -Dprefix="/pkg/main/${PKG}.core.${PVR}" -Dsiteprefix="/pkg/main/dev-lang.perl-modules.core.${PVR}" -Dvendorprefix="/pkg/main/${PKG}.core.${PVR}" \
-	-Dman1dir="/pkg/main/${PKG}.doc.${PVR}/man/man1" -Dman3dir="/pkg/main/${PKG}.doc.${PVR}/man/man3" \
-	-Dsiteman1dir="/pkg/main/dev-lang.perl-modules.doc.${PVR}/man/man1" -Dsiteman3dir="/pkg/main/dev-lang.perl-modules.doc.${PVR}/man/man3" \
+sh "${CHPATH}/${P}/Configure" -des -Dprefix="/pkg/main/${PKG}.core.${PVRF}" -Dsiteprefix="/pkg/main/dev-lang.perl-modules.core.${PVRF}" -Dvendorprefix="/pkg/main/${PKG}.core.${PVRF}" \
+	-Dman1dir="/pkg/main/${PKG}.doc.${PVRF}/man/man1" -Dman3dir="/pkg/main/${PKG}.doc.${PVRF}/man/man3" \
+	-Dsiteman1dir="/pkg/main/dev-lang.perl-modules.doc.${PVRF}/man/man1" -Dsiteman3dir="/pkg/main/dev-lang.perl-modules.doc.${PVRF}/man/man3" \
 	-Dman1ext='1' -Dman3ext='3pm' \
 	-Dpager="/bin/less -isR" -Duseshrplib -Dusethreads -Uusenm -Duselargefiles -Dd_semctl_semun \
 	-Doptimize="${CPPFLAGS} ${CFLAGS} -O2" -Dldflags="${LDFLAGS}" \
@@ -32,6 +32,6 @@ make
 make install DESTDIR="${D}"
 
 # make perl modules be in the right path
-mv "${D}/pkg/main/dev-lang.perl-modules.core.${PVR}" "${D}/pkg/main/${PKG}.mod.${PVR}"
+mv "${D}/pkg/main/dev-lang.perl-modules.core.${PVRF}" "${D}/pkg/main/${PKG}.mod.${PVRF}"
 
 finalize

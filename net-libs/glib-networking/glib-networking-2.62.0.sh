@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Dlibproxy=disabled "${CHPATH}/${P}"
+meson --prefix="/pkg/main/${PKG}.core.${PVRF}" -Dlibproxy=disabled "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

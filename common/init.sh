@@ -14,7 +14,8 @@ PN=$(basename $(pwd))
 CATEGORY=$(basename $(dirname $(pwd)))
 # TODO fix P to not include revision if any
 P=${PF}
-PVR="${P#"${PN}-"}.${OS}.${ARCH}"
+PVR="${P#"${PN}-"}"
+PVRF="${PVR}.${OS}.${ARCH}"
 PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
@@ -135,11 +136,6 @@ squash() {
 	fi
 }
 
-get_target() {
-	# $1 is one of "core", "libs", etc
-	echo "${PKG}.$1.${PVR}"
-}
-
 organize() {
 	cd "${D}"
 
@@ -156,12 +152,12 @@ organize() {
 
 	# ensure lib dirs are in libs and not core
 	for foo in lib lib32 lib64; do
-		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
+		if [ -d "pkg/main/${PKG}.core.${PVRF}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVRF}/$foo" ]; then
 			echo "Moving core $foo directory to libs"
-			mkdir -p "pkg/main/${PKG}.libs.${PVR}/$foo"
-			mv -v "pkg/main/${PKG}.core.${PVR}/$foo"/* "pkg/main/${PKG}.libs.${PVR}/$foo" || true
-			rm -frv "pkg/main/${PKG}.core.${PVR}/$foo"
-			ln -sv "/pkg/main/${PKG}.libs.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/$foo"
+			mkdir -p "pkg/main/${PKG}.libs.${PVRF}/$foo"
+			mv -v "pkg/main/${PKG}.core.${PVRF}/$foo"/* "pkg/main/${PKG}.libs.${PVRF}/$foo" || true
+			rm -frv "pkg/main/${PKG}.core.${PVRF}/$foo"
+			ln -sv "/pkg/main/${PKG}.libs.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/$foo"
 		fi
 	done
 
@@ -169,115 +165,115 @@ organize() {
 	if [ $MULTILIB = yes ]; then
 		for foo in core libs dev; do
 			# if we have a "lib" dir and no lib64, move it
-			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
-				mv -v "pkg/main/${PKG}.$foo.${PVR}/lib" "pkg/main/${PKG}.$foo.${PVR}/$LIB"
-				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
+			if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" -a ! -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
+				mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib" "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
+				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
 			fi
-			if [ -d "pkg/main/${PKG}.$foo.${PVR}/lib" -a ! -L "pkg/main/${PKG}.$foo.${PVR}/lib"  -a -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" ]; then
+			if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" -a ! -L "pkg/main/${PKG}.$foo.${PVRF}/lib"  -a -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
 				# move stuff
-				mv -v "pkg/main/${PKG}.$foo.${PVR}/lib"/* "pkg/main/${PKG}.$foo.${PVR}/$LIB"
-				rmdir "pkg/main/${PKG}.$foo.${PVR}/lib"
+				mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib"/* "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
+				rmdir "pkg/main/${PKG}.$foo.${PVRF}/lib"
 			fi
 			# ensure we have a "lib" symlink to lib64 if it exists
-			if [ -d "pkg/main/${PKG}.$foo.${PVR}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVR}/lib" ]; then
-				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVR}/lib"
+			if [ -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ]; then
+				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
 			fi
 		done
 	fi
 
 	if [ -d "${D}/etc" ]; then
 		# move it to core
-		if [ -d "${D}/pkg/main/${PKG}.core.${PVR}/etc" ]; then
+		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/etc" ]; then
 			# already ahve etc, try to merge
-			mv -v "${D}/etc"/* "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+			mv -v "${D}/etc"/* "${D}/pkg/main/${PKG}.core.${PVRF}/etc"
 			rmdir "${D}/etc"
 		else
-			mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-			mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+			mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+			mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVRF}/etc"
 		fi
 	fi
 
 	if [ -d "${D}/lib/udev" ]; then
 		# we got udev rules/etc, move these to core
-		mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-		mv -Tv "${D}/lib/udev" "${D}/pkg/main/${PKG}.core.${PVR}/udev"
+		mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+		mv -Tv "${D}/lib/udev" "${D}/pkg/main/${PKG}.core.${PVRF}/udev"
 	fi
 
 	if [ "$PN" != "font-util" ]; then
 		if [ -d "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts ]; then
 			# looks like fonts were installed in the wrong place.
-			mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}"
-			mv -v "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts/* "${D}/pkg/main/${PKG}.fonts.${PVR}"
+			mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+			mv -v "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts/* "${D}/pkg/main/${PKG}.fonts.${PVRF}"
 		fi
 	fi
 
 	for foo in pkgconfig cmake; do
-		if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" ]; then
+		if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" ]; then
 			# should be in dev
-			mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
-			mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/$foo" "pkg/main/${PKG}.dev.${PVR}"
-			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.libs.${PVR}/$LIB"
+			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
+			mv -v "pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" "pkg/main/${PKG}.dev.${PVRF}"
+			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "pkg/main/${PKG}.libs.${PVRF}/$LIB"
 		fi
-		if [ -d "pkg/main/${PKG}.core.${PVR}/share/$foo" ]; then
+		if [ -d "pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
 			# should be in dev
-			mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
-			if [ ! -d "pkg/main/${PKG}.core.${PVR}/share/$foo" ]; then
-				mv -v "pkg/main/${PKG}.core.${PVR}/share/$foo" "pkg/main/${PKG}.dev.${PVR}"
+			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
+			if [ ! -d "pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
+				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo" "pkg/main/${PKG}.dev.${PVRF}"
 			else
-				mv -v "pkg/main/${PKG}.core.${PVR}/share/$foo"/* "pkg/main/${PKG}.dev.${PVR}/$foo"
-				rmdir -v "pkg/main/${PKG}.core.${PVR}/share/$foo"
+				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"/* "pkg/main/${PKG}.dev.${PVRF}/$foo"
+				rmdir -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"
 			fi
-			ln -sv "/pkg/main/${PKG}.dev.${PVR}/$foo" "pkg/main/${PKG}.core.${PVR}/share"
+			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/share"
 		fi
 	done
-	if [ -d "pkg/main/${PKG}.libs.${PVR}/$LIB/udev" ]; then
+	if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
 		# should be in core
-		mkdir -pv "pkg/main/${PKG}.core.${PVR}"
-		mv -v "pkg/main/${PKG}.libs.${PVR}/$LIB/udev" "pkg/main/${PKG}.core.${PVR}/"
-		ln -sv "/pkg/main/${PKG}.core.${PVR}/udev" "pkg/main/${PKG}.libs.${PVR}/$LIB"
+		mkdir -pv "pkg/main/${PKG}.core.${PVRF}"
+		mv -v "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" "pkg/main/${PKG}.core.${PVRF}/"
+		ln -sv "/pkg/main/${PKG}.core.${PVRF}/udev" "pkg/main/${PKG}.libs.${PVRF}/$LIB"
 	fi
 
-	if [ -d "pkg/main/${PKG}.core.${PVR}/include" ]; then
-		mkdir -pv "pkg/main/${PKG}.dev.${PVR}"
-		mv -v "pkg/main/${PKG}.core.${PVR}/include" "pkg/main/${PKG}.dev.${PVR}/include"
-		ln -sv "/pkg/main/${PKG}.dev.${PVR}/include" "pkg/main/${PKG}.core.${PVR}/include"
+	if [ -d "pkg/main/${PKG}.core.${PVRF}/include" ]; then
+		mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
+		mv -v "pkg/main/${PKG}.core.${PVRF}/include" "pkg/main/${PKG}.dev.${PVRF}/include"
+		ln -sv "/pkg/main/${PKG}.dev.${PVRF}/include" "pkg/main/${PKG}.core.${PVRF}/include"
 	fi
 
 	for foo in $LIBS; do
-		if [ -d "pkg/main/${PKG}.libs.${PVR}/$foo" ]; then
+		if [ -d "pkg/main/${PKG}.libs.${PVRF}/$foo" ]; then
 			# check for any .a file, move to dev
-			mkdir -pv "pkg/main/${PKG}.dev.${PVR}/$foo"
+			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}/$foo"
 			if [ $foo = lib64 ]; then
-				ln -sv lib64 "pkg/main/${PKG}.dev.${PVR}/lib"
+				ln -sv lib64 "pkg/main/${PKG}.dev.${PVRF}/lib"
 			fi
-			count=`find "pkg/main/${PKG}.libs.${PVR}/$foo" -maxdepth 0 -name '*.a' | wc -l`
+			count=`find "pkg/main/${PKG}.libs.${PVRF}/$foo" -maxdepth 0 -name '*.a' | wc -l`
 			if [ $count -gt 0 ]; then
-				mv -v "pkg/main/${PKG}.libs.${PVR}/$foo"/*.a "pkg/main/${PKG}.dev.${PVR}/$foo"
+				mv -v "pkg/main/${PKG}.libs.${PVRF}/$foo"/*.a "pkg/main/${PKG}.dev.${PVRF}/$foo"
 			fi
 			# link whatever remains to dev
-			for bar in "pkg/main/${PKG}.libs.${PVR}/$foo"/*; do
-				ln -snfv "/$bar" "pkg/main/${PKG}.dev.${PVR}/$foo"
+			for bar in "pkg/main/${PKG}.libs.${PVRF}/$foo"/*; do
+				ln -snfv "/$bar" "pkg/main/${PKG}.dev.${PVRF}/$foo"
 			done
 		fi
 	done
 
-	for foo in "pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"/python*/; do
+	for foo in "pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"/python*/; do
 		if [ -d "$foo" ]; then
 			# this should be in a python module dir, not here. Let's try to find out what version of python this is and move it around.
 			PYTHON=`basename "$foo"` # for example "python3.8"
 			VER=`"$PYTHON" --version | awk '{ print $2 }'` # 3.8.6 or whatever
-			mkdir -pv "pkg/main/${PKG}.mod.${PVR}.py${VER}/lib"
-			mv -v "$foo" "pkg/main/${PKG}.mod.${PVR}.py${VER}/lib"
+			mkdir -pv "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
+			mv -v "$foo" "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
 		fi
 	done
 
 	for foo in man info share/man share/info; do
-		if [ -d "pkg/main/${PKG}.core.${PVR}/$foo" ]; then
+		if [ -d "pkg/main/${PKG}.core.${PVRF}/$foo" ]; then
 			# this should be in doc
-			mkdir -pv "pkg/main/${PKG}.doc.${PVR}"
-			mv -v "pkg/main/${PKG}.core.${PVR}/$foo" "pkg/main/${PKG}.doc.${PVR}"
-			rmdir "pkg/main/${PKG}.core.${PVR}/$foo" || true
-			rmdir "pkg/main/${PKG}.core.${PVR}" || true
+			mkdir -pv "pkg/main/${PKG}.doc.${PVRF}"
+			mv -v "pkg/main/${PKG}.core.${PVRF}/$foo" "pkg/main/${PKG}.doc.${PVRF}"
+			rmdir "pkg/main/${PKG}.core.${PVRF}/$foo" || true
+			rmdir "pkg/main/${PKG}.core.${PVRF}" || true
 		fi
 	done
 }
@@ -292,8 +288,8 @@ archive() {
 	fi
 
 	if [ -f "${BASEDIR}/azusa.yaml" ]; then
-		if [ -d "${D}/pkg/main/${PKG}.core.${PVR}" ]; then
-			cp -vT "${BASEDIR}/azusa.yaml" "${D}/pkg/main/${PKG}.core.${PVR}/azusa.yaml"
+		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}" ]; then
+			cp -vT "${BASEDIR}/azusa.yaml" "${D}/pkg/main/${PKG}.core.${PVRF}/azusa.yaml"
 		fi
 	fi
 
@@ -316,7 +312,7 @@ finalize() {
 
 cleanup() {
 	echo "Cleaning up..."
-	rm -fr "${TMPBASE}/${PKG}/${PVR}"
+	rm -fr "${TMPBASE}/${PKG}/${PVRF}"
 }
 
 callconf() {
@@ -351,21 +347,21 @@ callconf() {
 
 doconf() {
 	echo "Running configure..."
-	callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc --localstatedir=/var \
-	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
-	--mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc "$@"
+	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc --localstatedir=/var \
+	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVRF}/share \
+	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/doc "$@"
 }
 
 doconflight() {
 	echo "Running configure..."
-	callconf --prefix=/pkg/main/${PKG}.core.${PVR} "$@"
+	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} "$@"
 }
 
 doconf213() {
 	echo "Running configure..."
-	callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
-	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVR}/share \
-	--mandir=/pkg/main/${PKG}.doc.${PVR}/man "$@"
+	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc \
+	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVRF}/share \
+	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man "$@"
 }
 
 domeson() {

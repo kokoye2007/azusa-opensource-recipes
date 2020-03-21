@@ -8,7 +8,7 @@ cd "${T}"
 
 # see http://llvm.org/docs/CMake.html
 
-docmake -DLIBCXXABI_LIBCXX_INCLUDES=/pkg/main/sys-libs.libcxx.dev.${PVR}/include/c++/v1
+docmake -DLIBCXXABI_LIBCXX_INCLUDES=/pkg/main/sys-libs.libcxx.dev.${PVRF}/include/c++/v1
 
 make
 make install DESTDIR="${D}"

@@ -13,7 +13,7 @@ cd "$BOOST_BUILD_PATH"
 export CPPFLAGS="$CPPFLAGS -I/pkg/main/dev-lang.python.core.3.8/include/python3.8"
 
 # configure & build
-./bootstrap.sh --with-icu=/pkg/main/dev-libs.icu.core --with-python=python3.8 --with-python-root=/pkg/main/dev-lang.python.core.3.8/ --with-python-version=3.8 --prefix="/pkg/main/${PKG}.core.${PVR}" --libdir="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" --includedir="/pkg/main/${PKG}.dev.${PVR}/include"
+./bootstrap.sh --with-icu=/pkg/main/dev-libs.icu.core --with-python=python3.8 --with-python-root=/pkg/main/dev-lang.python.core.3.8/ --with-python-version=3.8 --prefix="/pkg/main/${PKG}.core.${PVRF}" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --includedir="/pkg/main/${PKG}.dev.${PVRF}/include"
 
 # create user-config.jam
 cat >>user-config.jam <<EOF
@@ -40,6 +40,6 @@ B2_OPTS=(
 )
 
 ./b2 "${B2_OPTS[@]}" stage -j"$NPROC"
-./b2 "${B2_OPTS[@]}" install --prefix="${D}/pkg/main/${PKG}.core.${PVR}" --libdir="${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" --includedir="${D}/pkg/main/${PKG}.dev.${PVR}/include"
+./b2 "${B2_OPTS[@]}" install --prefix="${D}/pkg/main/${PKG}.core.${PVRF}" --libdir="${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --includedir="${D}/pkg/main/${PKG}.dev.${PVRF}/include"
 
 finalize

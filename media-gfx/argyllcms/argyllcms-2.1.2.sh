@@ -20,7 +20,7 @@ CFLAGS="$CFLAGS -DUNIX -D_THREAD_SAFE -O2"
 
 sed -e 's:CCFLAGS:CFLAGS:g' -i Jambase
 
-export PREFIX=/pkg/main/${PKG}.core.${PVR}
+export PREFIX=/pkg/main/${PKG}.core.${PVRF}
 export DESTDIR="${D}"
 
 jam -dx -fJambase

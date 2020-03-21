@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Ddocs=false "${CHPATH}/${P}"
+meson --prefix="/pkg/main/${PKG}.core.${PVRF}" -Ddocs=false "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

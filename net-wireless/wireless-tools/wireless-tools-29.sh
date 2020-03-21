@@ -8,6 +8,6 @@ cd "$S"
 patch -Np1 -i "$FILESDIR/wireless_tools-29-fix_iwlist_scanning-1.patch"
 
 make
-make install PREFIX="${D}/pkg/main/${PKG}.core.${PVR}"
+make install PREFIX="${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

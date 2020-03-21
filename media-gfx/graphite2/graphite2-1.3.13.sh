@@ -9,7 +9,7 @@ sed -i '/cmptest/d' tests/CMakeLists.txt
 
 cd "${T}"
 
-cmake -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} "${CHPATH}/${P}"
+cmake -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVRF} "${CHPATH}/${P}"
 
 make
 make install DESTDIR="${D}"

@@ -10,18 +10,18 @@ sed -i '/install.*STALIBNAME/d' libcap/Makefile
 
 # configure & build
 make
-make install RAISE_SETFCAP=no prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+make install RAISE_SETFCAP=no prefix="${D}/pkg/main/${PKG}.core.${PVRF}"
 
 cd "${D}"
 
-rm -fr "pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX/pkgconfig"
+rm -fr "pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/pkgconfig"
 
-mkdir -p "pkg/main/${PKG}.dev.${PVR}/pkgconfig"
-cat >"pkg/main/${PKG}.dev.${PVR}/pkgconfig/libcap.pc" <<EOF
-prefix=/pkg/main/${PKG}.core.${PVR}
+mkdir -p "pkg/main/${PKG}.dev.${PVRF}/pkgconfig"
+cat >"pkg/main/${PKG}.dev.${PVRF}/pkgconfig/libcap.pc" <<EOF
+prefix=/pkg/main/${PKG}.core.${PVRF}
 exec_prefix=
-libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
-includedir=/pkg/main/${PKG}.dev.${PVR}/include
+libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
+includedir=/pkg/main/${PKG}.dev.${PVRF}/include
 
 Name: libcap
 Description: libcap

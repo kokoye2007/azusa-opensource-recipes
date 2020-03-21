@@ -12,8 +12,8 @@ make
 make install DESTDIR="${D}"
 
 # some pkgs (boost) require icu to have lib & include dirs in core, make symlinks
-ln -snfT "/pkg/main/${PKG}.libs.${PVR}/lib" "${D}/pkg/main/${PKG}.core.${PVR}/lib"
-ln -snfT "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX"
-ln -snfT "/pkg/main/${PKG}.dev.${PVR}/include" "${D}/pkg/main/${PKG}.core.${PVR}/include"
+ln -snfT "/pkg/main/${PKG}.libs.${PVRF}/lib" "${D}/pkg/main/${PKG}.core.${PVRF}/lib"
+ln -snfT "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"
+ln -snfT "/pkg/main/${PKG}.dev.${PVRF}/include" "${D}/pkg/main/${PKG}.core.${PVRF}/include"
 
 finalize

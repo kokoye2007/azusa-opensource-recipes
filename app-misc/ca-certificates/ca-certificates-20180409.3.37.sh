@@ -1,8 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-cd "${D}/pkg/main/${PKG}.core.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}"
 mkdir "certificates"
 
 # copy certificates from local gentoo (should come from nss)

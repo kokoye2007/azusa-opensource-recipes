@@ -12,7 +12,7 @@ cd "${T}"
 
 importpkg ncurses
 
-TERMINFO="/pkg/main/${PKG}.libs.${PVR}/terminfo" doconf213 --with-app-defaults=/etc/X11/app-defaults
+TERMINFO="/pkg/main/${PKG}.libs.${PVRF}/terminfo" doconf213 --with-app-defaults=/etc/X11/app-defaults
 
 make
 make install DESTDIR="${D}"

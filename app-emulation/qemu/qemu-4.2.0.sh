@@ -11,7 +11,7 @@ cd "${T}"
 importpkg media-libs/alsa-lib sys-fs/udev
 export CFLAGS="$CPPFLAGS"
 
-callconf --prefix="/pkg/main/${PKG}.core.${PVR}" --interp-prefix="/pkg/main/${PKG}.mod.${PVR}.%M" --mandir="/pkg/main/${PKG}.doc.${PVR}/man" --docdir="/pkg/main/${PKG}.doc.${PVR}" --libdir=lib$LIB_SUFFIX --sysconfdir=/etc \
+callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --interp-prefix="/pkg/main/${PKG}.mod.${PVRF}.%M" --mandir="/pkg/main/${PKG}.doc.${PVRF}/man" --docdir="/pkg/main/${PKG}.doc.${PVRF}" --libdir=lib$LIB_SUFFIX --sysconfdir=/etc \
 	--audio-drv-list=alsa --enable-malloc-trim \
 	--enable-sdl --enable-sdl-image --enable-xkbcommon --enable-gtk --enable-vte --enable-opengl --enable-virglrenderer
 

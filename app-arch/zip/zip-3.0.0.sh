@@ -7,6 +7,6 @@ acheck
 cd "zip30"
 
 make -f unix/Makefile generic_gcc
-make -f unix/Makefile install prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+make -f unix/Makefile install prefix="${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

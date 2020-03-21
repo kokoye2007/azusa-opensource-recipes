@@ -6,8 +6,8 @@ acheck
 
 cd "${S}"
 
-mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}" "${D}/pkg/main/${PKG}.doc.${PVR}"
-mv -v *.ttf "${D}/pkg/main/${PKG}.fonts.${PVR}"
-mv -v *.TXT *.conf "${D}/pkg/main/${PKG}.doc.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}" "${D}/pkg/main/${PKG}.doc.${PVRF}"
+mv -v *.ttf "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+mv -v *.TXT *.conf "${D}/pkg/main/${PKG}.doc.${PVRF}"
 
 finalize

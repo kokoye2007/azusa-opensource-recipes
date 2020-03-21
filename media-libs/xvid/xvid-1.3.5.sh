@@ -13,6 +13,6 @@ make
 make install DESTDIR="${D}"
 
 # remove static lib
-rm "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libxvidcore.a"
+rm "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libxvidcore.a"
 
 finalize

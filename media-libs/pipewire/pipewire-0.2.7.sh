@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc
+meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc
 
 ninja
 DESTDIR="${D}" ninja install

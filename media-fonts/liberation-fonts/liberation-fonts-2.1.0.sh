@@ -6,7 +6,7 @@ acheck
 
 cd "${S}"
 
-mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}"
-mv -v *.ttf "${D}/pkg/main/${PKG}.fonts.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+mv -v *.ttf "${D}/pkg/main/${PKG}.fonts.${PVRF}"
 
 finalize

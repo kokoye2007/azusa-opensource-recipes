@@ -7,8 +7,8 @@ acheck
 cd "${P}"
 
 MAKEOPTS=(
-	PREFIX="/pkg/main/${PKG}.core.${PVR}"
-	LIBDIR="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
+	PREFIX="/pkg/main/${PKG}.core.${PVRF}"
+	LIBDIR="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 	DESTDIR="${D}"
 )
 

@@ -8,9 +8,9 @@ cd "${P}"
 
 MAKEOPTS=(
 	DESTDIR="${D}"
-	prefix="/pkg/main/${PKG}.core.${PVR}"
-	mandir="/pkg/main/${PKG}.doc.${PVR}/man"
-	docdir="/pkg/main/${PKG}.doc.${PVR}"
+	prefix="/pkg/main/${PKG}.core.${PVRF}"
+	mandir="/pkg/main/${PKG}.doc.${PVRF}/man"
+	docdir="/pkg/main/${PKG}.doc.${PVRF}"
 )
 
 make "${MAKEOPTS[@]}"

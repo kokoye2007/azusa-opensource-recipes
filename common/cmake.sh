@@ -10,7 +10,7 @@ docmake() {
 	export ECM_DIR=/pkg/main/kde-frameworks.extra-cmake-modules.core/share/ECM/cmake
 
 	set -- "$CMAKE_ROOT" \
-		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVR}" \
+		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVRF}" \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \
 		-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}" \

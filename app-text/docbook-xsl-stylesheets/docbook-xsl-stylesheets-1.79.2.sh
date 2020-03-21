@@ -6,18 +6,18 @@ acheck
 
 cd docbook-xsl-${PV}
 
-mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-${PV}"
+mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-${PV}"
 
 cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
 	highlighting html htmlhelp images javahelp lib manpages params  \
 	profiling roundtrip slides template tests tools webhelp website \
 	xhtml xhtml-1_1 xhtml5                                          \
-	"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-${PV}"
+	"${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-${PV}"
 
-ln -s VERSION "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-${PV}/VERSION.xsl"
+ln -s VERSION "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-${PV}/VERSION.xsl"
 
 # generate sgml authority record
-cat >"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-${PV}/.xmlcatalog" <<EOF
+cat >"${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-${PV}/.xmlcatalog" <<EOF
 rewriteSystem https://cdn.docbook.org/release/xsl/${PV}
 rewriteURI https://cdn.docbook.org/release/xsl/${PV}
 rewriteSystem https://cdn.docbook.org/release/xsl/current

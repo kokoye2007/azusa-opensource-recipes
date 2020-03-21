@@ -5,13 +5,13 @@ inherit xmlcatalog
 get http://www.docbook.org/xml/${PV}/docbook-xml-${PV}.zip
 acheck
 
-mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xml-dtd-${PV}"
+mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xml-dtd-${PV}"
 chown -R root.root .
-cp -v -af docbook.cat *.dtd ent/ *.mod "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xml-dtd-${PV}"
+cp -v -af docbook.cat *.dtd ent/ *.mod "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xml-dtd-${PV}"
 
 # generate docbook file
-X="${D}/pkg/main/${PKG}.sgml.${PVR}/docbook-${PV}.xml"
-docbookdir="/pkg/main/${PKG}.sgml.${PVR}/docbook/xml-dtd-${PV}"
+X="${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook-${PV}.xml"
+docbookdir="/pkg/main/${PKG}.sgml.${PVRF}/docbook/xml-dtd-${PV}"
 
 xmlcatalog --noout --create "$X"
 

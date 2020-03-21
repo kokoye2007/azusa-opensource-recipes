@@ -40,12 +40,12 @@ cd "${T}"
 
 # https://doc.qt.io/qt-5/configure-options.html
 CONFIGURE=(
-	-prefix "/pkg/main/${PKG}.core.${PVR}"
-	-headerdir "/pkg/main/${PKG}.dev.${PVR}/include"
-	-libdir "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
-	-plugindir "/pkg/main/${PKG}.libs.${PVR}/plugins"
-	-docdir "/pkg/main/${PKG}.libs.${PVR}/doc"
-	-examplesdir "/pkg/main/${PKG}.doc.${PVR}/examples"
+	-prefix "/pkg/main/${PKG}.core.${PVRF}"
+	-headerdir "/pkg/main/${PKG}.dev.${PVRF}/include"
+	-libdir "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+	-plugindir "/pkg/main/${PKG}.libs.${PVRF}/plugins"
+	-docdir "/pkg/main/${PKG}.libs.${PVRF}/doc"
+	-examplesdir "/pkg/main/${PKG}.doc.${PVRF}/examples"
 	-no-compile-examples
 
 	-platform linux-g++

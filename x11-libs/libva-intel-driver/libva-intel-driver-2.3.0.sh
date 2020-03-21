@@ -11,6 +11,6 @@ make
 make install DESTDIR="${D}"
 
 # rename folder
-mv "${D}/pkg/main/x11-libs.libva.libs".* "${D}/pkg/main/${PKG}.libs.${PVR}"
+mv "${D}/pkg/main/x11-libs.libva.libs".* "${D}/pkg/main/${PKG}.libs.${PVRF}"
 
 finalize

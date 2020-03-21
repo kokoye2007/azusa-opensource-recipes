@@ -15,7 +15,7 @@ CONFIGURE=(
 	--enable-fhs
 	--sysconfdir="/etc"
 	--localstatedir="/var"
-	--with-modulesdir="/pkg/main/${PKG}.mod.${PVR}/samba"
+	--with-modulesdir="/pkg/main/${PKG}.mod.${PVRF}/samba"
 	--with-piddir="/run/${PN}"
 
 	# rpath disable needed?

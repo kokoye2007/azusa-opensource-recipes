@@ -7,12 +7,12 @@ cd "${D}/pkg/main/"
 get https://github.com/handshake-org/${PN}/archive/v${PV}.tar.gz
 acheck
 
-mv "$P" "${PKG}.core.${PVR}"
+mv "$P" "${PKG}.core.${PVRF}"
 rm -f "v${PV}.tar.gz"
 
 importpkg libunbound
 
-cd "${PKG}.core.${PVR}"
+cd "${PKG}.core.${PVRF}"
 
 npm install --production
 

@@ -5,6 +5,6 @@ source "../../common/init.sh"
 get http://distfiles.gentoo.org/distfiles/${P}.tar.gz
 
 make
-make install prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+make install prefix="${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

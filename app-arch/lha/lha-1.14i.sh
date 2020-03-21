@@ -8,9 +8,9 @@ prepare
 
 cd "${T}"
 
-callconf --prefix=/pkg/main/${PKG}.core.${PVR} --sysconfdir=/etc \
-	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib \
-	--mandir=/pkg/main/${PKG}.doc.${PVR}/man
+callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc \
+	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib \
+	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man
 
 make
 make install DESTDIR="${D}"

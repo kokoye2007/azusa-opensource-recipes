@@ -8,7 +8,7 @@ dowaf() {
 	# can only build from source
 	cd "${S}"
 
-	CCFLAGS="${CPPFLAGS} -O2" LINKFLAGS="${LDFLAGS}" "$WAF_BINARY" --prefix="/pkg/main/${PKG}.core.${PVR}" "$@" configure
+	CCFLAGS="${CPPFLAGS} -O2" LINKFLAGS="${LDFLAGS}" "$WAF_BINARY" --prefix="/pkg/main/${PKG}.core.${PVRF}" "$@" configure
 
 	echo "Running waf build"
 	"$WAF_BINARY" --jobs="$NPROC"

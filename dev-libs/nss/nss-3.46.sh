@@ -17,20 +17,20 @@ mkdir Release/bin-test
 mv Release/bin/*_gtest Release/bin-test
 rm Release/lib/*.TOC
 mkdir -p "${D}/pkg/main/"
-mv Release "${D}/pkg/main/${PKG}.core.${PVR}"
-mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}"
-mv -T public "${D}/pkg/main/${PKG}.dev.${PVR}/include"
-mv -T private "${D}/pkg/main/${PKG}.dev.${PVR}/include/nss/private"
+mv Release "${D}/pkg/main/${PKG}.core.${PVRF}"
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}"
+mv -T public "${D}/pkg/main/${PKG}.dev.${PVRF}/include"
+mv -T private "${D}/pkg/main/${PKG}.dev.${PVRF}/include/nss/private"
 
 # build NSS pkgconfig ourselves since nss doesn't know where it gets installed
 
-mkdir "${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig"
+mkdir "${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig"
 
-cat >"${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/nss.pc" <<EOF
-prefix=/pkg/main/${PKG}.core.${PVR}
+cat >"${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/nss.pc" <<EOF
+prefix=/pkg/main/${PKG}.core.${PVRF}
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib$LIB_SUFFIX
-includedir=/pkg/main/${PKG}.dev.${PVR}/include/nss
+includedir=/pkg/main/${PKG}.dev.${PVRF}/include/nss
 
 Name: NSS
 Description: Network Security Services
@@ -40,11 +40,11 @@ Libs: -L\${libdir} -lssl3 -lsmime3 -lnss3 -lnssutil3
 Cflags: -I\${includedir}
 EOF
 
-cat >"${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/nss-softokn.pc" <<EOF
-prefix=/pkg/main/${PKG}.core.${PVR}
+cat >"${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/nss-softokn.pc" <<EOF
+prefix=/pkg/main/${PKG}.core.${PVRF}
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib$LIB_SUFFIX
-includedir=/pkg/main/${PKG}.dev.${PVR}/include/nss
+includedir=/pkg/main/${PKG}.dev.${PVRF}/include/nss
 
 Name: NSS
 Description: Network Security Services

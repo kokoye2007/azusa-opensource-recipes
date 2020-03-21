@@ -8,7 +8,7 @@ cd "${T}"
 export VAPIGEN=vapigen-0.40
 export VALAC=valac-0.40
 
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Dvapi=enabled -Dgssapi=disabled "${CHPATH}/${P}"
+meson --prefix="/pkg/main/${PKG}.core.${PVRF}" -Dvapi=enabled -Dgssapi=disabled "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

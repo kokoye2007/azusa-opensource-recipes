@@ -9,9 +9,9 @@ acheck
 cd "${S}"
 
 cat >qwtconfig.pri <<-EOF
-QWT_INSTALL_LIBS = "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
-QWT_INSTALL_HEADERS = "/pkg/main/${PKG}.dev.${PVR}/include/qwt6"
-QWT_INSTALL_DOCS = "/pkg/main/${PKG}.doc.${PVR}"
+QWT_INSTALL_LIBS = "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+QWT_INSTALL_HEADERS = "/pkg/main/${PKG}.dev.${PVRF}/include/qwt6"
+QWT_INSTALL_DOCS = "/pkg/main/${PKG}.doc.${PVRF}"
 QWT_CONFIG += QwtPlot QwtWidgets QwtPkgConfig
 VERSION = ${PV/_*}
 QWT_VERSION = ${PV/_*}
@@ -22,8 +22,8 @@ QWT_CONFIG += QwtSvg
 QWT_CONFIG += qt warn_on thread release no_keywords
 QWT_CONFIG += QwtDll
 
-QWT_INSTALL_PLUGINS = "/pkg/main/${PKG}.data.designer.${PVR}"
-QWT_INSTALL_FEATURES = "/pkg/main/${PKG}.data.features.${PVR}"
+QWT_INSTALL_PLUGINS = "/pkg/main/${PKG}.data.designer.${PVRF}"
+QWT_INSTALL_FEATURES = "/pkg/main/${PKG}.data.features.${PVRF}"
 EOF
 
 sed \

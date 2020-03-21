@@ -29,8 +29,8 @@ make install DESTDIR="/"
 organize
 
 echo "Running dot -c"
-"${D}/pkg/main/${PKG}.core.${PVR}/bin/dot" -c
-#mkdir -p "${D}/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/graphviz/"
-mv -v "/.pkg-main-rw/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/graphviz/config"* "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/graphviz/"
+"${D}/pkg/main/${PKG}.core.${PVRF}/bin/dot" -c
+#mkdir -p "${D}/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
+mv -v "/.pkg-main-rw/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/config"* "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
 
 archive

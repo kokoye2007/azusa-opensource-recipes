@@ -7,11 +7,11 @@ acheck
 
 cd "${S}"
 
-mkdir -pv "${D}/pkg/main/${PKG}.fonts.${PVR}/ttf" "${D}/pkg/main/${PKG}.doc.${PVR}/"
+mkdir -pv "${D}/pkg/main/${PKG}.fonts.${PVRF}/ttf" "${D}/pkg/main/${PKG}.doc.${PVRF}/"
 
-cp -v *.ttf "${D}/pkg/main/${PKG}.fonts.${PVR}/ttf"
+cp -v *.ttf "${D}/pkg/main/${PKG}.fonts.${PVRF}/ttf"
 
 # copy readme, convert to UTF-8
-cat readme.txt | iconv -f SJIS -t UTF-8 > "${D}/pkg/main/${PKG}.doc.${PVR}/readme.txt"
+cat readme.txt | iconv -f SJIS -t UTF-8 > "${D}/pkg/main/${PKG}.doc.${PVRF}/readme.txt"
 
 finalize

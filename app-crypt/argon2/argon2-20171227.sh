@@ -7,6 +7,6 @@ acheck
 cd "phc-winner-argon2-${PV}"
 
 make
-make install DESTDIR="${D}" PREFIX="/pkg/main/${PKG}.core.${PVR}" LIBRARY_REL=lib$LIB_PREFIX
+make install DESTDIR="${D}" PREFIX="/pkg/main/${PKG}.core.${PVRF}" LIBRARY_REL=lib$LIB_PREFIX
 
 finalize

@@ -8,16 +8,16 @@ patch -Np1 -i "$FILESDIR/sysvinit-2.94-consolidated-4.patch"
 
 
 make
-make install ROOT="${D}/pkg/main/${PKG}.core.${PVR}"
+make install ROOT="${D}/pkg/main/${PKG}.core.${PVRF}"
 
 cd "${D}"
 # move stuff around
-mkdir "pkg/main/${PKG}.doc.${PVR}"
-mkdir "pkg/main/${PKG}.dev.${PVR}"
-mv "pkg/main/${PKG}.core.${PVR}/usr/share/man" "pkg/main/${PKG}.doc.${PVR}"
-rmdir "pkg/main/${PKG}.core.${PVR}/usr/share"
-mv "pkg/main/${PKG}.core.${PVR}/usr/include" "pkg/main/${PKG}.dev.${PVR}"
-rmdir "pkg/main/${PKG}.core.${PVR}/usr/bin"
-rmdir "pkg/main/${PKG}.core.${PVR}/usr"
+mkdir "pkg/main/${PKG}.doc.${PVRF}"
+mkdir "pkg/main/${PKG}.dev.${PVRF}"
+mv "pkg/main/${PKG}.core.${PVRF}/usr/share/man" "pkg/main/${PKG}.doc.${PVRF}"
+rmdir "pkg/main/${PKG}.core.${PVRF}/usr/share"
+mv "pkg/main/${PKG}.core.${PVRF}/usr/include" "pkg/main/${PKG}.dev.${PVRF}"
+rmdir "pkg/main/${PKG}.core.${PVRF}/usr/bin"
+rmdir "pkg/main/${PKG}.core.${PVRF}/usr"
 
 finalize

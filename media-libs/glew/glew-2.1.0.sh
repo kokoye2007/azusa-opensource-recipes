@@ -36,7 +36,7 @@ MAKEOPTS=(
 	POPT="${CPPFLAGS} -O2"
 )
 
-make "${MAKEOPTS[@]}" GLEW_PREFIX="/pkg/main/${PKG}.core.${PVR}" GLEW_DEST="/pkg/main/${PKG}.core.${PVR}" LIBDIR="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
-make "${MAKEOPTS[@]}" install.all GLEW_DEST="${D}/pkg/main/${PKG}.core.${PVR}" LIBDIR="${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" PKGDIR="${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig"
+make "${MAKEOPTS[@]}" GLEW_PREFIX="/pkg/main/${PKG}.core.${PVRF}" GLEW_DEST="/pkg/main/${PKG}.core.${PVRF}" LIBDIR="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+make "${MAKEOPTS[@]}" install.all GLEW_DEST="${D}/pkg/main/${PKG}.core.${PVRF}" LIBDIR="${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" PKGDIR="${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig"
 
 finalize

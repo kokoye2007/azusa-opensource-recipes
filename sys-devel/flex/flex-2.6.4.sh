@@ -13,6 +13,6 @@ make
 make install DESTDIR="${D}"
 
 # create a lex → flex symlink
-ln -snf flex "${D}/pkg/main/${PKG}.core.${PVR}/bin/lex"
+ln -snf flex "${D}/pkg/main/${PKG}.core.${PVRF}/bin/lex"
 
 finalize

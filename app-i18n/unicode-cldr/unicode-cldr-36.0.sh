@@ -9,7 +9,7 @@ fi
 
 get "$SRC_URI"
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/share/unicode/cldr"
-mv common "${D}/pkg/main/${PKG}.core.${PVR}/share/unicode/cldr"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/share/unicode/cldr"
+mv common "${D}/pkg/main/${PKG}.core.${PVRF}/share/unicode/cldr"
 
 archive

@@ -12,6 +12,6 @@ make
 make install DESTDIR="${D}"
 
 # create a symlink to /pkg/main/x11-misc.xkeyboard-config.core/share since somehow X11 will look for xkb rules here
-ln -snfTv /pkg/main/x11-misc.xkeyboard-config.core/share "${D}/pkg/main/${PKG}.core.${PVR}/share"
+ln -snfTv /pkg/main/x11-misc.xkeyboard-config.core/share "${D}/pkg/main/${PKG}.core.${PVRF}/share"
 
 finalize

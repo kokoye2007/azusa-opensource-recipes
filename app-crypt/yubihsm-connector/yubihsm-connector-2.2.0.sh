@@ -8,7 +8,7 @@ cd "${P}"
 
 make
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/bin"
-install bin/yubihsm-connector "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
+install bin/yubihsm-connector "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 
 finalize

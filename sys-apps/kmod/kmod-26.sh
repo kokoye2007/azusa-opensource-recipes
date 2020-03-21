@@ -14,7 +14,7 @@ make
 make install DESTDIR="${D}"
 
 # fix kmod
-cd "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 ln -snfv kmod lsmod
 mkdir ../sbin
 cd ../sbin

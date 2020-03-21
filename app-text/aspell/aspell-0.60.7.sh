@@ -11,7 +11,7 @@ make
 make install DESTDIR="${D}"
 
 cd "${CHPATH}/${P}"
-install -v -m 755 scripts/ispell "${D}/pkg/main/${PKG}.core.${PVR}/bin/"
-install -v -m 755 scripts/spell "${D}/pkg/main/${PKG}.core.${PVR}/bin/"
+install -v -m 755 scripts/ispell "${D}/pkg/main/${PKG}.core.${PVRF}/bin/"
+install -v -m 755 scripts/spell "${D}/pkg/main/${PKG}.core.${PVRF}/bin/"
 
 finalize

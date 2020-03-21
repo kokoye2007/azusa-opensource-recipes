@@ -15,6 +15,6 @@ doconf --sysconfdir=/etc --disable-static
 make
 make install DESTDIR="${D}"
 
-install -vm755 "$FILESDIR/run-parts" "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+install -vm755 "$FILESDIR/run-parts" "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 
 finalize

@@ -12,16 +12,16 @@ make -j"$NPROC"
 make test
 
 # doesn't have install script
-install -vd "${D}/pkg/main/${PKG}.dev.${PVR}/include"
-cp -rvT glm "${D}/pkg/main/${PKG}.dev.${PVR}/include/glm"
+install -vd "${D}/pkg/main/${PKG}.dev.${PVRF}/include"
+cp -rvT glm "${D}/pkg/main/${PKG}.dev.${PVRF}/include/glm"
 
-install -v -d "${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/"
+install -v -d "${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/"
 
-install -vd "${D}/pkg/main/${PKG}.doc.${PVR}"
-install -v readme.md manual.md "${D}/pkg/main/${PKG}.doc.${PVR}"
+install -vd "${D}/pkg/main/${PKG}.doc.${PVRF}"
+install -v readme.md manual.md "${D}/pkg/main/${PKG}.doc.${PVRF}"
 
-cat >>"${D}/pkg/main/${PKG}.dev.${PVR}/pkgconfig/glm.pc" <<EOF
-prefix=/pkg/main/${PKG}.dev.${PVR}
+cat >>"${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/glm.pc" <<EOF
+prefix=/pkg/main/${PKG}.dev.${PVRF}
 includedir=\${prefix}/include
 
 Name: GLM

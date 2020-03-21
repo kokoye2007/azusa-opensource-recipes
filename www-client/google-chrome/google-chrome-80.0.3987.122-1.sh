@@ -14,17 +14,17 @@ rm -r etc
 
 # move language packs to separate packages (+symlinks)
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-mv usr/* "${D}/pkg/main/${PKG}.core.${PVR}"
-mv opt/google/chrome "${D}/pkg/main/${PKG}.core.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+mv usr/* "${D}/pkg/main/${PKG}.core.${PVRF}"
+mv opt/google/chrome "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 # set suid bit on chrome-sandbox, and limit to +x
-chmod -v 04711 "${D}/pkg/main/${PKG}.core.${PVR}/chrome/chrome-sandbox"
+chmod -v 04711 "${D}/pkg/main/${PKG}.core.${PVRF}/chrome/chrome-sandbox"
 
-cd "${D}/pkg/main/${PKG}.core.${PVR}"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}"
 rm bin/google-chrome-stable
 
-ln -s /pkg/main/${PKG}.core.${PVR}/chrome/google-chrome bin/google-chrome-stable
+ln -s /pkg/main/${PKG}.core.${PVRF}/chrome/google-chrome bin/google-chrome-stable
 
 # ...
 

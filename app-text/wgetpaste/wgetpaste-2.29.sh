@@ -9,7 +9,7 @@ cd "${S}"
 PATCHES=( "${FILESDIR}/${P}-fix-bpaste.patch" )
 apatch "${PATCHES[@]}"
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/bin"
-mv "${PN}" "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
+mv "${PN}" "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 
 finalize

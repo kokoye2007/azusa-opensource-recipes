@@ -68,7 +68,7 @@ ac_add_options --with-system-harfbuzz
 ac_add_options --disable-debug-symbols
 
 # The BLFS editors recommend not changing anything below this line:
-ac_add_options --prefix=/pkg/main/${PKG}.core.${PVR}
+ac_add_options --prefix=/pkg/main/${PKG}.core.${PVRF}
 ac_add_options --enable-application=browser
 
 # The elf-hack is reported to cause failed installs (after successful builds)
@@ -120,6 +120,6 @@ export SHELL=/bin/sh
 ./mach install
 
 mkdir -p "${D}/pkg/main"
-mv /.pkg-main-rw/${PKG}.core.${PVR} "${D}/pkg/main/${PKG}.core.${PVR}"
+mv /.pkg-main-rw/${PKG}.core.${PVRF} "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

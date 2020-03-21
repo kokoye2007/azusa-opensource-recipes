@@ -7,7 +7,7 @@ acheck
 
 cd "${S}"
 
-mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}"
-cp -r ttf fontconfig "${D}/pkg/main/${PKG}.fonts.${PVR}/"
+mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+cp -r ttf fontconfig "${D}/pkg/main/${PKG}.fonts.${PVRF}/"
 
 finalize

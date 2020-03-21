@@ -27,7 +27,7 @@ docs = false
 extended = true
 
 [install]
-prefix = "/pkg/main/${PKG}.core.${PVR}"
+prefix = "/pkg/main/${PKG}.core.${PVRF}"
 
 [rust]
 channel = "stable"
@@ -61,7 +61,7 @@ export LIBGIT2_SYS_USE_PKG_CONFIG=1
 
 # to avoid errors such as
 # thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48
-mkdir -p "/pkg/main/${PKG}.core.${PVR}"
+mkdir -p "/pkg/main/${PKG}.core.${PVRF}"
 
 python3 ./x.py build --exclude src/tools/miri
 
@@ -71,6 +71,6 @@ unset LIBSSH2_SYS_USE_PKG_CONFIG
 
 # move path to D for packaging
 mkdir -p "${D}/pkg/main"
-mv "/.pkg-main-rw/${PKG}.core.${PVR}" "${D}/pkg/main/${PKG}.core.${PVR}"
+mv "/.pkg-main-rw/${PKG}.core.${PVRF}" "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

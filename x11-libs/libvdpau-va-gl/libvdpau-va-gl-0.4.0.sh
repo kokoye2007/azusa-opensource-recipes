@@ -5,7 +5,7 @@ get https://github.com/i-rinat/libvdpau-va-gl/archive/v${PV}/${P}.tar.gz
 
 cd "${T}"
 
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} "${CHPATH}/${P}"
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVRF} "${CHPATH}/${P}"
 
 make
 make install DESTDIR="${D}"

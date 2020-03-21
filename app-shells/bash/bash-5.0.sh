@@ -16,7 +16,7 @@ make
 make install DESTDIR="${D}"
 
 # add sh symlink
-cd "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 ln -snf bash sh
 
 finalize

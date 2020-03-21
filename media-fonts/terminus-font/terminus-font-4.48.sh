@@ -6,7 +6,7 @@ acheck
 
 cd "${P}"
 
-callconf --prefix=/pkg/main/${PKG}.fonts.${PVR} --psfdir=/pkg/main/${PKG}.fonts.${PVR}/consolefonts --x11dir=/pkg/main/${PKG}.fonts.${PVR}/X11
+callconf --prefix=/pkg/main/${PKG}.fonts.${PVRF} --psfdir=/pkg/main/${PKG}.fonts.${PVRF}/consolefonts --x11dir=/pkg/main/${PKG}.fonts.${PVRF}/X11
 
 make -j"$NPROC"
 make install fontdir DESTDIR="${D}"

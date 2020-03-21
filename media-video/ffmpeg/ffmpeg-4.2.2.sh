@@ -8,9 +8,9 @@ cd "${T}"
 
 importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug icu-uc
 
-callconf --prefix=/pkg/main/${PKG}.core.${PVR} \
-	--libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \
-	--mandir=/pkg/main/${PKG}.doc.${PVR}/man --docdir=/pkg/main/${PKG}.doc.${PVR}/doc \
+callconf --prefix=/pkg/main/${PKG}.core.${PVRF} \
+	--libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
+	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/doc \
 	--enable-gpl --enable-nonfree \
 	--enable-shared --disable-static \
 	--enable-avisynth --enable-gmp --enable-version3 --enable-gcrypt --enable-openssl --enable-libgsm --enable-libmp3lame --enable-libmodplug \

@@ -14,9 +14,9 @@ doconf
 make
 make install DESTDIR="${D}"
 
-#mkdir -p "${D}/pkg/main/${PKG}.doc.${PVR}/html/images"
+#mkdir -p "${D}/pkg/main/${PKG}.doc.${PVRF}/html/images"
 
-#install -v -m644 docs/*.{css,html} "${D}/pkg/main/${PKG}.doc.${PVR}/html"
-#install -v -m644 docs/images/*.{png,ico,svg} "${D}/pkg/main/${PKG}.doc.${PVR}/html/images"
+#install -v -m644 docs/*.{css,html} "${D}/pkg/main/${PKG}.doc.${PVRF}/html"
+#install -v -m644 docs/images/*.{png,ico,svg} "${D}/pkg/main/${PKG}.doc.${PVRF}/html/images"
 
 finalize

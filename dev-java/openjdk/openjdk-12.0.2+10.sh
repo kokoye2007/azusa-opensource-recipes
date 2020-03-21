@@ -50,11 +50,11 @@ make images
 #    test/jdk:tier1 test/langtools:tier1
 #unset JT_JAVA
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-cp -Rv build/*/images/jdk/* "${D}/pkg/main/${PKG}.core.${PVR}"
-#chown -R root:root "${D}/pkg/main/${PKG}.core.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+cp -Rv build/*/images/jdk/* "${D}/pkg/main/${PKG}.core.${PVRF}"
+#chown -R root:root "${D}/pkg/main/${PKG}.core.${PVRF}"
 for s in 16 24 32 48; do
-	install -vDm644 src/java.desktop/unix/classes/sun/awt/X11/java-icon${s}.png "${D}/pkg/main/${PKG}.core.${PVR}/share/icons/hicolor/${s}x${s}/apps/java.png"
+	install -vDm644 src/java.desktop/unix/classes/sun/awt/X11/java-icon${s}.png "${D}/pkg/main/${PKG}.core.${PVRF}/share/icons/hicolor/${s}x${s}/apps/java.png"
 done
 
 finalize

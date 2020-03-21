@@ -11,9 +11,9 @@ cd lsof_${PV}_src
 ./Configure -n linux
 make CFGL="-L./lib -ltirpc"
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/bin" "${D}/pkg/main/${PKG}.doc.${PVR}/man/man8"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin" "${D}/pkg/main/${PKG}.doc.${PVRF}/man/man8"
 
-install -v -m0755 lsof "${D}/pkg/main/${PKG}.core.${PVR}/bin"
-install -v lsof.8 "${D}/pkg/main/${PKG}.doc.${PVR}/man/man8"
+install -v -m0755 lsof "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
+install -v lsof.8 "${D}/pkg/main/${PKG}.doc.${PVRF}/man/man8"
 
 finalize

@@ -23,9 +23,9 @@ AUXLIBS_PCRE="$(pcre-config --libs)"
 AUXLIBS_PGSQL="-L$(pg_config --libdir) -lpq"
 AUXLIBS_SQLITE="-lsqlite3 -lpthread"
 
-make makefiles shared=yes dynamicmaps=no pie=yes shlib_directory="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/postfix/MAIL_VERSION" DEBUG="" OPT="-O2 ${CPPFLAGS}" CFLAGS="-O2 ${CPPFLAGS}" CCARGS="$CFLAGS" AUXLIBS="$LIBS" AUXLIBS_LMDB="${AUXLIBS_LMDB}" AUXLIBS_MYSQL="${AUXLIBS_MYSQL}" AUXLIBS_PCRE="${AUXLIBS_PCRE}" AUXLIBS_PGSQL="${AUXLIBS_PGSQL}" AUXLIBS_SQLITE="${AUXLIBS_SQLITE}"
+make makefiles shared=yes dynamicmaps=no pie=yes shlib_directory="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/postfix/MAIL_VERSION" DEBUG="" OPT="-O2 ${CPPFLAGS}" CFLAGS="-O2 ${CPPFLAGS}" CCARGS="$CFLAGS" AUXLIBS="$LIBS" AUXLIBS_LMDB="${AUXLIBS_LMDB}" AUXLIBS_MYSQL="${AUXLIBS_MYSQL}" AUXLIBS_PCRE="${AUXLIBS_PCRE}" AUXLIBS_PGSQL="${AUXLIBS_PGSQL}" AUXLIBS_SQLITE="${AUXLIBS_SQLITE}"
 make
-make install install_root="${D}" config_directory="/etc/postfix" manpage_directory="/pkg/main/${PKG}.doc.${PVR}/man" command_directory="/pkg/main/${PKG}.core.${PVR}/sbin" mailq_path="/pkg/main/${PKG}.core.${PVR}/bin/mailq" newaliases_path="/pkg/main/${PKG}.core.${PVR}/bin/newaliases" sendmail_path="/pkg/main/${PKG}.core.${PVR}/bin/sendmail"
-mv -v "${D}/etc/postfix" "/pkg/main/${PKG}.doc.${PVR}/etc"
+make install install_root="${D}" config_directory="/etc/postfix" manpage_directory="/pkg/main/${PKG}.doc.${PVRF}/man" command_directory="/pkg/main/${PKG}.core.${PVRF}/sbin" mailq_path="/pkg/main/${PKG}.core.${PVRF}/bin/mailq" newaliases_path="/pkg/main/${PKG}.core.${PVRF}/bin/newaliases" sendmail_path="/pkg/main/${PKG}.core.${PVRF}/bin/sendmail"
+mv -v "${D}/etc/postfix" "/pkg/main/${PKG}.doc.${PVRF}/etc"
 
 finalize

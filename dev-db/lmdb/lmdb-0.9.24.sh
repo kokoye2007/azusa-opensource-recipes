@@ -9,6 +9,6 @@ cd "lmdb-LMDB_${PV}/libraries/liblmdb"
 make
 sed -i 's| liblmdb.a||' Makefile
 
-make prefix="${D}/pkg/main/${PKG}.core.${PVR}" install
+make prefix="${D}/pkg/main/${PKG}.core.${PVRF}" install
 
 finalize

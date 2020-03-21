@@ -16,12 +16,12 @@ importpkg sys-apps/util-linux
 make bios efi32 efi64 installer install \
 	CC="gcc $CPPFLAGS $LDFLAGS" \
 	INSTALLROOT="${D}" \
-	BINDIR="/pkg/main/${PKG}.core.${PVR}/bin" \
-	SBINDIR="/pkg/main/${PKG}.core.${PVR}/sbin" \
-	LIBDIR="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" \
-	DATADIR="/pkg/main/${PKG}.core.${PVR}/share" \
-	MANDIR="/pkg/main/${PKG}.doc.${PVR}/man" \
-	INCDIR="/pkg/main/${PKG}.dev.${PVR}/include" \
-	TFTPBOOT="/pkg/main/${PKG}.core.${PVR}/tftpboot"
+	BINDIR="/pkg/main/${PKG}.core.${PVRF}/bin" \
+	SBINDIR="/pkg/main/${PKG}.core.${PVRF}/sbin" \
+	LIBDIR="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" \
+	DATADIR="/pkg/main/${PKG}.core.${PVRF}/share" \
+	MANDIR="/pkg/main/${PKG}.doc.${PVRF}/man" \
+	INCDIR="/pkg/main/${PKG}.dev.${PVRF}/include" \
+	TFTPBOOT="/pkg/main/${PKG}.core.${PVRF}/tftpboot"
 
 finalize

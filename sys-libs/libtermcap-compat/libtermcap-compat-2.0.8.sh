@@ -14,13 +14,13 @@ acheck
 
 make CFLAGS="-O2 -I."
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/lib$LIB_SUFFIX"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"
 if [ x"$LIB_SUFFIX" != x ]; then
-	ln -snfv "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVR}/lib"
+	ln -snfv "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib"
 fi
-make install prefix="${D}/pkg/main/${PKG}.core.${PVR}"
+make install prefix="${D}/pkg/main/${PKG}.core.${PVRF}"
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/etc"
-cp -v termcap "${D}/pkg/main/${PKG}.core.${PVR}/etc"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/etc"
+cp -v termcap "${D}/pkg/main/${PKG}.core.${PVRF}/etc"
 
 finalize

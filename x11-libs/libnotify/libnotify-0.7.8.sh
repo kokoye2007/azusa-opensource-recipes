@@ -9,7 +9,7 @@ importpkg zlib
 cd "${T}"
 
 # TODO fix docbook_docs building (xml-to)
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}"
+meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

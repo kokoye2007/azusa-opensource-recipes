@@ -7,7 +7,7 @@ acheck
 cd "${T}"
 
 # override prefix to solve pkg-config issue
-doconf --prefix="/pkg/main/${PKG}.dev.${PVR}"
+doconf --prefix="/pkg/main/${PKG}.dev.${PVRF}"
 
 make
 make install DESTDIR="${D}"

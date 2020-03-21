@@ -52,13 +52,13 @@ make
 make install DESTDIR="${D}"
 
 # move xorg modules
-mkdir -vp "${D}/pkg/main/${PKG}.mod.${PVR}/lib$LIB_SUFFIX/xorg"
-mv -vT "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/xorg/modules" "${D}/pkg/main/${PKG}.mod.${PVR}/lib$LIB_SUFFIX/xorg/modules"
-ln -snfTv "/pkg/main/${PKG}-modules.libs.${PVR}/lib$LIB_SUFFIX/xorg/modules" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/xorg/modules"
+mkdir -vp "${D}/pkg/main/${PKG}.mod.${PVRF}/lib$LIB_SUFFIX/xorg"
+mv -vT "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/xorg/modules" "${D}/pkg/main/${PKG}.mod.${PVRF}/lib$LIB_SUFFIX/xorg/modules"
+ln -snfTv "/pkg/main/${PKG}-modules.libs.${PVRF}/lib$LIB_SUFFIX/xorg/modules" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/xorg/modules"
 
 # move config
-mkdir -p "${D}/pkg/main/${PKG}.mod.${PVR}/share"
-mv -vT "${D}/pkg/main/${PKG}.core.${PVR}/share/X11" "${D}/pkg/main/${PKG}.mod.${PVR}/share/X11"
-ln -snfTv "/pkg/main/${PKG}-modules.libs.${PVR}/share/X11" "${D}/pkg/main/${PKG}.mod.${PVR}/share/X11"
+mkdir -p "${D}/pkg/main/${PKG}.mod.${PVRF}/share"
+mv -vT "${D}/pkg/main/${PKG}.core.${PVRF}/share/X11" "${D}/pkg/main/${PKG}.mod.${PVRF}/share/X11"
+ln -snfTv "/pkg/main/${PKG}-modules.libs.${PVRF}/share/X11" "${D}/pkg/main/${PKG}.mod.${PVRF}/share/X11"
 
 finalize

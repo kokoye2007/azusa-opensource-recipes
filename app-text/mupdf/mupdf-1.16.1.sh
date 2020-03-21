@@ -12,7 +12,7 @@ apatch $FILESDIR/${P}-*.patch
 
 USE_SYSTEM_LIBS=yes make
 
-make DESTDIR="${D}" prefix="/pkg/main/${PKG}.core.${PVR}" build=release docdir="/pkg/main/${PKG}.doc.${PVR}" install
-ln -sfv mupdf-x11 "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+make DESTDIR="${D}" prefix="/pkg/main/${PKG}.core.${PVRF}" build=release docdir="/pkg/main/${PKG}.doc.${PVRF}" install
+ln -sfv mupdf-x11 "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 
 finalize

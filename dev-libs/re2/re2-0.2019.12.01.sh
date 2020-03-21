@@ -13,8 +13,8 @@ cd "${S}"
 MAKEPARAMS=(
 	SONAME="azusa-${PV}"
 	DESTDIR="${D}"
-	prefix="/pkg/main/${PKG}.core.${PVR}"
-	libdir="/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX"
+	prefix="/pkg/main/${PKG}.core.${PVRF}"
+	libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 )
 
 make ${MAKEPARAMS[@]}

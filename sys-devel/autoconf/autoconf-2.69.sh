@@ -13,7 +13,7 @@ make
 make install DESTDIR="${D}"
 
 for foo in autom4te autoconf autoheader autoreconf ifnames autoscan autoupdate; do
-	ln -snfv "$foo-$PV" "${D}/pkg/main/${PKG}.core.${PVR}/bin/$foo"
+	ln -snfv "$foo-$PV" "${D}/pkg/main/${PKG}.core.${PVRF}/bin/$foo"
 done
 
 finalize

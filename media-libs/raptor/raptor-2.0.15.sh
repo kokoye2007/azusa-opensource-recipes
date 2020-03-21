@@ -9,7 +9,7 @@ acheck
 
 cd "${T}"
 
-doconf --with-www=curl --with-html-dir="/pkg/main/${PKG}.doc.${PVR}/html" --with-yajl --disable-static --with-icu-config=/bin/icu-config
+doconf --with-www=curl --with-html-dir="/pkg/main/${PKG}.doc.${PVRF}/html" --with-yajl --disable-static --with-icu-config=/bin/icu-config
 
 make
 make install DESTDIR="${D}"

@@ -13,7 +13,7 @@ cd "${T}"
 importpkg dev-libs/libgcrypt
 
 # TODO fix man
-meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVR}
+meson "${CHPATH}/${P}" --prefix=/pkg/main/${PKG}.core.${PVRF}
 
 ninja
 DESTDIR="${D}" ninja install

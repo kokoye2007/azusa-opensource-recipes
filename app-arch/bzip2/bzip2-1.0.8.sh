@@ -22,20 +22,20 @@ make
 mkdir -p ${D}/work
 make install PREFIX="${D}/work"
 
-mkdir -p $D/pkg/main/${PKG}.{libs,core,dev,doc}.${PVR}
+mkdir -p $D/pkg/main/${PKG}.{libs,core,dev,doc}.${PVRF}
 
 # shared libs
-mkdir $D/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
-cp -a libbz2.so* $D/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+mkdir $D/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
+cp -a libbz2.so* $D/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
 
 # extra lib symlinks
-ln -snf libbz2.so.${PV} "$D/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libbz2.so"
-ln -snf libbz2.so.${PV} "$D/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libbz2.so.1"
+ln -snf libbz2.so.${PV} "$D/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libbz2.so"
+ln -snf libbz2.so.${PV} "$D/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libbz2.so.1"
 
 # copy stuff
 cd $D
-mv work/bin pkg/main/${PKG}.core.${PVR}/
-mv work/man pkg/main/${PKG}.doc.${PVR}/
-mv work/include pkg/main/${PKG}.dev.${PVR}/
+mv work/bin pkg/main/${PKG}.core.${PVRF}/
+mv work/man pkg/main/${PKG}.doc.${PVRF}/
+mv work/include pkg/main/${PKG}.dev.${PVRF}/
 
 finalize

@@ -8,9 +8,9 @@ importpkg ncurses
 
 cd "${P}"
 
-export HACKDIR="/pkg/main/${PKG}.core.${PVR}/nethack"
+export HACKDIR="/pkg/main/${PKG}.core.${PVRF}/nethack"
 export INSTDIR="${D}$HACKDIR"
-export SHELLDIR="${D}/pkg/main/${PKG}.core.${PVR}/bin"
+export SHELLDIR="${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 export VARDIR="/var/games/nethack"
 export CC=gcc
 export WINTTYLIB="$(pkg-config --libs ncurses)"
@@ -32,7 +32,7 @@ mkdir -pv "$SHELLDIR"
 
 make install
 
-mkdir "${D}/pkg/main/${PKG}.core.${PVR}/etc"
-cp sys/unix/sysconf "${D}/pkg/main/${PKG}.core.${PVR}/etc/nethack.sysconf"
+mkdir "${D}/pkg/main/${PKG}.core.${PVRF}/etc"
+cp sys/unix/sysconf "${D}/pkg/main/${PKG}.core.${PVRF}/etc/nethack.sysconf"
 
 finalize

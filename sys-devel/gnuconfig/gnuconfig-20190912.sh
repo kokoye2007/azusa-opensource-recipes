@@ -6,9 +6,9 @@ acheck
 
 apatch *.patch
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}/share/${PN}"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/share/${PN}"
 
-cp config.{sub,guess} "${D}/pkg/main/${PKG}.core.${PVR}/share/${PN}"
-chmod +x "${D}/pkg/main/${PKG}.core.${PVR}/share/${PN}"/config.{sub,guess}
+cp config.{sub,guess} "${D}/pkg/main/${PKG}.core.${PVRF}/share/${PN}"
+chmod +x "${D}/pkg/main/${PKG}.core.${PVRF}/share/${PN}"/config.{sub,guess}
 
 finalize

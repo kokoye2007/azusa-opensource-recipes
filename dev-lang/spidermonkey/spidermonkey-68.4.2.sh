@@ -5,8 +5,8 @@ get http://ftp.gnome.org/pub/gnome/teams/releng/tarballs-needing-help/mozjs/mozj
 
 cd "${T}"
 
-"${S}/js/src/configure" --prefix=/pkg/main/${PKG}.core.${PVR} \
-	--includedir=/pkg/main/${PKG}.dev.${PVR}/include --libdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX \
+"${S}/js/src/configure" --prefix=/pkg/main/${PKG}.core.${PVRF} \
+	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
 	--with-intl-api --with-system-zlib --with-system-icu --disable-jemalloc --enable-readline
 
 make

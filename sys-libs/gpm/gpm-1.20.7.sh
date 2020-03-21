@@ -34,7 +34,7 @@ make
 make install DESTDIR="${D}"
 
 # make symlink
-ln -snf libgpm.so.1.20.0 "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libgpm.so"
+ln -snf libgpm.so.1.20.0 "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libgpm.so"
 
 ls -laR "${D}"
 

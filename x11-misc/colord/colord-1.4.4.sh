@@ -8,7 +8,7 @@ importpkg media-libs/lcms
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" "${CHPATH}/${P}" -Dsystemd=false -Ddaemon_user=colord
+meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}" -Dsystemd=false -Ddaemon_user=colord
 
 ninja
 DESTDIR="${D}" ninja install

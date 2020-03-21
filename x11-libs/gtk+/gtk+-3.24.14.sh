@@ -9,7 +9,7 @@ cd "${T}"
 importpkg x11-libs/cairo
 
 # TODO fix man (xslt)
-meson --prefix="/pkg/main/${PKG}.core.${PVR}" -Dcolord=yes -Dbroadway_backend=true "${CHPATH}/${P}"
+meson --prefix="/pkg/main/${PKG}.core.${PVRF}" -Dcolord=yes -Dbroadway_backend=true "${CHPATH}/${P}"
 
 ninja
 DESTDIR="${D}" ninja install

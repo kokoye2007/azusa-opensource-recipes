@@ -8,10 +8,10 @@ cd "${P}"
 
 make linux
 
-mkdir -pv "${D}/pkg/main/${PKG}.core.${PVR}/bin"
-cp -v mac-robber "${D}/pkg/main/${PKG}.core.${PVR}/bin"
+mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
+cp -v mac-robber "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 
-mkdir -pv "${D}/pkg/main/${PKG}.doc.${PVR}"
-cp -v CHANGES README "${D}/pkg/main/${PKG}.doc.${PVR}"
+mkdir -pv "${D}/pkg/main/${PKG}.doc.${PVRF}"
+cp -v CHANGES README "${D}/pkg/main/${PKG}.doc.${PVRF}"
 
 finalize

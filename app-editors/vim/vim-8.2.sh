@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get ftp://ftp.vim.org/pub/vim/unix/${P}.tar.bz2
 acheck
 
-echo "#define SYS_VIMRC_FILE \"/pkg/main/${PKG}.core.${PVR}/etc/vimrc\"" >> vim82/src/feature.h
+echo "#define SYS_VIMRC_FILE \"/pkg/main/${PKG}.core.${PVRF}/etc/vimrc\"" >> vim82/src/feature.h
 
 cd "${CHPATH}/vim82"
 
@@ -17,9 +17,9 @@ make install DESTDIR="${D}"
 
 cd "${D}"
 
-mkdir -p "pkg/main/${PKG}.core.${PVR}/etc"
+mkdir -p "pkg/main/${PKG}.core.${PVRF}/etc"
 
-cat >"pkg/main/${PKG}.core.${PVR}/etc/vimrc" <<"EOF"
+cat >"pkg/main/${PKG}.core.${PVRF}/etc/vimrc" <<"EOF"
 " Begin /etc/vimrc
 
 " Ensure defaults are set before customizing settings, not after

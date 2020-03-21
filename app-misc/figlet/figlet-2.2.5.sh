@@ -6,8 +6,8 @@ acheck
 
 cd "${P}"
 
-PREFIX="/pkg/main/${PKG}.core.${PVR}"
+PREFIX="/pkg/main/${PKG}.core.${PVRF}"
 make prefix="$PREFIX" all
-make prefix="$PREFIX" DESTDIR="${D}" BINDIR="$PREFIX/bin" MANDIR="/pkg/main/${PKG}.doc.${PVR}/man" install
+make prefix="$PREFIX" DESTDIR="${D}" BINDIR="$PREFIX/bin" MANDIR="/pkg/main/${PKG}.doc.${PVRF}/man" install
 
 finalize

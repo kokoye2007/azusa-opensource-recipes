@@ -15,7 +15,7 @@ make
 make install DESTDIR="${D}"
 
 # create symlinks
-ln -snfv libdevmapper.so.1.02 "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libdevmapper.so.1"
-ln -snfv libdevmapper.so.1.02 "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libdevmapper.so"
+ln -snfv libdevmapper.so.1.02 "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libdevmapper.so.1"
+ln -snfv libdevmapper.so.1.02 "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libdevmapper.so"
 
 finalize

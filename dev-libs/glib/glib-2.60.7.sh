@@ -9,8 +9,8 @@ cd "${T}"
 export DESTDIR="${D}"
 
 # configure & build
-meson setup --buildtype release --strip --prefix /pkg/main/${PKG}.core.${PVR} \
-	--datadir /pkg/main/${PKG}.core.${PVR}/share --default-library shared --backend ninja "${CHPATH}/${P}" .
+meson setup --buildtype release --strip --prefix /pkg/main/${PKG}.core.${PVRF} \
+	--datadir /pkg/main/${PKG}.core.${PVRF}/share --default-library shared --backend ninja "${CHPATH}/${P}" .
 
 ninja
 ninja install

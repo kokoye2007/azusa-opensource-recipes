@@ -11,7 +11,7 @@ echo -n >example/meson.build
 
 cd "${T}"
 
-doconf --disable-example --disable-static INIT_D_PATH=/etc/init.d MOUNT_FUSE_PATH="/pkg/main/${PKG}.core.${PVR}/sbin"
+doconf --disable-example --disable-static INIT_D_PATH=/etc/init.d MOUNT_FUSE_PATH="/pkg/main/${PKG}.core.${PVRF}/sbin"
 
 make
 make install DESTDIR="${D}"

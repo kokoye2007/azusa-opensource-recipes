@@ -41,8 +41,8 @@ CMAKE_OPTS=(
 	-DLLVM_ENABLE_DOXYGEN=OFF
 	-DLLVM_INSTALL_UTILS=ON
 
-	-DCMAKE_INSTALL_MANDIR=/pkg/main/${PKG}.doc.${PVR}/man
-	-DLLVM_INSTALL_SPHINX_HTML_DIR=/pkg/main/${PKG}.doc.${PVR}/html
+	-DCMAKE_INSTALL_MANDIR=/pkg/main/${PKG}.doc.${PVRF}/man
+	-DLLVM_INSTALL_SPHINX_HTML_DIR=/pkg/main/${PKG}.doc.${PVRF}/html
 	-DSPHINX_WARNINGS_AS_ERRORS=OFF
 	-DLLVM_ENABLE_THREADS=ON
 
@@ -64,10 +64,10 @@ docmake "${CMAKE_OPTS[@]}"
 make -j"$NPROC" || /bin/bash -i
 make install DESTDIR="${D}"
 
-#cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVR}" -P cmake_install.cmake
+#cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVRF}" -P cmake_install.cmake
 
 # fix dev pkg so bin is available there
-mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}"
-ln -snfTv "/pkg/main/${PKG}.core.${PVR}/bin" "${D}/pkg/main/${PKG}.dev.${PVR}/bin"
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}"
+ln -snfTv "/pkg/main/${PKG}.core.${PVRF}/bin" "${D}/pkg/main/${PKG}.dev.${PVRF}/bin"
 
 finalize

@@ -14,7 +14,7 @@ cd "${T}"
 importpkg sys-fs/udev
 export CFLAGS="$CPPFLAGS"
 
-callconf --prefix="/pkg/main/${PKG}.core.${PVR}" --interp-prefix="/pkg/main/${PKG}.mod.${PV}.%M.${OS}.${ARCH}" --mandir="/pkg/main/${PKG}.doc.${PVR}/man" --docdir="/pkg/main/${PKG}.doc.${PVR}" --libdir=lib$LIB_SUFFIX --sysconfdir=/etc \
+callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --interp-prefix="/pkg/main/${PKG}.mod.${PV}.%M.${OS}.${ARCH}" --mandir="/pkg/main/${PKG}.doc.${PVRF}/man" --docdir="/pkg/main/${PKG}.doc.${PVRF}" --libdir=lib$LIB_SUFFIX --sysconfdir=/etc \
 	--audio-drv-list= --enable-malloc-trim --with-pkgversion=-console \
 	--disable-sdl --disable-sdl-image --disable-xkbcommon --disable-gtk --disable-vte --disable-xen --disable-xen-pci-passthrough --disable-opengl --disable-virglrenderer
 

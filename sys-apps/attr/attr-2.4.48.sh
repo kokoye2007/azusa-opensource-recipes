@@ -13,6 +13,6 @@ make
 make install DESTDIR="${D}"
 
 cd "${D}"
-mv "etc" "pkg/main/${PKG}.core.${PVR}"
+mv "etc" "pkg/main/${PKG}.core.${PVRF}"
 
 finalize

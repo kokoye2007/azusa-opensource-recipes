@@ -17,12 +17,12 @@ CONFIGURE=(
 	--disable-werror
 	--enable-bind-now
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
-	--with-pkgversion="AZUSA ${PVR}"
+	--with-pkgversion="AZUSA ${PVRF}"
 	--enable-crypt
 #	--enable-systemtap
 	--enable-nscd
 	--disable-timezone-tools
-	libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX
+	libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
 )
 
 if [ "$ARCH" == "amd64" ]; then
@@ -43,18 +43,18 @@ find "${D}" -name "libnsl.so" -delete
 find "${D}" -name pt_chown -exec chmod -s {} +
 
 # generate share/i18n/SUPPORTED (Debian-style locale updating)
-mkdir -pv "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n"
-sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/localedata/SUPPORTED > "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"
+mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n"
+sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/localedata/SUPPORTED > "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/SUPPORTED"
 
-locale_list=`echo "C.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/SUPPORTED"`
+locale_list=`echo "C.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/SUPPORTED"`
 
-mkdir -p "${D}/pkg/main/${PKG}.data.locale.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.data.locale.${PVRF}"
 
 # we create this link temporarily this way so we can grab the generated files in the right location
-ln -snfT "${D}/pkg/main/${PKG}.data.locale.${PVR}" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
+ln -snfT "${D}/pkg/main/${PKG}.data.locale.${PVRF}" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
 
 # install "C" locale
-cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/locales/C"
+cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/C"
 
 # generate locales
 echo "$locale_list" | while read foo; do
@@ -62,50 +62,50 @@ echo "$locale_list" | while read foo; do
 	charset=`echo "$foo" | cut -f2 -d' '`
 	locale_short=${locale%%.*}
 	echo " * Generating locale $locale_short ($charset)"
-	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVR}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVR}/share/locale/locale.alias" --prefix "${D}" "${locale}"
+	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}"
 done
 
 # generate locale archive
-for foo in "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"/*/; do
+for foo in "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"/*/; do
 	localedef --add-to-archive "${foo%/}" --replace --prefix "${D}" && rm -fr "${foo%/}"
 done
 
 # fix link to point to symlinks, this way we can generate locale-archive with other i18n paths
-ln -snfT "/pkg/main/${PKG}.data.locale.${PVR}" "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/locale"
+ln -snfT "/pkg/main/${PKG}.data.locale.${PVRF}" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
 
 # make dev a sysroot for gcc
-ln -snfTv "/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVR}/lib$LIB_SUFFIX"
+ln -snfTv "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX"
 if [ x"$LIB_SUFFIX" != x ]; then
-	ln -snfTv "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVR}/lib"
+	ln -snfTv "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVRF}/lib"
 fi
-ln -snfTv . "${D}/pkg/main/${PKG}.dev.${PVR}/usr"
+ln -snfTv . "${D}/pkg/main/${PKG}.dev.${PVRF}/usr"
 
 # linux includes
 for foo in /pkg/main/sys-kernel.linux.dev/include/*; do
 	BASE=`basename "$foo"`
-	if [ -d "${D}/pkg/main/${PKG}.dev.${PVR}/include/$BASE" ]; then
+	if [ -d "${D}/pkg/main/${PKG}.dev.${PVRF}/include/$BASE" ]; then
 		# already a dir there, need to do a cp operation
-		cp -rsfT "$foo" "${D}/pkg/main/${PKG}.dev.${PVR}/include/$BASE"
+		cp -rsfT "$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}/include/$BASE"
 	else
-		ln -snfvT "$foo" "${D}/pkg/main/${PKG}.dev.${PVR}/include/$BASE"
+		ln -snfvT "$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}/include/$BASE"
 	fi
 done
 
 # c++ includes + libs
-ln -snfv /pkg/main/sys-libs.libcxx.dev/include/c++ "${D}/pkg/main/${PKG}.dev.${PVR}/include/"
-ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main/${PKG}.libs.${PVR}/lib$LIB_SUFFIX/libc++.so"
+ln -snfv /pkg/main/sys-libs.libcxx.dev/include/c++ "${D}/pkg/main/${PKG}.dev.${PVRF}/include/"
+ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc++.so"
 
 # add link to ld.so.conf and ld.so.cache since binutils will be looking for it here
-mkdir "${D}/pkg/main/${PKG}.dev.${PVR}/etc"
-ln -snf /pkg/main/azusa.symlinks.core/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVR}/etc/"
+mkdir "${D}/pkg/main/${PKG}.dev.${PVRF}/etc"
+ln -snf /pkg/main/azusa.symlinks.core/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
 
 # move etc/rpc
-mv -v "${D}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVR}/etc/"
+mv -v "${D}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
 
 # add a link to /pkg in sysroot, because binutils will always prefix sysroot to paths found in ld.so.conf
-ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVR}/pkg"
+ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVRF}/pkg"
 
 # symlink share/zoneinfo to /pkg/main/sys-libs.timezone-data.core
-ln -snfT /pkg/main/sys-libs.timezone-data.core "${D}/pkg/main/${PKG}.core.${PVR}/share/zoneinfo"
+ln -snfT /pkg/main/sys-libs.timezone-data.core "${D}/pkg/main/${PKG}.core.${PVRF}/share/zoneinfo"
 
 archive

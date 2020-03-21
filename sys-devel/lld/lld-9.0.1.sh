@@ -11,7 +11,7 @@ cd "${T}"
 # make it possible to run llvm tools within a non-azusa linux (TEMP)
 export LLVM_DIR=/pkg/main/sys-devel.llvm.dev.${PV}/lib64/cmake/llvm
 
-cmake ${CHPATH}/${P}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVR} -DLLVM_ENABLE_TERMINFO=ON \
+cmake ${CHPATH}/${P}.src -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVRF} -DLLVM_ENABLE_TERMINFO=ON \
 	-DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON \
 	-DBUILD_SHARED_LIBS=ON
 

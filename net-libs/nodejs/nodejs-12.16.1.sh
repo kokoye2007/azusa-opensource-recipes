@@ -12,8 +12,8 @@ make
 make install DESTDIR="${D}"
 
 # move "node_modules" to its own "mod" package
-mkdir -p "${D}/pkg/main/${PKG}.mod.${PVR}"
-mv "${D}/pkg/main/${PKG}.core.${PVR}/lib/node_modules" "${D}/pkg/main/${PKG}.mod.${PVR}"
-ln -snf "/pkg/main/${PKG}.mod.${PVR}/node_modules" "${D}/pkg/main/${PKG}.core.${PVR}/lib/node_modules"
+mkdir -p "${D}/pkg/main/${PKG}.mod.${PVRF}"
+mv "${D}/pkg/main/${PKG}.core.${PVRF}/lib/node_modules" "${D}/pkg/main/${PKG}.mod.${PVRF}"
+ln -snf "/pkg/main/${PKG}.mod.${PVRF}/node_modules" "${D}/pkg/main/${PKG}.core.${PVRF}/lib/node_modules"
 
 finalize

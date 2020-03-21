@@ -42,8 +42,8 @@ make
 make install-strip DESTDIR="${D}"
 if [ -f /bin/pdflatex ]; then
 	make texlinks
-	mkdir -pv "${D}/pkg/main/${PKG}.doc.${PVR}/tlpkg/TeXLive/"
-	install -v -m644 ../texk/tests/TeXLive/* "${D}/pkg/main/${PKG}.doc.${PVR}/tlpkg/TeXLive/"
+	mkdir -pv "${D}/pkg/main/${PKG}.doc.${PVRF}/tlpkg/TeXLive/"
+	install -v -m644 ../texk/tests/TeXLive/* "${D}/pkg/main/${PKG}.doc.${PVRF}/tlpkg/TeXLive/"
 
 	if [ -d "$TEXMF" ]; then
 		# ??

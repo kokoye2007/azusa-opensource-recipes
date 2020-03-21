@@ -6,7 +6,7 @@ domeson() {
 		MESON_ROOT="${S}"
 	fi
 
-	meson "$MESON_ROOT" --prefix="/pkg/main/${PKG}.core.${PVR}" -Dbuildtype=release "$@" || return $?
+	meson "$MESON_ROOT" --prefix="/pkg/main/${PKG}.core.${PVRF}" -Dbuildtype=release "$@" || return $?
 
 	echo "Building with ninja..."
 	ninja || return $?

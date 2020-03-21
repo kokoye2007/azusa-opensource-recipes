@@ -24,11 +24,11 @@ make so
 make install DESTDIR="${D}"
 make soinstall DESTDIR="${D}"
 
-mkdir -p "${D}/pkg/main/${PKG}.dev.${PVR}/include/ghostscript"
-install -v -m644 base/*.h "${D}/pkg/main/${PKG}.dev.${PVR}/include/ghostscript"
-ln -sfvn ghostscript "${D}/pkg/main/${PKG}.dev.${PVR}/include/ps"
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/include/ghostscript"
+install -v -m644 base/*.h "${D}/pkg/main/${PKG}.dev.${PVRF}/include/ghostscript"
+ln -sfvn ghostscript "${D}/pkg/main/${PKG}.dev.${PVRF}/include/ps"
 
-mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVR}"
-mv -v "${CHPATH}/fonts" "${D}/pkg/main/${PKG}.fonts.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+mv -v "${CHPATH}/fonts" "${D}/pkg/main/${PKG}.fonts.${PVRF}"
 
 finalize

@@ -8,18 +8,18 @@ cd docbook-xsl-nons-${PV}
 
 apatch "$FILESDIR/docbook-xsl-nons-1.79.2-stack_fix-1.patch"
 
-mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}"
+mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-nons-${PV}"
 
 cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
 	highlighting html htmlhelp images javahelp lib manpages params  \
 	profiling roundtrip slides template tests tools webhelp website \
 	xhtml xhtml-1_1 xhtml5                                          \
-	"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}"
+	"${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-nons-${PV}"
 
-ln -s VERSION "${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/VERSION.xsl"
+ln -s VERSION "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-nons-${PV}/VERSION.xsl"
 
 # generate sgml authority record
-cat >"${D}/pkg/main/${PKG}.sgml.${PVR}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog" <<EOF
+cat >"${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-nons-${PV}/.xmlcatalog" <<EOF
 rewriteSystem https://cdn.docbook.org/release/xsl-nons/${PV}
 rewriteURI https://cdn.docbook.org/release/xsl-nons/${PV}
 rewriteSystem https://cdn.docbook.org/release/xsl-nons/current

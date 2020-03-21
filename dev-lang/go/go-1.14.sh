@@ -7,14 +7,14 @@ cd "go/src"
 
 export GOOS=linux
 export GOARCH=amd64
-export GOROOT_FINAL="/pkg/main/${PKG}.dev.${PVR}"
-export GOROOT="${D}/pkg/main/${PKG}.dev.${PVR}"
+export GOROOT_FINAL="/pkg/main/${PKG}.dev.${PVRF}"
+export GOROOT="${D}/pkg/main/${PKG}.dev.${PVRF}"
 
 ./all.bash
 
 # install
 cd ../..
 mkdir -p "${D}/pkg/main/"
-mv go "${D}/pkg/main/${PKG}.dev.${PVR}"
+mv go "${D}/pkg/main/${PKG}.dev.${PVRF}"
 
 finalize
