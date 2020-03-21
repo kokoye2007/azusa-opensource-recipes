@@ -3,9 +3,12 @@ source "../../common/init.sh"
 
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 S="${CHPATH}/depot_tools"
-acheck
-
 cd "${S}"
+
+echo "Running ensure_bootstrap"
+PATH=".:$PATH" ./ensure_bootstrap
+
+acheck
 
 # grab last commit date/time as version (YYYYMMDD.HHMMSS)
 DEPOT_VER=`git log -1 --format=%at | xargs -I{} date -d @{} +%Y%m%d.%H%M%S`
