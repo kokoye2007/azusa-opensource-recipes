@@ -1,0 +1,12 @@
+diff -rbBU3 higan-110/higan/target-higan/GNUmakefile higan-110.mod/higan/target-higan/GNUmakefile
+--- higan-110/higan/target-higan/GNUmakefile	2020-03-20 07:59:06.000000000 +0000
++++ higan-110.mod/higan/target-higan/GNUmakefile	2020-03-21 19:42:38.795129375 +0000
+@@ -37,8 +37,6 @@
+ ifeq ($(platform),windows)
+ 	mkdir -p $(prefix)/$(name)/
+ 	cp -R System/* $(prefix)/$(name)/
+-else ifeq ($(shell id -un),root)
+-	$(error "make install should not be run as root")
+ else ifeq ($(platform),macos)
+ 	mkdir -p ~/Library/Application\ Support\$(name)/
+ 	mkdir -p ~/Library/Application\ Support\$(name)/System/
