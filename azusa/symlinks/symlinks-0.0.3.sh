@@ -4,8 +4,8 @@ source "../../common/init.sh"
 TZ=`date +%Y%m%d`
 PVR="${PV}.${TZ}.${OS}.${ARCH}"
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVR}"
-cd "${D}/pkg/main/${PKG}.core.${PVR}"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 # install makeroot in "azusa"
 mkdir "azusa"
