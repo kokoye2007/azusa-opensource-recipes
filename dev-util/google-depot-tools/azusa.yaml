@@ -1,0 +1,3 @@
+description: Tools used by Chromium and other Google projects for repository and process management.
+homepage: http://dev.chromium.org/developers/how-tos/install-depot-tools
+license: BSD
