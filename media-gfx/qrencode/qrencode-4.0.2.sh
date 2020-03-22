@@ -6,6 +6,7 @@ acheck
 
 cd "${T}"
 
+prepare
 doconf --disable-static
 
 make
