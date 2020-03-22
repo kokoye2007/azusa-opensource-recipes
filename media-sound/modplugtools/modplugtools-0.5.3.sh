@@ -3,7 +3,6 @@ source "../../common/init.sh"
 
 get https://download.sourceforge.net/modplug-xmms/${P}.tar.gz
 acheck
-prepare
 
 cd "${T}"
 

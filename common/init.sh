@@ -346,6 +346,7 @@ callconf() {
 }
 
 doconf() {
+	prepare
 	echo "Running configure..."
 	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc --localstatedir=/var \
 	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVRF}/share \
@@ -353,11 +354,13 @@ doconf() {
 }
 
 doconflight() {
+	prepare
 	echo "Running configure..."
 	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} "$@"
 }
 
 doconf213() {
+	prepare
 	echo "Running configure..."
 	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc \
 	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVRF}/share \

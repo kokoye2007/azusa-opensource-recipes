@@ -3,7 +3,6 @@ source "../../common/init.sh"
 
 get http://downloads.xiph.org/releases/vorbis/${P}.tar.gz
 acheck
-prepare
 
 cd "${T}"
 

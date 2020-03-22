@@ -3,7 +3,6 @@ source "../../common/init.sh"
 
 get https://downloads.sourceforge.net/libexif/${P}.tar.bz2
 acheck
-prepare
 
 cd "${T}"
 

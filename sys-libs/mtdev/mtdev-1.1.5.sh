@@ -3,7 +3,6 @@ source "../../common/init.sh"
 
 get http://bitmath.org/code/mtdev/${P}.tar.bz2
 acheck
-prepare
 
 cd "${T}"
 
