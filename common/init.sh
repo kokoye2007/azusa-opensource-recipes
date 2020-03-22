@@ -88,15 +88,24 @@ get() {
 		BN="$2"
 	fi
 
+	download "$1" "$BN"
+	extract "$BN"
+}
+
+download() {
+	if [ "x$2" = x"" ]; then
+		BN=`basename $1`
+	else
+		BN="$2"
+	fi
+
 	if [ -s "$BN" ]; then
-		extract "$BN"
 		return
 	fi
 
 	# try to get from our system
 	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" `echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g'` || true
 	if [ -s "$BN" ]; then
-		extract "$BN"
 		return
 	fi
 
@@ -107,8 +116,6 @@ get() {
 		# upload if possible to aws
 		aws s3 cp "$BN" s3://azusa-pkg/src/main/${PKG/.//}/${BN}
 	fi
-
-	extract "$BN"
 }
 
 prepare() {

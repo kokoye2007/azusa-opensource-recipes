@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://github.com/Kitware/CMake/releases/download/v${PV}/${P}.tar.gz
 acheck
 
-importpkg app-crypt/rhash sys-libs/zlib app-arch/libarchive dev-libs/jsoncpp dev-libs/libuv
+importpkg app-crypt/rhash sys-libs/zlib app-arch/libarchive dev-libs/jsoncpp dev-libs/libuv dev-libs/jsoncpp
 
 cd "${T}"
 
