@@ -23,6 +23,7 @@ if [ $MULTILIB = no ]; then
 	if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/lib64" ]; then
 		mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/lib64"/* "${D}/pkg/main/${PKG}.libs.${PVRF}/lib"
 		rmdir "${D}/pkg/main/${PKG}.libs.${PVRF}/lib64"
+		ln -s lib "${D}/pkg/main/${PKG}.libs.${PVRF}/lib64"
 	fi
 fi
 
