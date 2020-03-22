@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # currently active python versions (for modules, etc)
-PYTHON_VERSIONS="2.7.17 3.5.9 3.6.10 3.7.6 3.8.2"
+PYTHON_VERSIONS="2.7.17 3.6.10 3.7.7 3.8.2"
 
 PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject dev-python/numpy dev-util/scons"
 
