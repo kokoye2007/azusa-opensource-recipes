@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg sys-fs/eudev
+importpkg sys-fs/eudev sys-libs/readline dev-libs/libical
 
 doconf --sysconfdir=/etc --localstatedir=/var --enable-library --disable-systemd
 
