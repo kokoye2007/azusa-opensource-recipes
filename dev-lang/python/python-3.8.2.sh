@@ -7,7 +7,7 @@ acheck
 cd "Python-${PV}"
 
 # ensure python can build its "bits" for the following packages
-importpkg libffi expat ncurses openssl zlib sqlite3 readline liblzma app-arch/bzip2 sys-libs/gdbm
+importpkg libffi expat ncurses openssl zlib sqlite3 sys-libs/readline liblzma app-arch/bzip2 sys-libs/gdbm
 
 MODDIR="/pkg/main/dev-lang.python-modules.core.${PV}.${OS}.${ARCH}"
 
