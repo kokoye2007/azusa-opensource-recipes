@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg zlib gstreamer-tag-1.0 x11
+
 doconf --disable-static
 
 make
