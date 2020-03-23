@@ -423,8 +423,19 @@ importpkg() {
 
 	if [ x"$PKGCFG" != x ]; then
 		pkg-config --exists --print-errors "$PKGCFG"
-		export CPPFLAGS="$CPPFLAGS $(pkg-config --cflags-only-I "$PKGCFG")"
-		export LDFLAGS="$LDFLAGS $(pkg-config --libs-only-L "$PKGCFG")"
+		local inc="$(pkg-config --cflags-only-I "$PKGCFG")"
+		local lib="$(pkg-config --libs-only-L "$PKGCFG")"
+		export CPPFLAGS="$CPPFLAGS $inc"
+		export LDFLAGS="$LDFLAGS $lib"
+
+		for foo in $inc; do
+			# remove -I and add to CMAKE_SYSTEM_INCLUDE_PATH
+			export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};${foo#-I}"
+		done
+		for foo in $lib; do
+			# remove -L and add to CMAKE_SYSTEM_LIBRARY_PATH
+			export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};${foo#-L}"
+		done
 	fi
 }
 

@@ -5,9 +5,9 @@ MY_P="Argyll_V${PV}"
 get http://www.argyllcms.com/${MY_P}_src.zip
 acheck
 
-#importpkg media-libs/tiff media-libs/libjpeg-turbo x11-libs/libX11 x11-libs/libXext x11-libs/libXxf86vm x11-libs/libXinerama x11-libs/libXrandr x11-libs/libXau x11-libs/libXdmcp x11-libs/libXScrnSaver
+importpkg media-libs/tiff media-libs/libjpeg-turbo X
 
-cd "${MY_P}"
+cd "${S}"
 
 # Make it respect LDFLAGS
 echo "LINKFLAGS += ${LDFLAGS} ;" >> Jamtop
@@ -16,7 +16,7 @@ echo "LINKFLAGS += ${LDFLAGS} ;" >> Jamtop
 # the shared libraries by default on the command line _before_ the object to be built...
 echo "STDLIBS += -ldl -lrt -lX11 -lXext -lXxf86vm -lXinerama -lXrandr -lXau -lXdmcp -lXss -ltiff -ljpeg ;" >> Jamtop
 
-CFLAGS="$CFLAGS -DUNIX -D_THREAD_SAFE -O2"
+export CFLAGS="$CFLAGS -DUNIX -D_THREAD_SAFE -O2 ${CPPFLAGS}"
 
 sed -e 's:CCFLAGS:CFLAGS:g' -i Jambase
 
