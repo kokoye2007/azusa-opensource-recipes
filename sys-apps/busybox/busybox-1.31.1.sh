@@ -8,8 +8,8 @@ echo "Compiling ${P} ..."
 cd "${P}"
 cp $FILESDIR/config-${PV} .config
 
-make
-make install
+make CC="musl-gcc -I /pkg/main/sys-kernel.linux.dev/include"
+make install CC="musl-gcc -I /pkg/main/sys-kernel.linux.dev/include"
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/"
 rsync -a ./_install/ "${D}/pkg/main/${PKG}.core.${PVRF}/"
