@@ -3,7 +3,7 @@ source "../../common/init.sh"
 
 get http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/${P}/${P}.tar.xz
 cd "${P}"
-get http://distfiles.gentoo.org/distfiles/gcc-9.2.0-patches-5.tar.bz2
+get http://distfiles.gentoo.org/distfiles/gcc-${PV}-patches-3.tar.bz2
 apatch patch/*.patch
 acheck
 
