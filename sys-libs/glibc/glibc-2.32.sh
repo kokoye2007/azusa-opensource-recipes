@@ -57,13 +57,19 @@ ln -snfT "${D}/pkg/main/${PKG}.data.locale.${PVRF}" "${D}/pkg/main/${PKG}.libs.$
 cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/C"
 
 # generate locales
-echo "$locale_list" | while read foo; do
+mkdir -p "${D}$(realpath /pkg/main/sys-libs.glibc.libs)/lib64/locale"
+OIFS="$IFS"
+IFS=$'\n'
+for foo in $locale_list; do
 	locale=`echo "$foo" | cut -f1 -d' '`
 	charset=`echo "$foo" | cut -f2 -d' '`
 	locale_short=${locale%%.*}
 	echo " * Generating locale $locale_short ($charset)"
-	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}"
+	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}" || /bin/bash
 done
+IFS="$OIFS"
+# cleanup
+rm -fr "${D}$(realpath /pkg/main/sys-libs.glibc.libs)"
 
 # generate locale archive
 for foo in "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"/*/; do

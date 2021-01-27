@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get http://ftp.gnu.org/gnu/bash/${P}.tar.gz
+acheck
 
 echo "Compiling ${P} ..."
 cd "${T}"
