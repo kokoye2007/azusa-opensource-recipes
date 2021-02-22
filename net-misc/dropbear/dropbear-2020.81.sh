@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconf --enable-static --enable-bundled-libtom --disable-zlib
+doconf --enable-static --enable-bundled-libtom --disable-zlib CC="musl-gcc"
 
 make
 make install DESTDIR="${D}"
