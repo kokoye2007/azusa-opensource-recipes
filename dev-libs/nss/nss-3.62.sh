@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 
-get https://ftp.mozilla.org/pub/security/nss/releases/NSS_3_46_RTM/src/${P}.tar.gz
+get https://ftp.mozilla.org/pub/security/nss/releases/NSS_3_62_RTM/src/${P}.tar.gz
 acheck
 
 cd "${P}/${PN}"

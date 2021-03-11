@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://archive.mozilla.org/pub/nspr/releases/v${PV}/src/${P}.tar.gz
+acheck
 
 cd "${P}/${PN}"
 
