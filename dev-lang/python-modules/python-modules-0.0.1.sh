@@ -37,4 +37,4 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	fi
 done
 
-finalize
+archive

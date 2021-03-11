@@ -26,4 +26,4 @@ mv "${D}/pkg/main/dev-lang.python-modules.core.${PV}" "${D}/pkg/main/${PKG}.mod.
 # create symlink to fix confused easy install packages
 ln -snf "/pkg/main/dev-lang.python-modules.core.${PV}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.${PVRF}/lib/python${PV%.*}/site-packages"
 
-finalize
+archive

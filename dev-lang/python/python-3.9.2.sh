@@ -27,9 +27,9 @@ if [ ! -f python ]; then
 fi
 
 # move modules installed to exec-prefix back to prefix
-mv "${D}${MODDIR}" "${D}/pkg/main/${PKG}.mod.${PVRF}"
+mv -v "${D}${MODDIR}" "${D}/pkg/main/${PKG}.mod.${PVRF}"
 
 # create symlink to fix confused easy install packages
 ln -snf "${MODDIR}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.${PVRF}/lib/python${PV%.*}/site-packages"
 
-finalize
+archive
