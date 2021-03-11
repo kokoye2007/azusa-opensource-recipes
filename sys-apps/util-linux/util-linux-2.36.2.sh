@@ -2,7 +2,7 @@
 cd "$(dirname $0)"
 source "../../common/init.sh"
 
-get https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.35/${P}.tar.xz
+get https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v${PV%.*}/${P}.tar.xz
 acheck
 
 cd "${T}"
