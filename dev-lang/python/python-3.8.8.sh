@@ -32,4 +32,7 @@ mv "${D}${MODDIR}" "${D}/pkg/main/${PKG}.mod.${PVRF}"
 # create symlink to fix confused easy install packages
 ln -snf "${MODDIR}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.${PVRF}/lib/python${PV%.*}/site-packages"
 
+org_movelib
+org_fixdev
+
 archive

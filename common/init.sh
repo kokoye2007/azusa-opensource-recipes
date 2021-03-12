@@ -143,16 +143,7 @@ squash() {
 	fi
 }
 
-organize() {
-	cd "${D}"
-
-	LIBS=lib
-	LIB=lib
-	if [ $MULTILIB = yes ]; then
-		LIBS="lib64 lib32"
-		LIB=lib64
-	fi
-
+org_movelib() {
 	# remove any .la file
 	# see: https://wiki.gentoo.org/wiki/Project:Quality_Assurance/Handling_Libtool_Archives
 	find "${D}" -name '*.la' -delete
@@ -167,6 +158,13 @@ organize() {
 			ln -sv "/pkg/main/${PKG}.libs.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/$foo"
 		fi
 	done
+}
+
+org_fixmultilib() {
+	local LIB=lib
+	if [ $MULTILIB = yes ]; then
+		LIB=lib64
+	fi
 
 	# fix common issues
 	if [ $MULTILIB = yes ]; then
@@ -187,7 +185,9 @@ organize() {
 			fi
 		done
 	fi
+}
 
+org_moveetc() {
 	if [ -d "${D}/etc" ]; then
 		# move it to core
 		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/etc" ]; then
@@ -199,21 +199,15 @@ organize() {
 			mv -Tv "${D}/etc" "${D}/pkg/main/${PKG}.core.${PVRF}/etc"
 		fi
 	fi
+}
 
-	if [ -d "${D}/lib/udev" ]; then
-		# we got udev rules/etc, move these to core
-		mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
-		mv -Tv "${D}/lib/udev" "${D}/pkg/main/${PKG}.core.${PVRF}/udev"
+org_fixdev() {
+	local LIB=lib
+	if [ $MULTILIB = yes ]; then
+		LIB=lib64
 	fi
 
-	if [ "$PN" != "font-util" ]; then
-		if [ -d "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts ]; then
-			# looks like fonts were installed in the wrong place.
-			mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
-			mv -v "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts/* "${D}/pkg/main/${PKG}.fonts.${PVRF}"
-		fi
-	fi
-
+	# fix common issues
 	for foo in pkgconfig cmake; do
 		if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" ]; then
 			# should be in dev
@@ -233,17 +227,48 @@ organize() {
 			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/share"
 		fi
 	done
-	if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
-		# should be in core
-		mkdir -pv "pkg/main/${PKG}.core.${PVRF}"
-		mv -v "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" "pkg/main/${PKG}.core.${PVRF}/"
-		ln -sv "/pkg/main/${PKG}.core.${PVRF}/udev" "pkg/main/${PKG}.libs.${PVRF}/$LIB"
-	fi
 
 	if [ -d "pkg/main/${PKG}.core.${PVRF}/include" ]; then
 		mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
 		mv -v "pkg/main/${PKG}.core.${PVRF}/include" "pkg/main/${PKG}.dev.${PVRF}/include"
 		ln -sv "/pkg/main/${PKG}.dev.${PVRF}/include" "pkg/main/${PKG}.core.${PVRF}/include"
+	fi
+}
+
+organize() {
+	cd "${D}"
+
+	local LIBS=lib
+	local LIB=lib
+	if [ $MULTILIB = yes ]; then
+		LIBS="lib64 lib32"
+		LIB=lib64
+	fi
+
+	org_movelib
+	org_fixmultilib
+	org_moveetc
+	org_fixdev
+
+	if [ -d "${D}/lib/udev" ]; then
+		# we got udev rules/etc, move these to core
+		mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+		mv -Tv "${D}/lib/udev" "${D}/pkg/main/${PKG}.core.${PVRF}/udev"
+	fi
+
+	if [ "$PN" != "font-util" ]; then
+		if [ -d "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts ]; then
+			# looks like fonts were installed in the wrong place.
+			mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+			mv -v "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts/* "${D}/pkg/main/${PKG}.fonts.${PVRF}"
+		fi
+	fi
+
+	if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
+		# should be in core
+		mkdir -pv "pkg/main/${PKG}.core.${PVRF}"
+		mv -v "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" "pkg/main/${PKG}.core.${PVRF}/"
+		ln -sv "/pkg/main/${PKG}.core.${PVRF}/udev" "pkg/main/${PKG}.libs.${PVRF}/$LIB"
 	fi
 
 	for foo in $LIBS; do
