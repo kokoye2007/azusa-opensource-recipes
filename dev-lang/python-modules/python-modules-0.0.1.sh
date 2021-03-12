@@ -12,7 +12,7 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 	# generate path from /pkg/main/dev-lang.python.mod.${PYTHON_VERSION}
 
-	MODP="/pkg/main/dev-lang.python.mod.${PYTHON_VERSION}.linux.${ARCH}"
+	MODP="/pkg/main/dev-lang.python.mod.${PYTHON_VERSION}.${OS}.${ARCH}"
 	cp -rsfT "$MODP"/ "$TARGET"
 
 	for pn in `curl -s http://localhost:100/apkgdb/main?action=list | grep "py$PYTHON_VERSION"`; do
