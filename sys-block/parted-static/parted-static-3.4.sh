@@ -9,7 +9,7 @@ cd "${T}"
 importpkg sys-apps/util-linux sys-fs/lvm2 sys-libs/readline sys-libs/ncurses
 
 export CFLAGS="-static -pthread"
-export LDFLAGS="-static -pthread -L/pkg/main/sys-fs.lvm2-static.libs/lib64 -L/pkg/main/sys-apps.util-linux.libs/lib64"
+export LDFLAGS="-static -pthread -L/pkg/main/sys-fs.lvm2-static.libs/lib -L/pkg/main/sys-apps.util-linux.libs/lib"
 export LIBS="-lblkid -lm" # static libs
 
 # TODO give path of the static libdevmapper
