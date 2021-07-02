@@ -37,7 +37,24 @@ for GOARCH in $TGT; do
 
 		source files/env.sh
 
-		make -C "$KDIR" oldconfig
+		# multiple passes because sometimes options only appears after values are tweaked
+		for pass in `seq 1 3`; do
+			make -C "$KDIR" listnewconfig | while read foo; do
+				case "${foo: -1}" in
+				n)
+					# yes/no stuff like DEBUG typically cannot be set to m, so this will stay as no
+					echo "Attempting to set ${foo:0:-2}=m"
+					(cd "$KDIR"; ./source/scripts/config -m "${foo:0:-2}" )
+					;;
+				y)
+					# default value is "y", so safe to set to y
+					echo "Setting ${foo:0:-2}=y"
+					(cd "$KDIR"; ./source/scripts/config -e "${foo:0:-2}" )
+					;;
+				esac
+			done
+		done
+		make -C "$KDIR" olddefconfig
 		make -C "$KDIR" menuconfig
 		cp -v "$KDIR/.config" "files/config-$KVER-$GOARCH"
 
