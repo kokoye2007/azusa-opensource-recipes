@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://downloads.sourceforge.net/${PN}/lcms2-${PV}.tar.gz
+acheck
 
 cd "lcms2-${PV}"
 
