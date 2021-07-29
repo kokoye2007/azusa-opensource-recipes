@@ -1,0 +1,3 @@
+description: Library for encoding video streams into the H.265/HEVC format
+homepage: http://x265.org/ https://bitbucket.org/multicoreware/x265/wiki/Home
+license: GPL-2

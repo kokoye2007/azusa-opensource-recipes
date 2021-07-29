@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://bitbucket.org/multicoreware/x265/downloads/x265_${PV}.tar.gz
+get https://bitbucket.org/multicoreware/x265_git/downloads/${PN}_${PV}.tar.gz
 acheck
 
 cd "${T}"
