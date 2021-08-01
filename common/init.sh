@@ -466,16 +466,20 @@ importpkg() {
 
 # azusa check
 acheck() {
+	envcheck
+	# disable networking now that we know we are in a separate env
+	# TODO we should actually disable the whole net stack in local namespace
+	echo -n >/etc/resolv.conf
+
+}
+
+envcheck() {
 	# check if env is sane for building, and perform stuff
 	if [ ! -d /.pkg-main-rw ]; then
 		echo "This needs to be built in Azusa Build env:"
 		echo "$ROOTDIR/common/build.sh ${CATEGORY}/${PN}/${PF}.sh"
 		exit
 	fi
-
-	# disable networking
-	# TODO we should actually disable the whole net stack in local container
-	echo -n >/etc/resolv.conf
 
 	# TODO check if /.pkg-main-rw is indeed empty, etc
 }
