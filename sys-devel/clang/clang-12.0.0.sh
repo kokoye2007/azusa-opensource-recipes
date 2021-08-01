@@ -2,11 +2,10 @@
 source "../../common/init.sh"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
-acheck
-
 cd "$S"
-
 apatch $FILESDIR/clang-9.0.1-libxml2-include-dirs.patch
+
+acheck
 
 cd "${T}"
 

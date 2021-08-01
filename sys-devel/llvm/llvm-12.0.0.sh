@@ -1,7 +1,18 @@
 #!/bin/sh
 source "../../common/init.sh"
+# options:
+# clang clang-tools-extra compiler-rt libc libclc libcxx libcxxabi libunwind lld lldb mlir openmp parallel-libs polly pstl flang
+LLVM_PROJECTS="libcxx;libcxxabi"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
+OIFS="$IFS"
+IFS=";"
+for project in $LLVM_PROJECTS; do
+	get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${project}-${PV}.src.tar.xz
+	mv "${project}-${PV}.src" "${project}"
+done
+IFS="$OIFS"
+
 acheck
 
 cd "${T}"
@@ -12,6 +23,8 @@ export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
 
 CMAKE_OPTS=(
+	-DLLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
+
 	-DLLVM_APPEND_VC_REV=OFF
 	-DLLVM_LIBDIR_SUFFIX=$LIB_SUFFIX
 
@@ -31,8 +44,6 @@ CMAKE_OPTS=(
 	-DLLVM_ENABLE_EH=ON
 	-DLLVM_ENABLE_RTTI=ON
 	-DLLVM_ENABLE_Z3_SOLVER=ON
-
-	-DWITH_POLLY=OFF
 
 	# stuff
 	-DLLVM_BUILD_DOCS=ON

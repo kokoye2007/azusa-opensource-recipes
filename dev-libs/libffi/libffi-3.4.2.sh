@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get ftp://sourceware.org/pub/libffi/${P}.tar.gz
+get https://github.com/libffi/libffi/releases/download/v${PV}/${P}.tar.gz
 acheck
 
 cd "${P}"
