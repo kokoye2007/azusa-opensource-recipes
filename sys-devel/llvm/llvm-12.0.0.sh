@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libxml-2.0 icu-uc
+importpkg libxml-2.0 icu-uc sci-mathematics/z3
 # importpkg will set CPPFLAGS but that's not read by llvm
 export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
