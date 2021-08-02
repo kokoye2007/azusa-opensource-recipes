@@ -1,15 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_${PV}.tar.gz
+get https://github.com/lsof-org/${PN}/releases/download/${PV}/${PN}_${PV}.linux.tar.bz2
+acheck
 
-cd "lsof_${PV}"
-
-tar -xf lsof_${PV}_src.tar
-cd lsof_${PV}_src
+cd "${S}"
 
 ./Configure -n linux
-make CFGL="-L./lib -ltirpc"
+make
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin" "${D}/pkg/main/${PKG}.doc.${PVRF}/man/man8"
 
