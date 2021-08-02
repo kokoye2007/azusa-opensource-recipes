@@ -15,7 +15,7 @@ fi
 echo "Compiling tzdata-${PV} ..."
 
 mkdir -p ${D}/pkg/main/${PKG}.core.${PV}/{posix,right}
-for tz in etcetera southamerica northamerica europe africa antarctica asia australasia backward pacificnew systemv; do
+for tz in etcetera southamerica northamerica europe africa antarctica asia australasia backward; do
 	zic -L /dev/null -d ${D}/pkg/main/${PKG}.core.${PV}/ "tzdata-${PV}/$tz"
 	zic -L /dev/null -d ${D}/pkg/main/${PKG}.core.${PV}/posix "tzdata-${PV}/$tz"
 	zic -L "tzdata-${PV}/leapseconds" -d ${D}/pkg/main/${PKG}.core.${PV}/right "tzdata-${PV}/$tz"

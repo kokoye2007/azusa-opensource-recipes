@@ -1,0 +1,3 @@
+description: Timezone data (/usr/share/zoneinfo) and utilities (tzselect/zic/zdump)
+homepage: https://www.iana.org/time-zones
+license: BSD public-domain
