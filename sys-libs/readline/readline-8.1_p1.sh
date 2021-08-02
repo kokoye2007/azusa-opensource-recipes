@@ -1,13 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${PN}-8.0.tar.gz
+MY_PV="${PV/_*/}"
+get https://ftp.gnu.org/gnu/${PN}/${PN}-${MY_PV}.tar.gz
 
-cd "${PN}-8.0"
+cd "${PN}-${MY_PV}"
 
-for foo in `seq -f '%03.f' 1 4`; do
-	get https://ftp.gnu.org/gnu/readline/readline-8.0-patches/readline80-$foo
-	patch -p0 <"readline80-$foo"
+for foo in `seq -f '%03.f' 1 "${PV/*_p/}"`; do
+	get https://ftp.gnu.org/gnu/readline/${PN}-${MY_PV}-patches/readline81-$foo
+	patch -p0 <"readline81-$foo"
 done
 
 acheck
