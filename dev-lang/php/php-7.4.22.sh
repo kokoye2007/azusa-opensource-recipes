@@ -64,7 +64,7 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--enable-filter")
 	CONFIGURE+=("--enable-ftp=shared")
 	CONFIGURE+=("--enable-gd=shared" "--enable-gd-jis-conv")
-	CONFIGURE+=("--with-gettext=shared")
+	CONFIGURE+=("--with-gettext=shared,/pkg/main/sys-libs.glibc.dev")
 	CONFIGURE+=("--with-gmp=shared,/pkg/main/dev-libs.gmp.dev")
 	CONFIGURE+=("--with-mhash")
 	CONFIGURE+=("--with-iconv")
