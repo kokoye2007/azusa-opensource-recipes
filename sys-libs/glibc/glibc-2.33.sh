@@ -17,7 +17,7 @@ CONFIGURE=(
 	--disable-werror
 	--enable-bind-now
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
-	--with-pkgversion="AZUSA ${PVRF}"
+	--with-pkgversion="Azusa ${PVRF}"
 	--enable-crypt
 #	--enable-systemtap
 	--enable-nscd
@@ -36,13 +36,16 @@ make -j"$NPROC"
 make install DESTDIR="${D}"
 
 # compatibility libraries for the NIS/NIS+ support, do not need .so or .a, only .so.X (gentoo)
+echo "Deleting libnsl.(a|so) ..."
 find "${D}" -name "libnsl.a" -delete
 find "${D}" -name "libnsl.so" -delete
 
 # With devpts under Linux mounted properly, we do not need the pt_chown suid bit (gentoo)
+echo "Removing suid bit on pt_chown ..."
 find "${D}" -name pt_chown -exec chmod -s {} +
 
 # generate share/i18n/SUPPORTED (Debian-style locale updating)
+echo "Generating locales ..."
 mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n"
 sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/localedata/SUPPORTED > "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/SUPPORTED"
 
@@ -56,8 +59,13 @@ ln -snfT "${D}/pkg/main/${PKG}.data.locale.${PVRF}" "${D}/pkg/main/${PKG}.libs.$
 # install "C" locale
 cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/C"
 
+localedef() {
+	# run newly installed localedef
+	"${D}/pkg/main/${PKG}.core.${PVRF}/bin/localedef" "$@"
+}
+
 # generate locales
-mkdir -p "${D}$(realpath /pkg/main/sys-libs.glibc.libs)/lib64/locale"
+mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib64/locale"
 OIFS="$IFS"
 IFS=$'\n'
 for foo in $locale_list; do
@@ -68,15 +76,15 @@ for foo in $locale_list; do
 	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}" || /bin/bash
 done
 IFS="$OIFS"
-# cleanup
-rm -fr "${D}$(realpath /pkg/main/sys-libs.glibc.libs)"
 
 # generate locale archive
+echo "Generating locale archive..."
 for foo in "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"/*/; do
 	localedef --add-to-archive "${foo%/}" --replace --prefix "${D}" && rm -fr "${foo%/}"
 done
 
 # fix link to point to symlinks, this way we can generate locale-archive with other i18n paths
+echo "Fixing locale symlink..."
 ln -snfT "/pkg/main/${PKG}.data.locale.${PVRF}" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
 
 # make dev a sysroot for gcc
@@ -113,5 +121,9 @@ ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVRF}/pkg"
 
 # symlink share/zoneinfo to /pkg/main/sys-libs.timezone-data.core
 ln -snfT /pkg/main/sys-libs.timezone-data.core "${D}/pkg/main/${PKG}.core.${PVRF}/share/zoneinfo"
+
+# this is to make clang happy
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/env.d"
+ln -sT /pkg/main/sys-devel.gcc-config.core/gcc-config "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/env.d/gcc"
 
 archive
