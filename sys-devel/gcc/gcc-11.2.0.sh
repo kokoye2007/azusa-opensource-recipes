@@ -18,6 +18,7 @@ export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp
 
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --infodir=/pkg/main/${PKG}.doc.${PVRF}/info --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/gcc \
+--with-pkgversion=Azusa --with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues \
 --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --with-slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
 --with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVRF}/include/c++ --with-sysroot=/pkg/main/sys-libs.glibc.dev \
 --with-gcc-major-version-only \
