@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://nginx.org/download/${P}.tar.gz
+acheck
 
 cd "${P}"
 
