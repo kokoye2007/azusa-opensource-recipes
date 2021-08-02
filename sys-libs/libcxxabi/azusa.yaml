@@ -1,3 +1,0 @@
-description: Low level support for a standard C++ library
-homepage: https://libcxxabi.llvm.org/
-license: "Apache-2.0-with-LLVM-exceptions || ( UoI-NCSA MIT )"

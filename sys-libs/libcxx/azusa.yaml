@@ -1,3 +1,0 @@
-description: New implementation of the C++ standard library, targeting C++11
-homepage: https://libcxx.llvm.org/
-license: "Apache-2.0-with-LLVM-exceptions || ( UoI-NCSA MIT )"
