@@ -36,5 +36,27 @@ ln -sv gcc "${D}/pkg/main/${PKG}.core.${PVRF}/bin/cc"
 # remove any .la file
 find "${D}" -name '*.la' -delete
 
+# create gentoo-like config file in an effort to please clang
+# see /etc/env.d/gcc/ on a gentoo system
+# you can symlink /pkg/main/sys-devel.gcc.dev/gcc-config as {{sysroot}}/etc/env.d/gcc and clang might be happy
+TRIPLE="$("${D}/pkg/main/${PKG}.core.${PVRF}/bin/gcc" -dumpmachine)"
+VERS="$("${D}/pkg/main/${PKG}.core.${PVRF}/bin/gcc" -dumpversion)"
+
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/gcc-config"
+echo "CURRENT=${TRIPLE}-${PV}" >"${D}/pkg/main/${PKG}.dev.${PVRF}/gcc-config/config-${TRIPLE}"
+
+cat >"${D}/pkg/main/${PKG}.dev.${PVRF}/gcc-config/${TRIPLE}-${PV}" <<EOF
+GCC_PATH="/pkg/main/${PKG}.core.${PVRF}/bin"
+LDPATH="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/gcc/${TRIPLE}/${VERS}"
+MANPATH="/pkg/main/${PKG}.doc.${PVRF}/man"
+INFOPATH="/pkg/main/${PKG}.doc.${PVRF}/info"
+STDCXX_INCDIR="/pkg/main/${PKG}.dev.${PVRF}/include/c++"
+CTARGET="${TRIPLE}"
+GCC_SPECS=""
+EOF
+if [ "$MULTILIB" = "yes" ]; then
+	echo "MULTIOSDIRS=\"../lib64:../lib\"" >>"${D}/pkg/main/${PKG}.dev.${PVRF}/gcc-config/${TRIPLE}-${PV}"
+fi
+
 # do not use finalize because we depend on location of some files
 archive
