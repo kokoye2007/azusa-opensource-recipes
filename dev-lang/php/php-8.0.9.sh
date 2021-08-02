@@ -96,14 +96,9 @@ for sapi in $SAPIS; do
 
 	# cgi/cli: readline/libedit support
 	case $sapi in
-		cli)
+		cli|cgi)
 			CONFIGURE+=("--without-pear")
 			CONFIGURE+=("--with-readline=/pkg/main/sys-libs.readline.dev")
-			export LIBS="-ltinfo" # link php against libtinfo so ncurses/readline works
-			;;
-		cgi)
-			CONFIGURE+=("--without-pear")
-			CONFIGURE+=("--with-readline=shared,/pkg/main/sys-libs.readline.dev")
 			export LIBS="-ltinfo" # link php against libtinfo so ncurses/readline works
 			;;
 		*)
