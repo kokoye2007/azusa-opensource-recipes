@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get https://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2
+acheck
+
+importpkg expat
 
 cd "${T}"
 

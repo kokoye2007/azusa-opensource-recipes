@@ -4,11 +4,9 @@ source "../../common/init.sh"
 get http://ftp.riken.jp/net/apache/apr/${P}.tar.bz2
 acheck
 
-importpkg expat
-
 cd "${T}"
 
-doconf --with-apr=`realpath /pkg/main/dev-libs.apr.core`
+doconf --with-apr=`realpath /pkg/main/dev-libs.apr.core` --with-expat=`realpath /pkg/main/dev-libs.expat.dev`
 
 make
 make install DESTDIR="${D}"
