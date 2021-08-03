@@ -7,12 +7,13 @@ acheck
 cd "Python-${PV}"
 
 # ensure python can build its "bits" for the following packages
-importpkg libffi expat ncurses openssl zlib sqlite3 sys-libs/readline liblzma app-arch/bzip2 sys-libs/gdbm
+importpkg libffi expat ncurses openssl zlib sqlite3 sys-libs/readline liblzma app-arch/bzip2 sys-libs/gdbm sys-apps/util-linux
 
 MODDIR="/pkg/main/dev-lang.python-modules.core.${PV}.${OS}.${ARCH}"
 
 callconf --prefix="$MODDIR" --exec-prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --localstatedir=/var --includedir="\${exec_prefix}/include" --datarootdir="\${exec_prefix}/share" \
 	--infodir="/pkg/main/${PKG}.doc.${PVRF}/info" --mandir="/pkg/main/${PKG}.doc.${PVRF}/man" --docdir="/pkg/main/${PKG}.doc.${PVRF}" \
+	--with-tzpath=/pkg/main/sys-libs.timezone-data.core \
 	--enable-shared --with-system-expat --with-system-ffi --enable-optimizations --with-computed-gotos --with-dbmliborder=gdbm:bdb --with-libc= --enable-loadable-sqlite-extensions --without-ensurepip
 
 make
