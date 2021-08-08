@@ -11,6 +11,7 @@ cd "${T}"
 # ./sysdeps/generic/dl-cache.h:38:# define LD_SO_CACHE SYSCONFDIR "/ld.so.cache"
 
 CONFIGURE=(
+	--host="$BUILD_TARGET"
 	--sysconfdir="/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc"
 	--disable-werror
 	--enable-kernel=4.14
@@ -31,6 +32,13 @@ CONFIGURE=(
 
 if [ "$ARCH" == "amd64" ]; then
 	CONFIGURE+=(--enable-cet)
+fi
+
+if [ "$ARCH" == "386" ]; then
+	if [ "$(uname -m)" = "x86_64" ]; then
+		# force 32bits gcc
+		CONFIGURE+=(CC="gcc -m32" CXX="g++ -m32")
+	fi
 fi
 
 # configure & build
@@ -69,7 +77,7 @@ localedef() {
 }
 
 # generate locales
-mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib64/locale"
+mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
 OIFS="$IFS"
 IFS=$'\n'
 for foo in $locale_list; do
@@ -119,7 +127,7 @@ ln -snf /pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/ld.so.* "${D}/pkg/main/${PKG
 
 # move etc/rpc
 mv -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
-rm -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/ld.so.cache"
+rm -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/ld.so.cache" || true
 rmdir -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc" || /bin/bash -i
 rmdir -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}"
 
