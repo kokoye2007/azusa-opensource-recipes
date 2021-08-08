@@ -1,0 +1,3 @@
+description: Standard GNU utilities (chmod, cp, dd, ls, sort, tr, head, wc, who,...)
+homepage: https://www.gnu.org/software/coreutils/
+license: GPL-3
