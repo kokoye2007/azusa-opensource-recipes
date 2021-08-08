@@ -495,6 +495,9 @@ importpkg() {
 
 # azusa check
 acheck() {
+	if [ x"$AZUSA_ALLOW_ENV" != x ]; then
+		return
+	fi
 	envcheck
 	# disable networking now that we know we are in a separate env
 	# TODO we should actually disable the whole net stack in local namespace
@@ -503,6 +506,9 @@ acheck() {
 }
 
 envcheck() {
+	if [ x"$AZUSA_ALLOW_ENV" != x ]; then
+		return
+	fi
 	# check if env is sane for building, and perform stuff
 	if [ ! -d /.pkg-main-rw ]; then
 		echo "This needs to be built in Azusa Build env:"
