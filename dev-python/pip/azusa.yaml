@@ -1,0 +1,3 @@
+description: Installs python packages -- replacement for easy_install
+homepage: https://pip.pypa.io/en/stable/ https://pypi.org/project/pip/ https://github.com/pypa/pip/
+license: MIT
