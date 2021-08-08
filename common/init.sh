@@ -354,13 +354,14 @@ fixelf() {
 	# file /bin/bash
 	# /pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter /bin/bash
 	# /pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs/lib64/ld-linux-x86-64.so.2
-	find "${D}" -executable | while read fn; do
+	find "${D}" -type f -executable | while read fn; do
 		local ft="$(file -b "${fn}")"
 		case $ft in
 			ELF*)
 				cur="$(/pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter "${fn}")"
-				case cur in
+				case $cur in
 					/lib64/ld-linux-x86-64.so.2)
+						echo "FIXELF: patching $fn"
 						# linux amd64
 						/pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs.linux.amd64/lib64/ld-linux-x86-64.so.2 "${fn}"
 						;;
