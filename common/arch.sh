@@ -7,14 +7,13 @@ case $ARCH in
 	i?86)
 		ARCH=386
 		LIB_SUFFIX=
-		BUILD_TARGET="i386-pc-linux-gnu"
+		BUILD_TARGET="i686-pc-linux-gnu"
 		;;
 	x86_64)
 		if [ $BITS -eq 32 ]; then
-			# actually in 32bits mode
-			ARCH=386
-			LIB_SUFFIX=
-			BUILD_TARGET="i386-pc-linux-gnu"
+			# let's force uname -m to be 32bits
+			exec setarch i686 /bin/bash "$0" "$@"
+			exit 1
 		else
 			ARCH=amd64
 			MULTILIB=yes

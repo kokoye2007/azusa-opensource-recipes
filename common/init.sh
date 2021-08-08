@@ -365,6 +365,11 @@ fixelf() {
 						# linux amd64
 						/pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs.linux.amd64/lib64/ld-linux-x86-64.so.2 "${fn}"
 						;;
+					/lib/ld-linux.so.2)
+						echo "FIXELF: patching $fn"
+						# linux x86
+						/pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs.linux.386/lib/ld-linux.so.2 "${fn}"
+						;;
 				esac
 				;;
 		esac
