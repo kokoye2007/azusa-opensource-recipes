@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://ftp.gnu.org/gnu/mpc/${P}.tar.gz
+acheck
 
 cd "${T}"
 
