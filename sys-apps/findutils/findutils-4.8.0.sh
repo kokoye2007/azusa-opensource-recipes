@@ -1,11 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.gz
+get http://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.xz
+acheck
 
 cd "${P}"
-
-sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
 
 sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c
 sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c

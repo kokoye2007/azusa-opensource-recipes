@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconf
+FORCE_UNSAFE_CONFIGURE=1 doconf
 
 make
 make install DESTDIR="${D}"
