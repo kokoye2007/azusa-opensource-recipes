@@ -15,7 +15,7 @@ cd "${T}"
 export LDFLAGS="$(pkg-config zlib --libs-only-L)"
 
 # configure & build
-doconf --enable-gold --enable-ld=default --enable-plugins --enable-shared --enable-64-bit-bfd --with-system-zlib --with-sysroot=/pkg/main/sys-libs.glibc.dev
+doconf --enable-gold --enable-ld=default --enable-plugins --enable-shared --enable-64-bit-bfd --with-system-zlib --with-sysroot=/pkg/main/sys-libs.glibc.dev --with-gcc-major-version-only
 
 make
 make install DESTDIR="${D}"
