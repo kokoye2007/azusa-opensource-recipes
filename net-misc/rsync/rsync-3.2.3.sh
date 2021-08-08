@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://download.samba.org/pub/rsync/${P}.tar.gz
+acheck
 
 cd "${T}"
 
