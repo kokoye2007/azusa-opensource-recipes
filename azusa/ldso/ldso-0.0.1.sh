@@ -11,6 +11,7 @@ cd "${D}/pkg/main/${PKG}.data.${MY_PVR}"
 LIBS="lib lib32 lib64"
 
 mkdir etc
+ln -s /pkg/main/sys-libs.glibc.dev/etc/rpc etc/rpc
 
 for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep libs); do
 	p=/pkg/main/${pn}
