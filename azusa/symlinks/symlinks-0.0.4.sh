@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source "../../common/init.sh"
 
 TZ=`date +%Y%m%d`
