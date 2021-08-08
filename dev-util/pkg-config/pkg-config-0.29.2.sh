@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://pkg-config.freedesktop.org/releases/${P}.tar.gz
+acheck
 
 cd "${T}"
 

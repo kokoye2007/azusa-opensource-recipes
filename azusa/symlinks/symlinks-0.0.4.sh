@@ -33,7 +33,7 @@ else
 	mkdir -p lib full/lib
 
 	#cp -rsfT `realpath /pkg/main/sys-libs.glibc.libs/lib` lib
-	cp -rsf /pkg/main/sys-libs.glibc.libs/lib/ld-linux* lib
+	cp -rsf /pkg/main/sys-libs.glibc.libs/lib/ld-linux* lib || true
 fi
 mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules" "$LIB/udev"
 ln -snf "$LIB/cmake" cmake
@@ -41,7 +41,7 @@ ln -snf "$LIB/pkgconfig" pkgconfig
 ln -snf . usr
 xmlcatalog --noout --create etc/xml/catalog
 
-for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busybox | grep -v symlinks); do
+for pn in $(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
 	p=/pkg/main/${pn}
 	t=`echo "$pn" | cut -d. -f3`
