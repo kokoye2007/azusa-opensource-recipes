@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get ftp://ftp.astron.com/pub/file/${P}.tar.gz
+acheck
 
 cd "${T}"
 
