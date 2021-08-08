@@ -7,7 +7,11 @@ acheck
 
 cd "${T}"
 
+# sysconfdir defines where ld.so.cache is found:
+# ./sysdeps/generic/dl-cache.h:38:# define LD_SO_CACHE SYSCONFDIR "/ld.so.cache"
+
 CONFIGURE=(
+	--sysconfdir="/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc"
 	--disable-werror
 	--enable-kernel=4.14
 	--enable-stack-protector=strong
@@ -73,7 +77,7 @@ for foo in $locale_list; do
 	charset=`echo "$foo" | cut -f2 -d' '`
 	locale_short=${locale%%.*}
 	echo " * Generating locale $locale_short ($charset)"
-	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}" || /bin/bash
+	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}"
 done
 IFS="$OIFS"
 
@@ -111,10 +115,13 @@ ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main
 
 # add link to ld.so.conf and ld.so.cache since binutils will be looking for it here
 mkdir "${D}/pkg/main/${PKG}.dev.${PVRF}/etc"
-ln -snf /pkg/main/azusa.symlinks.core/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
+ln -snf /pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
 
 # move etc/rpc
-mv -v "${D}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
+mv -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
+rm -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/ld.so.cache"
+rmdir -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc" || /bin/bash -i
+rmdir -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}"
 
 # add a link to /pkg in sysroot, because binutils will always prefix sysroot to paths found in ld.so.conf
 ln -snfT /pkg "${D}/pkg/main/${PKG}.dev.${PVRF}/pkg"
