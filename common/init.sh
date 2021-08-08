@@ -338,8 +338,36 @@ archive() {
 }
 
 finalize() {
+	fixelf
 	organize
 	archive
+}
+
+fixelf() {
+	if [ ! -f /pkg/main/dev-util.patchelf.core/bin/patchelf ]; then
+		echo "FIXELF ERROR: patchelf not found, skipping check"
+		return
+	fi
+	# locate all binaries that have .interp pointing to /lib64/ld-linux-x86-64.so.2
+	# and use patchelf to fix it
+	# readelf -p .interp /bin/bash | grep ld-linux | awk '{ print $3 }'
+	# file /bin/bash
+	# /pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter /bin/bash
+	# /pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs/lib64/ld-linux-x86-64.so.2
+	find "${D}" -executable | while read fn; do
+		local ft="$(file -b "${fn}")"
+		case $ft in
+			ELF*)
+				cur="$(/pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter "${fn}")"
+				case cur in
+					/lib64/ld-linux-x86-64.so.2)
+						# linux amd64
+						/pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs.linux.amd64/lib64/ld-linux-x86-64.so.2 "${fn}"
+						;;
+				esac
+				;;
+		esac
+	done
 }
 
 cleanup() {
