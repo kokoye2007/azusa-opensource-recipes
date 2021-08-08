@@ -1,0 +1,3 @@
+description: Small utility to modify the dynamic linker and RPATH of ELF executables
+homepage: https://nixos.org/patchelf.html
+license: GPL-3
