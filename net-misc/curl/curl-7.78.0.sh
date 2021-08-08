@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg libbrotlidec
 
-doconf
+doconf --with-openssl
 
 make
 make install DESTDIR="${D}"
