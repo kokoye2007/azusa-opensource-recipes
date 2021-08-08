@@ -15,6 +15,7 @@ GLOBAL_SHARED="share/gir-1.0 share/dbus-1 share/polkit-1 share/aclocal"
 
 mkdir -p bin sbin info $GLOBAL_SHARED etc etc/ssl etc/xml full/include
 ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
+ln -snf /pkg/main/azusa.ldso.data/etc/* etc/
 
 if [ $MULTILIB = yes ]; then
 	mkdir -p lib32 lib64 full/lib32 full/lib64
@@ -119,7 +120,6 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 			fi
 			for foo in $LIBS; do
 				if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
-					echo "${p}/$foo" >>etc/ld.so.conf.tmp
 					# generate symlinks for full/lib64
 					cp >/dev/null 2>&1 -rsfT "${p}/$foo" full/$foo/ || true
 				fi
@@ -144,16 +144,5 @@ for pn in $(curl -s http://localhost:100/apkgdb/main?action=list | grep -v busyb
 	# TODO: fonts
 done
 echo
-
-# include all of gcc's stupid libs
-for foo in `realpath /pkg/main/sys-devel.gcc.libs`/*; do
-	echo "$foo" >>etc/ld.so.conf.tmp
-done
-# reverse order in ld.so.conf so newer versions are on top and taken in priority
-tac etc/ld.so.conf.tmp >etc/ld.so.conf
-rm etc/ld.so.conf.tmp
-
-echo "Generating ld.so.cache..."
-/pkg/main/sys-libs.glibc.core/sbin/ldconfig -X -C etc/ld.so.cache -f etc/ld.so.conf 
 
 archive

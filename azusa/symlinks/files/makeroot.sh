@@ -38,7 +38,7 @@ for foo in man info; do
 done
 
 for foo in ld.so.cache ld.so.conf xml; do
-	ln -snf "/pkg/main/azusa.symlinks.core/etc/$foo" "$BASE/etc/$foo"
+	ln -snf "/pkg/main/azusa.ldso.data/etc/$foo" "$BASE/etc/$foo"
 done
 
 ln -snfT /pkg/main/azusa.symlinks.core/pkgconfig "$BASE/usr/share/pkgconfig"
