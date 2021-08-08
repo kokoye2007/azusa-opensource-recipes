@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source "../../common/init.sh"
 
 TZ=`date +%Y%m%d`
@@ -29,19 +29,20 @@ scanlibs() {
 	done
 }
 
-scanlibs "${OS}.${ARCH}"
-
 case $ARCH in
 	amd64)
-		# amd64 → also scan 32bits libs
+		# amd64 → also scan 32bits libs (scan first so they are lower priority)
 		scanlibs "${OS}.386"
 		;;
 esac
+
+scanlibs "${OS}.${ARCH}"
 
 # reverse order in ld.so.conf so newer versions are on top and taken in priority
 tac etc/ld.so.conf.tmp >etc/ld.so.conf
 rm etc/ld.so.conf.tmp
 
+echo
 echo "Generating ld.so.cache..."
 if [ -f /pkg/main/sys-libs.glibc.core/sbin/ldconfig ]; then
 	/pkg/main/sys-libs.glibc.core/sbin/ldconfig -X -C etc/ld.so.cache -f etc/ld.so.conf
