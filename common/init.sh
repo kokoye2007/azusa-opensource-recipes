@@ -447,6 +447,11 @@ docmake() {
 	docmake "$@" || return $?
 }
 
+fetchgit() {
+	inherit git
+	fetchgit "$@" || return $?
+}
+
 importcmakepkg() {
 	local PKGNAME="$1"
 	local PKGVARNAME="$2"
