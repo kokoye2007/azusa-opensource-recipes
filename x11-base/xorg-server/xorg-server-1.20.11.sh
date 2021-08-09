@@ -38,10 +38,10 @@ CONFIGURE=(
 	--disable-linux-acpi
 	--without-dtrace
 	--without-fop
-	#--with-os-vendor=AZUSA
-	#--with-vendor-name=AZUSA
-	#--with-vendor-name-short=AZUSA
-	#--with-vendor-web=https://www.azusa.jp
+	--with-os-vendor=Azusa
+	--with-vendor-name=Azusa
+	--with-vendor-name-short=Azusa
+	--with-vendor-web=https://www.azusa.jp
 	--with-sha1=libcrypto
 	--disable-dependency-tracking
 )
@@ -59,6 +59,6 @@ ln -snfTv "/pkg/main/${PKG}-modules.libs.${PVRF}/lib$LIB_SUFFIX/xorg/modules" "$
 # move config
 mkdir -p "${D}/pkg/main/${PKG}.mod.${PVRF}/share"
 mv -vT "${D}/pkg/main/${PKG}.core.${PVRF}/share/X11" "${D}/pkg/main/${PKG}.mod.${PVRF}/share/X11"
-ln -snfTv "/pkg/main/${PKG}-modules.libs.${PVRF}/share/X11" "${D}/pkg/main/${PKG}.mod.${PVRF}/share/X11"
+ln -snfTv "/pkg/main/${PKG}.mod.${PVRF}/share/X11" "${D}/pkg/main/${PKG}.core.${PVRF}/share/X11"
 
 finalize
