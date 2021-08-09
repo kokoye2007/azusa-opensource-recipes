@@ -35,5 +35,6 @@ ln -snf "${MODDIR}/lib/python${PV%.*}/site-packages" "${D}/pkg/main/${PKG}.core.
 
 org_movelib
 org_fixdev
+fixelf
 
 archive
