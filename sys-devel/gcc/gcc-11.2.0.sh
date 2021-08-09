@@ -14,7 +14,9 @@ export SED=sed
 # make sure gcc can find stuff like -lz
 importpkg zlib
 
-export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp
+if [ -f /pkg/main/sys-devel.gcc.core/bin/cpp ]; then
+	export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp
+fi
 
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --infodir=/pkg/main/${PKG}.doc.${PVRF}/info --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/gcc \
@@ -28,7 +30,7 @@ callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --infodir=/pkg/main/${PKG}.doc.$
 --with-gmp-include=`realpath /pkg/main/dev-libs.gmp.dev/include` --with-gmp-lib=`realpath /pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX` \
 --with-isl-include=`realpath /pkg/main/dev-libs.isl.dev/include` --with-isl-lib=`realpath /pkg/main/dev-libs.isl.libs/lib$LIB_SUFFIX`
 
-make
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 ln -sv gcc "${D}/pkg/main/${PKG}.core.${PVRF}/bin/cc"
