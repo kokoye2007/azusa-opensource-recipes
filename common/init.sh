@@ -1,26 +1,27 @@
+#!/bin/bash
 # Common stuff, variables, etc
 set -e
 
-BASEDIR=`pwd`
+BASEDIR="$(pwd)"
 if [ x"$ROOTDIR" = x ]; then
-	ROOTDIR=$(realpath $BASEDIR/../..)
+	ROOTDIR=$(realpath "$BASEDIR/../..")
 fi
 source "$ROOTDIR/common/arch.sh"
 
 # define variables - this should work most of the time
 # variable naming is based on gentoo
-PF=$(basename $0 .sh)
-PN=$(basename $(pwd))
-CATEGORY=$(basename $(dirname $(pwd)))
+PF=$(basename "$0" .sh)
+PN=$(basename "$(pwd)")
+CATEGORY=$(basename "$(dirname "$(pwd)")")
 # TODO fix P to not include revision if any
-P=${PF}
+P="${PF}"
 PVR="${P#"${PN}-"}"
 PVRF="${PVR}.${OS}.${ARCH}"
 PV=${P#"${PN}-"}
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 if [ x"$NPROC" = x ]; then
-	NPROC=`nproc 2>/dev/null || echo 1`
+	NPROC="$(nproc 2>/dev/null || echo 1)"
 fi
 
 # make pkg-config use our libs
@@ -43,11 +44,11 @@ if [ -d "${PKGBASE}" ]; then
 	rm -fr "${PKGBASE}"
 fi
 mkdir -p "${CHPATH}" "${D}" "${T}"
-cd ${CHPATH}
+cd "${CHPATH}"
 
 inherit() {
 	for foo in "$@"; do
-		source ${ROOTDIR}/common/$foo.sh
+		source "${ROOTDIR}/common/$foo.sh"
 	done
 }
 
@@ -67,15 +68,15 @@ extract() {
 	echo "Extracting $1 ..."
 	case $1 in
 		*.zip)
-			unzip -q $1
+			unzip -q "$1"
 			detect_src
 			;;
 		*.tar.*|*.tgz|*.tbz2)
-			tar xf $1
+			tar xf "$1"
 			detect_src
 			;;
 		*.gz)
-			gunzip $1
+			gunzip "$1"
 			detect_src
 			;;
 	esac
@@ -83,7 +84,7 @@ extract() {
 
 get() {
 	if [ "x$2" = x"" ]; then
-		BN=`basename $1`
+		BN=$(basename "$1")
 	else
 		BN="$2"
 	fi
@@ -94,7 +95,7 @@ get() {
 
 download() {
 	if [ "x$2" = x"" ]; then
-		BN=`basename $1`
+		BN=$(basename "$1")
 	else
 		BN="$2"
 	fi
@@ -104,7 +105,7 @@ download() {
 	fi
 
 	# try to get from our system
-	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" `echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g'` || true
+	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" "$(echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g')" || true
 	if [ -s "$BN" ]; then
 		return
 	fi
@@ -114,28 +115,28 @@ download() {
 
 	if [ -f "$HOME/.aws/credentials" ]; then
 		# upload if possible to aws
-		aws s3 cp "$BN" s3://azusa-pkg/src/main/${PKG/.//}/${BN}
+		aws s3 cp "$BN" "s3://azusa-pkg/src/main/${PKG/.//}/${BN}"
 	fi
 }
 
 prepare() {
 	echo "Checking for config.sub / config.guess"
-	find "${CHPATH}" -name config.sub -o -name config.guess | while read foo; do
+	find "${CHPATH}" -name config.sub -o -name config.guess | while read -r foo; do
 		rm -fv "$foo"
-		ln -snfTv /pkg/main/sys-devel.gnuconfig.core/share/gnuconfig/`basename "$foo"` "$foo"
+		ln -snfTv "/pkg/main/sys-devel.gnuconfig.core/share/gnuconfig/$(basename "$foo")" "$foo"
 	done
 }
 
 squash() {
-	FN=`basename $1`
+	FN=$(basename "$1")
 	mkdir -p "${APKGOUT}"
 	# check fn: 
-	if [ `echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm|arm64)$'` -eq 0 ]; then
+	if [ "$(echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm|arm64)$')" -eq 0 ]; then
 		# add
 		FN="${FN}.${OS}.${ARCH}"
 	fi
 
-	if [ `id -u` -eq 0 ]; then
+	if [ "$(id -u)" -eq 0 ]; then
 		# running as root, so we don't need -all-root
 		mksquashfs "$1" "${APKGOUT}/${FN}.squashfs" -nopad -noappend
 	else
@@ -150,41 +151,40 @@ org_movelib() {
 
 	# ensure lib dirs are in libs and not core
 	for foo in lib lib32 lib64; do
-		if [ -d "pkg/main/${PKG}.core.${PVRF}/$foo" -a ! -L "pkg/main/${PKG}.core.${PVRF}/$foo" ]; then
+		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/$foo" ] && [ ! -L "${D}/pkg/main/${PKG}.core.${PVRF}/$foo" ]; then
 			echo "Moving core $foo directory to libs"
-			mkdir -p "pkg/main/${PKG}.libs.${PVRF}/$foo"
-			mv -v "pkg/main/${PKG}.core.${PVRF}/$foo"/* "pkg/main/${PKG}.libs.${PVRF}/$foo" || true
-			rm -frv "pkg/main/${PKG}.core.${PVRF}/$foo"
-			ln -sv "/pkg/main/${PKG}.libs.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/$foo"
+			mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo"
+			mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/$foo"/* "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo" || true
+			rm -frv "${D}/pkg/main/${PKG}.core.${PVRF}/$foo"
+			ln -sv "/pkg/main/${PKG}.libs.${PVRF}/$foo" "${D}/pkg/main/${PKG}.core.${PVRF}/$foo"
 		fi
 	done
 }
 
 org_fixmultilib() {
-	local LIB=lib
-	if [ $MULTILIB = yes ]; then
-		LIB=lib64
+	if [ "$MULTILIB" != yes ]; then
+		return
 	fi
 
+	local LIB=lib64
+
 	# fix common issues
-	if [ $MULTILIB = yes ]; then
-		for foo in core libs dev; do
-			# if we have a "lib" dir and no lib64, move it
-			if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" -a ! -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
-				mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib" "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
-				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
-			fi
-			if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" -a ! -L "pkg/main/${PKG}.$foo.${PVRF}/lib"  -a -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
-				# move stuff
-				mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib"/* "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
-				rmdir "pkg/main/${PKG}.$foo.${PVRF}/lib"
-			fi
-			# ensure we have a "lib" symlink to lib64 if it exists
-			if [ -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" -a ! -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ]; then
-				ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
-			fi
-		done
-	fi
+	for foo in core libs dev; do
+		# if we have a "lib" dir and no lib64, move it
+		if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ ! -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
+			mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib" "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
+			ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
+		fi
+		if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ ! -L "pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
+			# move stuff
+			mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib"/* "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
+			rmdir "pkg/main/${PKG}.$foo.${PVRF}/lib"
+		fi
+		# ensure we have a "lib" symlink to lib64 if it exists
+		if [ -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ] && [ ! -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ]; then
+			ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
+		fi
+	done
 }
 
 org_moveetc() {
@@ -203,7 +203,7 @@ org_moveetc() {
 
 org_fixdev() {
 	local LIB=lib
-	if [ $MULTILIB = yes ]; then
+	if [ "$MULTILIB" = yes ]; then
 		LIB=lib64
 	fi
 
@@ -240,7 +240,7 @@ organize() {
 
 	local LIBS=lib
 	local LIB=lib
-	if [ $MULTILIB = yes ]; then
+	if [ "$MULTILIB" = yes ]; then
 		LIBS="lib64 lib32"
 		LIB=lib64
 	fi
@@ -257,11 +257,14 @@ organize() {
 	fi
 
 	if [ "$PN" != "font-util" ]; then
-		if [ -d "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts ]; then
+		for foo in "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts; do
+			if [ ! -d "$foo" ]; then
+				continue
+			fi
 			# looks like fonts were installed in the wrong place.
 			mkdir -p "${D}/pkg/main/${PKG}.fonts.${PVRF}"
 			mv -v "${D}/pkg/main/media-fonts.font-util.core".*/share/fonts/* "${D}/pkg/main/${PKG}.fonts.${PVRF}"
-		fi
+		done
 	fi
 
 	if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
@@ -275,11 +278,11 @@ organize() {
 		if [ -d "pkg/main/${PKG}.libs.${PVRF}/$foo" ]; then
 			# check for any .a file, move to dev
 			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}/$foo"
-			if [ $foo = lib64 ]; then
+			if [ "$foo" = lib64 ]; then
 				ln -sv lib64 "pkg/main/${PKG}.dev.${PVRF}/lib"
 			fi
-			count=`find "pkg/main/${PKG}.libs.${PVRF}/$foo" -maxdepth 0 -name '*.a' | wc -l`
-			if [ $count -gt 0 ]; then
+			count=$(find "pkg/main/${PKG}.libs.${PVRF}/$foo" -maxdepth 0 -name '*.a' | wc -l)
+			if [ "$count" -gt 0 ]; then
 				mv -v "pkg/main/${PKG}.libs.${PVRF}/$foo"/*.a "pkg/main/${PKG}.dev.${PVRF}/$foo"
 			fi
 			# link whatever remains to dev
@@ -292,8 +295,8 @@ organize() {
 	for foo in "pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"/python*/; do
 		if [ -d "$foo" ]; then
 			# this should be in a python module dir, not here. Let's try to find out what version of python this is and move it around.
-			PYTHON=`basename "$foo"` # for example "python3.8"
-			VER=`"$PYTHON" --version | awk '{ print $2 }'` # 3.8.6 or whatever
+			PYTHON=$(basename "$foo") # for example "python3.8"
+			VER=$("$PYTHON" --version | awk '{ print $2 }') # 3.8.6 or whatever
 			mkdir -pv "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
 			mv -v "$foo" "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
 		fi
@@ -328,7 +331,7 @@ archive() {
 	echo "Building squashfs..."
 	cd "${D}"
 
-	for foo in pkg/main/${PKG}.*; do
+	for foo in "pkg/main/${PKG}".*; do
 		squash "$foo"
 	done
 
@@ -354,8 +357,9 @@ fixelf() {
 	# file /bin/bash
 	# /pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter /bin/bash
 	# /pkg/main/dev-util.patchelf.core/bin/patchelf --set-interpreter /pkg/main/sys-libs.glibc.libs/lib64/ld-linux-x86-64.so.2
-	find "${D}" -type f -executable | while read fn; do
-		local ft="$(file -b "${fn}")"
+	find "${D}" -type f -executable | while read -r fn; do
+		local ft
+		ft="$(file -b "${fn}")"
 		case $ft in
 			ELF*dynamically*interpreter*)
 				cur="$(/pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter "${fn}")"
@@ -401,7 +405,7 @@ callconf() {
 		return
 	fi
 
-	CONFPATH=`echo "${CHPATH}"/*/configure`
+	CONFPATH=$(echo "${CHPATH}"/*/configure)
 	if [ -x "$CONFPATH" ]; then
 		"${CONFPATH}" "$@"
 		return
@@ -414,23 +418,23 @@ callconf() {
 doconf() {
 	prepare
 	echo "Running configure..."
-	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc --localstatedir=/var \
-	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVRF}/share \
-	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/doc "$@"
+	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --localstatedir=/var \
+	--includedir="/pkg/main/${PKG}.dev.${PVRF}/include" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --datarootdir="/pkg/main/${PKG}.core.${PVRF}/share" \
+	--mandir="/pkg/main/${PKG}.doc.${PVRF}/man" --docdir="/pkg/main/${PKG}.doc.${PVRF}/doc" "$@"
 }
 
 doconflight() {
 	prepare
 	echo "Running configure..."
-	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} "$@"
+	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" "$@"
 }
 
 doconf213() {
 	prepare
 	echo "Running configure..."
-	callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc \
-	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --datarootdir=/pkg/main/${PKG}.core.${PVRF}/share \
-	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man "$@"
+	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc \
+	--includedir="/pkg/main/${PKG}.dev.${PVRF}/include" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --datarootdir="/pkg/main/${PKG}.core.${PVRF}/share" \
+	--mandir="/pkg/main/${PKG}.doc.${PVRF}/man" "$@"
 }
 
 domeson() {
@@ -470,8 +474,8 @@ importpkg() {
 		elif [ "$foo" = "X" ]; then
 			# import all of X11
 			local sub=("x11-base/xorg-proto")
-			for foo in "${ROOTDIR}/x11-libs"/lib*; do
-				lib=`basename "$foo"`
+			for foo2 in "${ROOTDIR}/x11-libs"/lib*; do
+				lib=$(basename "$foo2")
 				sub+=("x11-libs/$lib")
 			done
 			importpkg "${sub[@]}"
@@ -480,10 +484,13 @@ importpkg() {
 		fi
 	done
 
+	local inc
+	local lib
+
 	if [ x"$PKGCFG" != x ]; then
 		pkg-config --exists --print-errors "$PKGCFG"
-		local inc="$(pkg-config --cflags-only-I "$PKGCFG")"
-		local lib="$(pkg-config --libs-only-L "$PKGCFG")"
+		inc="$(pkg-config --cflags-only-I "$PKGCFG")"
+		lib="$(pkg-config --libs-only-L "$PKGCFG")"
 		export CPPFLAGS="$CPPFLAGS $inc"
 		export LDFLAGS="$LDFLAGS $lib"
 
