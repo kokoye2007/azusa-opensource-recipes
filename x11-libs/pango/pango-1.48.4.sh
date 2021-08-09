@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnome.org/pub/gnome/sources/pango/1.42/${P}.tar.xz
+get http://ftp.gnome.org/pub/gnome/sources/pango/1.48/${P}.tar.xz
+acheck
 
 cd "${T}"
 
