@@ -125,4 +125,5 @@ for sapi in $SAPIS; do
 	fi
 done
 
+fixelf
 archive
