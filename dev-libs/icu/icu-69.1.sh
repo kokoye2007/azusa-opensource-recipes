@@ -2,11 +2,11 @@
 source "../../common/init.sh"
 
 get https://github.com/unicode-org/icu/releases/download/release-${PV//./-}/icu4c-${PV//./_}-src.tgz
-#acheck
+acheck
 
 cd "icu/source"
 
-doconf
+CC=gcc CXX=g++ doconf
 
 make
 make install DESTDIR="${D}"

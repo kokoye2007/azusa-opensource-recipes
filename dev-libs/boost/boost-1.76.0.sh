@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dl.bintray.com/boostorg/release/${PV}/source/boost_${PV//./_}.tar.bz2
+get https://boostorg.jfrog.io/artifactory/main/release/${PV}/source/boost_${PV//./_}.tar.bz2
 acheck
 
 importpkg dev-libs/icu zlib app-arch/bzip2 app-arch/xz app-arch/zstd
