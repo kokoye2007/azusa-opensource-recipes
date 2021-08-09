@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 for foo in */*; do
 	if [ ! -d "$foo" ]; then
