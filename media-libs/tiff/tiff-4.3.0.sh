@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://download.osgeo.org/libtiff/${P}.tar.gz
+acheck
 
 cd "${T}"
 
