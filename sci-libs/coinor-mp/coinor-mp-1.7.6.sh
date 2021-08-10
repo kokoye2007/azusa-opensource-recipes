@@ -19,7 +19,7 @@ sed -i \
 
 cd "${T}"
 
-doconf --enable-dependency-linking --with-coin-instdir="/pkg/main/${PKG}.core.${PVRF}" --datadir=/usr/share
+doconflight --enable-dependency-linking --with-coin-instdir="/pkg/main/${PKG}.core.${PVRF}" --datadir=/usr/share
 
 make
 make install DESTDIR="${D}"

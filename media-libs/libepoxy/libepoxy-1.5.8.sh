@@ -2,6 +2,9 @@
 source "../../common/init.sh"
 
 get https://github.com/anholt/libepoxy/releases/download/${PV}/${P}.tar.xz
+acheck
+
+importpkg x11 egl
 
 cd "${T}"
 

@@ -221,7 +221,8 @@ org_fixdev() {
 			if [ ! -d "pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
 				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo" "pkg/main/${PKG}.dev.${PVRF}"
 			else
-				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"/* "pkg/main/${PKG}.dev.${PVRF}/$foo"
+				mkdir -p "pkg/main/${PKG}.dev.${PVRF}/$foo"
+				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"/* -t "pkg/main/${PKG}.dev.${PVRF}/$foo"
 				rmdir -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"
 			fi
 			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/share"

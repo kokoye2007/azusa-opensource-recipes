@@ -11,7 +11,7 @@ cd "${T}"
 # ./sysdeps/generic/dl-cache.h:38:# define LD_SO_CACHE SYSCONFDIR "/ld.so.cache"
 
 CONFIGURE=(
-	--host="$BUILD_TARGET"
+	--host="$CHOST"
 	--sysconfdir="/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc"
 	--disable-werror
 	--enable-kernel=4.14

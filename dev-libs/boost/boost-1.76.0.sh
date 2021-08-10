@@ -7,19 +7,20 @@ acheck
 importpkg dev-libs/icu zlib app-arch/bzip2 app-arch/xz app-arch/zstd
 
 BOOST_BUILD_PATH="${CHPATH}/boost_${PV//./_}"
+BOOST_PYTHON="3.9"
 
 cd "$BOOST_BUILD_PATH"
 
-export CPPFLAGS="$CPPFLAGS -I/pkg/main/dev-lang.python.core.3.8/include/python3.8"
+export CPPFLAGS="$CPPFLAGS -I/pkg/main/dev-lang.python.core.${BOOST_PYTHON}/include/python${BOOST_PYTHON}"
 
 # configure & build
-./bootstrap.sh --with-icu=/pkg/main/dev-libs.icu.core --with-python=python3.8 --with-python-root=/pkg/main/dev-lang.python.core.3.8/ --with-python-version=3.8 --prefix="/pkg/main/${PKG}.core.${PVRF}" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --includedir="/pkg/main/${PKG}.dev.${PVRF}/include"
+./bootstrap.sh --with-icu=/pkg/main/dev-libs.icu.core --with-python="python${BOOST_PYTHON}" --with-python-root="/pkg/main/dev-lang.python.core.${BOOST_PYTHON}/" --with-python-version="${BOOST_PYTHON}" --prefix="/pkg/main/${PKG}.core.${PVRF}" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --includedir="/pkg/main/${PKG}.dev.${PVRF}/include"
 
 # create user-config.jam
 cat >>user-config.jam <<EOF
 using gcc : $(gcc -dumpversion) : /bin/gcc : <cflags>"${CFLAGS}" <cxxflags>"${CPPFLAGS} ${CXXFLAGS}" <linkflags>"${CPPFLAGS} ${LDFLAGS} -lstdc++" ;
 using mpi ;
-using python : 3.8 : python3.8 : /pkg/main/dev-lang.python.core.3.8/include/python3.8 : /pkg/main/dev-lang.python.libs.3.8/lib$LIB_SUFFIX ;
+using python : ${BOOST_PYTHON} : python${BOOST_PYTHON} : /pkg/main/dev-lang.python.core.${BOOST_PYTHON}/include/python${BOOST_PYTHON} : /pkg/main/dev-lang.python.libs.${BOOST_PYTHON}/lib$LIB_SUFFIX ;
 EOF
 
 #ICU_PATH="/pkg/main/dev-libs.icu.core"

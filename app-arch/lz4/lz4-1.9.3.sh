@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-CMAKE_ROOT=${S}/contrib/cmake_unofficial
+CMAKE_ROOT=${S}/build/cmake
 docmake -DBUILD_STATIC_LIBS=NO
 
 make

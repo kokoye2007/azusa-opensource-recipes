@@ -1,0 +1,3 @@
+description: Fast, multi-threaded malloc() and nifty performance analysis tools
+homepage: https://github.com/gperftools/gperftools
+license: MIT

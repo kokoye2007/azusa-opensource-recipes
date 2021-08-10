@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get http://ftp.de.debian.org/debian/pool/main/liba/libaio/libaio_${PV}.orig.tar.xz
+acheck
 
 cd "${P}"
 

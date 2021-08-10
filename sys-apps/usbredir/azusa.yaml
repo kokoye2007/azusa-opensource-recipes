@@ -1,0 +1,3 @@
+description: TCP daemon and set of libraries for usbredir protocol (redirecting USB traffic)
+homepage: https://www.spice-space.org/usbredir.html
+license: GPL-2 LGPL-2.1

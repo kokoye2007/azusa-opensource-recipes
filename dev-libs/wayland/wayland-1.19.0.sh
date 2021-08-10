@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconf
+doconf --disable-documentation
 
 make
 make install DESTDIR="${D}"

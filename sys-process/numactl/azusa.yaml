@@ -1,0 +1,3 @@
+description: Utilities and libraries for NUMA systems
+homepage: https://github.com/numactl/numactl
+license: GPL-2

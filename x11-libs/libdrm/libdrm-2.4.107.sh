@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dri.freedesktop.org/libdrm/${P}.tar.bz2
+get https://dri.freedesktop.org/libdrm/${P}.tar.xz
 acheck
 
 cd "${T}"

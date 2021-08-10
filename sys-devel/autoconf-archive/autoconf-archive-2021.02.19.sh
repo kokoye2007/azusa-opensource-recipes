@@ -1,11 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://people.redhat.com/sgrubb/libcap-ng/${P}.tar.gz
+get https://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
 acheck
 
 cd "${T}"
 
+# configure & build
 doconf
 
 make
