@@ -468,14 +468,19 @@ importpkg() {
 	local PKGCFG=""
 	for foo in "$@"; do
 		if [[ $foo == */* ]]; then
-			# standard import paths
-			if [ -d "/pkg/main/${foo/\//.}.dev/include" ]; then
-				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev/include"
-				export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev/include"
+			local vers=""
+			if [[ $foo == */*:* ]]; then
+				vers=".$(echo "$foo" | cut -d: -f2)"
+				foo="$(echo "$foo" | cut -d: -f1)"
 			fi
-			if [ -d "/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX" ]; then
-				export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
-				export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};/pkg/main/${foo/\//.}.libs/lib$LIB_SUFFIX"
+			# standard import paths
+			if [ -d "/pkg/main/${foo/\//.}.dev${vers}/include" ]; then
+				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev${vers}/include"
+				export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev${vers}/include"
+			fi
+			if [ -d "/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX" ]; then
+				export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
+				export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
 			fi
 		elif [ "$foo" = "X" ]; then
 			# import all of X11
