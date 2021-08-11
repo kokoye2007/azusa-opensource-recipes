@@ -12,7 +12,7 @@ importpkg \
 	sys-fs/eudev sys-apps/util-linux sys-apps/keyutils net-nds/openldap app-crypt/mit-krb5 sys-block/libzbd \
 	sys-process/numactl dev-util/cunit dev-libs/libaio dev-db/sqlite dev-libs/leveldb app-arch/snappy:1.1.8 app-arch/lz4 \
 	dev-util/google-perftools sys-auth/oath-toolkit dev-lang/python sys-libs/zlib dev-util/lttng-ust \
-	dev-libs/rocksdb dev-libs/boost dev-lang/lua sys-libs/liburing sys-libs/ncurses dev-libs/libnl dev-libs/icu \
+	dev-libs/rocksdb:6.15 dev-libs/boost dev-lang/lua sys-libs/liburing sys-libs/ncurses dev-libs/libnl dev-libs/icu \
 	net-libs/rabbitmq-c dev-libs/librdkafka dev-libs/pmdk dev-libs/userspace-rcu
 
 cd "${T}"
@@ -63,7 +63,7 @@ CMAKEOPTS=(
 
 docmake "${CMAKEOPTS[@]}"
 
-ninja
+ninja --verbose
 DESTDIR="${D}" ninja install
 
 finalize

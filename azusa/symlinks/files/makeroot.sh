@@ -4,7 +4,6 @@
 
 # See: https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
 
-
 BASE="$1"
 
 if [ x"$BASE" = x -o ! -d "$BASE" ]; then

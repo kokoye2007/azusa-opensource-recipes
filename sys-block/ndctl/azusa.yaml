@@ -1,0 +1,3 @@
+description: Helper tools and libraries for managing non-volatile memory on Linux
+homepage: https://github.com/pmem/ndctl
+license: GPL-2 LGPL-2.1 MIT CC0-1.0
