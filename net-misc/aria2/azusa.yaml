@@ -1,0 +1,3 @@
+description: A download utility with segmented downloading with BitTorrent support
+homepage: https://aria2.github.io/
+license: GPL-2+-with-openssl-exception
