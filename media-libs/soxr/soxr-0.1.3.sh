@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://sourceforge.net/projects/soxr/files/${P}-Source.tar.xz
+acheck
 
 cd "${T}"
 

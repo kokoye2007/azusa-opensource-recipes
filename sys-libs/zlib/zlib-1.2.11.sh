@@ -7,7 +7,7 @@ acheck
 cd "${T}"
 
 # configure & build
-callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
+doconflight
 make
 make install DESTDIR=${D}
 

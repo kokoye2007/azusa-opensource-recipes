@@ -1,11 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xiph.org/releases/flac/${P}.tar.xz
+get https://github.com/ofalk/${PN}/archive/${P}.tar.gz
+acheck
 
 cd "${T}"
 
-doconf
+doconflight
 
 make
 make install DESTDIR="${D}"

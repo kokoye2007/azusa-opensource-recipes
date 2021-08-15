@@ -1,12 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/modplug-xmms/${P}.tar.gz
+get http://downloads.xiph.org/releases/flac/${P}.tar.xz
 acheck
 
 cd "${T}"
-
-importpkg media-libs/libao
 
 doconf
 

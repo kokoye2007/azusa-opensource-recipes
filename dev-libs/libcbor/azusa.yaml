@@ -1,0 +1,3 @@
+description: CBOR protocol implementation for C and others
+homepage: https://github.com/pjk/libcbor
+license: MIT
