@@ -2,8 +2,6 @@
 source "../../common/init.sh"
 inherit python
 
-PYTHON_RESTRICT="3"
-
 get ftp://xmlsoft.org/libxml2/${P}.tar.gz
 acheck
 
@@ -26,7 +24,7 @@ cd "${CHPATH}/${P}/python"
 
 # fix includes_dir to include both ${D}/pkg/main/${PKG}.dev.${PVRF}/include and /pkg/main/sys-libs.glibc.dev/include
 sed -i -e "s#^includes_dir = \\[#includes_dir = ['${D}/pkg/main/${PKG}.dev.${PVRF}/include', '/pkg/main/sys-libs.glibc.dev/include',#" setup.py
-export LDFLAGS="${LDFLAGS} -L${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX"
+export LDFLAGS="${LDFLAGS} -L${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 
 pythonsetup
 
