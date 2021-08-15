@@ -4,16 +4,20 @@ source "../../common/init.sh"
 get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/submodules/${PN}-everywhere-src-${PV}.tar.xz
 acheck
 
+cd "${S}"
+
 # fix missing qt_version_tag symbol w/ LTO, bug 674382
 sed -i -e 's/^gcc:ltcg/gcc/' "${S}/src/corelib/global/global.pri"
+
+apatch "$FILESDIR/qtcore-5.15.2-gcc11.patch"
+
+importpkg zlib libevent
 
 # alter $S/qtbase/mkspecs/common/gcc-base.conf
 cat >>"$S/mkspecs/common/gcc-base.conf" <<EOF
 eval(QMAKE_CFLAGS_RELEASE += \$\$(CPPFLAGS))
 eval(QMAKE_LFLAGS_RELEASE += \$\$(LDFLAGS))
 EOF
-
-importpkg libevent
 
 cd "${T}"
 
@@ -23,7 +27,7 @@ CONFIGURE=(
 	-headerdir "/pkg/main/${PKG}.dev.${PVRF}/include"
 	-libdir "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 	-plugindir "/pkg/main/${PKG}.libs.${PVRF}/plugins"
-	-docdir "/pkg/main/${PKG}.libs.${PVRF}/doc"
+	-docdir "/pkg/main/${PKG}.doc.${PVRF}/doc"
 	-examplesdir "/pkg/main/${PKG}.doc.${PVRF}/examples"
 	-no-compile-examples
 
@@ -36,66 +40,34 @@ CONFIGURE=(
 
 	-pkg-config
 	-glib
-	-icu
+	-icu ICU_PREFIX=/pkg/main/dev-libs.icu.dev
 	-ssl
-	-openssl-linked
+	-openssl-linked OPENSSL_PREFIX=/pkg/main/dev-libs.openssl.dev
 	-dbus-linked
 
 	# Third-Party Libraries
-	-system-zlib
-	-system-libjpeg
-	-system-libpng
-	-system-xcb
-	-system-freetype
-	-system-pcre
-	-system-harfbuzz
-	-system-doubleconversion # thirdparty
-	-system-sqlite # db
+	-system-zlib ZLIB_PREFIX=/pkg/main/sys-libs.zlib.dev
 
 	# required for -gtk
-	-L/pkg/main/sys-libs.zlib.libs/lib$LIB_SUFFIX
 	-L/pkg/main/x11-libs.libX11.libs/lib$LIB_SUFFIX
 	-L/pkg/main/x11-libs.libXext.libs/lib$LIB_SUFFIX
 
-	# required for qtmultimedia:
-	# /pkg/main/media-libs.gst-plugins-base.core.1.16.2.linux.amd64/include/gstreamer-1.0/gst/gl/wayland/gstgldisplay_wayland.h:26:10: fatal error: wayland-client.h: No such file or directory
-	-I/pkg/main/dev-libs.wayland.dev/include
 
-	# libs, etc: qtbase
-	DBUS_PREFIX=/pkg/main/sys-apps.dbus.dev
-	LIBUDEV_PREFIX=/pkg/main/sys-fs.udev.dev
-	ZLIB_PREFIX=/pkg/main/sys-libs.zlib.dev
-	ZSTD_PREFIX=/pkg/main/app-arch.zstd.dev
-	DOUBLECONVERSION_PREFIX=/pkg/main/dev-libs.double-conversion.dev
-	ICU_PREFIX=/pkg/main/dev-libs.icu.dev
-	PCRE2_PREFIX=/pkg/main/dev-libs.libpcre2.dev
-	OPENSSL_PREFIX=/pkg/main/dev-libs.openssl.dev
-
-	# gui
-	HARFBUZZ_PREFIX=/pkg/main/media-libs.harfbuzz.dev
-	# LIBMD4C_PREFIX
-	# OpenVG → mesa?
-	OPENGL_PREFIX=/pkg/main/media-libs.mesa.dev # ?
-	# vulkan
-	LIBINPUT_PREFIX=/pkg/main/dev-libs.libinput.dev
-	# TSLIB_PREFIX → x11-libs/tslib
-	XCB_PREFIX=/pkg/main/x11-libs.libxcb.dev
-
-	# sqldrivers
-	MYSQL_PREFIX=/pkg/main/dev-db.mariadb.dev
+	-system-libjpeg
+	-system-libpng
+	-system-freetype
+	-system-pcre
+	-system-harfbuzz HARFBUZZ_PREFIX=/pkg/main/media-libs.harfbuzz.dev
+	-system-doubleconversion DOUBLECONVERSION_PREFIX=/pkg/main/dev-libs.double-conversion.dev
+	-system-sqlite # db
 )
 
-callconf "${CONFIGURE[@]}" | tee configure.log
+callconf "${CONFIGURE[@]}"
 
-# trick to make errors shown in red in make
 make -j"$NPROC" || /bin/bash -i
-#	2> >(while IFS='' read -r line; do echo -e "\e[01;31m$line\e[0m" >&2; done)
-make install DESTDIR="${D}"
+make install INSTALL_ROOT="${D}"
 
-organize
-
-echo "TODO → split Qt into per-module files"
+echo "check plugins in ${D}/pkg/main/${PKG}.libs.${PVRF}/plugins"
 /bin/bash -i
 
-
-archive
+finalize
