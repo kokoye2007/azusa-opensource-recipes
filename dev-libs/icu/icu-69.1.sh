@@ -20,6 +20,6 @@ ln -snfT "/pkg/main/${PKG}.dev.${PVRF}/include" "${D}/pkg/main/${PKG}.core.${PVR
 
 # fix header files so that when something is included in C ansi code, it doesn't fail
 # often happens with programs linking against libxml2 which itself will include icu, comment style needs to be /* */
-sed -rie 's#(^| )// *(.*)#\1/* \2 */#' "${D}/pkg/main/${PKG}.dev.${PVRF}/include/unicode"/*.h
+sed -rie 's#^([#_0-9a-zA-Z ]*)// *(.*)#\1/* \2 */#' "${D}/pkg/main/${PKG}.dev.${PVRF}/include/unicode"/*.h
 
 finalize
