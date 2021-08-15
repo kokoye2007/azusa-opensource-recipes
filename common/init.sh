@@ -568,3 +568,8 @@ aautoreconf() {
 	libtoolize --force --install
 	autoreconf -fi -I /pkg/main/azusa.symlinks.core/share/aclocal/ "${EXTRAOPT[@]}"
 }
+
+die() {
+	echo "$@"
+	exit 1
+}
