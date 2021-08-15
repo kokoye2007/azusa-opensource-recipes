@@ -389,25 +389,30 @@ cleanup() {
 callconf() {
 	# try to locate configure
 	if [ x"$CONFPATH" != x ]; then
+		echo "Calling ${CONFPATH} $@"
 		"${CONFPATH}" "$@"
 		return
 	fi
 
 	if [ -x ./configure ]; then
+		echo "Calling ./configure $@"
 		./configure "$@"
 		return
 	fi
 	if [ -x "${S}/configure" ]; then
+		echo "Calling ${S}/configure $@"
 		"${S}/configure" "$@"
 		return
 	fi
 	if [ -x "${CHPATH}/configure" ]; then
+		echo "Calling ${CHPATH}/configure $@"
 		"${CHPATH}/configure" "$@"
 		return
 	fi
 
 	CONFPATH=$(echo "${CHPATH}"/*/configure)
 	if [ -x "$CONFPATH" ]; then
+		echo "Calling ${CONFPATH} $@"
 		"${CONFPATH}" "$@"
 		return
 	fi
