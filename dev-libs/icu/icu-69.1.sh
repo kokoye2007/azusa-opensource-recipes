@@ -8,7 +8,7 @@ S="${S}/source"
 
 cd "${T}"
 
-CC=gcc CXX=g++ doconf --disable-renaming --disable-debug --disable-samples --enable-static --disable-layoutex
+CC=gcc CXX=g++ doconf --disable-debug --disable-samples --enable-static
 
 make -j"$NPROC" VERBOSE=1
 make install DESTDIR="${D}"
