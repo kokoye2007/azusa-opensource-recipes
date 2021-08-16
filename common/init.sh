@@ -131,7 +131,7 @@ squash() {
 	FN=$(basename "$1")
 	mkdir -p "${APKGOUT}"
 	# check fn: 
-	if [ "$(echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm|arm64)$')" -eq 0 ]; then
+	if [ "$(echo "$FN" | grep -c -E '\.(linux)\.(amd64|386|arm|arm64|any)$')" -eq 0 ]; then
 		# add
 		FN="${FN}.${OS}.${ARCH}"
 	fi

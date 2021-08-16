@@ -1,11 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-if [ ! -d "/pkg/main/${PKG}.src.${PV}" ]; then
+if [ ! -d "/pkg/main/${PKG}.src.${PV}.linux.any" ]; then
+	echo "Dir /pkg/main/${PKG}.src.${PV}.linux.any not found"
 	get https://cdn.kernel.org/pub/linux/kernel/v5.x/${P}.tar.xz
 
 	mkdir -p "${D}/pkg/main"
-	mv "${P}" "${D}/pkg/main/${PKG}.src.${PV}"
+	mv "${P}" "${D}/pkg/main/${PKG}.src.${PV}.linux.any"
 
 	archive
 	exit
@@ -17,7 +18,7 @@ for GOARCH in $TGT; do
 	mkdir -p "${T}/$GOARCH"
 
 	cd "${T}/$GOARCH"
-	echo "include /pkg/main/${PKG}.src.${PV}/Makefile" >Makefile
+	echo "include /pkg/main/${PKG}.src.${PV}.linux.any/Makefile" >Makefile
 	cp -v $FILESDIR/config-${PV}-$GOARCH ".config"
 
 	echo "Building kernel for $GOARCH..."

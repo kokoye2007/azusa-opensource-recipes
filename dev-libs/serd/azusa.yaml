@@ -1,0 +1,3 @@
+description: Library for RDF syntax which supports reading and writing Turtle and NTriples
+homepage: http://drobilla.net/software/serd/
+license: ISC

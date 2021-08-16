@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg zlib app-arch/bzip2 app-arch/zstd dev-libs/lzo app-arch/lz4 app-arch/xz-utils dev-libs/nettle
+importpkg zlib app-arch/bzip2 app-arch/zstd dev-libs/lzo app-arch/lz4 app-arch/xz dev-libs/nettle
 
 doconf --disable-static --with-lzo2 --with-nettle
 
