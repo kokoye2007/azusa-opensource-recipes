@@ -17,15 +17,16 @@ PATCHES=(
 )
 
 apatch "${PATCHES[@]}"
+touch zbar/gettext.h
 aautoreconf
 
 cd "${T}"
 
-importpkg X libjpeg media-libs/mesa
+importpkg X libjpeg media-libs/mesa zlib
 
-doconf --with-dbus --with-gtk3 --with-jpeg --with-gir --with-python=auto --disable-static --enable-pthread --enable-video --with-x --with-xshm --with-xv --with-graphicsmagick --without-imagemagick --with-qt --with-qt5 
+doconf --with-dbus --with-gtk3 --with-jpeg --with-gir --with-python=auto --disable-static --enable-pthread --enable-video --with-x --with-xshm --with-xv --with-graphicsmagick --without-imagemagick --without-qt --without-qt5 
 
-make
+make || /bin/bash -i
 make install DESTDIR="${D}"
 
 finalize

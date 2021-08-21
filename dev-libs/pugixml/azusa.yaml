@@ -1,0 +1,3 @@
+description: Light-weight, simple, and fast XML parser for C++ with XPath support
+homepage: https://pugixml.org/ https://github.com/zeux/pugixml/
+license: MIT

@@ -1,0 +1,3 @@
+description: kill a client by its X resource
+homepage: https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/app/xkill
+license: MIT

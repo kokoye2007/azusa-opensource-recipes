@@ -1,0 +1,3 @@
+description: A simple entropy daemon using the HAVEGE algorithm
+homepage: http://www.issihosts.com/haveged/
+license: GPL-3+
