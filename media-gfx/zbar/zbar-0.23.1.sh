@@ -7,12 +7,13 @@ acheck
 cd "${S}"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-0.10-errors.patch"
-	"${FILESDIR}/${P}_create_correct_pkconfig_file_for_zbar-qt5.patch"
-	"${FILESDIR}/${P}_fix_detection_of_errors_in_the_v4l_read.patch"
-	"${FILESDIR}/${P}_fix_python_detect.patch"
-	"${FILESDIR}/${P}_fix_Qt5X11Extras_detect.patch"
-	"${FILESDIR}/${P}_reset_conversion_descriptor_after_close.patch"
+	"${FILESDIR}/${P}_fix_leftover_on_shell_compatibility.patch"
+	"${FILESDIR}/${P}_fix_unittest.patch"
+	"${FILESDIR}/${P}_musl_include_locale_h.patch"
+	"${FILESDIR}/${PN}-0.23_fix_Qt5X11Extras_detect.patch"
+	"${FILESDIR}/${PN}-0.23_fix_python_detect.patch"
+	"${FILESDIR}/${P}-autoconf-2.70.patch"
+	"${FILESDIR}/${PN}-0.23.1_python_tp_print.patch"
 )
 
 apatch "${PATCHES[@]}"
