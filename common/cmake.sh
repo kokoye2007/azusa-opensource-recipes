@@ -34,6 +34,7 @@ EOF
 
 	set -- "$CMAKE_ROOT" \
 		-C "$common_config" \
+		-G Ninja \
 		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVRF}" \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \
@@ -45,4 +46,6 @@ EOF
 
 	echo "Running: cmake $@"
 	cmake "$@" || return $?
+	ninja || return $?
+	DESTDIR="${D}" ninja install || return $?
 }

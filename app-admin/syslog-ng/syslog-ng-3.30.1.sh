@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg json-c
+importpkg json-c openssl
 
 doconf --sysconfdir=/etc/syslog-ng --disable-java
 
