@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/AzusaOS/${PN}/releases/download/v${PV}/${P}.tar.xz
+get https://download.sourceforge.net/${PN}/${P}.tar.xz
 acheck
 
 cd "${S}"
