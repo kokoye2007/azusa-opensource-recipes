@@ -61,4 +61,5 @@ if [ "$MULTILIB" = "yes" ]; then
 fi
 
 # do not use finalize because we depend on location of some files
+fixelf
 archive

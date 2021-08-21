@@ -8,7 +8,7 @@ cd "${T}"
 
 doconf --disable-static
 
-make
+make || /bin/bash -i
 make install DESTDIR="${D}"
 
 finalize

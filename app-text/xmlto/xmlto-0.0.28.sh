@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://releases.pagure.org/xmlto/${P}.tar.bz2
+acheck
 
 cd "${T}"
 

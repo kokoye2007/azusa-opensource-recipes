@@ -1,7 +1,24 @@
 #!/bin/sh
 
-echo -n "Provide file url: "
-read file
+if [ x"$1" != x ]; then
+	file="$1"
+else
+	echo -n "Provide file url: "
+	read file
+fi
+
+case $file in
+	http://*)
+		:
+		;;
+	https://*)
+		:
+		;;
+	*)
+		# for example Locale::gettext
+		file="$(curl -s "https://fastapi.metacpan.org/v1/download_url/$file" | jq -r .download_url)"
+		;;
+esac
 
 base=`basename "$file" .tar.gz`
 pkg=`echo "$base" | sed -r -e 's/(.*)-.*/\1/'`
@@ -29,7 +46,7 @@ inherit perl
 get $URL_REPL
 acheck
 
-cd "\${P}"
+cd "\${S}"
 
 perlsetup
 finalize
