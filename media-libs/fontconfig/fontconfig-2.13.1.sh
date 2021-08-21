@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://www.freedesktop.org/software/fontconfig/release/${P}.tar.bz2
+acheck
 
 cd "${T}"
 

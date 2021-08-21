@@ -34,7 +34,8 @@ else
 	TMPBASE="$HOME/tmp/build"
 fi
 PKGBASE="${TMPBASE}/${PN}-${PVR}"
-CHPATH="${PKGBASE}/work"
+WORKDIR="${PKGBASE}/work"
+CHPATH="$WORKDIR" ## COMPAT XXX REMOVEME
 D="${PKGBASE}/dist"
 T="${PKGBASE}/temp"
 APKGOUT=/tmp/apkg
@@ -77,7 +78,9 @@ extract() {
 			;;
 		*.gz)
 			gunzip "$1"
-			detect_src
+			;;
+		*.xz)
+			xz -d "$1"
 			;;
 	esac
 }

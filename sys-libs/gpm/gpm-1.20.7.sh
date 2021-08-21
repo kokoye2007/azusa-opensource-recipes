@@ -10,8 +10,7 @@ cd "${P}"
 importpkg ncurses
 
 # gentoo patches
-patch -p1 <"$FILESDIR/gpm-1.20.7-sysmacros.patch"
-patch -p1 <"$FILESDIR/gpm-1.20.7-glibc-2.26.patch"
+apatch "$FILESDIR/gpm-1.20.7-sysmacros.patch" "$FILESDIR/gpm-1.20.7-glibc-2.26.patch" "$FILESDIR/gpm-1.20.7-gcc-10.patch"
 
 # fix ABI values
 sed -i -e '/^abi_lev=/s:=.*:=1:' -e '/^abi_age=/s:=.*:=20:' configure.ac.footer

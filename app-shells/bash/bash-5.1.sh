@@ -7,8 +7,7 @@ acheck
 echo "Compiling ${P} ..."
 cd "${T}"
 
-# force readline to be linkable (and everything, really)
-export LIBS="-L/pkg/main/azusa.symlinks/full/lib$LIB_SUFFIX"
+importpkg readline
 
 # configure & build
 doconf --without-bash-malloc --with-installed-readline

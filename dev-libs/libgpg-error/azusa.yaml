@@ -1,0 +1,3 @@
+description: Contains error handling functions used by GnuPG software
+homepage: https://www.gnupg.org/related_software/libgpg-error
+license: GPL-2 LGPL-2.1

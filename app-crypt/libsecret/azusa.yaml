@@ -1,0 +1,3 @@
+description: GObject library for accessing the freedesktop.org Secret Service API
+homepage: https://wiki.gnome.org/Projects/Libsecret
+license: LGPL-2.1+ Apache-2.0

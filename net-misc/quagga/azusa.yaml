@@ -1,0 +1,3 @@
+description: A free routing daemon replacing Zebra supporting RIP, OSPF and BGP
+homepage: https://www.quagga.net/
+license: GPL-2

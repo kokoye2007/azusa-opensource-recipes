@@ -1,0 +1,3 @@
+description: Various utilities dealing with the PCI bus
+homepage: https://mj.ucw.cz/sw/pciutils/ https://git.kernel.org/?p=utils/pciutils/pciutils.git
+license: GPL-2

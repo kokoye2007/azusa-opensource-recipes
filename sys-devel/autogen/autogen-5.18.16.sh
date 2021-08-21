@@ -9,6 +9,8 @@ sed -i -e '/def_bf/s/MAXNAMELEN/MAXNAMELEN+4/' getdefs/getdefs.c
 
 cd "${T}"
 
+importpkg atomic_ops
+
 doconf --disable-static --disable-dependency-tracking
 
 make

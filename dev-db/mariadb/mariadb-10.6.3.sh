@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu
+importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu dev-libs/boost
 
 # mariadb won't honor CPPFLAGS
 export CFLAGS="${CPPFLAGS} -O2"

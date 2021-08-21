@@ -1,0 +1,3 @@
+description: C library for reading and writing files containing sampled sound
+homepage: https://libsndfile.github.io/libsndfile/
+license: LGPL-2.1
