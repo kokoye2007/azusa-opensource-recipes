@@ -13,7 +13,8 @@ for PERL_VERSION in $PERL_VERSIONS; do
 		BASE=`basename "$foo"`
 		if [ `echo "$MODS" | grep -c "$BASE\\.mod"` -gt 0 ]; then
 			# already have
-			continue
+			#continue
+			:
 		fi
 		# detect version
 		VERS=""

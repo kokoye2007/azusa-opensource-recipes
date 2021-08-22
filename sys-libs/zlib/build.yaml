@@ -1,0 +1,9 @@
+versions:
+  stable: 1.2.11
+build:
+  -
+    version: "*"
+    source:
+      - "http://zlib.net/${P}.tar.gz"
+    engine: autoconf
+    options: [light]

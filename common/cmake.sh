@@ -20,12 +20,14 @@ EOF
 
 	local common_config="${CHPATH}/azusa_common_config.cmake"
 	cat >"$common_config" <<EOF
-set(LIB_SUFFIX ${LIB_SUFFIX} CACHE STRING "library path suffix" FORCE)
+set(LIB_SUFFIX "${LIB_SUFFIX}" CACHE STRING "library path suffix" FORCE)
+set(CMAKE_INSTALL_BINDIR "/pkg/main/${PKG}.core.${PVRF}/bin" CACHE PATH "")
+set(CMAKE_INSTALL_DATADIR "/pkg/main/${PKG}.core.${PVRF}/share" CACHE PATH "")
 set(CMAKE_INSTALL_LIBDIR "/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}" CACHE PATH "Output directory for libraries")
+set(CMAKE_INSTALL_DOCDIR "/pkg/main/${PKG}.doc.${PVRF}" CACHE PATH "")
 set(CMAKE_INSTALL_INFODIR "/pkg/main/${PKG}.doc.${PVRF}/info" CACHE PATH "")
 set(CMAKE_INSTALL_MANDIR "/pkg/main/${PKG}.doc.${PVRF}/man" CACHE PATH "")
 set(CMAKE_USER_MAKE_RULES_OVERRIDE "${build_rules}" CACHE FILEPATH "Azusa override rules")
-set(CMAKE_INSTALL_DOCDIR "/pkg/main/${PKG}.doc.${PVRF}" CACHE PATH "")
 set(BUILD_SHARED_LIBS ON CACHE BOOL "")
 EOF
 

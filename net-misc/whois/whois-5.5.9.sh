@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.debian.org/debian/pool/main/w/whois/whois_${PV}.tar.xz
+get https://github.com/rfc1036/${PN}/archive/v${PV}.tar.gz
 acheck
 
-cd "whois"
+cd "${S}"
 
 sed -i -e 's:#\(.*pos\):\1:' Makefile # nls
 

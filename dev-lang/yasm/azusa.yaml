@@ -1,0 +1,3 @@
+description: An assembler for x86 and x86_64 instruction sets
+homepage: https://yasm.tortall.net/
+license: "BSD-2 BSD || ( Artistic GPL-2 LGPL-2 )"

@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg zlib
+
 docmake -DBUILD_SHARED_LIBS=ON -DOPENCV_GENERATE_PKGCONFIG=YES
 
 finalize

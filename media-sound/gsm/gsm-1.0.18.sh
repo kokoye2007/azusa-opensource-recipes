@@ -2,10 +2,11 @@
 source "../../common/init.sh"
 
 get http://deb.debian.org/debian/pool/main/libg/libgsm/libgsm_${PV}.orig.tar.gz
+acheck
 
-cd */
+cd "${S}"
 
-patch -p1 <"$FILESDIR/gsm-${PV}-shared.patch"
+apatch "$FILESDIR/gsm-${PV}-shared.patch"
 
 make
 

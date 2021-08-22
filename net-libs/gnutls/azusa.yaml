@@ -1,0 +1,3 @@
+description: A secure communications library implementing the SSL, TLS and DTLS protocols
+homepage: https://www.gnutls.org/
+license: GPL-3 LGPL-2.1+

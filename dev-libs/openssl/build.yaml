@@ -1,0 +1,15 @@
+versions:
+  stable: 1.1.1k
+build:
+  -
+    version: "*"
+    source: "https://www.openssl.org/source/${P}.tar.gz"
+    engine: make
+    options: [inplace]
+    importpkg:
+      - zlib
+    pre_compile:
+      - ./config --prefix=/pkg/main/${PKG}.core.${PVRF} --openssldir=/etc/ssl --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX shared zlib-dynamic
+    makevars:
+      - MANSUFFIX=ssl
+      - DESTDIR="${D}"
