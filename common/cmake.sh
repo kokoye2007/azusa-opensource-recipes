@@ -34,9 +34,13 @@ EOF
 	# for kde's extra-cmake-modules
 	export ECM_DIR=/pkg/main/kde-frameworks.extra-cmake-modules.core/share/ECM/cmake
 
+	echo "CMAKE_SYSTEM_LIBRARY_PATH = $CMAKE_SYSTEM_LIBRARY_PATH"
+	echo "CMAKE_SYSTEM_INCLUDE_PATH = $CMAKE_SYSTEM_INCLUDE_PATH"
+	echo "CPPFLAGS = $CPPFLAGS"
+
 	set -- "$CMAKE_ROOT" \
 		-C "$common_config" \
-		-G Ninja \
+		-G Ninja -Wno-dev \
 		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVRF}" \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \

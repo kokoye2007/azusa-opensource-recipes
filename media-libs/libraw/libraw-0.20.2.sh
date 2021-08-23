@@ -10,6 +10,10 @@ acheck
 
 importpkg libjpeg
 
+cd "${S}"
+
+aautoreconf
+
 cd "${T}"
 
 doconf --disable-static --disable-jasper --disable-examples --enable-jpeg --enable-lcms --enable-openmp

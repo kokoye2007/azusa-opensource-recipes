@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg media-libs/ilmbase dev-libs/log4cplus dev-libs/c-blosc zlib dev-libs/boost media-libs/mesa media-libs/glu
+
 CMAKEOPTS=(
 	-DCHOST="${CHOST}"
 	-DOPENVDB_ABI_VERSION_NUMBER="7"

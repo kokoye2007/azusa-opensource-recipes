@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://storage.googleapis.com/downloads.webmproject.org/releases/webp/${P}.tar.gz
+get https://download.sourceforge.net/${PN}/${P}.tar.xz
+acheck
 
 cd "${T}"
 

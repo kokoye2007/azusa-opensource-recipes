@@ -114,7 +114,11 @@ download() {
 	fi
 
 	# failed download, get file, then upload...
-	wget -O "$BN" "$1"
+	wget -O "$BN" "$1" || true
+	if [ ! -s "$BN" ]; then
+		# try gentoo mirror
+		wget -O "$BN" "http://ftp.iij.ad.jp/pub/linux/gentoo/distfiles/$BN"
+	fi
 
 	if [ -f "$HOME/.aws/credentials" ]; then
 		# upload if possible to aws

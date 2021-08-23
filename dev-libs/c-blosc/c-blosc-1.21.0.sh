@@ -1,0 +1,11 @@
+#!/bin/sh
+source "../../common/init.sh"
+
+get https://github.com/Blosc/${PN}/archive/v${PV}.tar.gz "${P}.tar.gz"
+acheck
+
+cd "${T}"
+
+docmake -DBUILD_TESTS=OFF -DBUILD_STATIC=OFF -DBUILD_BENCHMARKS=OFF -DBUILD_FUZZERS=OFF -DDEACTIVATE_LZ4=OFF -DDEACTIVATE_SNAPPY=OFF -DDEACTIVATE_ZLIB=OFF -DDEACTIVATE_ZSTD=OFF -DPREFER_EXTERNAL_LZ4=ON -DPREFER_EXTERNAL_ZLIB=ON -DPREFER_EXTERNAL_ZSTD=ON
+
+finalize
