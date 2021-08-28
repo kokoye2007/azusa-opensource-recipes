@@ -19,13 +19,18 @@ PKGS=(
 	sci-libs/dcmtk
 	media-libs/libheif
 	media-libs/libraw
-	media-libs/Field3D
-	media-gfx/openvdb
 	media-libs/ptex
 	media-libs/libwebp
 	media-libs/mesa
 	dev-libs/libfmt
 	dev-cpp/robin-map
+	#media-gfx/openvdb
+	#media-libs/ilmbase
+	# Field3D dependencies
+	#media-libs/Field3D
+	#sci-libs/hdf5
+	#media-libs/ilmbase
+	#media-libs/openexr
 )
 
 importpkg "${PKGS[@]}"
@@ -47,14 +52,14 @@ CMAKEOPTS=(
 	-DUSE_JPEGTURBO=ON
 	-DUSE_NUKE=OFF # ??
 	-DUSE_FFMPEG=ON
-	-DUSE_FIELD3D=ON
+	-DUSE_FIELD3D=OFF # building fails
 	-DUSE_GIF=ON
 	-DUSE_OPENJPEG=ON
 	-DUSE_OPENCV=ON
 	-DUSE_OPENGL=ON
-	-DUSE_OPENVDB=ON
+	-DUSE_OPENVDB=OFF # building fails
 	-DUSE_PTEX=ON
-	-DUSE_PYTHON=ON
+	-DUSE_PYTHON=OFF
 	-DUSE_QT=OFF ## XXX
 	-DUSE_QT5=OFF ## XXX
 	-DUSE_LIBRAW=ON

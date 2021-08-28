@@ -8,6 +8,10 @@ cd "${S}"
 
 echo "$PV" >version
 
+# force absolute path for CMAKE_DIR
+# /pkg/main/media-libs.ptex.dev.2.3.2.linux.amd64/cmake/Ptex
+sed -i "s#^set(CMAKE_DIR.*#set(CMAKE_DIR \"/pkg/main/${PKG}.dev.${PVRF}/cmake/Ptex\")#" src/build/CMakeLists.txt
+
 cd "${T}"
 
 docmake -DPTEX_BUILD_STATIC_LIBS=ON

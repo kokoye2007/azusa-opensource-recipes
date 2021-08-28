@@ -178,18 +178,18 @@ org_fixmultilib() {
 	# fix common issues
 	for foo in core libs dev; do
 		# if we have a "lib" dir and no lib64, move it
-		if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ ! -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
-			mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib" "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
-			ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
+		if [ -d "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ ! -d "${D}/pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
+			mv -v "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib" "${D}/pkg/main/${PKG}.$foo.${PVRF}/$LIB"
+			ln -snfv "$LIB" "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib"
 		fi
-		if [ -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ ! -L "pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
+		if [ -d "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ ! -L "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib" ] && [ -d "${D}/pkg/main/${PKG}.$foo.${PVRF}/$LIB" ]; then
 			# move stuff
-			mv -v "pkg/main/${PKG}.$foo.${PVRF}/lib"/* "pkg/main/${PKG}.$foo.${PVRF}/$LIB"
-			rmdir "pkg/main/${PKG}.$foo.${PVRF}/lib"
+			mv -v "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib"/* "${D}/pkg/main/${PKG}.$foo.${PVRF}/$LIB"
+			rmdir "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib"
 		fi
 		# ensure we have a "lib" symlink to lib64 if it exists
-		if [ -d "pkg/main/${PKG}.$foo.${PVRF}/$LIB" ] && [ ! -d "pkg/main/${PKG}.$foo.${PVRF}/lib" ]; then
-			ln -snfv "$LIB" "pkg/main/${PKG}.$foo.${PVRF}/lib"
+		if [ -d "${D}/pkg/main/${PKG}.$foo.${PVRF}/$LIB" ] && [ ! -d "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib" ]; then
+			ln -snfv "$LIB" "${D}/pkg/main/${PKG}.$foo.${PVRF}/lib"
 		fi
 	done
 }
@@ -216,30 +216,30 @@ org_fixdev() {
 
 	# fix common issues
 	for foo in pkgconfig cmake; do
-		if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" ]; then
+		if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" ]; then
 			# should be in dev
-			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
-			mv -v "pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" "pkg/main/${PKG}.dev.${PVRF}"
-			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "pkg/main/${PKG}.libs.${PVRF}/$LIB"
+			mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}"
+			mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}"
+			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB"
 		fi
-		if [ -d "pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
+		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
 			# should be in dev
-			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
-			if [ ! -d "pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
-				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo" "pkg/main/${PKG}.dev.${PVRF}"
+			mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}"
+			if [ ! -d "${D}/pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
+				mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/share/$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}"
 			else
-				mkdir -p "pkg/main/${PKG}.dev.${PVRF}/$foo"
-				mv -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"/* -t "pkg/main/${PKG}.dev.${PVRF}/$foo"
-				rmdir -v "pkg/main/${PKG}.core.${PVRF}/share/$foo"
+				mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
+				mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/share/$foo"/* -t "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
+				rmdir -v "${D}/pkg/main/${PKG}.core.${PVRF}/share/$foo"
 			fi
-			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "pkg/main/${PKG}.core.${PVRF}/share"
+			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "${D}/pkg/main/${PKG}.core.${PVRF}/share"
 		fi
 	done
 
-	if [ -d "pkg/main/${PKG}.core.${PVRF}/include" ]; then
-		mkdir -pv "pkg/main/${PKG}.dev.${PVRF}"
-		mv -v "pkg/main/${PKG}.core.${PVRF}/include" "pkg/main/${PKG}.dev.${PVRF}/include"
-		ln -sv "/pkg/main/${PKG}.dev.${PVRF}/include" "pkg/main/${PKG}.core.${PVRF}/include"
+	if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/include" ]; then
+		mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}"
+		mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/include" "${D}/pkg/main/${PKG}.dev.${PVRF}/include"
+		ln -sv "/pkg/main/${PKG}.dev.${PVRF}/include" "${D}/pkg/main/${PKG}.core.${PVRF}/include"
 	fi
 }
 
@@ -275,27 +275,27 @@ organize() {
 		done
 	fi
 
-	if [ -d "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
+	if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
 		# should be in core
-		mkdir -pv "pkg/main/${PKG}.core.${PVRF}"
-		mv -v "pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" "pkg/main/${PKG}.core.${PVRF}/"
-		ln -sv "/pkg/main/${PKG}.core.${PVRF}/udev" "pkg/main/${PKG}.libs.${PVRF}/$LIB"
+		mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}"
+		mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" "${D}/pkg/main/${PKG}.core.${PVRF}/"
+		ln -sv "/pkg/main/${PKG}.core.${PVRF}/udev" "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB"
 	fi
 
 	for foo in $LIBS; do
-		if [ -d "pkg/main/${PKG}.libs.${PVRF}/$foo" ]; then
+		if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo" ]; then
 			# check for any .a file, move to dev
-			mkdir -pv "pkg/main/${PKG}.dev.${PVRF}/$foo"
+			mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
 			if [ "$foo" = lib64 ]; then
-				ln -sv lib64 "pkg/main/${PKG}.dev.${PVRF}/lib"
+				ln -sv lib64 "${D}/pkg/main/${PKG}.dev.${PVRF}/lib"
 			fi
-			count=$(find "pkg/main/${PKG}.libs.${PVRF}/$foo" -maxdepth 0 -name '*.a' | wc -l)
+			count=$(find "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo" -maxdepth 0 -name '*.a' | wc -l)
 			if [ "$count" -gt 0 ]; then
-				mv -v "pkg/main/${PKG}.libs.${PVRF}/$foo"/*.a "pkg/main/${PKG}.dev.${PVRF}/$foo"
+				mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo"/*.a "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
 			fi
 			# link whatever remains to dev
-			for bar in "pkg/main/${PKG}.libs.${PVRF}/$foo"/*; do
-				ln -snfv "/$bar" "pkg/main/${PKG}.dev.${PVRF}/$foo"
+			for bar in "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo"/*; do
+				ln -snfv "/$bar" "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
 			done
 		fi
 	done

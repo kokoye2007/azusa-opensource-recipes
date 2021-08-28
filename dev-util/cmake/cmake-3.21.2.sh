@@ -36,9 +36,8 @@ if [ -f /bin/cmake ]; then
 	# CMake_RUN_CLANG_TIDY:BOOL=OFF
 else
 	callconf --no-qt-gui --prefix=/pkg/main/${PKG}.core.${PVRF} --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/doc -- "${CMAKEOPTS[@]}"
+	make -j"$NPROC"
+	make install DESTDIR="${D}"
 fi
-
-make -j"$NPROC"
-make install DESTDIR="${D}"
 
 finalize

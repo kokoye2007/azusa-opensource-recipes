@@ -6,12 +6,41 @@ acheck
 
 cd "${T}"
 
-importpkg libjpeg libpng media-libs/freetype
+PKGS=(
+	libjpeg
+	libpng
+	media-libs/openjpeg
+	media-libs/tiff
+
+	media-libs/freetype
+	media-libs/opencolorio
+	media-libs/openimageio
+	media-libs/embree
+	dev-cpp/tbb
+	dev-libs/gmp
+	sys-devel/clang
+	media-libs/libsdl2
+	media-libs/openal
+	media-libs/libsndfile
+	sci-libs/fftw
+	dev-libs/jemalloc
+	media-gfx/openvdb
+	dev-libs/boost
+	media-libs/libharu
+	dev-libs/lzo
+	dev-cpp/eigen
+
+	gl
+	glew
+)
+
+importpkg "${PKGS[@]}"
 
 PYTHON_VERSION="$(/pkg/main/dev-lang.python.core/bin/python3 --version | awk '{ print $2 }')"
 
 CMAKEOPTS=(
-	-DPYTHON_INCLUDE_DIR=/pkg/main/dev-lang.python.dev.$PYTHON_VERSION/include
+	-DEigen3_ROOT=/pkg/main/dev-cpp.eigen.dev
+	-DPYTHON_INCLUDE_DIR=/pkg/main/dev-lang.python.dev.$PYTHON_VERSION/include/python${PYTHON_VERSION%.*}
 	-DPYTHON_LIBRARY=/pkg/main/dev-lang.python.libs.$PYTHON_VERSION/lib$LIB_SUFFIX
 	-DPYTHON_VERSION=$PYTHON_VERSION
 	-DWITH_ALEMBIC=ON
