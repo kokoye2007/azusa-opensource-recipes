@@ -29,9 +29,13 @@ PKGS=(
 	media-libs/libharu
 	dev-libs/lzo
 	dev-cpp/eigen
+	dev-libs/pugixml
 
 	gl
 	glew
+	glu
+	glut
+	media-libs/openexr
 )
 
 importpkg "${PKGS[@]}"
@@ -39,6 +43,7 @@ importpkg "${PKGS[@]}"
 PYTHON_VERSION="$(/pkg/main/dev-lang.python.core/bin/python3 --version | awk '{ print $2 }')"
 
 CMAKEOPTS=(
+	-DBUILD_SHARED_LIBS=OFF # to avoid inter-target dependency graph issues
 	-DEigen3_ROOT=/pkg/main/dev-cpp.eigen.dev
 	-DPYTHON_INCLUDE_DIR=/pkg/main/dev-lang.python.dev.$PYTHON_VERSION/include/python${PYTHON_VERSION%.*}
 	-DPYTHON_LIBRARY=/pkg/main/dev-lang.python.libs.$PYTHON_VERSION/lib$LIB_SUFFIX

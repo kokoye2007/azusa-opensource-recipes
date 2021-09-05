@@ -1,0 +1,59 @@
+diff -rbBU3 cmake-3.21.2-orig/Source/cmExportInstallFileGenerator.cxx cmake-3.21.2/Source/cmExportInstallFileGenerator.cxx
+--- cmake-3.21.2-orig/Source/cmExportInstallFileGenerator.cxx	2021-08-31 13:15:53.445513389 +0900
++++ cmake-3.21.2/Source/cmExportInstallFileGenerator.cxx	2021-08-31 13:21:48.421384248 +0900
+@@ -184,55 +184,12 @@
+   std::string installPrefix =
+     this->IEGen->GetLocalGenerator()->GetMakefile()->GetSafeDefinition(
+       "CMAKE_INSTALL_PREFIX");
+-  std::string const& expDest = this->IEGen->GetDestination();
+-  if (cmSystemTools::FileIsFullPath(expDest)) {
+-    // The export file is being installed to an absolute path so the
+-    // package is not relocatable.  Use the configured install prefix.
+     /* clang-format off */
+     os <<
+       "# The installation prefix configured by this project.\n"
+       "set(_IMPORT_PREFIX \"" << installPrefix << "\")\n"
+       "\n";
+     /* clang-format on */
+-  } else {
+-    // Add code to compute the installation prefix relative to the
+-    // import file location.
+-    std::string absDest = installPrefix + "/" + expDest;
+-    std::string absDestS = absDest + "/";
+-    os << "# Compute the installation prefix relative to this file.\n"
+-       << "get_filename_component(_IMPORT_PREFIX"
+-       << " \"${CMAKE_CURRENT_LIST_FILE}\" PATH)\n";
+-    if (cmHasLiteralPrefix(absDestS, "/lib/") ||
+-        cmHasLiteralPrefix(absDestS, "/lib64/") ||
+-        cmHasLiteralPrefix(absDestS, "/libx32/") ||
+-        cmHasLiteralPrefix(absDestS, "/usr/lib/") ||
+-        cmHasLiteralPrefix(absDestS, "/usr/lib64/") ||
+-        cmHasLiteralPrefix(absDestS, "/usr/libx32/")) {
+-      // Handle "/usr move" symlinks created by some Linux distros.
+-      /* clang-format off */
+-      os <<
+-        "# Use original install prefix when loaded through a\n"
+-        "# cross-prefix symbolic link such as /lib -> /usr/lib.\n"
+-        "get_filename_component(_realCurr \"${_IMPORT_PREFIX}\" REALPATH)\n"
+-        "get_filename_component(_realOrig \"" << absDest << "\" REALPATH)\n"
+-        "if(_realCurr STREQUAL _realOrig)\n"
+-        "  set(_IMPORT_PREFIX \"" << absDest << "\")\n"
+-        "endif()\n"
+-        "unset(_realOrig)\n"
+-        "unset(_realCurr)\n";
+-      /* clang-format on */
+-    }
+-    std::string dest = expDest;
+-    while (!dest.empty()) {
+-      os << "get_filename_component(_IMPORT_PREFIX \"${_IMPORT_PREFIX}\" "
+-            "PATH)\n";
+-      dest = cmSystemTools::GetFilenamePath(dest);
+-    }
+-    os << "if(_IMPORT_PREFIX STREQUAL \"/\")\n"
+-       << "  set(_IMPORT_PREFIX \"\")\n"
+-       << "endif()\n"
+-       << "\n";
+-  }
+ }
+ 
+ void cmExportInstallFileGenerator::CleanupTemporaryVariables(std::ostream& os)

@@ -96,6 +96,20 @@ get() {
 	extract "$BN"
 }
 
+apfx() {
+	if [ x"$1" != x ]; then
+		echo "/pkg/main/${PKG}.$1.${PVRF}"
+		return
+	fi
+	# default to core
+	echo "/pkg/main/${PKG}.core.${PVRF}"
+}
+
+dpfx() {
+	echo -n "${D%/}"
+	apfx "$1"
+}
+
 download() {
 	if [ "x$2" = x"" ]; then
 		BN=$(basename "$1")
@@ -152,6 +166,7 @@ squash() {
 }
 
 org_movelib() {
+	echo "Fixing libs..."
 	# remove any .la file
 	# see: https://wiki.gentoo.org/wiki/Project:Quality_Assurance/Handling_Libtool_Archives
 	find "${D}" -name '*.la' -delete
@@ -169,6 +184,7 @@ org_movelib() {
 }
 
 org_fixmultilib() {
+	echo "Fixing multilib files..."
 	if [ "$MULTILIB" != yes ]; then
 		return
 	fi
@@ -195,6 +211,7 @@ org_fixmultilib() {
 }
 
 org_moveetc() {
+	echo "Fixing /etc directory files..."
 	if [ -d "${D}/etc" ]; then
 		# move it to core
 		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/etc" ]; then
@@ -209,6 +226,7 @@ org_moveetc() {
 }
 
 org_fixdev() {
+	echo "Running fixdev (moving development files like pkgconfig and cmake)..."
 	local LIB=lib
 	if [ "$MULTILIB" = yes ]; then
 		LIB=lib64
@@ -245,6 +263,7 @@ org_fixdev() {
 
 organize() {
 	cd "${D}"
+	echo "Running organize ..."
 
 	local LIBS=lib
 	local LIB=lib
@@ -259,6 +278,7 @@ organize() {
 	org_fixdev
 
 	if [ -d "${D}/lib/udev" ]; then
+		echo "Moving udev rules..."
 		# we got udev rules/etc, move these to core
 		mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
 		mv -Tv "${D}/lib/udev" "${D}/pkg/main/${PKG}.core.${PVRF}/udev"
@@ -276,6 +296,7 @@ organize() {
 	fi
 
 	if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" ]; then
+		echo "Moving udev files to core..."
 		# should be in core
 		mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}"
 		mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/udev" "${D}/pkg/main/${PKG}.core.${PVRF}/"
@@ -300,15 +321,19 @@ organize() {
 		fi
 	done
 
-	for foo in "pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"/python*/; do
-		if [ -d "$foo" ]; then
-			# this should be in a python module dir, not here. Let's try to find out what version of python this is and move it around.
-			PYTHON=$(basename "$foo") # for example "python3.8"
-			VER=$("$PYTHON" --version | awk '{ print $2 }') # 3.8.6 or whatever
-			mkdir -pv "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
-			mv -v "$foo" "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
-		fi
-	done
+	if [ "${PKG}" != "dev-lang/python" ]; then
+		for foo in "pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"/python*/; do
+			if [ -d "$foo" ]; then
+				echo "bad $PKG $foo"
+				exit 1
+				# this should be in a python module dir, not here. Let's try to find out what version of python this is and move it around.
+				PYTHON=$(basename "$foo") # for example "python3.8"
+				VER=$("$PYTHON" --version | awk '{ print $2 }') # 3.8.6 or whatever
+				mkdir -pv "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
+				mv -v "$foo" "pkg/main/${PKG}.mod.${PVRF}.py${VER}/lib"
+			fi
+		done
+	fi
 
 	for foo in man info share/man share/info; do
 		if [ -d "pkg/main/${PKG}.core.${PVRF}/$foo" ]; then

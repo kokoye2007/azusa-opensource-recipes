@@ -72,13 +72,10 @@ CMAKE_ROOT="${CHPATH}/${P}.src"
 
 docmake "${CMAKE_OPTS[@]}"
 
-make -j"$NPROC" || /bin/bash -i
-make install DESTDIR="${D}"
-
-#cmake -DCMAKE_INSTALL_PREFIX="${D}/pkg/main/${PKG}.core.${PVRF}" -P cmake_install.cmake
-
 # fix dev pkg so bin is available there
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}"
 ln -snfTv "/pkg/main/${PKG}.core.${PVRF}/bin" "${D}/pkg/main/${PKG}.dev.${PVRF}/bin"
+
+/bin/bash -i
 
 finalize

@@ -4,6 +4,10 @@ source "../../common/init.sh"
 get https://github.com/Kitware/CMake/releases/download/v${PV}/${P}.tar.gz
 acheck
 
+cd "${S}"
+
+apatch "$FILESDIR/${P}-use-absolute-paths.patch"
+
 importpkg app-crypt/rhash sys-libs/zlib app-arch/libarchive dev-libs/libuv net-misc/curl
 
 CMAKEOPTS=(
