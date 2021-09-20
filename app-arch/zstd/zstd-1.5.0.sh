@@ -8,7 +8,4 @@ cd "${T}"
 
 CMAKE_ROOT="${CHPATH}/${P}/build/cmake" docmake
 
-make
-make install DESTDIR="${D}"
-
 finalize

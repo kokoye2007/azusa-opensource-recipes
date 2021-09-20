@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/seccomp/libseccomp/releases/download/v${PV}/${P}.tar.gz
+get https://ftp.gnu.org/gnu/${PN}/${P}.tar.bz2
+acheck
 
 cd "${T}"
 

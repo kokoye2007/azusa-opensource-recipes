@@ -6,13 +6,11 @@ get https://downloads.sourceforge.net/gs-fonts/ghostscript-fonts-std-8.11.tar.gz
 get https://downloads.sourceforge.net/gs-fonts/gnu-gs-fonts-other-6.0.tar.gz
 acheck
 
-cd "ghostscript-${PV}"
+cd "${S}"
 
-rm -rf freetype lcms2mt jpeg libpng openjpeg zlib
+rm -rf cups/libs freetype jbig2dec lcms2mt jpeg libpng openjpeg zlib tiff openjpeg
 
-patch -Np1 -i "$FILESDIR/ghostscript-9.27-upstream_fixes-1.patch"
-
-importpkg zlib libjpeg libpng lcms2
+importpkg zlib libjpeg libpng lcms2 media-libs/jbig2dec
 
 # needs libz ...
 ln -snfv /pkg/main/sys-libs.zlib.libs/lib$LIB_SUFFIX/libz.so* /usr/lib$LIB_SUFFIX/

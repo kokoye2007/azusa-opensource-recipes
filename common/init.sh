@@ -321,11 +321,9 @@ organize() {
 		fi
 	done
 
-	if [ "${PKG}" != "dev-lang/python" ]; then
+	if [ "${PKG}" != "dev-lang.python" ]; then
 		for foo in "pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"/python*/; do
 			if [ -d "$foo" ]; then
-				echo "bad $PKG $foo"
-				exit 1
 				# this should be in a python module dir, not here. Let's try to find out what version of python this is and move it around.
 				PYTHON=$(basename "$foo") # for example "python3.8"
 				VER=$("$PYTHON" --version | awk '{ print $2 }') # 3.8.6 or whatever
