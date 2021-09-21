@@ -1,0 +1,3 @@
+description: GObject-based wrapper around the Exiv2 library
+homepage: https://wiki.gnome.org/Projects/gexiv2
+license: LGPL-2.1+ GPL-2

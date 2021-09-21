@@ -1,0 +1,3 @@
+description: zstd fast compression library
+homepage: https://facebook.github.io/zstd/
+license: "|| ( BSD GPL-2 )"
