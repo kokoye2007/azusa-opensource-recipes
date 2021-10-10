@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu dev-libs/boost
+importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu dev-libs/boost libcurl zlib
 
 # mariadb won't honor CPPFLAGS
 export CFLAGS="${CPPFLAGS} -O2"
@@ -82,8 +82,5 @@ CMAKEOPTS=(
 
 # -DBUILD_CONFIG=mysql_release
 docmake "${CMAKEOPTS[@]}"
-
-make -j"$NPROC"
-make install DESTDIR="${D}"
 
 finalize

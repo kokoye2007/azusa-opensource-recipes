@@ -13,7 +13,7 @@ aautoreconf
 
 cd "${T}"
 
-importpkg expat x11-libs/libXaw zlib media-libs/gd x11-base/xorg-proto x11-libs/libX11 dev-scheme/guile dev-lang/lua x11-libs/cairo dev-libs/libatomic_ops media-libs/mesa
+importpkg expat x11-libs/libXaw zlib media-libs/gd x11-base/xorg-proto x11-libs/libX11 dev-scheme/guile dev-lang/lua x11-libs/cairo dev-libs/libatomic_ops media-libs/mesa dev-lang/perl
 
 export CFLAGS="${CPPFLAGS} -O2"
 export CXXFLAGS="${CPPFLAGS} -O2"
