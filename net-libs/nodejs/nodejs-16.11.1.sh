@@ -6,9 +6,14 @@ acheck
 
 cd "node-v${PV}"
 
+# fix include
+sed -i 's|ares_nameser.h|arpa/nameser.h|' src/cares_wrap.h
+# increase limit so ld works
+ulimit -n 65536
+
 doconflight --shared-cares --shared-libuv --shared-nghttp2 --shared-nghttp2-libpath=$(pkg-config --variable libdir libnghttp2) --shared-openssl --with-snapshot --shared-zlib --with-intl=system-icu
 
-make
+make || /bin/bash -i
 make install DESTDIR="${D}"
 
 # move "node_modules" to its own "mod" package
