@@ -23,7 +23,7 @@ CONFIGURE=(
 	--enable-bind-now
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
 	--with-pkgversion="Azusa ${PVRF}"
-	--enable-crypt
+	--disable-crypt
 #	--enable-systemtap
 	--enable-nscd
 	--disable-timezone-tools
