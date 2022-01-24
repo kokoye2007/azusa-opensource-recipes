@@ -73,9 +73,13 @@ cp -vT "${FILESDIR}/C-locale" "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/loca
 
 localedef() {
 	# run newly installed localedef
-	"${D}/pkg/main/${PKG}.core.${PVRF}/bin/localedef" "$@"
+	# this trick allows running it against the new glibc even before new glibc is installed
+	local NEWLIBDIR="${D}/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}"
+	#LD_LIBRARY_PATH="$NEWLIBDIR" "${NEWLIBDIR}/ld-linux-x86-64.so.2" "${D}/pkg/main/${PKG}.core.${PVRF}/bin/localedef" "$@"
+	LD_LIBRARY_PATH="$NEWLIBDIR" "${D}/pkg/main/${PKG}.core.${PVRF}/bin/localedef" "$@" || /bin/bash -i
 }
 
+if [ -d "/pkg/main/${PKG}.core.${PVRF}" ]; then
 # generate locales
 mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
 OIFS="$IFS"
@@ -98,6 +102,10 @@ done
 # fix link to point to symlinks, this way we can generate locale-archive with other i18n paths
 echo "Fixing locale symlink..."
 ln -snfT "/pkg/main/${PKG}.data.locale.${PVRF}" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
+
+else
+	echo "Cannot build locales without installation done once first"
+fi
 
 # make dev a sysroot for gcc
 ln -snfTv "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX"
@@ -141,4 +149,5 @@ ln -snfT /pkg/main/sys-libs.timezone-data.core "${D}/pkg/main/${PKG}.core.${PVRF
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/env.d"
 ln -sT /pkg/main/sys-devel.gcc-config.core/gcc-config "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/env.d/gcc"
 
+fixelf
 archive

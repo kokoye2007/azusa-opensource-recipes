@@ -14,6 +14,9 @@ importpkg sys-libs/pam openssl
 # prevent warning about ipv6
 touch ip6 sslunix
 
+# replace references to -lcrypt to include -L<sys-libs/libxcrypt>
+sed -i "s#-lcrypt#-L/pkg/main/sys-libs.libxcrypt.libs/lib$LIB_SUFFIX -lcrypt#" ./src/osdep/unix/Makefile
+
 # lnp?
 make slx EXTRACFLAGS="$CPPFLAGS -fPIC -I/pkg/main/dev-libs.openssl.dev/include/openssl" SSLTYPE=unix SHLIBBASE=c-client SHLIBNAME=libc-client.so.1 IP=6 SSLDIR=/etc/ssl SSLLIB=/pkg/main/dev-libs.openssl.libs/lib$LIB_SUFFIX
 #make an build BUILDTYPE=lnp EXTRACFLAGS="$CPPFLAGS -I/pkg/main/dev-libs.openssl.dev/include/openssl"

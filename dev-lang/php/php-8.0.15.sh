@@ -1,4 +1,4 @@
-#!/bin/sh
+#/bin/sh
 source "../../common/init.sh"
 
 get https://www.php.net/distributions/${P}.tar.xz
@@ -9,7 +9,7 @@ SAPIS="cli cgi fpm embed phpdbg"
 # apache2: fails because: apxs:Error: Config file /build/dev-lang.php/7.3.10/dist/etc/httpd.conf not found.
 
 # getting readline to work is a bit of a pain...
-importpkg sys-libs/ncurses sys-libs/readline
+importpkg sys-libs/ncurses sys-libs/readline sys-libs/libxcrypt
 
 for sapi in $SAPIS; do
 	echo
@@ -96,14 +96,9 @@ for sapi in $SAPIS; do
 
 	# cgi/cli: readline/libedit support
 	case $sapi in
-		cli)
+		cli|cgi)
 			CONFIGURE+=("--without-pear")
 			CONFIGURE+=("--with-readline=/pkg/main/sys-libs.readline.dev")
-			export LIBS="-ltinfo" # link php against libtinfo so ncurses/readline works
-			;;
-		cgi)
-			CONFIGURE+=("--without-pear")
-			CONFIGURE+=("--with-readline=shared,/pkg/main/sys-libs.readline.dev")
 			export LIBS="-ltinfo" # link php against libtinfo so ncurses/readline works
 			;;
 		*)
@@ -130,4 +125,5 @@ for sapi in $SAPIS; do
 	fi
 done
 
+fixelf
 archive
