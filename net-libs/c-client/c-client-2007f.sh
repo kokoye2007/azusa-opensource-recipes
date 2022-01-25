@@ -26,10 +26,13 @@ install -v -m 755 c-client/libc-client.so.1.0.0 "${D}/pkg/main/${PKG}.libs.${PVR
 ln -snfv libc-client.so.1.0.0 "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc-client.so.1"
 ln -snfv libc-client.so.1.0.0 "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc-client.so"
 
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX"
+install -v -m 644 c-client/c-client.a "${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX/libc-client.a"
+ln -snfv "/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX/libc-client.a" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc-client.a"
+
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/include/imap"
 install -v -m 644 ./c-client/*.h "${D}/pkg/main/${PKG}.dev.${PVRF}/include/imap"
 install -v -m 644 ./c-client/linkage.c "${D}/pkg/main/${PKG}.dev.${PVRF}/include/imap"
 install -v -m 644 ./src/osdep/tops-20/shortsym.h "${D}/pkg/main/${PKG}.dev.${PVRF}/include/imap"
-
 
 finalize

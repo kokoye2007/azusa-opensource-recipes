@@ -316,7 +316,8 @@ organize() {
 			fi
 			# link whatever remains to dev
 			for bar in "${D}/pkg/main/${PKG}.libs.${PVRF}/$foo"/*; do
-				ln -snfv "/$bar" "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
+				bar="/pkg/main/${PKG}.libs.${PVRF}/$foo/$(basename "$bar")"
+				ln -snfv "$bar" "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
 			done
 		fi
 	done
