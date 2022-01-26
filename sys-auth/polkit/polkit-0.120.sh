@@ -4,6 +4,10 @@ source "../../common/init.sh"
 get https://www.freedesktop.org/software/polkit/releases/${P}.tar.gz
 acheck
 
+cd "${S}"
+
+apatch "$FILESDIR/polkit-0.120-cve-2021-4034.patch"
+
 cd "${T}"
 
 importpkg expat sys-libs/pam
