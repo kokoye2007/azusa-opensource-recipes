@@ -6,7 +6,7 @@ acheck
 
 importpkg ncurses
 
-cd "${P}"
+cd "${S}"
 
 export HACKDIR="/pkg/main/${PKG}.core.${PVRF}/nethack"
 export INSTDIR="${D}$HACKDIR"

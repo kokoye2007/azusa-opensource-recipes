@@ -41,13 +41,15 @@ pythonsetup() {
 			fi
 		fi
 		echo "Running for python-$PYTHON_VERSION"
+		local PYTHON_VERSION_MINOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1-2 )" # for python3.10.2 this will be 3.10
+		local PYTHON_VERSION_MAJOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1 )" # fpr python3.10.2 this will be 3
 		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
-		export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION:0:3}:$PYTHONHOME/lib/python${PYTHON_VERSION:0:3}/lib-dynload"
+		export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
 		if [ x"$PYTHON_VERSION" == x"3.5.9" ]; then
 			# symlink to make python happy
 			ln -snfT "/pkg/main/dev-lang.python-modules.core.3.5.9/lib/python3.5/config-3.5m" "/pkg/main/dev-lang.python.core.3.5.9/lib/python3.5/config-3.5m"
 		fi
-		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" setup.py install
+		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION_MAJOR}" setup.py install
 
 		# fetch the installed module from /.pkg-main-rw/
 		if [ -d "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* ]; then
