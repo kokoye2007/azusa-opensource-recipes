@@ -1,0 +1,3 @@
+description: small, fast, portable implementation of TLS/SSL for embedded devices
+homepage: https://github.com/wolfSSL/wolfssl
+license: GPL-2

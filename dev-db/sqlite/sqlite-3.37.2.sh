@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sqlite.org/2020/sqlite-autoconf-3310100.tar.gz
+SRC_PV="$(printf "%u%02u%02u%02u" $(echo "$PV" | tr '.' ' '))"
+get https://sqlite.org/2022/sqlite-autoconf-$SRC_PV.tar.gz
 acheck
 
 cd "${T}"

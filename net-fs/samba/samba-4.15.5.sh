@@ -7,7 +7,7 @@ acheck
 
 cd "${S}"
 
-importpkg app-crypt/gpgme libbsd dev-libs/icu app-arch/libarchive sys-apps/acl sys-libs/pam sys-libs/libunwind net-print/cups zlib sys-libs/ldb net-nds/openldap dev-libs/libgpg-error sys-libs/ncurses
+importpkg app-crypt/gpgme libbsd dev-libs/icu app-arch/libarchive sys-apps/acl sys-libs/pam sys-libs/libunwind net-print/cups zlib sys-libs/ldb net-nds/openldap dev-libs/libgpg-error sys-libs/ncurses sys-libs/libxcrypt
 
 export LDFLAGS="${LDFLAGS}"
 
@@ -26,7 +26,6 @@ CONFIGURE=(
 	--nopyo
 
 	--with-acl-support
-	--with-dnsupdate
 	--with-ads
 	--with-ldap
 	#--with-cephfs
@@ -48,6 +47,6 @@ CONFIGURE=(
 	--builtin-libraries=NONE
 )
 
-dowaf "${CONFIGURE[@]}"
+dowaf "${CONFIGURE[@]}" || /bin/bash -i
 
 finalize

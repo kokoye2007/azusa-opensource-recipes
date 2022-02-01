@@ -6,9 +6,7 @@ acheck
 
 cd "${S}"
 
-apatch "$FILESDIR/polkit-0.120-duktape-js.patch" "$FILESDIR/polkit-0.120-cve-2021-4034.patch"
-
-aautoreconf
+apatch "$FILESDIR/polkit-0.120-cve-2021-4034.patch"
 
 cd "${T}"
 

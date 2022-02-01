@@ -609,3 +609,34 @@ die() {
 	echo "$@"
 	exit 1
 }
+
+# eg: makepkgconfig -lduktape
+makepkgconfig() {
+	local LIBS="$1"
+	if [ x"$LIBS" = x ]; then
+		die "need to specify libs in makepkgconfig"
+	fi
+
+	local NAME="$PN"
+	local DESC=""
+
+	if [ -f "$BASEDIR/azusa.yaml" ]; then
+		DESC="$(cat "$BASEDIR/azusa.yaml" | grep ^description: | sed -e 's/^description: *//')"
+	fi
+
+	local TGT="/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/"
+	mkdir -pv "${D}${TGT}"
+
+	cat >"${D}${TGT}${PN}.pc" <<EOF
+prefix=/pkg/main/${PKG}.core.${PVRF}
+exec_prefix=\${prefix}
+libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
+includedir=/pkg/main/${PKG}.dev.${PVRF}/include
+
+Name: $NAME
+Description: $DESC
+Version: $PV
+Libs: -L\${libdir} $LIBS
+Cflags: -I\${includedir}
+EOF
+}
