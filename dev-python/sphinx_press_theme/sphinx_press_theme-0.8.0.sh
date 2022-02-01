@@ -5,7 +5,7 @@ source ${ROOTDIR}/common/python.sh
 get https://pypi.org/packages/source/${PN:0:1}/${PN}/${P}.tar.gz
 acheck
 
-cd "${S}"
+cd "${P}"
 
 pythonsetup
 archive
