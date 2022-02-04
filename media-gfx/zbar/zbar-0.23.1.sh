@@ -26,7 +26,7 @@ importpkg X libjpeg media-libs/mesa zlib
 
 doconf --with-dbus --with-gtk3 --with-jpeg --with-gir --with-python=auto --disable-static --enable-pthread --enable-video --with-x --with-xshm --with-xv --with-graphicsmagick --without-imagemagick --without-qt --without-qt5 
 
-make || /bin/bash -i
+make
 make install DESTDIR="${D}"
 
 finalize

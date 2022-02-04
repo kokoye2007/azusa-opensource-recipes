@@ -1,6 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
+# in order to know latest version:
+# https://versionhistory.googleapis.com/v1/chrome/platforms/linux/channels/stable/versions
+
 # https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_76.0.3809.132-1_amd64.deb
 get https://dl.google.com/linux/chrome/deb/pool/main/g/${PN}-stable/${PN}-stable_${PV}_amd64.deb
 acheck
