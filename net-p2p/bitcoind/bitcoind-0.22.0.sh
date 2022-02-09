@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://bitcoincore.org/bin/bitcoin-core-${PV}/bitcoin-${PV}.tar.gz
+MY_PV=${PV:2}
+get https://bitcoincore.org/bin/bitcoin-core-${MY_PV}/bitcoin-${MY_PV}.tar.gz "bitcoin-${PV}.tar.gz"
 acheck
 
 cd "${S}"
