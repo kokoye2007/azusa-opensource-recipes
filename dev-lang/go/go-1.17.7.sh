@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://dl.google.com/${PN}/go${PV}.src.tar.gz
+envcheck
 
 cd "go/src"
 
