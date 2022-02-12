@@ -20,6 +20,7 @@ export BZIP2_INCLUDE="/pkg/main/app-arch.bzip2.dev/include"
 
 case $ARCH in
 	amd64) archname="x86_64-linux" ;;
+	amd64) archname="aarch64-linux" ;;
 	*) die "unsupported arch $ARCH - please add" ;;
 esac
 
