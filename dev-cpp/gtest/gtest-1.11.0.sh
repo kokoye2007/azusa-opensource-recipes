@@ -9,7 +9,4 @@ cd "${T}"
 CMAKE_ROOT="${CHPATH}/googletest-release-${PV}"
 docmake
 
-make
-make install DESTDIR="${D}"
-
 finalize
