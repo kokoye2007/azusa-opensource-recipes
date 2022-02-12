@@ -15,7 +15,4 @@ cd "${T}"
 
 docmake
 
-make
-make install DESTDIR="${D}"
-
 finalize
