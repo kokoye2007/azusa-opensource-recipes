@@ -7,7 +7,7 @@ acheck
 
 cd "${T}"
 
-importpkg python-3.8 icu-uc
+importpkg python-3.8 icu-uc sys-libs/libxcrypt
 
 doconf --disable-maintainer-mode --disable-static --with-icu
 
