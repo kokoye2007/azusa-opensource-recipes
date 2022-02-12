@@ -8,7 +8,4 @@ cd "${T}"
 
 docmake -DBUILD_SHARED_LIBS=YES
 
-make
-make install DESTDIR="${D}"
-
 finalize
