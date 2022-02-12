@@ -9,6 +9,7 @@ export GOOS="${OS}"
 export GOARCH="${ARCH}"
 export GOROOT_FINAL="/pkg/main/${PKG}.dev.${PVRF}"
 export GOROOT="${D}/pkg/main/${PKG}.dev.${PVRF}"
+export PATH="/pkg/main/dev-lang.go.dev/bin/:$PATH"
 
 ./all.bash
 
