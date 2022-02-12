@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg sys-libs/libxcrypt
+
 doconf --with-apr=`realpath /pkg/main/dev-libs.apr.core` --with-expat=`realpath /pkg/main/dev-libs.expat.dev`
 
 make
