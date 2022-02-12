@@ -8,7 +8,4 @@ cd "${T}"
 
 docmake -DCMARK_LIB_FUZZER=OFF -DCMARK_SHARED=ON -DCMARK_STATIC=OFF -DCMARK_TESTS=ON
 
-make
-make install DESTDIR="${D}"
-
 finalize
