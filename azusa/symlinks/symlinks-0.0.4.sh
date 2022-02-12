@@ -171,6 +171,9 @@ checkbin() {
 					/lib/ld-linux.so.2)
 						echo "Needs rebuild: $fn"
 						;;
+					/lib/ld-linux-aarch64.so.1)
+						echo "Needs rebuild: $fn"
+						;;
 				esac
 				;;
 		esac
