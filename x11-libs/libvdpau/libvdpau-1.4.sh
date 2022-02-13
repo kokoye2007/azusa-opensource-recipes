@@ -5,6 +5,8 @@ get https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/${PV}/${P}.tar.bz2
 
 cd "${T}"
 
+importpkg X
+
 meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
 
 ninja
