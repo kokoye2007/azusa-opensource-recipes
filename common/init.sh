@@ -14,10 +14,11 @@ PF=$(basename "$0" .sh)
 PN=$(basename "$(pwd)")
 CATEGORY=$(basename "$(dirname "$(pwd)")")
 # TODO fix P to not include revision if any
-P="${PF}"
-PVR="${P#"${PN}-"}"
+PR="${PF}"
+P="$(echo "$PR" | sed -r -e 's/-r[0-9]+$//')"
+PVR="${PR#"${PN}-"}"
 PVRF="${PVR}.${OS}.${ARCH}"
-PV=${P#"${PN}-"}
+PV="${P#"${PN}-"}"
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 if [ x"$NPROC" = x ]; then
