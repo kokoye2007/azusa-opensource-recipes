@@ -12,7 +12,7 @@ cd "${T}"
 export SED=sed
 
 # make sure gcc can find stuff like -lz
-importpkg zlib
+importpkg zlib libcrypt
 
 if [ -f /pkg/main/sys-devel.gcc.core/bin/cpp ]; then
 	export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp
