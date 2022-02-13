@@ -9,6 +9,8 @@ sed -i 's/env python/&3/' src/psl-make-dafsa
 
 cd "${T}"
 
+importpkg dev-libs/libunistring
+
 doconf --disable-static
 
 make

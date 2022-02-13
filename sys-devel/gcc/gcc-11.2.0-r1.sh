@@ -12,19 +12,26 @@ cd "${T}"
 export SED=sed
 
 # make sure gcc can find stuff like -lz
-importpkg zlib libcrypt
+importpkg zlib libcrypt libzstd dev-util/systemtap
 
 if [ -f /pkg/main/sys-devel.gcc.core/bin/cpp ]; then
 	export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp
 fi
 
+# note: we disable systemtap because gcc cannot look into the path we give it through CPPFLAGS
+# checking sys/sdt.h in the target C library... no
+# configure: error: sys/sdt.h was not found
+
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --infodir=/pkg/main/${PKG}.doc.${PVRF}/info --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/gcc \
---with-pkgversion=Azusa --with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues \
+--with-pkgversion="Azusa $PVRF" --with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues \
 --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --with-slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
 --with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVRF}/include/c++ --with-sysroot=/pkg/main/sys-libs.glibc.dev \
 --with-gcc-major-version-only \
 --enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
+--enable-obsolete --enable-secureplt --disable-werror --enable-nls --without-included-gettext --disable-libunwind-exceptions \
+--enable-esp --enable-libstdcxx-time --with-build-config=bootstrap-lto --disable-libstdcxx-pch --enable-__cxa_atexit --enable-clocale=gnu \
+--enable-cet --disable-systemtap --with-zstd --enable-lto --enable-default-ssp --enable-default-pie \
 --with-mpfr-include=`realpath /pkg/main/dev-libs.mpfr.dev/include` --with-mpfr-lib=`realpath /pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX` \
 --with-mpc-include=`realpath /pkg/main/dev-libs.mpc.dev/include` --with-mpc-lib=`realpath /pkg/main/dev-libs.mpc.libs/lib$LIB_SUFFIX` \
 --with-gmp-include=`realpath /pkg/main/dev-libs.gmp.dev/include` --with-gmp-lib=`realpath /pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX` \
