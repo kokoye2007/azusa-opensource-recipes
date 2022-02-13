@@ -460,7 +460,7 @@ callconf() {
 doconf() {
 	prepare
 	echo "Running configure..."
-	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --localstatedir=/var --host="$CHOST" \
+	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --localstatedir=/var --host="$CHOST" --build="$CHOST" \
 	--includedir="/pkg/main/${PKG}.dev.${PVRF}/include" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --datarootdir="/pkg/main/${PKG}.core.${PVRF}/share" \
 	--mandir="/pkg/main/${PKG}.doc.${PVRF}/man" --docdir="/pkg/main/${PKG}.doc.${PVRF}/doc" "$@"
 }
@@ -474,7 +474,7 @@ doconflight() {
 doconf213() {
 	prepare
 	echo "Running configure..."
-	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --host="$CHOST" \
+	callconf --prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --host="$CHOST" --build="$CHOST" \
 	--includedir="/pkg/main/${PKG}.dev.${PVRF}/include" --libdir="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" --datarootdir="/pkg/main/${PKG}.core.${PVRF}/share" \
 	--mandir="/pkg/main/${PKG}.doc.${PVRF}/man" "$@"
 }
