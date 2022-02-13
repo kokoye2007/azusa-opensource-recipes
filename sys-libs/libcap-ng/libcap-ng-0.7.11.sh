@@ -4,6 +4,8 @@ source "../../common/init.sh"
 get https://people.redhat.com/sgrubb/libcap-ng/${P}.tar.gz
 acheck
 
+importpkg libcrypt
+
 cd "${T}"
 
 if [ ! -d /usr/include ]; then
