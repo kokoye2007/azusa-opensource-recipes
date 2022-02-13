@@ -76,6 +76,4 @@ docmake "${CMAKE_OPTS[@]}"
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}"
 ln -snfTv "/pkg/main/${PKG}.core.${PVRF}/bin" "${D}/pkg/main/${PKG}.dev.${PVRF}/bin"
 
-/bin/bash -i
-
 finalize
