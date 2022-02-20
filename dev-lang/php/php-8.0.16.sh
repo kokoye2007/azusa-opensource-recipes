@@ -72,7 +72,7 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--with-gmp=shared,/pkg/main/dev-libs.gmp.dev")
 	CONFIGURE+=("--with-mhash")
 	CONFIGURE+=("--with-iconv")
-	CONFIGURE+=("--with-imap=shared,/pkg/main/net-libs.c-client.dev" "--with-imap-ssl")
+	#CONFIGURE+=("--with-imap=shared,/pkg/main/net-libs.c-client.dev" "--with-imap-ssl")
 	CONFIGURE+=("--enable-intl=shared,/pkg/main/dev-libs.icu.core")
 	CONFIGURE+=("--enable-json")
 	CONFIGURE+=("--enable-mbstring")
