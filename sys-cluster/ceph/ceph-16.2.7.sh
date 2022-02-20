@@ -1,5 +1,6 @@
 #!/bin/sh
 source "../../common/init.sh"
+inherit python
 
 get https://download.ceph.com/tarballs/${P}.tar.gz
 acheck
@@ -18,7 +19,6 @@ importpkg \
 cd "${T}"
 
 CMAKEOPTS=(
-	-G Ninja
 	-DWITH_BABELTRACE=NO
 	-DWITH_BLUESTORE_PMEM=YES
 	-DWITH_CEPHFS=YES
@@ -32,7 +32,7 @@ CMAKEOPTS=(
 	-DWITH_MGR=YES
 	-DWITH_MGR_DASHBOARD_FRONTEND=OFF
 	-DWITH_OPENLDAP=YES
-	-DWITH_PYTHON3=3
+	-DWITH_PYTHON3="$PYTHON_LATEST"
 	-DWITH_RADOSGW=YES
 	-DWITH_RADOSGW_AMQP_ENDPOINT=YES
 	-DWITH_RADOSGW_KAFKA_ENDPOINT=NO
@@ -53,7 +53,7 @@ CMAKEOPTS=(
 	-DWITH_SYSTEM_BOOST=YES
 	-DWITH_SYSTEM_ROCKSDB=ON
 	-DWITH_RDMA=OFF
-	#-DEPYTHON_VERSION=
+	-DEPYTHON_VERSION=3
 	-DCMAKE_INSTALL_DOCDIR="/pkg/main/${PKG}.doc.${PVRF}"
 	-DCMAKE_INSTALL_SYSCONFDIR=/etc
 	# needed for >=glibc-2.32
@@ -62,8 +62,5 @@ CMAKEOPTS=(
 )
 
 docmake "${CMAKEOPTS[@]}"
-
-ninja --verbose
-DESTDIR="${D}" ninja install
 
 finalize

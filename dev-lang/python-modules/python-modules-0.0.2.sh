@@ -2,6 +2,8 @@
 source ../../common/init.sh
 source ${ROOTDIR}/common/python.sh
 
+acheck
+
 # this will compile & generate python-modules package for each listed version of python
 
 for PYTHON_VERSION in $PYTHON_VERSIONS; do
@@ -30,10 +32,11 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 	# /pkg/main/dev-lang.python-modules.core.3.7/lib/python3.7/site-packages/setuptools.pth
 	# re-generate setuptools.pth file
-	if [ -d "${TARGET}/lib/python${PYTHON_VERSION:0:3}/site-packages" ]; then
-		cd "${TARGET}/lib/python${PYTHON_VERSION:0:3}/site-packages"
-		rm -f setuptools.pth
+	if [ -d "${TARGET}/lib/python${PYTHON_VERSION%.*}/site-packages" ]; then
+		cd "${TARGET}/lib/python${PYTHON_VERSION%.*}/site-packages"
+		rm -f setuptools.pth easy-install.pth
 		find . -maxdepth 1 -name '*.egg' | sort -r | sort -u --field-separator=- -k 1,1 >setuptools.pth
+		cp setuptools.pth easy-install.pth
 	fi
 done
 

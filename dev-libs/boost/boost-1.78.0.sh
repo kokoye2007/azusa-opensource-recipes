@@ -1,5 +1,6 @@
 #!/bin/sh
 source "../../common/init.sh"
+inherit python
 
 get https://boostorg.jfrog.io/artifactory/main/release/${PV}/source/boost_${PV//./_}.tar.bz2
 acheck
@@ -7,7 +8,7 @@ acheck
 importpkg dev-libs/icu zlib app-arch/bzip2 app-arch/xz app-arch/zstd
 
 BOOST_BUILD_PATH="${CHPATH}/boost_${PV//./_}"
-BOOST_PYTHON="3.9"
+BOOST_PYTHON="${PYTHON_LATEST%.*}"
 
 cd "$BOOST_BUILD_PATH"
 
