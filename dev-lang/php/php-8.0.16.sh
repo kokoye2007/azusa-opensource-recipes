@@ -11,6 +11,10 @@ SAPIS="cli cgi fpm embed phpdbg"
 # getting readline to work is a bit of a pain...
 importpkg sys-libs/ncurses sys-libs/readline sys-libs/libxcrypt
 
+# override pkgconfig for openssl since this version of PHP doesn't like OpenSSL 3
+export OPENSSL_CFLAGS="-I$(realpath "/pkg/main/dev-libs.openssl.dev.1/include")"
+export OPENSSL_LIBS="-L$(realpath "/pkg/main/dev-libs.openssl.libs.1/lib$LIB_SUFFIX") -lcrypto -lssl"
+
 for sapi in $SAPIS; do
 	echo
 	echo "*****"

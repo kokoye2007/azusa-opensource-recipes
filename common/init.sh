@@ -237,8 +237,13 @@ org_fixdev() {
 	for foo in pkgconfig cmake; do
 		if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" ]; then
 			# should be in dev
-			mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}"
-			mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}"
+			if [ -d "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo" ]; then
+				# already found in destination, only move contents
+				mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo"/* "${D}/pkg/main/${PKG}.dev.${PVRF}/$foo"
+			else
+				mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}"
+				mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB/$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}"
+			fi
 			ln -sv "/pkg/main/${PKG}.dev.${PVRF}/$foo" "${D}/pkg/main/${PKG}.libs.${PVRF}/$LIB"
 		fi
 		if [ -d "${D}/pkg/main/${PKG}.core.${PVRF}/share/$foo" ]; then
@@ -623,6 +628,10 @@ makepkgconfig() {
 		die "need to specify libs in makepkgconfig"
 	fi
 
+	local PCFILE="$2"
+	if [ x"$PCFILE" = x ]; then
+		PCFILE="$PN"
+	fi
 	local NAME="$PN"
 	local DESC=""
 
@@ -633,7 +642,9 @@ makepkgconfig() {
 	local TGT="/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/"
 	mkdir -pv "${D}${TGT}"
 
-	cat >"${D}${TGT}${PN}.pc" <<EOF
+	echo "Generating file ${TGT}${PCFILE}.pc"
+
+	cat >"${D}${TGT}${PCFILE}.pc" <<EOF
 prefix=/pkg/main/${PKG}.core.${PVRF}
 exec_prefix=\${prefix}
 libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
