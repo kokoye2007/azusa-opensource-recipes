@@ -9,5 +9,14 @@ acheck
 
 cd "${P}"
 
-pythonsetup
+PORTAGE_OPTS=(
+	--system-prefix="/pkg/main/${PKG}.core.${PVRF}"
+	--system-exec-prefix="/pkg/main/${PKG}.core.${PVRF}"
+	--bindir="/pkg/main/${PKG}.core.${PVRF}/bin"
+	--docdir="/pkg/main/${PKG}.doc.${PVRF}"
+	--mandir="/pkg/main/${PKG}.doc.${PVRF}/man"
+)
+
+pythonsetup "${PORTAGE_OPTS[@]}"
+
 archive
