@@ -6,9 +6,9 @@ acheck
 
 cd "${T}"
 
-doconf --disable-static
+doconf
 
-make || /bin/bash -i
+make
 make install DESTDIR="${D}"
 
 finalize
