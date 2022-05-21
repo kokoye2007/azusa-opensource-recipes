@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu dev-libs/boost libcurl zlib
+importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu dev-libs/boost libcurl zlib app-arch/bzip2 app-arch/xz dev-libs/libfmt dev-util/systemtap
 
 # mariadb won't honor CPPFLAGS
 export CFLAGS="${CPPFLAGS} -O2"
@@ -43,10 +43,10 @@ CMAKEOPTS=(
 	-DWITHOUT_CLIENTLIBS=YES
 	-DCLIENT_PLUGIN_DIALOG=OFF
 	-DCLIENT_PLUGIN_AUTH_GSSAPI_CLIENT=OFF
-	-DCLIENT_PLUGIN_CLIENT_ED25519=OFF
+	-DCLIENT_PLUGIN_CLIENT_ED25519=DYNAMIC
 	-DCLIENT_PLUGIN_MYSQL_CLEAR_PASSWORD=STATIC
-	-DCLIENT_PLUGIN_CACHING_SHA2_PASSWORD=ON
-	-DWITH_SSL=system
+	-DCLIENT_PLUGIN_CACHING_SHA2_PASSWORD=DYNAMIC
+	-DWITH_SSL=bundled # somehow Cannot find appropriate system libraries for SSL. but found version "3.0.1"
 	-DCLIENT_PLUGIN_SHA256_PASSWORD=STATIC
 	-DWITH_PCRE=system
 	-DPLUGIN_AUTH_PAM=NO
