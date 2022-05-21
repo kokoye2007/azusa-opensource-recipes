@@ -8,9 +8,6 @@ importpkg media-libs/lcms
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}" -Dsystemd=false -Ddaemon_user=colord
-
-ninja
-DESTDIR="${D}" ninja install
+domeson -Dsystemd=false -Ddaemon_user=colord
 
 finalize

@@ -29,7 +29,4 @@ CMAKEOPTS=(
 
 docmake "${CMAKEOPTS[@]}"
 
-make
-make install DESTDIR="${D}"
-
 finalize

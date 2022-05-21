@@ -7,7 +7,7 @@ CATEGORY=sys-devel get https://ftp.gnu.org/gnu/binutils/${P}.tar.xz
 CATEGORY=cross-arm64
 acheck
 
-importpkg zlib
+importpkg zlib dev-libs/elfutils
 
 # default libpath should include glibc path so gcc can find -lc
 export LIB_PATH=/lib:`realpath /pkg/main/sys-libs.glibc.libs/lib$LIB_SUFFIX`
