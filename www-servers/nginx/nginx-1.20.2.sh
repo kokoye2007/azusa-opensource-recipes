@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://nginx.org/download/${P}.tar.gz
 acheck
 
-importpkg zlib libpcre openssl libxslt geoip gdlib atomic_ops
+importpkg zlib libpcre openssl libxslt geoip gdlib atomic_ops libxcrypt
 
 cd "${P}"
 
