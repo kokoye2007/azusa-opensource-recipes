@@ -6,6 +6,8 @@ acheck
 
 cd "${P}"
 
+importpkg libxcrypt
+
 sed -i '/LIBPOSTFIX="64"/s/64//' configure.ac
 rm -frv libltdl # old libtool, do not autoreconf
 

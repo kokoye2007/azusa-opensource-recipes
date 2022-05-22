@@ -6,7 +6,10 @@ acheck
 
 cd "${S}"
 
-apatch "$FILESDIR/polkit-0.120-duktape-js.patch" "$FILESDIR/polkit-0.120-cve-2021-4034.patch"
+apatch \
+	"$FILESDIR/polkit-0.120-duktape-js.patch" \
+	"$FILESDIR/polkit-0.120-cve-2021-4034.patch" \
+	"$FILESDIR/polkit-0.120-CVE-2021-4115.patch"
 
 aautoreconf
 
@@ -20,4 +23,5 @@ doconf --disable-static --disable-man-pages --disable-gtk-doc --disable-examples
 make
 make install DESTDIR="${D}"
 
+wipesuid
 finalize

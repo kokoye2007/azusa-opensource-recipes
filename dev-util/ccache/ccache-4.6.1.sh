@@ -6,11 +6,10 @@ acheck
 
 cd "${T}"
 
-importpkg zlib
+importpkg app-arch/zstd
 
-doconf
-
-make
-make install DESTDIR="${D}"
+# Found hiredis, version 1.0.2
+# but still fails, so disable for now
+docmake -DREDIS_STORAGE_BACKEND=OFF
 
 finalize

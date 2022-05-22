@@ -18,4 +18,5 @@ doconf --disable-static --disable-man-pages --disable-gtk-doc --disable-examples
 make
 make install DESTDIR="${D}"
 
+wipesuid
 finalize

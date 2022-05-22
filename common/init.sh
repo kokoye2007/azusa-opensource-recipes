@@ -351,6 +351,11 @@ organize() {
 	done
 }
 
+wipesuid() {
+	echo "Wiping suid flag from files..."
+	find "${D}" -user root -perm -4000 -print0 | xargs -0 chmod -v ug-s
+}
+
 archive() {
 	SUIDEXE="$(find "${D}" -user root -perm -4000 -ls)"
 	if [ x"$SUIDEXE" != x ]; then
