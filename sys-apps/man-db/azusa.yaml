@@ -1,0 +1,3 @@
+description: A man replacement that utilizes berkdb instead of flat files
+homepage: http://www.nongnu.org/man-db/
+license: GPL-3
