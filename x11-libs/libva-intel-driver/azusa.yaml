@@ -1,0 +1,3 @@
+description: HW video decode support for Intel integrated graphics
+homepage: https://github.com/intel/intel-vaapi-driver
+license: MIT

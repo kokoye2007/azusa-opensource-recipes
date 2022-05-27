@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://xcb.freedesktop.org/dist/${P}.tar.bz2
+get https://xcb.freedesktop.org/dist/${P}.tar.xz
 acheck
 
 cd "${T}"
 
-doconf --localstatedir=/var --disable-static
+doconf --localstatedir=/var
 
 make
 make install DESTDIR="${D}"

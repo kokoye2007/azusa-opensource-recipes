@@ -8,9 +8,6 @@ importpkg zlib
 
 cd "${T}"
 
-meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
-
-ninja
-DESTDIR="${D}" ninja install
+domeson
 
 finalize

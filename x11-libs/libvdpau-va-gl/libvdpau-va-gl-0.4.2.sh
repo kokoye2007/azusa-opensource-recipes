@@ -2,12 +2,12 @@
 source "../../common/init.sh"
 
 get https://github.com/i-rinat/libvdpau-va-gl/archive/v${PV}/${P}.tar.gz
+acheck
 
 cd "${T}"
 
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/pkg/main/${PKG}.core.${PVRF} "${CHPATH}/${P}"
+importpkg X
 
-make
-make install DESTDIR="${D}"
+docmake
 
 finalize

@@ -1,0 +1,3 @@
+description: Standalone X server running under Wayland
+homepage: https://wayland.freedesktop.org/xserver.html
+license: MIT

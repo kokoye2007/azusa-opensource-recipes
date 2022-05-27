@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/xserver/${P}.tar.bz2
+get https://www.x.org/pub/individual/xserver/${P}.tar.xz
 acheck
 
 cd "${T}"

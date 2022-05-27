@@ -1,0 +1,3 @@
+description: X.Org X authorization library
+homepage: https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/lib/libXau
+license: MIT

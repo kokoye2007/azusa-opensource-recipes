@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg zlib
 
-doconf --localstatedir=/var --disable-static
+doconf --localstatedir=/var
 
 make
 make install DESTDIR="${D}"
