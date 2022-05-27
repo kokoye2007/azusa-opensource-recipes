@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/ivmai/libatomic_ops/releases/download/v${PV}/${P}.tar.gz
+acheck
 
 cd "${T}"
 

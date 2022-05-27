@@ -2,12 +2,17 @@
 source "../../common/init.sh"
 inherit python
 
-get ftp://xmlsoft.org/libxml2/${P}.tar.gz
+get https://gitlab.gnome.org/GNOME/libxml2/-/archive/v${PV}/libxml2-v${PV}.tar.bz2
 acheck
 
-cd "${T}"
+cd "${S}"
 
-importpkg python-3.8 icu-uc sys-libs/libxcrypt
+aautoreconf
+
+# can't run in T because of python
+#cd "${T}"
+
+importpkg python-${PYTHON_LATEST%.*} icu-uc sys-libs/libxcrypt
 
 doconf --disable-maintainer-mode --disable-static --with-icu
 
@@ -20,7 +25,7 @@ ln -v -s . "${D}/pkg/main/${PKG}.dev.${PVRF}/include/libxml2/libxml2"
 organize
 
 # run python
-cd "${CHPATH}/${P}/python"
+cd "${S}/python"
 
 # fix includes_dir to include both ${D}/pkg/main/${PKG}.dev.${PVRF}/include and /pkg/main/sys-libs.glibc.dev/include
 sed -i -e "s#^includes_dir = \\[#includes_dir = ['${D}/pkg/main/${PKG}.dev.${PVRF}/include', '/pkg/main/sys-libs.glibc.dev/include',#" setup.py

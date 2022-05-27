@@ -1,12 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/bc/${P}.tar.gz
+get ftp://ftp.gnu.org/gnu/gdbm/${P}.tar.gz
+acheck
 
 cd "${T}"
 
+importpkg readline
+
 # configure & build
-doconf
+doconf --enable-libgdbm-compat
 
 make
 make install DESTDIR="${D}"

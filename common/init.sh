@@ -371,6 +371,22 @@ archive() {
 		fi
 	fi
 
+	if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" ]; then
+		# build .ld.so.cache file
+		echo "Building ld.so.cache ..."
+		for sub in lib64 lib32 lib; do
+			# check if dir but not symlink
+			if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/$sub" ]; then
+				if [ ! -L "${D}/pkg/main/${PKG}.libs.${PVRF}/$sub" ]; then
+					echo "/pkg/main/${PKG}.libs.${PVRF}/$sub" >>"${D}/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf"
+				fi
+			fi
+		done
+		if [ -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.cache" ]; then
+			ldconfig --format=new -r "${D}" -C "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.cache" -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf" 
+		fi
+	fi
+
 	echo "Building squashfs..."
 	cd "${D}"
 

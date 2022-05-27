@@ -13,6 +13,7 @@ if [ ! -d "/pkg/main/${PKG}.src.${PV}.linux.any" ]; then
 fi
 
 TGT="amd64 386 arm64"
+acheck
 
 for GOARCH in $TGT; do
 	mkdir -p "${T}/$GOARCH"
