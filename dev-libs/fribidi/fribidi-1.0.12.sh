@@ -8,7 +8,4 @@ cd "${T}"
 
 domeson
 
-ninja
-DESTDIR="${D}" ninja install
-
 finalize
