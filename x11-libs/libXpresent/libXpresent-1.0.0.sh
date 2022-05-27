@@ -8,7 +8,7 @@ importpkg x11-libs/libXext x11-libs/libXfixes x11-libs/libXrandr x11-libs/libXre
 
 cd "${T}"
 
-doconf --localstatedir=/var --disable-static
+doconf --localstatedir=/var
 
 make
 make install DESTDIR="${D}"

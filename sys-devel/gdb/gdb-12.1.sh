@@ -1,11 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/SELinuxProject/selinux/releases/download/20191204/${P}.tar.gz
+get https://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
 acheck
 
 cd "${T}"
 
+importpkg dev-libs/boost dev-libs/gmp
+
+# configure & build
 doconf
 
 make

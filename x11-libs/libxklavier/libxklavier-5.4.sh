@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-doconf --disable-static --disable-gtk-doc --enable-introspection --enable-vala #--with-xkb-base=/usr/share/X11/xkb --with-xkb-bin-base=/usr/bin
+doconf --disable-gtk-doc --enable-introspection --enable-vala #--with-xkb-base=/usr/share/X11/xkb --with-xkb-bin-base=/usr/bin
 
 make
 make install DESTDIR="${D}"

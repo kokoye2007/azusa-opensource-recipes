@@ -1,16 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
+get https://ftp.gnu.org/gnu/m4/${P}.tar.xz
 acheck
 
+echo "Compiling ${P} ..."
 cd "${T}"
-
-importpkg dev-libs/boost
 
 # configure & build
 doconf
-
 
 make
 make install DESTDIR="${D}"

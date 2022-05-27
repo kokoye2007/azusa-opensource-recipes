@@ -544,6 +544,7 @@ importpkg() {
 			# standard import paths
 			if [ -d "/pkg/main/${foo/\//.}.dev${vers}/include" ]; then
 				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev${vers}/include"
+				export CPATH="$CPATH:/pkg/main/${foo/\//.}.dev${vers}/include"
 				export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev${vers}/include"
 			fi
 			if [ -d "/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX" ]; then

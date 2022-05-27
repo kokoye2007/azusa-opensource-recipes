@@ -1,0 +1,3 @@
+description: Shared memory fences using futexes
+homepage: https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/lib/libxshmfence
+license: MIT

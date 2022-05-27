@@ -2,9 +2,6 @@
 source "../../common/init.sh"
 
 get http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/${P}/${P}.tar.xz
-cd "${P}"
-get http://distfiles.gentoo.org/distfiles/gcc-11.3.0-patches-4.tar.bz2
-apatch patch/*.patch
 acheck
 
 cd "${T}"
@@ -12,7 +9,7 @@ cd "${T}"
 export SED=sed
 
 # make sure gcc can find stuff like -lz
-importpkg zlib libcrypt libzstd dev-util/systemtap
+importpkg zlib libcrypt libzstd dev-util/systemtap sys-libs/libxcrypt
 
 if [ -f /pkg/main/sys-devel.gcc.core/bin/cpp ]; then
 	export CPP=/pkg/main/sys-devel.gcc.core/bin/cpp

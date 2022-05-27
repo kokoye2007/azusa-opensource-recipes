@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dev.gentoo.org/~whissi/dist/${PN}/${P}.tar.bz2
+get https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${P}.tar.xz
 acheck
 
 apatch *.patch

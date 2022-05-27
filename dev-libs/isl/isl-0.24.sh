@@ -1,12 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/lib/${P}.tar.bz2
+get https://libisl.sourceforge.io/${P}.tar.xz
 acheck
 
 cd "${T}"
 
-doconf --localstatedir=/var --disable-static
+importpkg gmp
+
+# configure & build
+doconf 
 
 make
 make install DESTDIR="${D}"

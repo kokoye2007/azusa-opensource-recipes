@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get http://ftp.gnu.org/gnu/libtool/${P}.tar.gz
+acheck
 
 cd "${T}"
 

@@ -8,9 +8,6 @@ cd "${T}"
 
 importpkg zlib x11-libs/cairo
 
-meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
-
-ninja
-DESTDIR="${D}" ninja install
+domeson -Da11y=true -D_systemd=false -Dvapi=true -Dgtk3=true -Dgtk4=false -Dglade=true -Dfribidi=true -Dgir=true
 
 finalize

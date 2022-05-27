@@ -1,15 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://isl.gforge.inria.fr/${P}.tar.xz
+get https://www.x.org/pub/individual/lib/${P}.tar.bz2
 acheck
 
 cd "${T}"
 
-importpkg gmp
-
-# configure & build
-doconf 
+doconf
 
 make
 make install DESTDIR="${D}"

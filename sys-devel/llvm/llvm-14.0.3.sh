@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 # options:
 # clang clang-tools-extra compiler-rt libc libclc libcxx libcxxabi libunwind lld lldb mlir openmp parallel-libs polly pstl flang
-LLVM_PROJECTS="libcxx;libcxxabi"
+LLVM_PROJECTS="libcxx;libcxxabi;benchmark"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 OIFS="$IFS"
@@ -17,7 +17,7 @@ acheck
 
 cd "${T}"
 
-importpkg libxml-2.0 icu-uc sci-mathematics/z3
+importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib
 # importpkg will set CPPFLAGS but that's not read by llvm
 export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
