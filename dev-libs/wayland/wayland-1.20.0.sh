@@ -6,9 +6,6 @@ acheck
 
 cd "${T}"
 
-doconf --disable-documentation
-
-make
-make install DESTDIR="${D}"
+domeson
 
 finalize
