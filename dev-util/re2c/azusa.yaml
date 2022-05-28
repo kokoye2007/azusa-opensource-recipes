@@ -1,0 +1,3 @@
+description: tool for generating C-based recognizers from regular expressions
+homepage: http://re2c.org/
+license: public-domain

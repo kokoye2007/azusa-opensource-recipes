@@ -1,0 +1,3 @@
+description: Library to provide useful functions commonly found on BSD systems
+homepage: https://libbsd.freedesktop.org/wiki/ https://gitlab.freedesktop.org/libbsd/libbsd
+license: BSD BSD-2 BSD-4 ISC
