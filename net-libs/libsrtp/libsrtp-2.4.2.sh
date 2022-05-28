@@ -1,12 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/app/${P}.tar.bz2
+get https://github.com/cisco/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
 acheck
 
 cd "${T}"
-
-importpkg x11-base/xorg-proto
 
 doconf
 

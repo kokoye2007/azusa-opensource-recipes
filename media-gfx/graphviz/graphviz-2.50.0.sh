@@ -35,4 +35,5 @@ echo "Running dot -c"
 #mkdir -p "${D}/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
 mv -v "/.pkg-main-rw/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/config"* "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
 
+fixelf
 archive

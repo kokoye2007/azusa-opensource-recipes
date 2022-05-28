@@ -1,0 +1,18 @@
+--- heap_safe.h.orig	2022-05-20 12:48:16.896310237 +0000
++++ heap_safe.h	2022-05-20 12:48:37.796102238 +0000
+@@ -92,6 +92,7 @@
+ void HeapSafeMemsetError(const char *errorString, const char *file = NULL, unsigned int line = 0);
+ 
+ 
++extern "C" {
+ inline void *memcpy_heapsafe(void *destination, const void *destination_begin, const void *source, const void *source_begin, size_t length,
+ 			     const char *file = NULL, unsigned int line = 0) {
+ 	#if HEAPSAFE
+@@ -142,6 +143,7 @@
+ 	#endif
+ 	return(memcpy(destination, source, length));
+ }
++}
+ 
+ inline void *memcpy_heapsafe(void *destination, const void *source, size_t length,
+ 			     const char *file = NULL, unsigned int line = 0) {

@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg dev-libs/boost
 
-doconf --disable-static
+doconf
 
 make
 make install DESTDIR="${D}"

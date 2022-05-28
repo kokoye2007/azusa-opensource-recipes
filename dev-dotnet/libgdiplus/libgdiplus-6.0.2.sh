@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg media-libs/tiff libjpeg media-libs/giflib x11-libs/cairo
 
-doconf --disable-static --with-pango
+doconf --with-pango
 
 make
 make install DESTDIR="${D}"

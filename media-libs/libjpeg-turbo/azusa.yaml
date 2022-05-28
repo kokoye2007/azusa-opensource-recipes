@@ -1,0 +1,3 @@
+description: MMX, SSE, and SSE2 SIMD accelerated JPEG library
+homepage: https://libjpeg-turbo.org/ https://sourceforge.net/projects/libjpeg-turbo/
+license: BSD IJG ZLIB

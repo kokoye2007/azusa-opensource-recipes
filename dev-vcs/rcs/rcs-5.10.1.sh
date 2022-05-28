@@ -1,14 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/app/${P}.tar.bz2
+get https://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.lz
 acheck
 
 cd "${T}"
 
-importpkg x11-base/xorg-proto
-
-doconf
+doconf CFLAGS="-std=gnu99 -pipe -O2"
 
 make
 make install DESTDIR="${D}"

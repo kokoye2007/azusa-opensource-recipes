@@ -40,6 +40,7 @@ CHPATH="$WORKDIR" ## COMPAT XXX REMOVEME
 D="${PKGBASE}/dist"
 T="${PKGBASE}/temp"
 APKGOUT=/tmp/apkg
+export CPPFLAGS="-pipe -Wall"
 
 if [ -d "${PKGBASE}" ]; then
 	# cleanup
@@ -132,7 +133,7 @@ download() {
 	wget -O "$BN" "$1" || true
 	if [ ! -s "$BN" ]; then
 		# try gentoo mirror
-		wget -O "$BN" "http://ftp.iij.ad.jp/pub/linux/gentoo/distfiles/$BN"
+		wget -O "$BN" "https://ftp.iij.ad.jp/pub/linux/gentoo/distfiles/$BN"
 	fi
 
 	if [ -f "$HOME/.aws/credentials" ]; then
