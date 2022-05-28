@@ -2,6 +2,8 @@
 
 set -e
 
+source "common/arch.sh"
+
 # create a virtual azusa env with writable /pkg/main
 
 if [ `cat /proc/filesystems | grep -c overlay` -eq 0 ]; then
@@ -15,10 +17,10 @@ chmod 0755 "$tmp_dir"
 unset LC_ALL LANG TMPDIR
 export LC_ALL=C.utf8
 
-echo "Temporary environment is in $tmp_dir"
+echo "Temporary environment is in $tmp_dir ARCH=$ARCH"
 
 # initialize root
-/pkg/main/azusa.symlinks.core/azusa/makeroot.sh "$tmp_dir"
+/pkg/main/azusa.symlinks.core.linux.${ARCH}/azusa/makeroot.sh "$tmp_dir"
 
 # mount stuff
 mkdir "$tmp_dir/pkg/main" "$tmp_dir/build" "$tmp_dir/.pkg-main-rw" "$tmp_dir/.pkg-main-work"

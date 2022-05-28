@@ -10,6 +10,7 @@ cd "${D}/pkg/main/${PKG}.core.${MY_PVR}"
 # install makeroot in "azusa"
 mkdir "azusa"
 cp "$FILESDIR/makeroot.sh" azusa/
+sed -i "s/__ARCH__/$ARCH/" azusa/makeroot.sh
 
 GLOBAL_SHARED="share/gir-1.0 share/dbus-1 share/polkit-1 share/aclocal"
 
@@ -39,7 +40,7 @@ mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules" "$LIB/udev"
 ln -snf "$LIB/cmake" cmake
 ln -snf "$LIB/pkgconfig" pkgconfig
 ln -snf . usr
-xmlcatalog --noout --create etc/xml/catalog
+xmlcatalog --noout --create etc/xml/catalog || true
 
 for pn in $(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep -v busybox | grep -v symlinks); do
 	echo -ne "\rScanning: $pn\033[K"
@@ -133,7 +134,7 @@ for pn in $(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${AR
 				cat "$foo" | while read bar; do
 					typ=`echo "$bar" | cut -d' ' -f1`
 					orig=`echo "$bar" | cut -d' ' -f2-`
-					xmlcatalog --noout --add "$typ" "$orig" "$replace" etc/xml/catalog
+					xmlcatalog --noout --add "$typ" "$orig" "$replace" etc/xml/catalog || true
 				done
 			done
 			;;

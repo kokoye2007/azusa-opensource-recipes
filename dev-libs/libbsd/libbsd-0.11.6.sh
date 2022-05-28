@@ -1,7 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+get https://libbsd.freedesktop.org/releases/${P}.tar.xz
+acheck
 
 cd "${T}"
 

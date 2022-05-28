@@ -17,7 +17,7 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	MODP="/pkg/main/dev-lang.python.mod.${PYTHON_VERSION}.${OS}.${ARCH}"
 	cp -rsfT "$MODP"/ "$TARGET"
 
-	for pn in `curl -s http://localhost:100/apkgdb/main?action=list | grep "py$PYTHON_VERSION"`; do
+	for pn in `curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_VERSION"`; do
 		p=/pkg/main/${pn}
 		t=`echo "$pn" | cut -d. -f3`
 

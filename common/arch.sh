@@ -8,6 +8,7 @@ case $ARCH in
 		ARCH=386
 		LIB_SUFFIX=
 		CHOST="i686-pc-linux-gnu"
+		BITS=32
 		;;
 	x86_64)
 		if [ $BITS -eq 32 ]; then

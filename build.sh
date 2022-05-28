@@ -30,7 +30,7 @@ else
 	exit 1
 fi
 
-echo "Runnin $PKG"
+echo "Running $PKG"
 
 cd ${PKG_DIR}
 exec ./${PKG_SCRIPT}
