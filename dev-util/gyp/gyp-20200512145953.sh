@@ -7,7 +7,7 @@ acheck
 
 cd "${P}"
 
-PYTHON_RESTRICT="2.7"
+PYTHON_RESTRICT="3.10"
 
 pythonsetup
 archive

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.xz
+get https://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.xz
 acheck
 
 cd "${T}"
 
-FORCE_UNSAFE_CONFIGURE=1 doconf
+doconf
 
 make
 make install DESTDIR="${D}"

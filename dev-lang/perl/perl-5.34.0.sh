@@ -19,6 +19,7 @@ export BZIP2_LIB="/pkg/main/app-arch.bzip2.libs/lib$LIB_SUFFIX"
 export BZIP2_INCLUDE="/pkg/main/app-arch.bzip2.dev/include"
 
 case $ARCH in
+	386) archname="i686-linux" ;;
 	amd64) archname="x86_64-linux" ;;
 	arm64) archname="aarch64-linux" ;;
 	*) die "unsupported arch $ARCH - please add" ;;

@@ -16,7 +16,7 @@ for PERL_VERSION in $PERL_VERSIONS; do
 	cp -rsf "$MODP"/* "$TARGET"
 
 	# locate packages
-	for pn in `curl -s http://localhost:100/apkgdb/main?action=list | grep "perl$PERL_VERSION"`; do
+	for pn in `curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "perl$PERL_VERSION"`; do
 		p=/pkg/main/${pn}
 		t=`echo "$pn" | cut -d. -f3`
 

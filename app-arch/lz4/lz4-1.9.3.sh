@@ -9,7 +9,4 @@ cd "${T}"
 CMAKE_ROOT=${S}/build/cmake
 docmake -DBUILD_STATIC_LIBS=NO
 
-make
-make install DESTDIR="${D}"
-
 finalize
