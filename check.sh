@@ -1,4 +1,7 @@
 #!/bin/bash
+ROOTDIR="`pwd`"
+source "common/init.sh"
+cd "$ROOTDIR"
 
 for foo in */*; do
 	if [ ! -d "$foo" ]; then
@@ -8,16 +11,19 @@ for foo in */*; do
 	# check if this exists
 	p="/pkg/main/${foo/\//.}"
 
-	if [ -L "$p" ]; then
+	if [ -L "$p.core.${OS}.${ARCH}" ]; then
 		continue
 	fi
-	if [ -L "$p.core" ]; then
+	if [ -L "$p.libs.${OS}.${ARCH}" ]; then
 		continue
 	fi
-	if [ -L "$p.libs" ]; then
+	if [ -L "$p.fonts.${OS}.${ARCH}" ]; then
 		continue
 	fi
-	if [ -L "$p.fonts" ]; then
+	if [ -L "$p.data.${OS}.${ARCH}" ]; then
+		continue
+	fi
+	if [ -L "$p.mod.${OS}.${ARCH}" ]; then
 		continue
 	fi
 	echo "not found: $foo"

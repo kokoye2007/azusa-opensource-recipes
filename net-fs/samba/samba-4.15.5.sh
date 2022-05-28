@@ -47,6 +47,6 @@ CONFIGURE=(
 	--builtin-libraries=NONE
 )
 
-dowaf "${CONFIGURE[@]}" || /bin/bash -i
+dowaf "${CONFIGURE[@]}"
 
 finalize
