@@ -41,4 +41,5 @@ sed -i -re "s#^Cflags:(.*)#Cflags:\\1 -I${ICU_PATH}#" "${D}/pkg/main/${PKG}.dev.
 echo " -> fixing libxml2-config.cmake"
 sed -i -re "s#^set\\(LIBXML2_INCLUDE_DIRS(.*)\\)#set(LIBXML2_INCLUDE_DIRS\\1 ${ICU_PATH})#" "${D}/pkg/main/${PKG}.dev.${PVRF}/cmake/libxml2/libxml2-config.cmake"
 
+fixelf
 archive

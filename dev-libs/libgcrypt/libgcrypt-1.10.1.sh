@@ -17,4 +17,5 @@ organize
 sed -i -e "s,^Libs: ,Libs: -L/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX ," "${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/libgcrypt.pc"
 sed -i -e "s,^Cflags: ,Cflags: -I/pkg/main/${PKG}.dev.${PVRF}/include ," "${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig/libgcrypt.pc"
 
+fixelf
 archive

@@ -15,8 +15,8 @@ sed -i "s/__ARCH__/$ARCH/" azusa/makeroot.sh
 GLOBAL_SHARED="share/gir-1.0 share/dbus-1 share/polkit-1 share/aclocal"
 
 mkdir -p bin sbin info $GLOBAL_SHARED etc etc/ssl etc/xml full/include
-ln -snf /pkg/main/app-misc.ca-certificates/etc/ssl/certs etc/ssl/certs
-ln -snf /pkg/main/azusa.ldso.data/etc/* etc/
+ln -snf /pkg/main/app-misc.ca-certificates.$OS.$ARCH/etc/ssl/certs etc/ssl/certs
+ln -snf /pkg/main/azusa.ldso.data.$OS.$ARCH/etc/* etc/
 
 if [ $MULTILIB = yes ]; then
 	mkdir -p lib32 lib64 full/lib32 full/lib64
@@ -27,14 +27,21 @@ if [ $MULTILIB = yes ]; then
 
 	#ln -s `realpath /pkg/main/sys-libs.glibc.libs`/lib64/ld-linux-x86-64.so.2 lib64
 	#cp -rsfT `realpath /pkg/main/sys-libs.glibc.libs/lib64` lib64
-	cp -rsf /pkg/main/sys-libs.glibc.libs/lib64/ld-linux* lib64
+	cp -rsf /pkg/main/sys-libs.glibc.libs.$OS.$ARCH/lib64/ld-linux* lib64
+
+	case $ARCH in
+	amd64)
+		# add link to 386 ld-linux (copy in lib64 because lib is a symlink to that already)
+		cp -rsf /pkg/main/sys-libs.glibc.libs.$OS.386/lib/ld-linux* lib64
+		;;
+	esac
 else
 	LIBS=lib
 	LIB=lib
 	mkdir -p lib full/lib
 
 	#cp -rsfT `realpath /pkg/main/sys-libs.glibc.libs/lib` lib
-	cp -rsf /pkg/main/sys-libs.glibc.libs/lib/ld-linux* lib || true
+	cp -rsf /pkg/main/sys-libs.glibc.libs.$OS.$ARCH/lib/ld-linux* lib || true
 fi
 mkdir -p "$LIB/cmake" "$LIB/pkgconfig" "$LIB/modules" "$LIB/udev"
 ln -snf "$LIB/cmake" cmake
