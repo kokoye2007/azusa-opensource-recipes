@@ -1,5 +1,8 @@
 versions:
-  stable: 1.2.11
+  list:
+    - 1.2.11
+    - 1.2.12
+  stable: 1.2.12
 build:
   -
     version: "*"

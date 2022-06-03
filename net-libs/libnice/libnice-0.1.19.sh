@@ -6,9 +6,6 @@ acheck
 
 cd "${T}"
 
-doconf
-
-make
-make install DESTDIR="${D}"
+domeson
 
 finalize
