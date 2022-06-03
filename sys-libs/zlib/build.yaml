@@ -9,3 +9,10 @@ build:
         - http://zlib.net/${P}.tar.gz
       engine: autoconf
       options: [light]
+files:
+    zlib-1.2.12.tar.gz:
+        size: 1490071
+        hashes:
+            sha1: 207ba741d387e2c1607104cf0bd8cff27deb2605
+            sha3-256: 2805d802ace27edd65abcb5bd4100b3c74c76d1882bf642fcbedebe68df370b2
+            sha256: 91844808532e5ce316b3c010929493c0244f3d37593afd6de04f71821d5136d9
