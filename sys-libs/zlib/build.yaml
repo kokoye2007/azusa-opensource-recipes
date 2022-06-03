@@ -1,12 +1,11 @@
 versions:
-  list:
-    - 1.2.11
-    - 1.2.12
-  stable: 1.2.12
+    list:
+        - 1.2.11
+        - 1.2.12
+    stable: 1.2.12
 build:
-  -
-    version: "*"
-    source:
-      - "http://zlib.net/${P}.tar.gz"
-    engine: autoconf
-    options: [light]
+    - version: '*'
+      source:
+        - http://zlib.net/${P}.tar.gz
+      engine: autoconf
+      options: [light]
