@@ -1,0 +1,18 @@
+versions:
+    list:
+        - "1.34"
+    stable: "1.34"
+build:
+    - version: '*'
+      env:
+        - FORCE_UNSAFE_CONFIGURE=1
+      source:
+        - https://ftp.gnu.org/gnu/${PV}/${P}.tar.bz2
+      engine: autoconf
+files:
+    tar-1.34.tar.bz2:
+        size: 3017795
+        hashes:
+            sha1: 5bae4a431c4da46d50c772f377bfc204e22fecf2
+            sha3-256: ef783bef6c01c9cca02e10d6843565882806c21797fa7a5c79f101548442469c
+            sha256: b44cc67f8a1f6b0250b7c860e952b37e8ed932a90bd9b1862a511079255646ff

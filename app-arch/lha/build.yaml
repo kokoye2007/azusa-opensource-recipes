@@ -1,0 +1,17 @@
+versions:
+    list:
+        - 1.14i
+    stable: 1.14i
+build:
+    - version: 1.14i
+      source:
+        - https://osdn.net/projects/lha/downloads/22231/lha-1.14i-ac20050924p1.tar.gz
+      engine: autoconf
+      options: [light]
+files:
+    lha-1.14i-ac20050924p1.tar.gz:
+        size: 285518
+        hashes:
+            sha1: 2491c8b584c21759f1d3819f57fa0e1cbc235092
+            sha3-256: 830adbb7cd12588262bbe3b474e046399fe6533970ed07fbe4ae9f0aaf60b6ab
+            sha256: b5261e9f98538816aa9e64791f23cb83f1632ecda61f02e54b6749e9ca5e9ee4

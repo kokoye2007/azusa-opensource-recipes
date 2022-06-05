@@ -1,0 +1,16 @@
+versions:
+    list:
+        - "1.23"
+    stable: "1.23"
+build:
+    - version: '*'
+      source:
+        - http://download.savannah.gnu.org/releases/lzip/${P}.tar.gz
+      engine: autoconf
+files:
+    lzip-1.23.tar.gz:
+        size: 121817
+        hashes:
+            sha1: 9793edc5e4acda46b3ea16a47ea0dca02a6f6e3d
+            sha3-256: 84234305fff0e8d1d4defe7c66dd2c7f8bd901a377ddb901f4d8c76145b8bf23
+            sha256: 4792c047ddf15ef29d55ba8e68a1a21e0cb7692d87ecdf7204419864582f280d

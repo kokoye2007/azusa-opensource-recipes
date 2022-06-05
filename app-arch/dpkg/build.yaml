@@ -1,0 +1,26 @@
+versions:
+    list:
+        - 1.21.1
+    stable: 1.21.1
+build:
+    - version: '*'
+      source:
+        - http://ftp.jp.debian.org/debian/pool/main/d/${PN}/${P/-/_}.tar.xz
+      patches: []
+      engine: autoconf
+      arguments:
+        - --enable-unicode
+        - --enable-update-alternatives
+        - --with-libbz2
+        - --with-liblzma
+        - --with-libz
+        - --disable-compiler-warnings
+        - --disable-dselect
+        - --disable-start-stop-daemon
+files:
+    dpkg_1.21.1.tar.xz:
+        size: 4986936
+        hashes:
+            sha1: 26cfcdced2fd5b54dafe8b8e1617cb537f35b6f4
+            sha3-256: 01329fa988593be44d2c595bdd28c93ec02b3f7288ecdfb58cbcca6584cb2177
+            sha256: 1eb9fd5228b3199284ea5134904bb45b7a5bc12fb044b8e4964d89d2e5bbb563

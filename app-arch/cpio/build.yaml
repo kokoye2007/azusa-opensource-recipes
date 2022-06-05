@@ -1,0 +1,18 @@
+versions:
+    list:
+        - "2.13"
+    stable: "2.13"
+build:
+    - version: '*'
+      source:
+        - https://ftp.gnu.org/gnu/${PN}/${P}.tar.bz2
+      patches:
+        - cpio-2.12-gcc-10.patch
+      engine: autoconf
+files:
+    cpio-2.13.tar.bz2:
+        size: 1354559
+        hashes:
+            sha1: 4dcefc0e1bc36b11506a354768d82b15e3fe6bb8
+            sha3-256: 5d5d55d2165a02c3d79b949daef64d6593d944451c5e7d2da64192df4c01943c
+            sha256: eab5bdc5ae1df285c59f2a4f140a98fc33678a0bf61bdba67d9436ae26b46f6d
