@@ -383,7 +383,7 @@ archive() {
 				fi
 			fi
 		done
-		if [ -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.cache" ]; then
+		if [ -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf" ]; then
 			ldconfig --format=new -r "${D}" -C "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.cache" -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf" 
 		fi
 	fi
