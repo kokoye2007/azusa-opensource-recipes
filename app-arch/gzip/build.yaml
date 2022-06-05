@@ -1,0 +1,16 @@
+versions:
+    list:
+        - "1.12"
+    stable: "1.12"
+build:
+    - version: '*'
+      source:
+        - https://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.xz
+      engine: autoconf
+files:
+    gzip-1.12.tar.xz:
+        size: 825548
+        hashes:
+            sha1: 318107297587818c8f1e1fbb55962f4b2897bc0b
+            sha3-256: a0aabf5d5f2d8de5927b2cd02b85d356c89b3f6d9d4e2c9da2e789e3c4eeec54
+            sha256: ce5e03e519f637e1f814011ace35c4f87b33c0bbabeec35baf5fbd3479e91956
