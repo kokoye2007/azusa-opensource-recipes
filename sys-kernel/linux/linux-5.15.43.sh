@@ -12,7 +12,7 @@ if [ ! -d "/pkg/main/${PKG}.src.${PV}.linux.any" ]; then
 	exit
 fi
 
-TGT="amd64 386 arm64"
+TGT="amd64 386" # arm64"
 acheck
 
 for GOARCH in $TGT; do
