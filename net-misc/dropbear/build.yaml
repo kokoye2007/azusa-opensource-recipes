@@ -1,0 +1,22 @@
+versions:
+    list:
+        - "2020.81"
+        - "2022.82"
+    stable: "2022.82"
+build:
+    - version: '*'
+      source:
+        - https://matt.ucc.asn.au/dropbear/releases/${P}.tar.bz2
+      engine: autoconf
+      arguments:
+        - --enable-static
+        - --enable-bundled-libtom
+        - --disable-zlib
+        - CC=musl-gcc
+files:
+    dropbear-2022.82.tar.bz2:
+        size: 2309514
+        hashes:
+            sha1: 9719ea91b5ce8d93ee9a50b5c3a5bcd628736181
+            sha3-256: d5469a316abc70f1dafecb0942d62380eda180f2a7a234a85feee3ef99167d29
+            sha256: 3a038d2bbc02bf28bbdd20c012091f741a3ec5cbe460691811d714876aad75d1

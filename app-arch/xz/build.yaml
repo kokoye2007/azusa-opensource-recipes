@@ -1,0 +1,16 @@
+versions:
+    list:
+        - 5.2.5
+    stable: 5.2.5
+build:
+    - version: '*'
+      source:
+        - https://tukaani.org/xz/${P}.tar.bz2
+      engine: autoconf
+files:
+    xz-5.2.5.tar.bz2:
+        size: 1473322
+        hashes:
+            sha1: 19f83fb33dc51df87169864decd4b3de75dee1df
+            sha3-256: 285d745a707092b07d0391810804d33b8656efed5d1ec90bd76a43c4cd85aa94
+            sha256: 5117f930900b341493827d63aa910ff5e011e0b994197c3b71c08a20228a42df
