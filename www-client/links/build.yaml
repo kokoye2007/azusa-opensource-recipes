@@ -1,0 +1,48 @@
+versions:
+    list:
+        - "2.27"
+    stable: "2.27"
+build:
+    - version: '*'
+      import:
+        - sys-libs/gpm
+        - zlib
+        - app-arch/bzip2
+        - app-arch/brotli
+        - dev-libs/libevent
+        - app-arch/lzma
+      source:
+        - http://${PN}.twibright.com/download/${P}.tar.bz2
+      engine: autoconf
+      options: [light]
+      arguments:
+        - --without-directfb
+        - --without-librsvg
+        - --with-brotli
+        - --with-bzip2
+        - --with-fb
+        - --with-freetype
+        - --with-ipv6
+        - --with-libjpeg
+        - --with-libevent
+        - --with-lzip
+        - --with-lzma
+        - --with-ssl
+        - --with-svgalib
+        - --with-libtiff
+        - --with-x
+        - --with-zlib
+        - --with-zstd
+files:
+    links-2.23.tar.bz2:
+        size: 6521143
+        hashes:
+            sha1: 4077d341f9ea2e300319ee3fb972918cf4f703a1
+            sha3-256: 242a2e842dc2aa31ffb1865231d1ec212bff8ea3458ef9a2cac9e0f0832614d0
+            sha256: 6660d202f521fd18bf5184c3f1732d1fa7426a103374277ad1cdb8e57ce6ac45
+    links-2.27.tar.bz2:
+        size: 6510121
+        hashes:
+            sha1: f40ae91636d0f65a17c1391501539a18f37fa0f9
+            sha3-256: c4ed399503e3b438a07ccf78c46f6d8ed702f50b0f000f42179a5ca8b00cf50d
+            sha256: d8ddcbfcede7cdde80abeb0a236358f57fa6beb2bcf92e109624e9b896f9ebb4

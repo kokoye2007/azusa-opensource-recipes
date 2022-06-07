@@ -1,0 +1,32 @@
+versions:
+    list:
+        - 2.4.53
+    stable: 2.4.53
+build:
+    - version: '*'
+      import:
+        - expat
+        - libxcrypt
+      source:
+        - https://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2
+      engine: autoconf
+      arguments:
+        - --enable-authnz-fcgi
+        - --enable-mods-shared=all cgi
+        - --enable-mpms-shared=all
+        - --enable-suexec=shared
+        - --with-apr=/pkg/main/dev-libs.apr.core/bin/apr-1-config
+        - --with-apr-util=/pkg/main/dev-libs.apr-util.core/bin/apu-1-config
+        - --with-suexec-bin=/pkg/main/${PKG}.core.${PVRF}/bin/suexec
+        - --with-suexec-caller=apache
+        - --with-suexec-docroot=/srv/www
+        - --with-suexec-logfile=/var/log/httpd/suexec.log
+        - --with-suexec-uidmin=1000
+        - --with-suexec-userdir=public_html
+files:
+    httpd-2.4.53.tar.bz2:
+        size: 7431942
+        hashes:
+            sha1: cc064ed39f3845f2d35183b9b7cb638aa4cabfc9
+            sha3-256: cb65e74beb6724aedea2918d71cc01155e2f3e3334463fffc5ce8100217f6ddf
+            sha256: d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63
