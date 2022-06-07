@@ -1,0 +1,40 @@
+versions:
+    list:
+        - 1.35.0
+    stable: 1.35.0
+build:
+    - version: '*'
+      import:
+        - gmp
+        - zlib
+      source:
+        - https://github.com/aria2/${PN}/releases/download/release-${PV}/${P}.tar.xz
+      engine: autoconf
+      arguments:
+        - --disable-xmltest
+        - --enable-libaria2
+        - --with-libz
+        - --with-ca-bundle=
+        - --enable-bittorrent
+        - --enable-metalink
+        - --enable-nls
+        - --with-libcares
+        - --without-jemalloc
+        - --with-libuv
+        - --with-sqlite3
+        - --with-libssh2
+        - --with-tcmalloc
+        - --without-openssl
+        - --with-gnutls
+        - --with-libnettle
+        - --without-libgcrypt
+        - --with-libgmp
+        - --without-libexpat
+        - --with-libxml2
+files:
+    aria2-1.35.0.tar.xz:
+        size: 1534460
+        hashes:
+            sha1: 1e4f8dba13e6eb5860b90c567a9c03d2c4be8f18
+            sha3-256: cf7fac90b11bff01c023816752c6bde567d4b694ffd3ce0ef9f42afc50fe8637
+            sha256: 1e2b7fd08d6af228856e51c07173cfcf987528f1ac97e04c5af4a47642617dfd
