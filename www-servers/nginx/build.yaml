@@ -1,0 +1,72 @@
+versions:
+    list:
+        - 1.22.0
+    stable: 1.22.0
+build:
+    - version: '*'
+      import:
+        - zlib
+        - libpcre
+        - openssl
+        - libxslt
+        - geoip
+        - gdlib
+        - atomic_ops
+        - libxcrypt
+      source:
+        - https://nginx.org/download/${P}.tar.gz
+      engine: autoconf
+      options: [light, build_in_tree]
+      arguments:
+        - --conf-path=/etc/nginx
+        - --error-log-path=/var/log/nginx
+        - --pid-path=/run/nginx
+        - --lock-path=/run/nginx
+        - --with-cc-opt=$CPPFLAGS
+        - --with-ld-opt=$LDFLAGS
+        - --without-select_module
+        - --with-poll_module
+        - --with-threads
+        - --with-file-aio
+        - --with-http_ssl_module
+        - --with-http_v2_module
+        - --with-http_realip_module
+        - --with-http_addition_module
+        - --with-http_xslt_module=dynamic
+        - --with-http_image_filter_module=dynamic
+        - --with-http_geoip_module=dynamic
+        - --with-http_sub_module
+        - --with-http_dav_module
+        - --with-http_flv_module
+        - --with-http_mp4_module
+        - --with-http_gunzip_module
+        - --with-http_gzip_static_module
+        - --with-http_auth_request_module
+        - --with-http_random_index_module
+        - --with-http_secure_link_module
+        - --with-http_degradation_module
+        - --with-http_slice_module
+        - --with-http_stub_status_module
+        - --with-mail=dynamic
+        - --with-mail_ssl_module
+        - --with-stream=dynamic
+        - --with-stream_ssl_module
+        - --with-stream_realip_module
+        - --with-stream_geoip_module=dynamic
+        - --with-stream_ssl_preread_module
+        - --with-pcre
+        - --with-pcre-jit
+        - --with-libatomic
+files:
+    nginx-1.21.6.tar.gz:
+        size: 1073364
+        hashes:
+            sha1: 3e6d39a714f6716861286630a5f9df3044668d5a
+            sha3-256: 28d8d1447fa6dfceac780cba80440ea906c59063fec24d45c4fe37ad2a064996
+            sha256: 66dc7081488811e9f925719e34d1b4504c2801c81dee2920e5452a86b11405ae
+    nginx-1.22.0.tar.gz:
+        size: 1073322
+        hashes:
+            sha1: 419efb77b80f165666e2ee406ad8ae9b845aba93
+            sha3-256: 13d95aad37682945c80180773b9d0cd227106f437f15277258557de7ed945726
+            sha256: b33d569a6f11a01433a57ce17e83935e953ad4dc77cdd4d40f896c88ac26eb53

@@ -8,7 +8,7 @@ cd "${T}"
 
 # --audio-drv-list=oss,alsa,sdl,pa
 
-importpkg media-libs/alsa-lib sys-fs/udev media-libs/libepoxy egl dev-libs/libaio sys-libs/libcap-ng app-arch/bzip2 dev-libs/jemalloc dev-libs/libgcrypt net-libs/libssh2 dev-libs/lzo app-arch/snappy sys-process/numactl zlib dev-libs/pmdk sys-block/ndctl
+importpkg media-libs/alsa-lib sys-fs/udev media-libs/libepoxy egl dev-libs/libaio sys-libs/libcap-ng app-arch/bzip2 dev-libs/jemalloc dev-libs/libgcrypt net-libs/libssh2 dev-libs/lzo app-arch/snappy sys-process/numactl zlib dev-libs/pmdk sys-block/ndctl sys-libs/liburing
 export CFLAGS="$CPPFLAGS"
 
 CONFOPTS=(
@@ -32,7 +32,7 @@ CONFOPTS=(
 	--enable-module-upgrades
 
 	--enable-virtfs
-	--disable-virtiofsd # error: ‘struct statx’ has no member named ‘stx_mnt_id’; did you mean ‘stx_uid’?
+	--enable-virtiofsd # error: ‘struct statx’ has no member named ‘stx_mnt_id’; did you mean ‘stx_uid’?
 	--enable-tools
 	--enable-curl
 
@@ -65,7 +65,6 @@ CONFOPTS=(
 	--enable-vhost-vdpa
 	--enable-crypto-afalg
 	--enable-vnc
-	--enable-libxml2
 	--audio-drv-list="alsa,pa,sdl"
 	--enable-libpmem
 	--enable-spice
