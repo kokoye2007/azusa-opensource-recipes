@@ -1,0 +1,33 @@
+versions:
+    list:
+        - 7.1.0
+    stable: 7.1.0
+build:
+    - version: '*'
+      import:
+        - jemalloc
+      source:
+        - http://varnish-cache.org/_downloads/${P}.tgz
+      engine: autoconf
+      arguments:
+        - --enable-pcre2-jit
+        - --with-jemalloc
+files:
+    varnish-6.6.1.tgz:
+        size: 3518308
+        hashes:
+            sha1: b5036538ea05cc57afbfabeabdb2f284349c648d
+            sha3-256: e734216776d34decab3734c3aacb0385a71ecdda6032c6d718ecd21a7db708b8
+            sha256: ab1a6884332731f983c8dab675c636deb3883a206c8a0127a7c663af2422e628
+    varnish-7.0.2.tgz:
+        size: 3703686
+        hashes:
+            sha1: 84e5da9f2ed20a60d85c4ce9fe432859cf9acb82
+            sha3-256: c5f75fef729e4c04af2227e4b15891e91d299e94c8c8ec3bbbece853b075f750
+            sha256: 524a495a6ad2bf5b7e4092b0907ed1d283dd270af426efa82b70714c630c3f61
+    varnish-7.1.0.tgz:
+        size: 3787588
+        hashes:
+            sha1: f678f15f3b4eab0a5663e3878955a72bf4fe0957
+            sha3-256: 544fab14c55f44647abfa1f3e3254ddf5185fa0fab5c057bbcbd5516cf47ca22
+            sha256: f54ab88685667664e5b3c39eb56ac8c624b6c1093436a7f8c555491144c69eba
