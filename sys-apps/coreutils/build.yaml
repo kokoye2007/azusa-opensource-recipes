@@ -1,0 +1,10 @@
+versions:
+    list:
+        - "9.1"
+    stable: "9.1"
+build:
+    - version: '*'
+      env:
+        - FORCE_UNSAFE_CONFIGURE=1
+      source:
+        - https://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
