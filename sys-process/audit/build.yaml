@@ -1,0 +1,16 @@
+versions:
+    list:
+        - 3.0.8
+    stable: 3.0.8
+build:
+    - version: '*'
+      import:
+        - sys-kernel/linux
+      source:
+        - https://people.redhat.com/sgrubb/audit/${P}.tar.gz
+      engine: autoconf
+      arguments:
+        - --disable-zos-remote
+        - --without-python
+        - --without-python3
+        - CFLAGS=${CPPFLAGS} -O2

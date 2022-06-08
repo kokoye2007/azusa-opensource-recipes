@@ -1,0 +1,15 @@
+files:
+    audit-3.0.8.tar.gz:
+        size: 1182432
+        added: 2022-06-08T11:41:38.246621436+09:00
+        hashes:
+            sha1: 5274894bbb9e4ee2bcaed853d641ef5bfa504b7e
+            sha3-256: b7aee02c4d74043db05a42f3b90688b5c6056af47f9fc12db1a8df5c1316598d
+            sha256: b5f4d9b9ad69381ee18f33d3d918326aa52861509c901143f8a8c4ed5caa8913
+    audit-3.0.tar.gz:
+        size: 1109442
+        added: 2022-06-08T11:37:08.974042415+09:00
+        hashes:
+            sha1: 57077653bf6e56062a31e5836cb50533b728ac20
+            sha3-256: a450cddccdd6fa365887ea098867b905a61540c4cc0985a8459c9b61b3c7965f
+            sha256: bd31826823b912b6fe271d2d979ed879e9fc393cab1e2f7c4e1af258231765b8
