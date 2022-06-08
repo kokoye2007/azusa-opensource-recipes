@@ -1,0 +1,8 @@
+files:
+    lm-sensors-3.6.0.tar.gz:
+        size: 273209
+        added: 2022-06-08T12:14:33.032954707+09:00
+        hashes:
+            sha1: 2ef03242b62d70523919d06859503f12feb9f7d4
+            sha3-256: 49e0ccef37d001581142d673a8ec9687cd94590d18e5382a276091b6eeca6fca
+            sha256: 0591f9fa0339f0d15e75326d0365871c2d4e2ed8aa1ff759b3a55d3734b7d197

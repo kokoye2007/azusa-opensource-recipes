@@ -1,0 +1,13 @@
+versions:
+    list:
+        - 3.6.0
+    stable: 3.6.0
+build:
+    - version: '*'
+      source:
+        - https://github.com/lm-sensors/lm-sensors/archive/V${PV//./-}.tar.gz -> ${P}.tar.gz
+      engine: none
+      compile_post:
+        - make PREFIX="/pkg/main/${PKG}.core.${PVRF}"
+      install_post:
+        - make install PREFIX="/pkg/main/${PKG}.core.${PVRF}" DESTDIR="${D}"
