@@ -1,0 +1,12 @@
+versions:
+    list:
+        - "23.5"
+    stable: "23.5"
+build:
+    - version: '*'
+      import:
+        - ncurses
+      source:
+        - https://gitlab.com/psmisc/psmisc/-/archive/v${PV}/psmisc-v${PV}.tar.gz
+      engine: autoconf
+      options: [autoreconf, build_in_tree]

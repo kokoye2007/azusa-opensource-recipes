@@ -1,0 +1,8 @@
+versions:
+    list:
+        - 2.0.14
+    stable: 2.0.14
+build:
+    - version: '*'
+      source:
+        - https://github.com/numactl/numactl/releases/download/v${PV}/${P}.tar.gz
