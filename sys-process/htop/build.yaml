@@ -8,6 +8,8 @@ build:
         - CPPFLAGS=${CPPFLAGS} -DMAJOR_IN_SYSMACROS
       import:
         - sys-libs/ncurses
+        - sys-libs/libcap
+        - sys-apps/lm-sensors
       source:
         - https://github.com/htop-dev/${PN}/archive/${PV/_}.tar.gz -> ${P}.tar.gz
       engine: autoconf

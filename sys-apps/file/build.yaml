@@ -1,0 +1,12 @@
+versions:
+    list:
+        - "5.41"
+    stable: "5.41"
+build:
+    - version: '*'
+      import:
+        - zlib
+        - app-arch/bzip2
+        - app-arch/xz
+      source:
+        - http://ftp.astron.com/pub/file/${P}.tar.gz

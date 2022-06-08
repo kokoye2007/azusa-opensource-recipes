@@ -7,8 +7,9 @@ build:
       import:
         - sys-libs/pam
       source:
-        - https://github.com/cronie-crond/cronie/releases/download/${P}-final/${P}.tar.gz
+        - https://github.com/cronie-crond/cronie/archive/${P}.tar.gz
       engine: autoconf
+      options: [autoreconf]
       arguments:
         - --enable-syscrontab
         - --enable-anacron

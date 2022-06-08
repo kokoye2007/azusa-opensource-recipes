@@ -1,0 +1,22 @@
+files:
+    file-5.39.tar.gz:
+        size: 954266
+        added: 2022-06-08T12:24:08.581110609+09:00
+        hashes:
+            sha1: a5a8941a8e4c436fe22933db6a71c5161c3fb10b
+            sha3-256: c279074b9a91457200800432d5c5a57a1a237c57e1b04959a189e552967491f1
+            sha256: f05d286a76d9556243d0cb05814929c2ecf3a5ba07963f8f70bfaaa70517fad1
+    file-5.40.tar.gz:
+        size: 1004214
+        added: 2022-06-08T12:25:45.311568521+09:00
+        hashes:
+            sha1: 8a5d51c59cf090f09b00c2d75e50a194ee43250e
+            sha3-256: 0735c98956c2b3b517fab72d22d5e1beda7623c9013b95c7c388a1d106718370
+            sha256: 167321f43c148a553f68a0ea7f579821ef3b11c27b8cbe158e4df897e4a5dd57
+    file-5.41.tar.gz:
+        size: 1064097
+        added: 2022-06-08T12:28:58.184102518+09:00
+        hashes:
+            sha1: 8d80d2d50f4000e087aa60ffae4f099c63376762
+            sha3-256: d263179842a4416db415cc98216dcbb13d2320c6e2bdeaab4e0c7d7efd733996
+            sha256: 13e532c7b364f7d57e23dfeea3147103150cb90593a57af86c10e4f6e411603f
