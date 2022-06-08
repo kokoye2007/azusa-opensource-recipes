@@ -1,0 +1,25 @@
+versions:
+    list:
+        - 2.37.3
+    stable: 2.37.3
+build:
+    - version: '*'
+      import:
+        - libpcre2-8
+        - sys-libs/ncurses
+      source:
+        - https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v${PV%.*}/${P}.tar.xz
+      engine: autoconf
+      arguments:
+        - --libdir=/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX
+        - --disable-chfn-chsh
+        - --disable-login
+        - --disable-nologin
+        - --disable-su
+        - --disable-setpriv
+        - --disable-runuser
+        - --disable-pylibmount
+        - --enable-static
+        - --without-python
+        - --without-systemd
+        - --without-systemdsystemunitdir
