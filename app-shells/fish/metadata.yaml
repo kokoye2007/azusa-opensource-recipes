@@ -1,0 +1,15 @@
+files:
+    fish-3.3.1.tar.xz:
+        size: 3489152
+        added: 2022-06-08T15:05:03.667329816+09:00
+        hashes:
+            sha1: 2a220f67b8eee0e0f2439411e9cc6c0320970caa
+            sha3-256: bfd2e9d38fa4efc839f9cc4cb8123677334d4711c5042929bc2788ee54d6aeb3
+            sha256: b5b4ee1a5269762cbbe993a4bd6507e675e4100ce9bbe84214a5eeb2b19fae89
+    fish-3.4.1.tar.xz:
+        size: 3293068
+        added: 2022-06-08T15:06:44.040330659+09:00
+        hashes:
+            sha1: 1ae099c05e38a69db02ed214cf226145799d5f9a
+            sha3-256: 1b59a5e45e7298ca63093283590d6b3c1c1ed3765402d6edc3cf264a3a86b898
+            sha256: b6f23b3843b04db6b0a90fea1f6f0d0e40cc027b4a732098200863f2864a94ea

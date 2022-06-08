@@ -1,0 +1,16 @@
+versions:
+    list:
+        - 3.4.1
+    stable: 3.4.1
+build:
+    - version: '*'
+      import:
+        - tinfo
+      source:
+        - https://github.com/${PN}-shell/${PN}-shell/releases/download/${PV}/${P}.tar.xz
+      engine: cmake
+      arguments:
+        - -DCURSES_NEED_NCURSES=ON
+        - -DINSTALL_DOCS=ON
+        - -DWITH_GETTEXT=ON
+        - -DCMAKE_INSTALL_SYSCONFDIR=/etc
