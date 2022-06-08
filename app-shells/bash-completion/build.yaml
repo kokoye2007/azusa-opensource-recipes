@@ -1,0 +1,8 @@
+versions:
+    list:
+        - "2.11"
+    stable: "2.11"
+build:
+    - version: '*'
+      source:
+        - https://github.com/scop/bash-completion/releases/download/${PV}/${P}.tar.xz

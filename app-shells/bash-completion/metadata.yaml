@@ -1,0 +1,8 @@
+files:
+    bash-completion-2.10.tar.xz:
+        size: 310764
+        added: 2022-06-08T14:53:33.748468287+09:00
+        hashes:
+            sha1: c25bb5c092f0345c9148e6396a10f81228b2f622
+            sha3-256: 73254addb7bc3340354b89b141f22771bf7bda5b4aafdf0f57fc293fce74773e
+            sha256: 123c17998e34b937ce57bb1b111cd817bc369309e9a8047c0bcf06ead4a3ec92

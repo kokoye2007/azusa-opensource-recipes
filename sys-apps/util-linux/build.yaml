@@ -7,6 +7,7 @@ build:
       import:
         - libpcre2-8
         - sys-libs/ncurses
+        - libxcrypt
       source:
         - https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v${PV%.*}/${P}.tar.xz
       engine: autoconf
