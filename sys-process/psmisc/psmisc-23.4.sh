@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.2.tar.xz
+get https://sourceforge.net/projects/psmisc/files/psmisc/${P}.tar.xz
 acheck
 
 importpkg ncurses

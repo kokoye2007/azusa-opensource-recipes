@@ -1,0 +1,9 @@
+versions:
+    list:
+        - "1.9"
+    stable: "1.9"
+build:
+    - version: '*'
+      source:
+        - https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+      engine: ""
