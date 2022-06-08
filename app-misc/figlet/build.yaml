@@ -1,0 +1,21 @@
+versions:
+    list:
+        - 2.2.5
+    stable: 2.2.5
+build:
+    - version: '*'
+      env:
+        - PREFIX=/pkg/main/${PKG}.core.${PVRF}
+      source:
+        - http://ftp.figlet.org/pub/figlet/program/unix/${P}.tar.gz
+      engine: none
+      compile_post:
+        - make prefix="$PREFIX" all
+        - make prefix="$PREFIX" DESTDIR="${D}" BINDIR="$PREFIX/bin" MANDIR="/pkg/main/${PKG}.doc.${PVRF}/man" install
+files:
+    figlet-2.2.5.tar.gz:
+        size: 233201
+        hashes:
+            sha1: dda696958c161bd71d6590152c94c4f705415727
+            sha3-256: 651abed5fa5c9011f009444cd174564d2fbb915d2b7e3eb93507c21c57de944f
+            sha256: bf88c40fd0f077dab2712f54f8d39ac952e4e9f2e1882f1195be9e5e4257417d

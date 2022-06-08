@@ -1,0 +1,11 @@
+versions:
+    list:
+        - 3.3.17
+    stable: 3.3.17
+build:
+    - version: '*'
+      import:
+        - ncurses
+      source:
+        - https://download.sourceforge.net/${PN}-ng/${PN}-ng-${PV}.tar.xz
+      engine: autoconf

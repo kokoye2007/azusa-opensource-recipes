@@ -1,0 +1,15 @@
+files:
+    v0.18.0.tar.gz:
+        size: 32152
+        added: 2022-06-08T11:30:30.597684749+09:00
+        hashes:
+            sha1: 27b7529ae87ea688e21d0a061b6d9299ff9362f6
+            sha3-256: 33f042fa6f91897915e64ddb0357a44201173bf96ba82043601e938eea823d09
+            sha256: 1097675352d6317b547e73f9dc7c6839fd0bb0d96dafc2e5c95506bb324049a2
+    v0.19.0.tar.gz:
+        size: 32369
+        added: 2022-06-08T11:32:11.014047847+09:00
+        hashes:
+            sha1: 2245210bdd29faea02e566a192df4c7df702b264
+            sha3-256: 4f82168a09266cb09644c2c3c5a704299cefc90cdb0824cc4a54347d344b7b5c
+            sha256: 0fd35a7030052acd9f58948d1d900fe1e432ee37103c5561554408bdac6bbf0d

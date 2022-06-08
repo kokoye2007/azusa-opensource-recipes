@@ -1,0 +1,33 @@
+versions:
+    list:
+        - "1.19"
+        - 2.13.1
+    stable: 2.13.1
+build:
+    - version: 1.*
+      source:
+        - https://downloads.sourceforge.net/${PN}/${P}.tar.gz
+      patches:
+        - lcms-1.19-cve_2013_4276-1.patch
+      engine: autoconf
+      options: [build_in_tree]
+    - version: '*'
+      source:
+        - https://downloads.sourceforge.net/${PN}/lcms2-${PV}.tar.gz
+      engine: autoconf
+      options: [autoreconf]
+      configure_pre:
+        - sed -i '/AX_APPEND/s/^/#/' configure.ac
+files:
+    lcms-1.19.tar.gz:
+        size: 927752
+        hashes:
+            sha1: d5b075ccffc0068015f74f78e4bc39138bcfe2d4
+            sha3-256: c246e8737fa24bff124ff413d3fe56d13605678e94f09a25075fd95dc367cdf7
+            sha256: 80ae32cb9f568af4dc7ee4d3c05a4c31fc513fc3e31730fed0ce7378237273a9
+    lcms2-2.13.1.tar.gz:
+        size: 7276499
+        hashes:
+            sha1: 72d0a0b7fbaeca12eb0186ab5728eb0f26806b22
+            sha3-256: 0decc0f6128bf9e70d93907d660d6373af6af4923cd75c38fe41829c985f547d
+            sha256: d473e796e7b27c5af01bd6d1552d42b45b43457e7182ce9903f38bb748203b88

@@ -1,0 +1,26 @@
+versions:
+    list:
+        - 3.4.0
+    stable: 3.4.0
+build:
+    - version: '*'
+      source:
+        - https://gitlab.com/lib${PN}/${PN}/-/archive/${PV}/${P}.tar.gz
+      engine: cmake
+      arguments:
+        - -DEIGEN_TEST_NO_OPENGL=ON
+        - -DCMAKE_DISABLE_FIND_PACKAGE_Cholmod=ON
+        - -DEIGEN_TEST_CXX11=ON
+        - -DEIGEN_TEST_NOQT=ON
+        - -DEIGEN_TEST_ALTIVEC=ON
+        - -DEIGEN_TEST_CUDA=ON
+        - -DEIGEN_TEST_OPENMP=OFF
+        - -DEIGEN_TEST_NEON64=ON
+        - -DEIGEN_TEST_VSX=ON
+files:
+    eigen-3.4.0.tar.gz:
+        size: 2705005
+        hashes:
+            sha1: d222db69a9e87d9006608e029d1039039f360b52
+            sha3-256: 4f708fb6d44136fbebac5f54ffd3f2a3e317924e7ebd3a9dd116576379554ab4
+            sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72

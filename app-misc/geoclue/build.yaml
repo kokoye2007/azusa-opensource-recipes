@@ -1,0 +1,16 @@
+versions:
+    list:
+        - 2.5.3
+    stable: 2.5.3
+build:
+    - version: '*'
+      source:
+        - https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/${PV}/${P}.tar.bz2
+      engine: meson
+files:
+    geoclue-2.5.3.tar.bz2:
+        size: 85084
+        hashes:
+            sha1: 84e42c078eb85b8c9ccf412eb123da3f29da7fc3
+            sha3-256: db750ba49ddcce1b3a9f6c6727f1a3dd04a773b977c20ba50a5d20341770e376
+            sha256: a626f6adaff15d88fd0561344e614e371900e4a64a1fe9ddfcdd40d39712e78b

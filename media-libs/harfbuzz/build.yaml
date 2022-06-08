@@ -1,0 +1,20 @@
+versions:
+    list:
+        - 2.6.7
+        - 4.3.0
+    stable: 4.3.0
+build:
+    - version: '*'
+      source:
+        - https://github.com/harfbuzz/harfbuzz/releases/download/${PV}/${P}.tar.xz
+      engine: autoconf
+      arguments:
+        - --with-gobject
+        - --with-graphite2
+files:
+    harfbuzz-4.3.0.tar.xz:
+        size: 15036020
+        hashes:
+            sha1: b500754cf5f3468d31f73fa8b06710d958734791
+            sha3-256: 3d2d22f1eacfe9e88bac08c722f2d2ff544fa3afba7b144f09913b24795617cc
+            sha256: a49628f4c4c8e6d8df95ef44935a93446cf2e46366915b0e3ca30df21fffb530

@@ -1,0 +1,23 @@
+versions:
+    list:
+        - 1.12.0
+    stable: 1.12.0
+build:
+    - version: '*'
+      source:
+        - https://github.com/strukturag/libheif/releases/download/v${PV}/${P}.tar.gz
+      engine: autoconf
+      arguments:
+        - --disable-go
+        - --enable-aom
+        - --enable-libde265
+        - --enable-multithreading
+        - --enable-x265
+        - --disable-rav1e
+files:
+    libheif-1.12.0.tar.gz:
+        size: 1684355
+        hashes:
+            sha1: 7bc8ed78a2946949f137dcd9f86492de99aee2bd
+            sha3-256: fdaa13b435cb2f73059719443a751972f6cb17e4f8233477d4ac9a0b1278141a
+            sha256: e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718

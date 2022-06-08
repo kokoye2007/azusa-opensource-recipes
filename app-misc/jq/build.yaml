@@ -1,0 +1,24 @@
+versions:
+    list:
+        - "1.6"
+    stable: "1.6"
+build:
+    - version: '*'
+      import:
+        - oniguruma
+      source:
+        - https://github.com/stedolan/jq/releases/download/${P}/${P}.tar.gz
+      engine: autoconf
+      arguments:
+        - --disable-docs
+        - --disable-valgrind
+        - --disable-maintainer-mode
+        - --enable-rpathhack
+        - --with-oniguruma=yes
+files:
+    jq-1.6.tar.gz:
+        size: 1750584
+        hashes:
+            sha1: 73bcbdc45be4db907a864e829b06cd869f77f4f7
+            sha3-256: 67cac41ba7f0f842e8fd2fe3834af472a808a8dda470ecf385050209f0cebe21
+            sha256: 5de8c8e29aaa3fb9cc6b47bb27299f271354ebb72514e3accadc7d38b5bbaa72

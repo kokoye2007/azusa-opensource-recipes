@@ -1,0 +1,19 @@
+versions:
+    list:
+        - 2.3.0
+    stable: 2.3.0
+build:
+    - version: '*'
+      source:
+        - https://github.com/${PN}/${PN}/archive/${MYP}.tar.gz -> ${P}.tar.gz
+      engine: cmake
+      arguments:
+        - -DLIBHPDF_EXAMPLES=NO
+        - -DLIBHPDF_STATIC=NO
+files:
+    libharu-2.3.0.tar.gz:
+        size: 1396413
+        hashes:
+            sha1: 434177d4baaf2a37b2d2d16467dd786961919e0d
+            sha3-256: 5fa1b0fc860c3bbadaa565d97cfbdc7490fa431f20800bbb7d89f35a8b90ea58
+            sha256: 8f9e68cc5d5f7d53d1bc61a1ed876add1faf4f91070dbc360d8b259f46d9a4d2

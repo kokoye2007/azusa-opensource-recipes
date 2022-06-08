@@ -1,0 +1,19 @@
+versions:
+    list:
+        - "0.3"
+    stable: "0.3"
+build:
+    - version: '*'
+      source:
+        - http://caca.zoy.org/raw-attachment/wiki/${PN}/${P}.tar.gz
+      engine: autoconf
+      configure_pre:
+        - sed -i -e 's:-g -O2 -fno-strength-reduce -fomit-frame-pointer::' configure
+        - sed -i -e 's:$(srcdir)/$^:$^:' doc/Makefile.in doc/Makefile.am
+files:
+    toilet-0.3.tar.gz:
+        size: 864880
+        hashes:
+            sha1: 73ea7aa2b0470ac0fecc103d7eeed0048684a505
+            sha3-256: 01b7cc1cc8c53a4c49f6829dabc9cb9afc8a2f418dbd2ee1058aa0571156570c
+            sha256: 89d4b530c394313cc3f3a4e07a7394fa82a6091f44df44dfcd0ebcb3300a81de

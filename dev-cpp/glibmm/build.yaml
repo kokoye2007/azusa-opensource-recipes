@@ -1,0 +1,22 @@
+versions:
+    list:
+        - 2.72.1
+    stable: 2.72.1
+build:
+    - version: '*'
+      source:
+        - https://ftp.gnome.org/pub/gnome/sources/glibmm/${PV%.*}/${P}.tar.xz
+      engine: meson
+files:
+    glibmm-2.63.1.tar.xz:
+        size: 7588116
+        hashes:
+            sha1: fde1d1880f72eefcfa8ca05db23fb95094453686
+            sha3-256: e38753d4002673a0e1ecab3299729272a056cfa4d876631c6aa6b1a55e1e08fd
+            sha256: 4f99e29bd0a67afd94c0d6fdad2b86bc5cd944cd5d4ff097520dc58b6c997ada
+    glibmm-2.72.1.tar.xz:
+        size: 7921260
+        hashes:
+            sha1: 785982b77c6e9c014f409f4183cd49d75fc7d8a3
+            sha3-256: 982efe08f29c4562d9c2430528ec488df490b9f19fb4e615656b3cb0b3ea5a27
+            sha256: 2a7649a28ab5dc53ac4dabb76c9f61599fbc628923ab6a7dd74bf675d9155cd8

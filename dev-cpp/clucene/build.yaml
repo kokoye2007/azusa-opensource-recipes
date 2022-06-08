@@ -1,0 +1,22 @@
+versions:
+    list:
+        - 2.3.3.4
+    stable: 2.3.3.4
+build:
+    - version: '*'
+      import:
+        - zlib
+      source:
+        - https://downloads.sourceforge.net/clucene/clucene-core-${PV}.tar.gz
+      patches:
+        - clucene-2.3.3.4-contribs_lib-1.patch
+      engine: cmake
+      arguments:
+        - -DBUILD_CONTRIBS_LIB=ON
+files:
+    clucene-core-2.3.3.4.tar.gz:
+        size: 2241498
+        hashes:
+            sha1: 76d6788e747e78abb5abf8eaad78d3342da5f2a4
+            sha3-256: 30ee55362bd7e57bd5cea18332ca92d5046a93569547872e6070ed5717b125db
+            sha256: ddfdc433dd8ad31b5c5819cc4404a8d2127472a3b720d3e744e8c51d79732eab

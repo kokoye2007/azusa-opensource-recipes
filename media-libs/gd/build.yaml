@@ -1,0 +1,41 @@
+versions:
+    list:
+        - 2.3.3
+    stable: 2.3.3
+build:
+    - version: '*'
+      import:
+        - libjpeg
+        - libwebp
+        - uuid
+        - app-arch/bzip2
+        - liblzma
+        - libbsd
+      source:
+        - https://github.com/libgd/libgd/releases/download/${P}/lib${P}.tar.xz
+      engine: autoconf
+      arguments:
+        - --disable-werror
+        - --without-x
+        - --without-liq
+        - --with-zlib
+        - --with-png
+        - --with-freetype
+        - --with-fontconfig
+        - --with-jpeg=/pkg/main/media-libs.libjpeg-turbo.dev
+        - --with-xpm
+        - --with-tiff
+        - --with-webp
+files:
+    libgd-2.3.2.tar.xz:
+        size: 2821096
+        hashes:
+            sha1: dddf5e9d25cb0b20b8642d5cbcfad67f8903532f
+            sha3-256: 1330d3fa496629bb10b919a1957fa147808e79afc6e19aeba0a40b1ab7024178
+            sha256: 478a047084e0d89b83616e4c2cf3c9438175fb0cc55d8c8967f06e0427f7d7fb
+    libgd-2.3.3.tar.xz:
+        size: 2809056
+        hashes:
+            sha1: 7ce6ecb5aed26c08246a37b6351c886ab4b51ca2
+            sha3-256: 6af2b311cdebafd6d67b307afef2a0f6460773907019f5d4da39a9901e832b6e
+            sha256: 3fe822ece20796060af63b7c60acb151e5844204d289da0ce08f8fdf131e5a61

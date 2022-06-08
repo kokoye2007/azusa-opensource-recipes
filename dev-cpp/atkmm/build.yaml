@@ -1,0 +1,22 @@
+versions:
+    list:
+        - 2.36.1
+    stable: 2.36.1
+build:
+    - version: '*'
+      source:
+        - http://ftp.gnome.org/pub/gnome/sources/atkmm/${PV%.*}/${P}.tar.xz
+      engine: meson
+files:
+    atkmm-2.28.0.tar.xz:
+        size: 891904
+        hashes:
+            sha1: a01d1c2ab97777f1e087d723744cb6951d5c9488
+            sha3-256: 5b7685701c9b1b4fb292d67318c516357f81d768dbc2e164af591db868235abd
+            sha256: 4c4cfc917fd42d3879ce997b463428d6982affa0fb660cafcc0bc2d9afcedd3a
+    atkmm-2.36.1.tar.xz:
+        size: 736828
+        hashes:
+            sha1: 99a56720aa85c556e6a32b3d8939c26413f3f1a0
+            sha3-256: d3a80d4fd756e8b292cf4f4ac00db420a9f984c80a1a89ceb59e4cd81c0b7b72
+            sha256: e11324bfed1b6e330a02db25cecc145dca03fb0dff47f0710c85e317687da458

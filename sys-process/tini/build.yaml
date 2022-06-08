@@ -1,0 +1,8 @@
+versions:
+    list:
+        - 0.19.0
+    stable: 0.19.0
+build:
+    - version: '*'
+      source:
+        - https://github.com/krallin/tini/archive/v${PV}.tar.gz
