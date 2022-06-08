@@ -1,0 +1,3 @@
+description: Cronie is a standard UNIX daemon cron based on the original vixie-cron
+homepage: https://github.com/cronie-crond/cronie
+license: ISC BSD BSD-2 GPL-2

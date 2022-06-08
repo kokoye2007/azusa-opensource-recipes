@@ -1,0 +1,17 @@
+versions:
+    list:
+        - 1.6.1
+    stable: 1.6.1
+build:
+    - version: '*'
+      import:
+        - sys-libs/pam
+      source:
+        - https://github.com/cronie-crond/cronie/releases/download/${P}-final/${P}.tar.gz
+      engine: autoconf
+      arguments:
+        - --enable-syscrontab
+        - --enable-anacron
+        - --disable-silent-rules
+        - --with-inotify
+        - --with-pam

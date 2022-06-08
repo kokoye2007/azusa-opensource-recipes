@@ -1,0 +1,8 @@
+files:
+    cronie-1.5.4.tar.gz:
+        size: 247743
+        added: 2022-06-08T11:44:41.936619474+09:00
+        hashes:
+            sha1: d6f93eff168e181e9f50c237431959aae72266d1
+            sha3-256: f84009e51be677b78e096926a28d2000b9a11783aefe8624606c7ae196830221
+            sha256: af8970559cad4262f8ffd7ec72abf682d2dcce04fdfb8f206a71d96566aba882
