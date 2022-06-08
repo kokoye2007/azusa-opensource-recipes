@@ -1,0 +1,20 @@
+versions:
+    list:
+        - 3.2.0
+    stable: 3.2.0
+build:
+    - version: '*'
+      env:
+        - CPPFLAGS=${CPPFLAGS} -DMAJOR_IN_SYSMACROS
+      import:
+        - sys-libs/ncurses
+      source:
+        - https://github.com/htop-dev/${PN}/archive/${PV/_}.tar.gz -> ${P}.tar.gz
+      engine: autoconf
+      options: [autoreconf]
+      arguments:
+        - --disable-hwloc
+        - --enable-capabilities
+        - --enable-delayacct
+        - --enable-sensors
+        - --enable-unicode
