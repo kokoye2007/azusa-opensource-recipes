@@ -1,0 +1,8 @@
+versions:
+    list:
+        - "1.18"
+    stable: "1.18"
+build:
+    - version: '*'
+      source:
+        - https://ftp.gnu.org/gnu/${PN}/${P}.tar.lz

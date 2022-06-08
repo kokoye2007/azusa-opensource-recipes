@@ -1,0 +1,22 @@
+files:
+    ed-1.15.tar.lz:
+        size: 67343
+        added: 2022-06-08T12:32:02.953541323+09:00
+        hashes:
+            sha1: 2294404988a7dc0eb2dd3670c9ccac3a099d5948
+            sha3-256: ff0acd0d42a7a1f36d77357090c111770afa460e47f23e88c96b64a46e0aebd1
+            sha256: ad4489c0ad7a108c514262da28e6c2a426946fb408a3977ef1ed34308bdfd174
+    ed-1.17.tar.lz:
+        size: 67914
+        added: 2022-06-08T12:32:37.11372996+09:00
+        hashes:
+            sha1: 51d4050046799e15eb6e6f3aa15b3cfec27d2829
+            sha3-256: 19c4d8d8d1b1f247385917d96685088e1083af69c75c649cd329d5b5415c7ece
+            sha256: 71de39883c25b6fab44add80635382a10c9bf154515b94729f4a6529ddcc5e54
+    ed-1.18.tar.lz:
+        size: 66019
+        added: 2022-06-08T12:33:35.337176521+09:00
+        hashes:
+            sha1: 71b1b95d004e022cabd9b01109af6d00fd35c787
+            sha3-256: 9641e5b14f51de3115aa1431157926fc49c8ece33f5e1d37aed881ad930879f0
+            sha256: aca8efad9800c587724a20b97aa8fc47e6b5a47df81606feaba831b074462b4f
