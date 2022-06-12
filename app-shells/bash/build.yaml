@@ -1,0 +1,16 @@
+versions:
+    list:
+        - "5.1"
+    stable: "5.1"
+build:
+    - version: '*'
+      import:
+        - readline
+      source:
+        - https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+      engine: autoconf
+      arguments:
+        - --without-bash-malloc
+        - --with-installed-readline
+      install_post:
+        - ln -snf bash "${D}/pkg/main/${PKG}.core.${PVRF}/bin/sh"

@@ -1,0 +1,8 @@
+files:
+    qemu-7.0.0.tar.xz:
+        size: 125117636
+        added: 2022-06-12T14:57:18.84544317+09:00
+        hashes:
+            sha1: c3fd2403106c33d0470bc9ba4fb4b946c0402248
+            sha3-256: 59671b92fa4ae2a2e112c5fd4f071f05da2139e4a377558f02f5c7e598cabba7
+            sha256: f6b375c7951f728402798b0baabb2d86478ca53d44cedbefabbe1c46bf46f839
