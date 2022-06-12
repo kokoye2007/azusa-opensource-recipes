@@ -13,7 +13,7 @@ export CFLAGS="$CPPFLAGS"
 
 CONFOPTS=(
 	--prefix="/pkg/main/${PKG}.core.${PVRF}"
-	--interp-prefix="/pkg/main/${PKG}.mod.${PVRF}.%M"
+	--interp-prefix="/pkg/main/${PKG}.mod.%M.${PVRF}"
 	# The value of the 'mandir' option must be a subdir of the prefix
 	--mandir="/pkg/main/${PKG}.core.${PVRF}/share/man"
 	--docdir="/pkg/main/${PKG}.doc.${PVRF}"

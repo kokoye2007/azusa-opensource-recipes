@@ -1,7 +1,8 @@
 versions:
     list:
         - "5.1"
-    stable: "5.1"
+        - 5.1.16
+    stable: 5.1.16
 build:
     - version: '*'
       import:
