@@ -22,13 +22,12 @@ build:
         - dev-libs/pmdk
         - sys-block/ndctl
         - sys-libs/liburing
+        - gdk-3.0
       source:
         - https://download.qemu.org/${P}.tar.xz
       env:
         - CFLAGS=$CPPFLAGS
       engine: autoconf
-      options:
-        - light
       arguments:
         - --interp-prefix=/pkg/main/${PKG}.mod.%M.${PVRF}
         # The value of the 'mandir' option must be a subdir of the prefix

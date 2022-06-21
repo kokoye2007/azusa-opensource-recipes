@@ -22,7 +22,7 @@ CONFIGURE=(
 	--disable-werror
 	--enable-bind-now
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
-	--with-pkgversion="Azusa ${PVRF}"
+	--with-pkgversion="Azusa glibc ${PVRF}"
 	--disable-crypt
 #	--enable-systemtap
 	--enable-nscd
@@ -148,6 +148,11 @@ ln -snfT /pkg/main/sys-libs.timezone-data.core "${D}/pkg/main/${PKG}.core.${PVRF
 # this is to make clang happy
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/env.d"
 ln -sT /pkg/main/sys-devel.gcc-config.core/gcc-config "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/env.d/gcc"
+
+if [ "$ARCH" == "amd64" ]; then
+	# if building on amd64, add symlinks to 386 versions of stubs & libnames
+	ln -snfv "/pkg/main/${PKG}.dev.${PVR}.${OS}.386/usr/include/gnu"/{lib-names,stubs}-32.h "${D}/pkg/main/${PKG}.dev.${PVRF}/usr/include/gnu/"
+fi
 
 fixelf
 archive
