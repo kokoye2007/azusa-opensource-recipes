@@ -21,18 +21,18 @@ fi
 
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --infodir=/pkg/main/${PKG}.doc.${PVRF}/info --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/gcc \
---with-pkgversion="Azusa $PVRF" --with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues \
+--with-pkgversion="Azusa gcc $PVRF" --with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues \
 --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --with-slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
---with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVRF}/include/c++ --with-sysroot=/pkg/main/sys-libs.glibc.dev \
+--with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVRF}/include/c++ --with-sysroot=/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH} \
 --with-gcc-major-version-only \
 --enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
 --enable-obsolete --enable-secureplt --disable-werror --enable-nls --without-included-gettext --disable-libunwind-exceptions \
 --enable-esp --enable-libstdcxx-time --with-build-config=bootstrap-lto --disable-libstdcxx-pch --enable-__cxa_atexit --enable-clocale=gnu \
 --enable-cet --disable-systemtap --with-zstd --enable-lto --enable-default-ssp --enable-default-pie \
---with-mpfr-include=`realpath /pkg/main/dev-libs.mpfr.dev/include` --with-mpfr-lib=`realpath /pkg/main/dev-libs.mpfr.libs/lib$LIB_SUFFIX` \
---with-mpc-include=`realpath /pkg/main/dev-libs.mpc.dev/include` --with-mpc-lib=`realpath /pkg/main/dev-libs.mpc.libs/lib$LIB_SUFFIX` \
---with-gmp-include=`realpath /pkg/main/dev-libs.gmp.dev/include` --with-gmp-lib=`realpath /pkg/main/dev-libs.gmp.libs/lib$LIB_SUFFIX` \
---with-isl-include=`realpath /pkg/main/dev-libs.isl.dev/include` --with-isl-lib=`realpath /pkg/main/dev-libs.isl.libs/lib$LIB_SUFFIX` \
+--with-mpfr-include=`realpath /pkg/main/dev-libs.mpfr.dev.${OS}.${ARCH}/include` --with-mpfr-lib=`realpath /pkg/main/dev-libs.mpfr.libs.${OS}.${ARCH}/lib$LIB_SUFFIX` \
+--with-mpc-include=`realpath /pkg/main/dev-libs.mpc.dev.${OS}.${ARCH}/include` --with-mpc-lib=`realpath /pkg/main/dev-libs.mpc.libs.${OS}.${ARCH}/lib$LIB_SUFFIX` \
+--with-gmp-include=`realpath /pkg/main/dev-libs.gmp.dev.${OS}.${ARCH}/include` --with-gmp-lib=`realpath /pkg/main/dev-libs.gmp.libs.${OS}.${ARCH}/lib$LIB_SUFFIX` \
+--with-isl-include=`realpath /pkg/main/dev-libs.isl.dev.${OS}.${ARCH}/include` --with-isl-lib=`realpath /pkg/main/dev-libs.isl.libs.${OS}.${ARCH}/lib$LIB_SUFFIX` \
 CPPFLAGS="$CPPFLAGS" LDFLAGS="$LDFLAGS"
 
 make -j"$NPROC"

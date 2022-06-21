@@ -17,7 +17,7 @@ CONFIGURE=(
 	--enable-kernel=4.14
 	--enable-stack-protector=strong
 	--enable-stackguard-randomization
-	--with-headers=/pkg/main/sys-kernel.linux.dev/include
+	--with-headers=/pkg/main/sys-kernel.linux.dev.${OS}.${ARCH}/include
 	--without-cvs
 	--disable-werror
 	--enable-bind-now
