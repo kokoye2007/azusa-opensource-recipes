@@ -19,6 +19,7 @@ P="$(echo "$PR" | sed -r -e 's/-r[0-9]+$//')"
 PVR="${PR#"${PN}-"}"
 PVRF="${PVR}.${OS}.${ARCH}"
 PV="${P#"${PN}-"}"
+PVF="${PV}.${OS}.${ARCH}"
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
 if [ x"$NPROC" = x ]; then
@@ -26,7 +27,7 @@ if [ x"$NPROC" = x ]; then
 fi
 
 # make pkg-config use our libs
-export PKG_CONFIG_LIBDIR=/pkg/main/azusa.symlinks.core/pkgconfig
+export PKG_CONFIG_LIBDIR=/pkg/main/azusa.symlinks.core.${OS}.${ARCH}/pkgconfig
 export XDG_DATA_DIRS="/usr/share"
 
 if [ -w /build/ ]; then
@@ -542,6 +543,7 @@ importpkg() {
 				vers=".$(echo "$foo" | cut -d: -f2)"
 				foo="$(echo "$foo" | cut -d: -f1)"
 			fi
+			vers="${vers}.${OS}.${ARCH}"
 			# standard import paths
 			if [ -d "/pkg/main/${foo/\//.}.dev${vers}/include" ]; then
 				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev${vers}/include"

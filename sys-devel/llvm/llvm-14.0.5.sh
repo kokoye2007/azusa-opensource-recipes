@@ -2,12 +2,12 @@
 source "../../common/init.sh"
 # options:
 # clang clang-tools-extra compiler-rt libc libclc libcxx libcxxabi libunwind lld lldb mlir openmp parallel-libs polly pstl flang
-LLVM_PROJECTS="libcxx;libcxxabi;benchmark"
+LLVM_RUNTIMES="libcxx;libcxxabi"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 OIFS="$IFS"
 IFS=";"
-for project in $LLVM_PROJECTS; do
+for project in $LLVM_RUNTIMES; do
 	get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${project}-${PV}.src.tar.xz
 	mv "${project}-${PV}.src" "${project}"
 done
@@ -23,13 +23,15 @@ export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
 
 CMAKE_OPTS=(
-	-DLLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
+	-DLLVM_ENABLE_PROJECTS="$LLVM_RUNTIMES"
+	#-DLLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES" # ain't working right 
 
 	-DLLVM_APPEND_VC_REV=OFF
 	-DLLVM_LIBDIR_SUFFIX=$LIB_SUFFIX
 
 	-DBUILD_SHARED_LIBS=ON
 	-DLLVM_INCLUDE_TESTS=OFF
+	-DLLVM_INCLUDE_BENCHMARKS=OFF
 
 	# ffi requires extra info to be passed
 	-DLLVM_ENABLE_FFI=ON
@@ -65,6 +67,7 @@ CMAKE_OPTS=(
 	#-DLLVM_BUILD_LLVM_DYLIB=ON
 	#-DLLVM_LINK_LLVM_DYLIB=ON
 
+	-DLIBCXX_INCLUDE_BENCHMARKS=OFF
 )
 
 # see http://llvm.org/docs/CMake.html

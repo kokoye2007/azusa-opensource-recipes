@@ -26,14 +26,22 @@ make
 make install DESTDIR="${D}"
 
 # run dot -c to create  /.pkg-main-rw/media-gfx.graphviz.libs.2.42.1.linux.amd64/lib64/graphviz/config6
-make install DESTDIR="/"
+#make install DESTDIR="/"
 
 organize
 
 echo "Running dot -c"
-"${D}/pkg/main/${PKG}.core.${PVRF}/bin/dot" -c
+
+#echo "${D}/pkg/main/${PKG}.core.${PVRF}/bin/dot" ## XXX
+#/bin/bash -i
+
+# TODO find out if this will always be created in the right location, find a way to specify $prefix to do if not
+#
+#  -c          - Configure plugins (Writes $prefix/lib/graphviz/config ...)
+LD_LIBRARY_PATH="${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/bin/dot" -c
+
 #mkdir -p "${D}/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
-mv -v "/.pkg-main-rw/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/config"* "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
+#mv -v "/.pkg-main-rw/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/config"* "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/graphviz/"
 
 fixelf
 archive
