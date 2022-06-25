@@ -8,7 +8,7 @@ cd "${T}"
 
 importpkg zlib
 
-doconf
+doconf --with-libpotrace
 
 make
 make install DESTDIR="${D}"

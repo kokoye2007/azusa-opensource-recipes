@@ -38,9 +38,13 @@ EOF
 	echo "CMAKE_SYSTEM_INCLUDE_PATH = $CMAKE_SYSTEM_INCLUDE_PATH"
 	echo "CPPFLAGS = $CPPFLAGS"
 
-	set -- "$CMAKE_ROOT" \
+	if [ x"$CMAKE_BUILD_ENGINE" = x ]; then
+		CMAKE_BUILD_ENGINE="Ninja"
+	fi
+
+	set -- -S "$CMAKE_ROOT" -B "$PWD" \
 		-C "$common_config" \
-		-G Ninja -Wno-dev \
+		-G "$CMAKE_BUILD_ENGINE" -Wno-dev \
 		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVRF}" \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DBUILD_SHARED_LIBS=ON \
@@ -52,6 +56,26 @@ EOF
 
 	echo "Running: cmake $@"
 	cmake "$@" || return $?
-	ninja || return $?
-	DESTDIR="${D}" ninja install || return $?
+
+	echo "Invoking compiler..."
+
+	case $CMAKE_BUILD_ENGINE in
+		Ninja)
+			ninja || return $?
+			for tgt in $CMAKE_EXTRA_TARGETS; do
+				ninja "$tgt" || return $?
+			done
+			DESTDIR="${D}" ninja install || return $?
+			;;
+		Unix\ Makefiles)
+			make -j"$NPROC" || return $?
+			for tgt in $CMAKE_EXTRA_TARGETS; do
+				make -j"$NPROC" "$tgt" || return $?
+			done
+			make install DESTDIR="${D}" || return $?
+			;;
+		*)
+			echo "Invalid value for CMAKE_BUILD_ENGINE: $CMAKE_BUILD_ENGINE"
+			exit 1
+	esac
 }

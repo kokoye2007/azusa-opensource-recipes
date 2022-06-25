@@ -30,6 +30,7 @@ PKGS=(
 	dev-libs/lzo
 	dev-cpp/eigen
 	dev-libs/pugixml
+	dev-libs/imath
 
 	gl
 	glew

@@ -2,11 +2,14 @@
 source "../../common/init.sh"
 # options:
 # clang clang-tools-extra compiler-rt libc libclc libcxx libcxxabi libunwind lld lldb mlir openmp parallel-libs polly pstl flang
-LLVM_RUNTIMES="libcxx;libcxxabi"
+# libunwind requires being built in a monorepo layout with libcxx available
+# no idea where to download "libc" from
+#LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind;openmp"
+LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 OIFS="$IFS"
-IFS=";"
+IFS="; "
 for project in $LLVM_RUNTIMES; do
 	get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${project}-${PV}.src.tar.xz
 	mv "${project}-${PV}.src" "${project}"
@@ -25,6 +28,7 @@ export CXXFLAGS="${CPPFLAGS}"
 CMAKE_OPTS=(
 	-DLLVM_ENABLE_PROJECTS="$LLVM_RUNTIMES"
 	#-DLLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES" # ain't working right 
+	-DLLVM_HOST_TRIPLE="${CHOST}"
 
 	-DLLVM_APPEND_VC_REV=OFF
 	-DLLVM_LIBDIR_SUFFIX=$LIB_SUFFIX

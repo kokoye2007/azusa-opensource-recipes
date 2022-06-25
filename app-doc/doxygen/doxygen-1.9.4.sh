@@ -4,13 +4,18 @@ source "../../common/init.sh"
 get http://doxygen.nl/files/${P}.src.tar.gz
 acheck
 
-cd "${P}"
+cd "${S}"
 
-importpkg dev-libs/xapian zlib
+apatch "$FILESDIR/doxygen-1.9.4-gcc12-include.patch"
 
-# ninja: error: rebuilding 'build.ninja': dependency cycle: examples/CMakeLists.txt -> examples/CMakeLists.txt
-# solved with: -Dbuild_doc=OFF
-docmake -Dbuild_doc=OFF -Dbuild_search=ON -DICONV_INCLUDE_DIR=/pkg/main/sys-libs.glibc.dev/include
+cd "${T}"
+
+importpkg dev-libs/xapian zlib sqlite3
+
+# dev-texlive/texlive-fontutils is required for -Dbuild_doc=ON + CMAKE_EXTRA_TARGETS="docs"
+#CMAKE_EXTRA_TARGETS="docs" docmake -Dbuild_doc=ON -Dbuild_search=ON -Duse_sqlite3=ON -DICONV_INCLUDE_DIR=/pkg/main/sys-libs.glibc.dev/include
+docmake -Dbuild_doc=OFF -Dbuild_search=ON -Duse_sqlite3=ON -DICONV_INCLUDE_DIR=/pkg/main/sys-libs.glibc.dev/include
+
 # TODO -Duse_libclang=ON -Dbuild_wizard=ON
 
 finalize
