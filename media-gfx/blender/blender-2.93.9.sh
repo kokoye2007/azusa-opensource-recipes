@@ -11,6 +11,29 @@ apatch "$FILESDIR/blender-3.0.1-openexr.patch" \
 	"$FILESDIR/blender-3.0.1-openimageio-2.3.patch" \
 	"$FILESDIR/blender-3.0.1-ffmpeg-5.0.patch"
 
+# slot
+BV="${PV%.*}"
+
+# Disable MS Windows help generation. The variable doesn't do what it
+# it sounds like.
+sed -e "s|GENERATE_HTMLHELP      = YES|GENERATE_HTMLHELP      = NO|" \
+	-i doc/doxygen/Doxyfile
+
+# Prepare icons and .desktop files for slotting.
+sed -e "s|blender.svg|blender-${BV}.svg|" -i source/creator/CMakeLists.txt
+sed -e "s|blender-symbolic.svg|blender-${BV}-symbolic.svg|" -i source/creator/CMakeLists.txt
+sed -e "s|blender.desktop|blender-${BV}.desktop|" -i source/creator/CMakeLists.txt
+sed -e "s|blender-thumbnailer.py|blender-${BV}-thumbnailer.py|" -i source/creator/CMakeLists.txt
+
+sed -e "s|Name=Blender|Name=Blender ${PV}|" -i release/freedesktop/blender.desktop
+sed -e "s|Exec=blender|Exec=blender-${BV}|" -i release/freedesktop/blender.desktop
+sed -e "s|Icon=blender|Icon=blender-${BV}|" -i release/freedesktop/blender.desktop
+
+mv release/freedesktop/icons/scalable/apps/blender.svg release/freedesktop/icons/scalable/apps/blender-${BV}.svg
+mv release/freedesktop/icons/symbolic/apps/blender-symbolic.svg release/freedesktop/icons/symbolic/apps/blender-${BV}-symbolic.svg
+mv release/freedesktop/blender.desktop release/freedesktop/blender-${BV}.desktop
+mv release/bin/blender-thumbnailer.py release/bin/blender-${BV}-thumbnailer.py
+
 cd "${T}"
 
 PKGS=(
@@ -121,5 +144,9 @@ CMAKEOPTS=(
 )
 
 docmake "${CMAKEOPTS[@]}"
+
+# /build/blender-2.93.9/dist/pkg/main/media-gfx.blender.core.2.93.9.linux.amd64/share/man/man1/blender.1
+mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/share/man/man1/blender.1" "${D}/pkg/main/${PKG}.core.${PVRF}/share/man/man1/blender-${BV}.1"
+mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender" "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}"
 
 finalize
