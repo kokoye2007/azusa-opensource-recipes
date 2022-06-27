@@ -1,12 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/embree/embree/archive/v${PV}.tar.gz
+get https://github.com/embree/embree/archive/v${PV}.tar.gz "${P}.tar.gz"
 acheck
 
 importpkg media-libs/libpng media-libs/libjpeg-turbo gl dev-libs/imath
 
 cd "${T}"
+
+export LDFLAGS="-Wl,--copy-dt-needed-entries"
 
 CMAKEOPTS=(
 	-DTBB_ROOT=/pkg/main/dev-cpp.tbb.dev

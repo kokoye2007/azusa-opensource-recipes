@@ -56,14 +56,12 @@ PKGS=(
 
 importpkg "${PKGS[@]}"
 
-export CPPFLAGS="${CPPFLAGS} -I/pkg/main/dev-lang.python-modules/lib/python${PYTHON_LATEST%.*}/site-packages/numpy/core/include/"
-
 CMAKEOPTS=(
 	-DBUILD_SHARED_LIBS=OFF # to avoid inter-target dependency graph issues
 	-DEigen3_ROOT=/pkg/main/dev-cpp.eigen.dev
 	-DPYTHON_INCLUDE_DIR=/pkg/main/dev-lang.python.dev.$PYTHON_LATEST/include/python${PYTHON_LATEST%.*}
-	-DPYTHON_LIBRARY=/pkg/main/dev-lang.python.libs.$PYTHON_LATEST/lib$LIB_SUFFIX
-	-DPYTHON_VERSION=$PYTHON_LATEST
+	-DPYTHON_LIBRARY=/pkg/main/dev-lang.python.libs.$PYTHON_LATEST/lib$LIB_SUFFIX/libpython${PYTHON_LATEST%.*}.so
+	-DPYTHON_VERSION=${PYTHON_LATEST}
 	-DWITH_ALEMBIC=ON
 	-DWITH_ASSERT_ABORT=OFF
 	-DWITH_BOOST=ON
@@ -109,9 +107,9 @@ CMAKEOPTS=(
 	-DWITH_POTRACE=ON
 	-DWITH_PUGIXML=ON
 	-DWITH_PULSEAUDIO=ON
-	-DWITH_PYTHON_INSTALL=ON
-	# TODO python
-	-DWITH_PYTHON_INSTALL_NUMPY=ON
+	-DWITH_PYTHON_INSTALL=OFF
+	-DPYTHON_NUMPY_PATH=/pkg/main/dev-lang.python-modules.core/lib/python${PYTHON_LATEST%.*}/site-packages/numpy
+	-DPYTHON_NUMPY_INCLUDE_DIRS=/pkg/main/dev-lang.python-modules.core/lib/python${PYTHON_LATEST%.*}/site-packages/numpy/core/include
 	-DWITH_SDL=ON
 	-DWITH_STATIC_LIBS=OFF
 	-DWITH_SYSTEM_EIGEN3=ON
@@ -122,9 +120,6 @@ CMAKEOPTS=(
 	-DWITH_XR_OPENXR=OFF
 )
 
-docmake -G Ninja "${CMAKEOPTS[@]}"
-
-ninja
-DESTDIR="${D}" ninja install
+docmake "${CMAKEOPTS[@]}"
 
 finalize
