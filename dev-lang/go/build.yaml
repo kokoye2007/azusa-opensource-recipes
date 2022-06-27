@@ -1,0 +1,21 @@
+versions:
+    list:
+        - 1.17.11
+        - 1.18.3
+    stable: 1.18.3
+build:
+    - version: '*'
+      env:
+        - S=${WORKDIR}/go/src
+        - GOOS=$OS
+        - GOARCH=$ARCH
+        - GOROOT_FINAL=/pkg/main/${PKG}.dev.${PVRF}
+        - GOROOT=${D}/pkg/main/${PKG}.dev.${PVRF}
+      source:
+        - https://dl.google.com/${PN}/go${PV}.src.tar.gz
+      engine: none
+      compile_post:
+        - cd "${S}"; /bin/bash all.bash
+      install_post:
+        - mkdir -p "${D}/pkg/main/"
+        - cd "${WORKDIR}"; mv go "${D}/pkg/main/${PKG}.dev.${PVRF}"

@@ -24,10 +24,8 @@ PKGS=(
 	media-libs/mesa
 	dev-libs/libfmt
 	dev-cpp/robin-map
-	#media-gfx/openvdb
+	media-gfx/openvdb
 	#media-libs/ilmbase
-	# Field3D dependencies
-	#media-libs/Field3D
 	#sci-libs/hdf5
 	#media-libs/ilmbase
 	#media-libs/openexr
@@ -52,12 +50,11 @@ CMAKEOPTS=(
 	-DUSE_JPEGTURBO=ON
 	-DUSE_NUKE=OFF # ??
 	-DUSE_FFMPEG=ON
-	-DUSE_FIELD3D=OFF # building fails
 	-DUSE_GIF=ON
 	-DUSE_OPENJPEG=ON
 	-DUSE_OPENCV=ON
 	-DUSE_OPENGL=ON
-	-DUSE_OPENVDB=OFF # building fails
+	-DUSE_OPENVDB=ON
 	-DUSE_PTEX=ON
 	-DUSE_PYTHON=OFF
 	-DUSE_QT=OFF ## XXX

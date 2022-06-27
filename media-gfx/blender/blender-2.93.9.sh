@@ -1,12 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
+inherit python
 
 get https://down/load.blender.org/source/${P}.tar.xz
 acheck
 
 cd "${S}"
 
-apatch "$FILESDIR/blender-3.0.1-openexr.patch"
+apatch "$FILESDIR/blender-3.0.1-openexr.patch" \
+	"$FILESDIR/blender-3.0.1-openimageio-2.3.patch" \
+	"$FILESDIR/blender-3.0.1-ffmpeg-5.0.patch"
 
 cd "${T}"
 
@@ -37,6 +40,7 @@ PKGS=(
 	media-libs/osl
 	media-gfx/potrace
 	media-gfx/alembic
+	media-video/ffmpeg
 
 	gl
 	glew
@@ -52,14 +56,14 @@ PKGS=(
 
 importpkg "${PKGS[@]}"
 
-PYTHON_VERSION="$(/pkg/main/dev-lang.python.core/bin/python3 --version | awk '{ print $2 }')"
+export CPPFLAGS="${CPPFLAGS} -I/pkg/main/dev-lang.python-modules/lib/python${PYTHON_LATEST%.*}/site-packages/numpy/core/include/"
 
 CMAKEOPTS=(
 	-DBUILD_SHARED_LIBS=OFF # to avoid inter-target dependency graph issues
 	-DEigen3_ROOT=/pkg/main/dev-cpp.eigen.dev
-	-DPYTHON_INCLUDE_DIR=/pkg/main/dev-lang.python.dev.$PYTHON_VERSION/include/python${PYTHON_VERSION%.*}
-	-DPYTHON_LIBRARY=/pkg/main/dev-lang.python.libs.$PYTHON_VERSION/lib$LIB_SUFFIX
-	-DPYTHON_VERSION=$PYTHON_VERSION
+	-DPYTHON_INCLUDE_DIR=/pkg/main/dev-lang.python.dev.$PYTHON_LATEST/include/python${PYTHON_LATEST%.*}
+	-DPYTHON_LIBRARY=/pkg/main/dev-lang.python.libs.$PYTHON_LATEST/lib$LIB_SUFFIX
+	-DPYTHON_VERSION=$PYTHON_LATEST
 	-DWITH_ALEMBIC=ON
 	-DWITH_ASSERT_ABORT=OFF
 	-DWITH_BOOST=ON
@@ -107,7 +111,7 @@ CMAKEOPTS=(
 	-DWITH_PULSEAUDIO=ON
 	-DWITH_PYTHON_INSTALL=ON
 	# TODO python
-	-DWITH_PYTHON_INSTALL_NUMPY=OFF
+	-DWITH_PYTHON_INSTALL_NUMPY=ON
 	-DWITH_SDL=ON
 	-DWITH_STATIC_LIBS=OFF
 	-DWITH_SYSTEM_EIGEN3=ON

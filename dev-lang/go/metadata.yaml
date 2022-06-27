@@ -1,0 +1,8 @@
+files:
+    go1.18.3.src.tar.gz:
+        size: 22838104
+        added: 2022-06-08T14:32:03.75893442+09:00
+        hashes:
+            sha1: bab912c39b6482e8a5b6b58740abe1feb7604bc7
+            sha3-256: 18008a383b4c7b77136d963741be166cd1084641c072a66c80ac15ec40cbe95e
+            sha256: 0012386ddcbb5f3350e407c679923811dbd283fcdc421724931614a842ecbc2d

@@ -43,9 +43,10 @@ pythonsetup() {
 		fi
 		echo "Running for python-$PYTHON_VERSION"
 		local PYTHON_VERSION_MINOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1-2 )" # for python3.10.2 this will be 3.10
-		local PYTHON_VERSION_MAJOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1 )" # fpr python3.10.2 this will be 3
+		local PYTHON_VERSION_MAJOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1 )" # for python3.10.2 this will be 3
 		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
 		export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
+		export SETUPTOOLS_USE_DISTUTILS=stdlib
 		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION_MAJOR}" setup.py install --root "${D}" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" "$@"
 
 		# fetch the installed module from /.pkg-main-rw/

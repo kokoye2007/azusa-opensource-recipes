@@ -19,13 +19,16 @@ fi
 # checking sys/sdt.h in the target C library... no
 # configure: error: sys/sdt.h was not found
 
+# languages:
+# all, default, ada, c, c++, d, fortran, go, jit, lto, objc, obj-c++
+
 # configure & build
 callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --infodir=/pkg/main/${PKG}.doc.${PVRF}/info --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/gcc \
 --with-pkgversion="Azusa gcc $PVRF" --with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues \
 --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX --with-slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
 --with-gxx-include-dir=/pkg/main/${PKG}.dev.${PVRF}/include/c++ --with-sysroot=/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH} \
 --with-gcc-major-version-only \
---enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
+--enable-languages=all --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib \
 --enable-obsolete --enable-secureplt --disable-werror --enable-nls --without-included-gettext --disable-libunwind-exceptions \
 --enable-esp --enable-libstdcxx-time --with-build-config=bootstrap-lto --disable-libstdcxx-pch --enable-__cxa_atexit --enable-clocale=gnu \
 --enable-cet --disable-systemtap --with-zstd --enable-lto --enable-default-ssp --enable-default-pie \
