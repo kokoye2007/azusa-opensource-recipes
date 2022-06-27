@@ -1,8 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.blender.org/source/${P}.tar.xz
+get https://down/load.blender.org/source/${P}.tar.xz
 acheck
+
+cd "${S}"
+
+apatch "$FILESDIR/blender-3.0.1-openexr.patch"
 
 cd "${T}"
 
@@ -30,14 +34,21 @@ PKGS=(
 	dev-libs/lzo
 	dev-cpp/eigen
 	dev-libs/pugixml
-	dev-libs/imath
+	media-libs/osl
+	media-gfx/potrace
+	media-gfx/alembic
 
 	gl
 	glew
 	glu
 	glut
 	media-libs/openexr
+	dev-libs/imath
+	Imath
 )
+
+# ilmbase + openexr2 or imath+openexr3 ?
+# openimage depend on imath/openexr3
 
 importpkg "${PKGS[@]}"
 
@@ -95,7 +106,8 @@ CMAKEOPTS=(
 	-DWITH_PUGIXML=ON
 	-DWITH_PULSEAUDIO=ON
 	-DWITH_PYTHON_INSTALL=ON
-	-DWITH_PYTHON_INSTALL_NUMPY=ON
+	# TODO python
+	-DWITH_PYTHON_INSTALL_NUMPY=OFF
 	-DWITH_SDL=ON
 	-DWITH_STATIC_LIBS=OFF
 	-DWITH_SYSTEM_EIGEN3=ON
