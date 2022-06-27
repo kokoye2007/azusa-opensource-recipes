@@ -147,6 +147,16 @@ docmake "${CMAKEOPTS[@]}"
 
 # /build/blender-2.93.9/dist/pkg/main/media-gfx.blender.core.2.93.9.linux.amd64/share/man/man1/blender.1
 mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/share/man/man1/blender.1" "${D}/pkg/main/${PKG}.core.${PVRF}/share/man/man1/blender-${BV}.1"
-mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender" "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}"
+mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}/libexec"
+mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender" "${D}/pkg/main/${PKG}.core.${PVRF}/libexec/blender-${BV}"
+
+# create a fake blender executable which sets the required PYTHONHOME and PYTHONPATH variables for blender to work
+cat >"${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}" <<EOF
+#!/bin/bash
+export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_LATEST%.*}"
+export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_LATEST%.*}/lib/python${PYTHON_LATEST%.*}:\$PYTHONHOME/lib/python${PYTHON_LATEST%.*}/lib-dynload"
+exec "/pkg/main/${PKG}.core.${PVRF}/libexec/blender-${BV}" "$@"
+EOF
+chmod -x "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}"
 
 finalize
