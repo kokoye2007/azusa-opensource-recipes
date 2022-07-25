@@ -6,11 +6,12 @@ source "../../common/init.sh"
 # no idea where to download "libc" from
 #LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind;openmp"
 LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind"
+LLVM_PROJECTS=""
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 OIFS="$IFS"
 IFS="; "
-for project in $LLVM_RUNTIMES; do
+for project in $LLVM_PROJECTS $LLVM_RUNTIMES; do
 	get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${project}-${PV}.src.tar.xz
 	mv "${project}-${PV}.src" "${project}"
 done
@@ -26,7 +27,7 @@ export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
 
 CMAKE_OPTS=(
-	-DLLVM_ENABLE_PROJECTS="$LLVM_RUNTIMES"
+	#-DLLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
 	#-DLLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES" # ain't working right 
 	-DLLVM_HOST_TRIPLE="${CHOST}"
 

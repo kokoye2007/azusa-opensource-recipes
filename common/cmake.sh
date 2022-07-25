@@ -59,20 +59,27 @@ EOF
 
 	echo "Invoking compiler..."
 
+	if [ x"$CMAKE_TARGET_ALL" = x ]; then
+		CMAKE_TARGET_ALL="all"
+	fi
+	if [ x"$CMAKE_TARGET_INSTALL" = x ]; then
+		CMAKE_TARGET_INSTALL="install"
+	fi
+
 	case $CMAKE_BUILD_ENGINE in
 		Ninja)
-			ninja || return $?
+			ninja "$CMAKE_TARGET_ALL" || return $?
 			for tgt in $CMAKE_EXTRA_TARGETS; do
 				ninja "$tgt" || return $?
 			done
-			DESTDIR="${D}" ninja install || return $?
+			DESTDIR="${D}" ninja "$CMAKE_TARGET_INSTALL" || return $?
 			;;
 		Unix\ Makefiles)
-			make -j"$NPROC" || return $?
+			make -j"$NPROC" "$CMAKE_TARGET_ALL" || return $?
 			for tgt in $CMAKE_EXTRA_TARGETS; do
 				make -j"$NPROC" "$tgt" || return $?
 			done
-			make install DESTDIR="${D}" || return $?
+			make "$CMAKE_TARGET_INSTALL" DESTDIR="${D}" || return $?
 			;;
 		*)
 			echo "Invalid value for CMAKE_BUILD_ENGINE: $CMAKE_BUILD_ENGINE"
