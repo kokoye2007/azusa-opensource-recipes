@@ -1,0 +1,12 @@
+--- ./src/main/java/com/google/devtools/build/lib/rules/cpp/CppCompileAction.java.orig	2022-08-12 05:27:53.538028061 +0900
++++ ./src/main/java/com/google/devtools/build/lib/rules/cpp/CppCompileAction.java	2022-08-12 05:31:29.105059769 +0900
+@@ -1014,6 +1014,9 @@
+     Iterable<PathFragment> includePathsToVerify =
+         Iterables.concat(getIncludeDirs(), getQuoteIncludeDirs(), systemIncludeDirs);
+     for (PathFragment includePath : includePathsToVerify) {
++      if (includePath.startsWith(PathFragment.create("/pkg"))) {
++        continue; // /pkg on AZUSA only contains read-only system directories
++      }
+       // includePathsToVerify contains all paths that are added as -isystem directive on the command
+       // line, most of which are added for include directives in the CcCompilationContext and are
+       // thus also in ignoredDirs. The hash lookup prevents this from becoming O(N^2) for these.

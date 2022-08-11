@@ -4,6 +4,8 @@ source "../../common/init.sh"
 get https://github.com/bazelbuild/bazel/releases/download/${PV}/${P}-dist.zip
 acheck
 
+apatch "$FILESDIR/bazel-5.0.0-allow-pkg-sys-includes-azusa.patch"
+
 export JAVA_HOME="/pkg/main/dev-java.openjdk.core.linux.${ARCH}" # so keepwork works
 export EXTRA_BAZEL_ARGS="--jobs=$(nproc) --java_runtime_version=local_jdk --tool_java_runtime_version=local_jdk"
 
