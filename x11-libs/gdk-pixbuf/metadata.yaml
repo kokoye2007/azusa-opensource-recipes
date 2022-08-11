@@ -1,0 +1,8 @@
+files:
+    gdk-pixbuf-2.42.8.tar.xz:
+        size: 8503020
+        added: 2022-06-12T16:41:20.04160452+09:00
+        hashes:
+            sha1: f21f1347ed8b7b484ec11d052162773865cdc3c7
+            sha3-256: 07c7c332d5b04383b56a5d495ad454bfc08ba7235ebee73960d9e8fe292291f8
+            sha256: 84acea3acb2411b29134b32015a5b1aaa62844b19c4b1ef8b8971c6b0759f4c6

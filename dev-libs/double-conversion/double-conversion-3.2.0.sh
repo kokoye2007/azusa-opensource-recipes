@@ -8,7 +8,4 @@ cd "${T}"
 
 docmake
 
-make VERBOSE=1
-make install DESTDIR="${D}"
-
 finalize

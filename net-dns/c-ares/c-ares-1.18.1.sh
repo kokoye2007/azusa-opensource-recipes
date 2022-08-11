@@ -7,7 +7,7 @@ acheck
 cd "${T}"
 
 # configure & build
-doconf --disable-static
+doconf
 
 make
 make install DESTDIR="${D}"

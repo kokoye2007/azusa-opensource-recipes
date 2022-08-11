@@ -1,0 +1,18 @@
+versions:
+    list:
+        - "2.42.8"
+    stable: "2.42.8"
+build:
+    - version: '*'
+      import:
+        - media-libs/libpng
+        - media-libs/libjpeg-turbo
+      source:
+        - https://ftp.gnome.org/pub/gnome/sources/${PN}/${PV%.*}/${P}.tar.xz
+      engine: meson
+      install_post:
+        - ${D}/pkg/main/${PKG}.core.${PVRF}/bin/gdk-pixbuf-query-loaders > ${D}/pkg/main/${PKG}.core.${PVRF}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
+
+# /root/gdk-pixbuf-2.38.2/build/gdk-pixbuf/loaders.cache
+#cp -v gdk-pixbuf/loaders.cache "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"/gdk-pixbuf-*/2.*/loaders.cache
+#"${D}/pkg/main/${PKG}.core.${PVRF}/bin/gdk-pixbuf-query-loaders" > "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"/gdk-pixbuf-*/2.*/loaders.cache
