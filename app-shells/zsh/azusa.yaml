@@ -1,0 +1,3 @@
+description: UNIX Shell similar to the Korn shell
+homepage: https://www.zsh.org/
+license: "ZSH gdbm? ( GPL-2 )"

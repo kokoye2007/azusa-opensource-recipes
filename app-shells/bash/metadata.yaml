@@ -1,0 +1,15 @@
+files:
+    bash-5.1.16.tar.gz:
+        size: 10522932
+        added: 2022-06-08T15:20:19.803613449+09:00
+        hashes:
+            sha1: dc46d863c0410d9252f8fc3d356e47809b4bc46d
+            sha3-256: 303cddeb8c1d371f8c53f2ebc764a0f2bf2ac247247406ac82281053c3ff60b0
+            sha256: 5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558
+    bash-5.1.tar.gz:
+        size: 10458638
+        added: 2022-06-08T15:17:14.129531021+09:00
+        hashes:
+            sha1: 063019501ef1f30fad99d2b735a7ae2ce1d11423
+            sha3-256: fec1353e04bfff660f0d533273437a93c8077402acad3342d7b3259fd95a6f64
+            sha256: cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa
