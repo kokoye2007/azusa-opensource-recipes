@@ -51,8 +51,8 @@ startup --batch
 # dont strip HOME, portage sets a temp per-package dir
 build --action_env HOME
 
-# make bazel respect MAKEOPTS (TODO)
-build --jobs=1
+# make bazel respect MAKEOPTS
+build --jobs=${NPROC}
 build --compilation_mode=opt --host_compilation_mode=opt
 
 # FLAGS
