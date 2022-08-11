@@ -1,6 +1,24 @@
 --- ./src/main/java/com/google/devtools/build/lib/rules/cpp/CppCompileAction.java.orig	2022-08-12 05:27:53.538028061 +0900
-+++ ./src/main/java/com/google/devtools/build/lib/rules/cpp/CppCompileAction.java	2022-08-12 05:31:29.105059769 +0900
-@@ -1014,6 +1014,9 @@
++++ ./src/main/java/com/google/devtools/build/lib/rules/cpp/CppCompileAction.java	2022-08-12 05:58:06.982893700 +0900
+@@ -99,6 +99,7 @@
+ import java.io.IOException;
+ import java.io.InputStream;
+ import java.nio.charset.StandardCharsets;
++import java.util.Arrays;
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Collections;
+@@ -962,6 +963,9 @@
+             ? getBuiltInIncludeDirectories()
+             : getValidationIgnoredDirs();
+ 
++    // rule to allow AZUSA includes in /pkg (which is a read only directory)
++    ignoreDirs = Iterables.concat(ignoreDirs, Arrays.asList(PathFragment.create("/pkg")));
++
+     // Copy the nested sets to hash sets for fast contains checking, but do so lazily.
+     // Avoid immutable sets here to limit memory churn.
+     Set<PathFragment> looseHdrsDirs = ccCompilationContext.getLooseHdrsDirs().toSet();
+@@ -1014,6 +1018,9 @@
      Iterable<PathFragment> includePathsToVerify =
          Iterables.concat(getIncludeDirs(), getQuoteIncludeDirs(), systemIncludeDirs);
      for (PathFragment includePath : includePathsToVerify) {
