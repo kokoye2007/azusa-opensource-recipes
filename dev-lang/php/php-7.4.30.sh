@@ -120,6 +120,10 @@ for sapi in $SAPIS; do
 
 	callconf --prefix="/pkg/main/${PKG}.core.$sapi.${PVRF}" --libdir="/pkg/main/${PKG}.libs.$sapi.${PVRF}" --includedir="/pkg/main/${PKG}.dev.$sapi.${PVRF}" "${CONFIGURE[@]}"
 
+	# replace libtool with system's (add --tag=CXX)
+	echo "#!/bin/sh" >libtool
+	echo "exec /bin/libtool --tag=CXX \"\$@\"">>libtool
+
 	make -j"$NPROC"
 	make install INSTALL_ROOT="${D}"
 

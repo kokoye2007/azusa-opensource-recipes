@@ -4,6 +4,8 @@ source "../../common/init.sh"
 get https://www.php.net/distributions/${P}.tar.xz
 acheck
 
+cd "${S}"
+
 # which PHP SAPIs to be compiled
 SAPIS="cli cgi fpm embed phpdbg"
 # apache2: fails because: apxs:Error: Config file /build/dev-lang.php/7.3.10/dist/etc/httpd.conf not found.
@@ -74,7 +76,6 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--with-iconv")
 	#CONFIGURE+=("--with-imap=shared,/pkg/main/net-libs.c-client.dev" "--with-imap-ssl")
 	CONFIGURE+=("--enable-intl=shared,/pkg/main/dev-libs.icu.core")
-	CONFIGURE+=("--enable-json")
 	CONFIGURE+=("--enable-mbstring")
 	CONFIGURE+=("--with-mysqli=shared,mysqlnd")
 	CONFIGURE+=("--enable-opcache" "--enable-huge-code-pages")
@@ -93,7 +94,6 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--enable-tokenizer")
 	CONFIGURE+=("--enable-xml=shared")
 	CONFIGURE+=("--enable-xmlreader=shared")
-	CONFIGURE+=("--with-xmlrpc=shared")
 	CONFIGURE+=("--enable-xmlwriter=shared")
 	CONFIGURE+=("--with-xsl=shared,/pkg/main/dev-libs.libxslt.dev")
 	CONFIGURE+=("--enable-mysqlnd")
@@ -114,6 +114,10 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--with-config-file-path=/etc/php/php-$sapi")
 
 	callconf --prefix="/pkg/main/${PKG}.core.$sapi.${PVRF}" --libdir="/pkg/main/${PKG}.libs.$sapi.${PVRF}" --includedir="/pkg/main/${PKG}.dev.$sapi.${PVRF}" "${CONFIGURE[@]}"
+
+	# replace libtool with system's (add --tag=CXX)
+	echo "#!/bin/sh" >libtool
+	echo "exec /bin/libtool --tag=CXX \"\$@\"">>libtool
 
 	make -j"$NPROC"
 	make install INSTALL_ROOT="${D}"
