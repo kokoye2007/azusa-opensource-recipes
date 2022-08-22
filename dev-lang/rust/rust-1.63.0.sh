@@ -8,6 +8,8 @@ importpkg zlib
 
 cd "rustc-${PV}-src"
 
+# https://github.com/rust-lang/rust/blob/master/config.toml.example
+
 cat << EOF > config.toml
 [llvm]
 targets = "X86"
@@ -28,6 +30,7 @@ extended = true
 
 [install]
 prefix = "/pkg/main/${PKG}.core.${PVRF}"
+sysconfdir = "etc"
 
 [rust]
 channel = "stable"
@@ -63,10 +66,9 @@ mkdir -p "/pkg/main/${PKG}.core.${PVRF}"
 
 python3 ./x.py build --exclude src/tools/miri
 
-python3 ./x.py install
+DESTDIR="${D}" python3 ./x.py install
 
-# move path to D for packaging
-mkdir -p "${D}/pkg/main"
-mv "/.pkg-main-rw/${PKG}.core.${PVRF}" "${D}/pkg/main/${PKG}.core.${PVRF}"
+# add +x flag on libs so ldconfig indexes these
+chmod -v +x "${D}/pkg/main/${PKG}.core.${PVRF}"/lib*/*.so
 
 finalize
