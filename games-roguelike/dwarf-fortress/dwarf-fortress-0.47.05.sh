@@ -19,7 +19,7 @@ cat >"${D}/pkg/main/${PKG}.core.${PVRF}/bin/dwarf-fortress" <<EOF
 export SDL_DISABLE_LOCK_KEYS=1 # Work around for bug in Debian/Ubuntu SDL patch.
 #export SDL_VIDEO_CENTERED=1    # Centre the screen.  Messes up resizing.
 
-if [[ ! -d "\$HOME/.cache/dwarf-fortress" ]; then
+if [[ ! -d "\$HOME/.cache/dwarf-fortress" ]]; then
 	mkdir -p "\$HOME/.cache/dwarf-fortress/data"
 fi
 
