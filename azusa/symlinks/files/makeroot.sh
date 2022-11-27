@@ -57,7 +57,7 @@ cp -fT /pkg/main/azusa.init.core.linux.__ARCH__/init "$BASE/usr/azusa/azusa-init
 cp -fT /pkg/main/sys-apps.busybox.core.linux.__ARCH__/bin/busybox "$BASE/usr/azusa/busybox"
 
 # initialize dev
-if [ $USER = root ]; then
+if [ "$(id -u)" -eq 0 ]; then
 	mknod -m 600 "$BASE/dev/console" c 5 1
 	mknod -m 666 "$BASE/dev/null" c 1 3
 	mknod -m 666 "$BASE/dev/zero" c 1 5
@@ -96,6 +96,6 @@ chmod 0600 "$BASE/etc/shadow"
 # touch stuff
 touch "$BASE/var/run/utmp" "$BASE/var/log/"{btmp,lastlog,wtmp}
 chmod 664 "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
-if [ $USER = root ]; then
+if [ "$(id -u)" -eq 0 ]; then
 	chgrp utmp "$BASE/var/run/utmp" "$BASE/var/log/lastlog"
 fi
