@@ -7,8 +7,8 @@ get https://ftp.gnu.org/gnu/${PN}/${PN}-${MY_PV}.tar.gz
 cd "${PN}-${MY_PV}"
 
 for foo in `seq -f '%03.f' 1 "${PV/*_p/}"`; do
-	get https://ftp.gnu.org/gnu/readline/${PN}-${MY_PV}-patches/readline81-$foo
-	patch -p0 <"readline81-$foo"
+	get https://ftp.gnu.org/gnu/readline/${PN}-${MY_PV}-patches/readline82-$foo
+	patch -p0 <"readline82-$foo"
 done
 
 acheck
