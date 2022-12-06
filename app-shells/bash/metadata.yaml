@@ -13,3 +13,10 @@ files:
             sha1: 063019501ef1f30fad99d2b735a7ae2ce1d11423
             sha3-256: fec1353e04bfff660f0d533273437a93c8077402acad3342d7b3259fd95a6f64
             sha256: cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa
+    bash-5.2.tar.gz:
+        size: 10950833
+        added: 2022-12-07T08:52:54.455570391+09:00
+        hashes:
+            sha1: a799460be16c01aeab492b9aa88f5eb7f35c1b9b
+            sha3-256: 01af6b12452665d8202cd50cdc9ca7e6e80d58ba3388d72eb5a0f1c737f8abd7
+            sha256: a139c166df7ff4471c5e0733051642ee5556c1cc8a4a78f145583c5c81ab32fb
