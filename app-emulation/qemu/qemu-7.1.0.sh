@@ -53,15 +53,12 @@ CONFOPTS=(
 	--enable-linux-aio
 	#--enable-linux-io-uring
 	--enable-vnc-jpeg
-	--enable-vnc-png
 	--enable-seccomp
 	--enable-usb-redir
 	--enable-vhost-net
-	--enable-vhost-vsock
 	--enable-vhost-crypto
 	--enable-vhost-kernel
 	--enable-vhost-user
-	--enable-vhost-user-fs
 	--enable-vhost-vdpa
 	--enable-crypto-afalg
 	--enable-vnc
