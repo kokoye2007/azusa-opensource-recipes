@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libbrotlidec
+importpkg libbrotlidec app-arch/zstd
 
 doconf --with-openssl
 

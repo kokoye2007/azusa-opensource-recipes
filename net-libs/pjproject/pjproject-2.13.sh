@@ -6,7 +6,7 @@ acheck
 
 cd "${S}"
 
-importpkg media-libs/speex media-libs/speexdsp media-sound/gsm net-libs/libsrtp
+importpkg media-libs/speex media-libs/speexdsp media-sound/gsm net-libs/libsrtp media-libs/portaudio media-libs/libsamplerate
 
 CONFIG=(
 	--enable-shared
@@ -27,7 +27,7 @@ CONFIG=(
 	--with-external-speex
 )
 
-doconf "${CONFIG[@]}" || /bin/bash -i
+doconf "${CONFIG[@]}"
 
 make
 make install DESTDIR="${D}"

@@ -8,9 +8,6 @@ cd "${T}"
 
 export XDG_DATA_DIRS="/usr/share:/pkg/main/dev-libs.gobject-introspection.core/share:/pkg/main/net-libs.libsoup.core/share"
 
-doconf
-
-make
-make install DESTDIR="${D}"
+domeson
 
 finalize

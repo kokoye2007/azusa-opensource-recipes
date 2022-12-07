@@ -26,7 +26,7 @@ CONFIG=(
 	--with-unbound
 )
 
-doconf "${CONFIG[@]}" || /bin/bash -i
+doconf "${CONFIG[@]}"
 
 make
 make install DESTDIR="${D}"

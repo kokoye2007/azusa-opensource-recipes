@@ -11,7 +11,4 @@ cd "${T}"
 # configure & build
 domeson --strip --default-library shared -Dselinux=disabled
 
-ninja
-DESTDIR="${D}" ninja install
-
 finalize

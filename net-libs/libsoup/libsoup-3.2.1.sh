@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get http://ftp.gnome.org/pub/gnome/sources/libsoup/2.68/${P}.tar.xz
+acheck
 
 cd "${T}"
 

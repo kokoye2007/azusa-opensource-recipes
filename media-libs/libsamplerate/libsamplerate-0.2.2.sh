@@ -1,11 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.sourceforge.net/linuxwacom/${P}.tar.bz2
+get https://github.com/libsndfile/libsamplerate/releases/download/${PV}/${P}.tar.xz
 acheck
 
 cd "${T}"
 
+importpkg media-libs/alsa-lib
 doconf --disable-static
 
 make
