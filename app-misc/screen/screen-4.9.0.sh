@@ -4,9 +4,13 @@ source "../../common/init.sh"
 get https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
 acheck
 
-cd "${P}"
+cd "${S}"
 
-importpkg tinfo
+aautoreconf
+
+#cd "${T}"
+
+importpkg tinfo libxcrypt
 
 doconf --with-socket-dir=/var/run/screen --with-pty-group=5 --with-sys-screenrc=/etc/screenrc
 
