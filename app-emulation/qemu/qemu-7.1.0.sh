@@ -8,7 +8,7 @@ cd "${T}"
 
 # --audio-drv-list=oss,alsa,sdl,pa
 
-importpkg media-libs/alsa-lib sys-fs/udev media-libs/libepoxy egl dev-libs/libaio sys-libs/libcap-ng app-arch/bzip2 dev-libs/jemalloc dev-libs/libgcrypt net-libs/libssh2 dev-libs/lzo app-arch/snappy sys-process/numactl zlib dev-libs/pmdk sys-block/ndctl sys-libs/liburing
+importpkg media-libs/alsa-lib sys-fs/udev media-libs/libepoxy egl dev-libs/libaio sys-libs/libcap-ng app-arch/bzip2 dev-libs/jemalloc dev-libs/libgcrypt net-libs/libssh2 dev-libs/lzo app-arch/snappy sys-process/numactl zlib dev-libs/pmdk sys-block/ndctl sys-libs/liburing gdk-pixbuf-2.0
 export CFLAGS="$CPPFLAGS"
 
 CONFOPTS=(

@@ -6,3 +6,10 @@ files:
             sha1: f21f1347ed8b7b484ec11d052162773865cdc3c7
             sha3-256: 07c7c332d5b04383b56a5d495ad454bfc08ba7235ebee73960d9e8fe292291f8
             sha256: 84acea3acb2411b29134b32015a5b1aaa62844b19c4b1ef8b8971c6b0759f4c6
+    gdk-pixbuf-2.42.10.tar.xz:
+        size: 6519776
+        added: 2022-12-07T12:16:49.376398151+09:00
+        hashes:
+            sha1: 2fec549625f33685cab5d9d432bdb5887279acbb
+            sha3-256: fe5683b5e3f0adda4a51e2856afbe6144e217947de32c5c030b9713680b9164a
+            sha256: ee9b6c75d13ba096907a2e3c6b27b61bcd17f5c7ebeab5a5b439d2f2e39fe44b

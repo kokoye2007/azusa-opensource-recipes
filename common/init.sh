@@ -50,6 +50,15 @@ fi
 mkdir -p "${CHPATH}" "${D}" "${T}"
 cd "${CHPATH}"
 
+if [ x"$DEBUG" != x ]; then
+	catcherror() {
+		echo "ERR Trap debug console! Something went wrong but DEBUG=1 was provided, launching interactive console..."
+		/bin/bash -i || true
+		exit $1
+	}
+	trap catcherror ERR
+fi
+
 inherit() {
 	for foo in "$@"; do
 		source "${ROOTDIR}/common/$foo.sh"

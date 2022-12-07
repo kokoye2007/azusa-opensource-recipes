@@ -1,7 +1,8 @@
 versions:
     list:
         - "2.42.8"
-    stable: "2.42.8"
+        - 2.42.10
+    stable: "2.42.10"
 build:
     - version: '*'
       import:
