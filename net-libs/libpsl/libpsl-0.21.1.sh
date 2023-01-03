@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/rockdaboot/libpsl/releases/download/${P}/${P}.tar.gz
+acheck
 
 cd "${P}"
 

@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/gmp dev-libs/libunistring libunbound dev-libs/libtasn1
+importpkg dev-libs/gmp dev-libs/libunistring libunbound dev-libs/libtasn1 app-arch/brotli
 
 doconf
 

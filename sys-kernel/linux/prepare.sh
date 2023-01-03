@@ -58,8 +58,27 @@ for GOARCH in $TGT; do
 				esac
 			done
 		done
+
 		#make -C "$KDIR" olddefconfig
 		make -C "$KDIR" defconfig
+
+		# our required stuff
+		for foo in $(cat files/commonconfig.txt); do
+			case "${foo: -1}" in
+			n)
+				# disable
+				(cd "$KDIR"; ./source/scripts/config -d "${foo:0:-2}" )
+				;;
+			y)
+				# enable
+				(cd "$KDIR"; ./source/scripts/config -e "${foo:0:-2}" )
+				;;
+			m)
+				# module
+				(cd "$KDIR"; ./source/scripts/config -e "${foo:0:-2}" )
+				;;
+		done
+
 		make -C "$KDIR" menuconfig
 		cp -v "$KDIR/.config" "files/config-$KVER-$GOARCH"
 

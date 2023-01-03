@@ -14,6 +14,8 @@ fetchgit() {
 	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" "$(echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g')" || true
 	if [ -s "$BN" ]; then
 		extract "$BN"
+		# owner might differ, add directory to safe.directory
+		git config --global --add safe.directory "${S}"
 		return
 	fi
 

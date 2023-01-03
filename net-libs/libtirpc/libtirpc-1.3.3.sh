@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://downloads.sourceforge.net/libtirpc/${P}.tar.bz2
+acheck
 
 cd "${T}"
 

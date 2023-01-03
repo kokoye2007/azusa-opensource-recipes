@@ -6,7 +6,7 @@ acheck
 
 importpkg expat zlib
 
-cd "${T}"
+cd "${S}"
 
 doconf --enable-threadsafe-ssl=posix --with-expat --with-ssl=openssl --enable-shared --with-libproxy --enable-nls --disable-static --with-zlib
 
