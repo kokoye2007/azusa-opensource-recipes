@@ -1,0 +1,3 @@
+description: FFmpeg version of headers required to interface with Nvidias codec APIs
+homepage: https://git.videolan.org/?p=ffmpeg/nv-codec-headers.git
+license: MIT
