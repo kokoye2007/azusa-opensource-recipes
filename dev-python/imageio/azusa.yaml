@@ -1,0 +1,3 @@
+description: Library for reading and writing a wide range of image, video, scientific, and volumetric data formats.
+homepage: https://github.com/imageio/imageio
+license: BSD-2-Clause
