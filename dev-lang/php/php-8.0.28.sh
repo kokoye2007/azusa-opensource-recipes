@@ -11,7 +11,7 @@ SAPIS="cli cgi fpm embed phpdbg"
 # apache2: fails because: apxs:Error: Config file /build/dev-lang.php/7.3.10/dist/etc/httpd.conf not found.
 
 # getting readline to work is a bit of a pain...
-importpkg sys-libs/ncurses sys-libs/readline sys-libs/libxcrypt
+importpkg sys-libs/ncurses sys-libs/readline sys-libs/libxcrypt dev-util/valgrind
 
 # override pkgconfig for openssl since this version of PHP doesn't like OpenSSL 3
 export OPENSSL_CFLAGS="-I$(realpath "/pkg/main/dev-libs.openssl.dev.1/include")"

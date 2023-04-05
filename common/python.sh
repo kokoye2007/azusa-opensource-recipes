@@ -47,7 +47,15 @@ pythonsetup() {
 		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
 		export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
 		export SETUPTOOLS_USE_DISTUTILS=stdlib
-		"/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION_MAJOR}" setup.py install --root "${D}" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" "$@"
+
+		PIP_EXE="/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/bin/pip${PYTHON_VERSION_MAJOR}"
+		PYTHON_EXE="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION_MAJOR}"
+		if [ -x "$PIP_EXE" ]; then
+			"$PIP_EXE" install . --nodeps --ignore-installed --progress-bar off --no-clean --disable-pip-version-check --python-version "${PYTHON_VERSION}" --root "${D}" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
+		else
+			# if we don't have pip, fallback to using setup.py (required to install setuptools & pip)
+			"$PYTHON_EXE" setup.py install --root "${D}" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" "$@"
+		fi
 
 		# fetch the installed module from /.pkg-main-rw/
 		if [ -d "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* ]; then
