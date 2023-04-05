@@ -59,8 +59,8 @@ for GOARCH in $TGT; do
 			done
 		done
 
-		#make -C "$KDIR" olddefconfig
-		make -C "$KDIR" defconfig
+		make -C "$KDIR" olddefconfig
+		#make -C "$KDIR" defconfig
 
 		# our required stuff
 		for foo in $(cat files/commonconfig.txt); do
@@ -77,11 +77,48 @@ for GOARCH in $TGT; do
 				# module
 				(cd "$KDIR"; ./source/scripts/config -e "${foo:0:-2}" )
 				;;
+			esac
 		done
 
 		make -C "$KDIR" menuconfig
 		cp -v "$KDIR/.config" "files/config-$KVER-$GOARCH"
 
+		rm -fr "$KDIR"
+	else
+		# check file just in case
+		echo "Checking config for $KVER-$GOARCH"
+		KDIR=`mktemp -d -t lk-XXXXXXXXXX`
+		echo "include /pkg/main/sys-kernel.linux.src.$KVER.linux.any/Makefile" >"$KDIR/Makefile"
+		cp -v "files/config-$KVER-$GOARCH" "$KDIR/.config"
+
+		source files/env.sh
+
+		make -C "$KDIR" prepare
+
+		# ensure base options
+		(cd "$KDIR"; ./source/scripts/config --set-str LOCALVERSION "-azusa" --enable LOCALVERSION_AUTO --set-str DEFAULT_HOSTNAME "localhost")
+		# our required stuff
+		for foo in $(cat files/commonconfig.txt); do
+			case "${foo: -1}" in
+			n)
+				# disable
+				(cd "$KDIR"; ./source/scripts/config -d "${foo:0:-2}" )
+				;;
+			y)
+				# enable
+				(cd "$KDIR"; ./source/scripts/config -e "${foo:0:-2}" )
+				;;
+			m)
+				# module
+				(cd "$KDIR"; ./source/scripts/config -e "${foo:0:-2}" )
+				;;
+			esac
+		done
+
+		# make olddefconfig
+		make -C "$KDIR" olddefconfig
+
+		cp -v "$KDIR/.config" "files/config-$KVER-$GOARCH"
 		rm -fr "$KDIR"
 	fi
 done

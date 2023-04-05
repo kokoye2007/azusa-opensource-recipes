@@ -30,7 +30,7 @@ for GOARCH in $TGT; do
 	make -s olddefconfig
 
 	# ensure some config
-	./source/scripts/config --set-str LOCALVERSION "-azusa" --enable LOCALVERSION_AUTO --set-str DEFAULT_HOSTNAME "localhost" --enable CONFIG_FUSE_FS
+	./source/scripts/config --set-str LOCALVERSION "-azusa" --enable LOCALVERSION_AUTO --set-str DEFAULT_HOSTNAME "localhost"
 
 	# re-copy file
 	cp .config $FILESDIR/config-${PV}-$GOARCH
