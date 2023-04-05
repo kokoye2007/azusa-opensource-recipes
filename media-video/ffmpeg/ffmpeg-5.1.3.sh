@@ -15,7 +15,8 @@ callconf --prefix=/pkg/main/${PKG}.core.${PVRF} \
 	--enable-shared --disable-static \
 	--enable-avisynth --enable-gmp --enable-version3 --enable-gcrypt --enable-openssl --enable-libgsm --enable-libmp3lame --enable-libmodplug \
 	--enable-libopencv --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libxvid \
-	--enable-libxml2 --enable-libx265
+	--enable-libxml2 --enable-libx265 --enable-libfreetype \
+	--enable-cuvid --enable-libnpp --enable-vaapi --enable-cuda-nvcc --nvccflags='-gencode arch=compute_80,code=sm_80 -O2' --enable-libnpp --enable-nvenc || /bin/bash -i
 #--enable-libass --enable-libbluray --enable-libdrm --enable-libkvazaar --enable-libxavs --enable-libxavs2
 
 make

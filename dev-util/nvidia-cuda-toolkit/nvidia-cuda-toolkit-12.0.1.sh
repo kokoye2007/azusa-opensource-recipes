@@ -22,47 +22,49 @@ builddirs=(
 	builds/cuda_{cccl,cudart,cuobjdump,cuxxfilt,demo_suite,nvcc,nvdisasm,nvml_dev,nvprune,nvrtc,nvtx,opencl}
 	builds/lib{cublas,cufft,cufile,curand,cusolver,cusparse,npp,nvjitlink,nvjpeg}
 	builds/nvidia_fs
-	builds/cuda_nvcc/nvvm
-	builds/cuda_nvml_dev/nvml
 )
 
-mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 
 for d in "${builddirs[@]}"; do
 	echo "Installing ${d}"
 	[[ -d ${d} ]] || die "Directory does not exist: ${d}"
 
-	if [ -d "${d}/targets/x86_64-linux" ]; then
-		if [ -d "${d}/targets/x86_64-linux/include" ]; then
-			mkdir -p "${d}/include"
-			rsync -av "${d}/targets/x86_64-linux/include/" "${d}/include/"
-			rm -fr "${d}/targets/x86_64-linux/include"
+	for x in bin targets share extras; do
+		if [ -d "${d}/${x}" ]; then
+			rsync -av "${d}/${x}" "${D}/pkg/main/${PKG}.core.${PVRF}/"
 		fi
-		if [ -d "${d}/targets/x86_64-linux/lib" ]; then
-			mkdir -p "${d}/lib64"
-			rsync -av "${d}/targets/x86_64-linux/lib/" "${d}/lib64/"
-			rm -fr "${d}/targets/x86_64-linux/lib"
-		fi
-		if [ -d "${d}/targets/x86_64-linux/res" ]; then
-			mkdir -p "${d}/res"
-			rsync -av "${d}/targets/x86_64-linux/res/" "${d}/res/"
-			rm -fr "${d}/targets/x86_64-linux/res"
-		fi
-		ls "${d}/targets/x86_64-linux"
-		rmdir "${d}/targets/x86_64-linux"
-	fi
-
-	rsync -av "${d}/" "${D}/pkg/main/${PKG}.core.${PVRF}"
+	done
 done
+cp builds/EULA.txt "${D}/pkg/main/${PKG}.core.${PVRF}/"
 
-# targets typically contains what we already have (if any)
-rm -fr "${D}/pkg/main/${PKG}.core.${PVRF}/targets" || true
+echo "Installing nvvm"
+chmod +x builds/cuda_nvcc/nvvm/bin/cicc
+rsync -av builds/cuda_nvcc/nvvm "${D}/pkg/main/${PKG}.core.${PVRF}/"
+
+echo "Installing nvml"
+rsync -av builds/cuda_nvml_dev/nvml "${D}/pkg/main/${PKG}.core.${PVRF}/"
 
 # todo nsight
+
+# move a bit stuff around
+mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}"
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX"
+
+# move include
+mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/targets/x86_64-linux/include" "${D}/pkg/main/${PKG}.dev.${PVRF}/include"
+ln -snf "/pkg/main/${PKG}.dev.${PVRF}/include" "${D}/pkg/main/${PKG}.core.${PVRF}/targets/x86_64-linux/include"
+
+# move libs
+mv -v "${D}/pkg/main/${PKG}.core.${PVRF}/targets/x86_64-linux/lib" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+ln -snf "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/targets/x86_64-linux/lib"
+
+ln -snf "/pkg/main/${PKG}.dev.${PVRF}/include" "${D}/pkg/main/${PKG}.core.${PVRF}/include"
+ln -snf "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"
 
 # cuda-config
 sed -e "s:CUDA_SUPPORTED_GCC:${cuda_supported_gcc}:g" \
 	"${FILESDIR}"/cuda-config.in > "${D}/pkg/main/${PKG}.core.${PVRF}/bin/cuda-config"
 chmod -v +x "${D}/pkg/main/${PKG}.core.${PVRF}/bin/cuda-config"
 
-finalize
+archive
