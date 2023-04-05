@@ -1,8 +1,8 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-DRIVER_PV="510.47.03"
-cuda_supported_gcc="8.5 9.4 9.5 10.3 10.4 11.1 11.2 11.3"
+DRIVER_PV="525.85.12"
+cuda_supported_gcc="8.5 9.4 9.5 10 10.3 10.4 11 11.1 11.2 11.3 12 12.1 12.2"
 
 get "https://developer.download.nvidia.com/compute/cuda/${PV}/local_installers/cuda_${PV}_${DRIVER_PV}_linux.run"
 acheck
@@ -19,8 +19,9 @@ dd ibs="$skip_bytes" skip=1 if="$SRCFILE" of="${SRCFILE}.arch"
 tar --no-same-owner -xf "${SRCFILE}.arch"
 
 builddirs=(
-	builds/cuda_{cccl,cudart,cuobjdump,cuxxfilt,memcheck,nvcc,nvdisasm,nvml_dev,nvprune,nvrtc,nvtx}
-	builds/lib{cublas,cufft,curand,cusolver,cusparse,npp,nvjpeg}
+	builds/cuda_{cccl,cudart,cuobjdump,cuxxfilt,demo_suite,nvcc,nvdisasm,nvml_dev,nvprune,nvrtc,nvtx,opencl}
+	builds/lib{cublas,cufft,cufile,curand,cusolver,cusparse,npp,nvjitlink,nvjpeg}
+	builds/nvidia_fs
 	builds/cuda_nvcc/nvvm
 	builds/cuda_nvml_dev/nvml
 )
@@ -41,6 +42,11 @@ for d in "${builddirs[@]}"; do
 			mkdir -p "${d}/lib64"
 			rsync -av "${d}/targets/x86_64-linux/lib/" "${d}/lib64/"
 			rm -fr "${d}/targets/x86_64-linux/lib"
+		fi
+		if [ -d "${d}/targets/x86_64-linux/res" ]; then
+			mkdir -p "${d}/res"
+			rsync -av "${d}/targets/x86_64-linux/res/" "${d}/res/"
+			rm -fr "${d}/targets/x86_64-linux/res"
 		fi
 		ls "${d}/targets/x86_64-linux"
 		rmdir "${d}/targets/x86_64-linux"

@@ -51,6 +51,7 @@ CONFOPTS=(
 	#--enable-netmap
 	--enable-tpm
 	--enable-linux-aio
+	--enable-slirp
 	#--enable-linux-io-uring
 	--enable-vnc-jpeg
 	--enable-seccomp
