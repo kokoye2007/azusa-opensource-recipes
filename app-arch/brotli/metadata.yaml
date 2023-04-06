@@ -1,0 +1,15 @@
+files:
+    v1.0.7.tar.gz:
+        size: 23827908
+        added: 0001-01-01T00:00:00Z
+        hashes:
+            sha1: ee64a380152aa20fbc1098fe3799104884c570c1
+            sha3-256: 9da1ca42a5c375b8998260879f7b53158169cbb45815392db275a4d6f566b08e
+            sha256: 4c61bfb0faca87219ea587326c467b95acb25555b53d1a421ffa3c8a9296ee2c
+    v1.0.9.tar.gz:
+        size: 486984
+        added: 0001-01-01T00:00:00Z
+        hashes:
+            sha1: ddfefdf2593b3f03eec221a7f4ceaa710e5a2e6b
+            sha3-256: 509465bb5cee4353524ad29dc78efa9fd6a85dae759d57e76be5d6d445e12b5f
+            sha256: f9e8d81d0405ba66d181529af42a3354f838c939095ff99930da6aa9cdf6fe46
