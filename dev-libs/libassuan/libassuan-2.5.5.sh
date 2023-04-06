@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://www.gnupg.org/ftp/gcrypt/libassuan/${P}.tar.bz2
+acheck
 
 cd "${T}"
 

@@ -49,11 +49,10 @@ pythonsetup() {
 		echo "Running for python-$PYTHON_VERSION"
 		local PYTHON_VERSION_MINOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1-2 )" # for python3.10.2 this will be 3.10
 		local PYTHON_VERSION_MAJOR="$(echo "${PYTHON_VERSION}" | cut -d. -f1 )" # for python3.10.2 this will be 3
+		local PYTHON_PACKAGES="/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}/site-packages/azusafinder.py"
+
 		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
-		export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}/site-packages:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
-		for pkg in $(cat /pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}/site-packages/packages.pth); do
-			export PYTHONPATH="${PYTHONPATH}.${pkg}"
-		done
+		export PYTHONPATH=":./site-packages:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}/site-packages:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
 		#export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 		echo " * PYTHONHOME=$PYTHONHOME"
@@ -61,24 +60,27 @@ pythonsetup() {
 
 		#PIP_EXE="/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/bin/pip${PYTHON_VERSION_MAJOR}"
 		PYTHON_EXE="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION_MAJOR}"
-		PIP_EXE="$PYTHON_EXE"
-		if [ -x "$PIP_EXE" ]; then
+		if [ "$(cat "$PYTHON_PACKAGES" | grep -c pip)" -gt 0 ]; then
 			#"$PIP_EXE" install --no-binary=:all: --no-deps --no-clean --disable-pip-version-check --root "${D}" --prefix "/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" .
 			#"$PIP_EXE" install --no-binary=:all: --no-deps --no-clean --disable-pip-version-check --root "${D}" --prefix "/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" .
 			#logrun "$PYTHON_EXE" -m pip list
+			mkdir -p site-packages
+			echo "import wheel" >site-packages/load_wheel.py
+			echo "print(\"loaded wheel\")" >>site-packages/load_wheel.py
+			echo "import load_wheel" >site-packages/load_wheel.pth
 			logrun "$PYTHON_EXE" -m pip install --verbose --verbose --verbose --no-binary=:all: --no-build-isolation --no-cache-dir --no-deps --disable-pip-version-check --root "$D" --prefix "/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}" .
 		else
 			# if we don't have pip, fallback to using setup.py (required to install setuptools & pip)
-			"$PYTHON_EXE" setup.py install --root "${D}" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}" "$@"
+			logrun "$PYTHON_EXE" setup.py install --root "${D}" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}" "$@"
 		fi
 
 		# fetch the installed module from /.pkg-main-rw/
-		if [ -d "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* ]; then
-			mv -v "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}"
+		mkdir -p "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}"
+
+		if [ -d "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" ]; then
+			rsync -av --remove-source-files "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
 		elif [ -d "${D}/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" ]; then
-			mv -v "${D}/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}"
-		else
-			mkdir -p "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}"
+			rsync -av --remove-source-files "${D}/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}"/ "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
 		fi
 		if [ -d "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"* ]; then
 			# maybe installed lib folder here. Move it too
@@ -89,6 +91,8 @@ pythonsetup() {
 			cp -arv "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
 		fi
 	done
+	find "${D}" -name azusafinder*.pyc | xargs rm -fv
+	find "${D}" -name __pycache__ -type d | xargs rmdir --ignore-fail-on-non-empty -v
 }
 
 pythonpackage() {

@@ -55,6 +55,12 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 					echo "            '$foo': '${p}/lib/python${PYTHON_MINOR}/site-packages'," >>$FINDER
 				fi
 			done
+			# copy package infos
+			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*.{egg,dist}-info; do
+				if [ -e "$foo" ]; then
+					cp -r "$foo" -t "$TARGET"
+				fi
+			done
 		else
 			echo "no modules found!"
 		fi
