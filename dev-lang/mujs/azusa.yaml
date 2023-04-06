@@ -1,0 +1,3 @@
+description: An embeddable JavaScript interpreter written in C
+homepage: https://mujs.com/ https://github.com/ccxvii/mujs
+license: ISC
