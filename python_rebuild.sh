@@ -34,6 +34,10 @@ done
 # check extra mods (python stuff that is not inside dev-python)
 EXTRA_MODS="$(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep '\.mod\.'  | grep '\.py' | cut -d. -f1-2 | sort -u | grep -v '^dev-python' | sed -e 's#\.#/#')"
 for foo in $EXTRA_MODS; do
+	if [ "$foo" = "dev-lang/python" ]; then
+		# exclude python itself from check
+		continue
+	fi
 	echo "extra: $foo"
 	BASE=`basename "$foo"`
 	PKGNAME="$(echo "$foo" | sed -e 's#/#.#')" # as pkg name

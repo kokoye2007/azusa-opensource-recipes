@@ -102,6 +102,11 @@ for pn in $(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${AR
 			fi
 			;;
 		mod)
+			for foo in bin sbin; do
+				if [ -d "${p}/${foo}" -a ! -L "${p}/${foo}" ]; then
+					cp -rsfT "${p}/${foo}" "${foo}"
+				fi
+			done
 			for foo in cmake pkgconfig; do
 				if [ -d "${p}/${foo}" ]; then
 					cp -rsfT "${p}/${foo}" "$LIB/${foo}"
