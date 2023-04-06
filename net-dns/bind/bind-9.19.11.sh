@@ -12,13 +12,12 @@ CONFIGURE=(
 	--sysconfdir=/etc
 	--localstatedir=/var
 	--with-libtool
-	--disable-static
 	--with-openssl=/pkg/main/dev-libs.openssl.dev
 	--with-lmdb=/pkg/main/dev-db.lmdb.dev
 	--with-libxml2
 	--with-json-c
 	--with-zlib
-	--with-readline="$(pkg-config --libs readline ncurses)"
+	--with-readline="readline"
 	--with-protobuf-c=/pkg/main/dev-libs.protobuf-c.dev
 	--with-libfstrm=/pkg/main/dev-libs.fstrm.dev
 	--with-libidn2=/pkg/main/net-dns.libidn2.dev
