@@ -48,8 +48,6 @@ CONFOPTS=(
 	# video
 	--enable-drm
 	#--enable-gbm
-	--enable-wayland-scanner
-	--enable-wayland-protocols
 	--enable-wayland
 	--enable-x11
 	--enable-xv
