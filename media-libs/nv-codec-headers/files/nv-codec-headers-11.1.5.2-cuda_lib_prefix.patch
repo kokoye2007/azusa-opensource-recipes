@@ -1,0 +1,41 @@
+diff -rbBU3 nv-codec-headers-11.1.5.2/include/ffnvcodec/dynlink_loader.h nv-codec-headers-11.1.5.2-edit/include/ffnvcodec/dynlink_loader.h
+--- nv-codec-headers-11.1.5.2/include/ffnvcodec/dynlink_loader.h	2022-11-01 21:09:36.000000000 +0900
++++ nv-codec-headers-11.1.5.2-edit/include/ffnvcodec/dynlink_loader.h	2023-04-07 02:15:40.612567636 +0900
+@@ -29,6 +29,7 @@
+ #define FFNV_CUDA_DYNLINK_LOADER_H
+ 
+ #include <stdlib.h>
++#include <string.h>
+ 
+ #include "dynlink_cuda.h"
+ #include "dynlink_nvcuvid.h"
+@@ -81,12 +82,26 @@
+ 
+ #define LOAD_LIBRARY(l, path)                                  \
+     do {                                                       \
+-        if (!((l) = FFNV_LOAD_FUNC(path))) {                   \
+-            FFNV_LOG_FUNC(logctx, "Cannot load %s\n", path);   \
++        char *cuda_lib_prefix = getenv("CUDA_LIB_PREFIX");          \
++        const char *final_path = NULL;                              \
++        char *allocated_path = NULL;                                \
++        if (cuda_lib_prefix) {                                      \
++            allocated_path = malloc(strlen(cuda_lib_prefix) +       \
++                                   strlen(path) + 1);               \
++            strcpy(allocated_path, cuda_lib_prefix);                \
++            strcat(allocated_path, path);                           \
++            final_path = allocated_path;                            \
++        } else {                                                    \
++            final_path = path;                                      \
++        }                                                           \
++        if (!((l) = FFNV_LOAD_FUNC(final_path))) {                  \
++            FFNV_LOG_FUNC(logctx, "Cannot load %s\n", final_path);  \
+             ret = -1;                                          \
++            if (allocated_path) free(allocated_path);               \
+             goto error;                                        \
+         }                                                      \
+-        FFNV_DEBUG_LOG_FUNC(logctx, "Loaded lib: %s\n", path); \
++        FFNV_DEBUG_LOG_FUNC(logctx, "Loaded lib: %s\n", final_path);\
++        if (allocated_path) free(allocated_path);                   \
+     } while (0)
+ 
+ #define LOAD_SYMBOL(fun, tp, symbol)                             \
