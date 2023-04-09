@@ -35,7 +35,7 @@ cat >gclient <<EOF
 #!/bin/sh
 CMD=\`basename "\$0"\`
 export PATH="\$PATH:$TARGET/depot_tools"
-exec "$TARGET/depot_tools/\$CMD" "$@"
+exec "$TARGET/depot_tools/\$CMD" "\$@"
 EOF
 
 chmod +x gclient
