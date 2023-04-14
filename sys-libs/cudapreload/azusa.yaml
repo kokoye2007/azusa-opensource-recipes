@@ -1,0 +1,3 @@
+description: allows loading CUDA libraries from outside of the standard Azusa system
+homepage: https://github.com/AzusaOS/cudapreload
+license: MIT
