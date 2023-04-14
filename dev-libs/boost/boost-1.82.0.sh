@@ -3,6 +3,8 @@ source "../../common/init.sh"
 inherit python
 
 get https://boostorg.jfrog.io/artifactory/main/release/${PV}/source/boost_${PV//./_}.tar.bz2
+cd "${S}"
+apatch "$FILESDIR/boost-1.81.0-issue-112-multiple-def-uarg.patch"
 acheck
 
 importpkg dev-libs/icu zlib app-arch/bzip2 app-arch/xz app-arch/zstd
