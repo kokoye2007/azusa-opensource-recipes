@@ -6,9 +6,9 @@ acheck
 
 cd "${T}"
 
-importpkg json-c openssl
+importpkg json-c openssl dev-libs/hiredis
 
-doconf --sysconfdir=/etc/syslog-ng --disable-java
+doconf --sysconfdir=/etc/syslog-ng --disable-java --disable-python
 
 make
 make install DESTDIR="${D}"

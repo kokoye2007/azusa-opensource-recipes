@@ -1,12 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/${PN}/${PN}/archive/v${MY_PV}.tar.gz ${P}.tar.gz
+get https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
 acheck
+
+# suppress network access, package builds fine without the submodules
+mkdir "${S}/third_party/opencensus-proto/src" || die
 
 cd "${T}"
 
-importpkg net-dns/c-ares dev-libs/protobuf zlib
+importpkg net-dns/c-ares dev-libs/protobuf zlib dev-cpp/abseil-cpp
 
 CMAKEARGS=(
 	-DgRPC_INSTALL=ON

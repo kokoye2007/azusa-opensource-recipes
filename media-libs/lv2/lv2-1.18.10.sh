@@ -1,12 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
-inherit waf
 
-get http://lv2plug.in/spec/${P}.tar.bz2
+get https://lv2plug.in/spec/${P}.tar.xz
 acheck
+
+inherit asciidoc
 
 cd "${T}"
 
-dowaf
+domeson
 
 finalize

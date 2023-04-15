@@ -6,3 +6,10 @@ files:
             sha1: aa7bf0be95eef29d98eb5c76d4455698b3b705b3
             sha3-256: b3e67b9df57cfc85ca37963387f5a3c79d5f3988bf92b72ab9025d77957862e0
             sha256: 61a1f410d78ba7e7f37a5a4f50e6d1320aca33375484a3255eddf17a38580423
+    coreutils-9.2.tar.xz:
+        size: 5773008
+        added: 2023-04-16T00:32:49.083168688+09:00
+        hashes:
+            sha1: 3769071b357890dc36d820c597c1c626a1073fcb
+            sha3-256: 139f219de7f3e0092fe1beb4eb461cf332f05c2f2975d146c9b91f424bce360b
+            sha256: 6885ff47b9cdb211de47d368c17853f406daaf98b148aaecdf10de29cc04b0b3

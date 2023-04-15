@@ -14,7 +14,7 @@ importpkg zlib
 
 doconf
 
-make
+make -j$NPROC
 make install DESTDIR="${D}"
 
 finalize
