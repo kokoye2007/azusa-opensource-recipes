@@ -4,15 +4,11 @@ source "../../common/init.sh"
 get https://people.redhat.com/sgrubb/libcap-ng/${P}.tar.gz
 acheck
 
-importpkg libcrypt
+importpkg libcrypt sys-kernel/linux
 
 cd "${T}"
 
-if [ ! -d /usr/include ]; then
-	ln -s /pkg/main/azusa.symlinks.core/full/include /usr/include
-fi
-
-doconf
+doconf --with-capability_header=/pkg/main/azusa.symlinks.core/full/include/linux/capability.h
 
 make
 make install DESTDIR="${D}"

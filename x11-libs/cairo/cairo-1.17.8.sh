@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.cairographics.org/releases/${P}.tar.xz
+get https://gitlab.freedesktop.org/cairo/cairo/-/archive/${PV}/cairo-${PV}.tar.bz2
 acheck
 
 cd "${T}"

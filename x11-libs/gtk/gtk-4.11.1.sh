@@ -9,6 +9,6 @@ cd "${T}"
 importpkg x11-libs/cairo
 
 # TODO fix man (xslt)
-domeson -Dcolord=enabled -Dbroadway_backend=true
+domeson -Dcolord=enabled
 
 finalize
