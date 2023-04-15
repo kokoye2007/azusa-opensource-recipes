@@ -1,0 +1,3 @@
+description: pkg-config compatible replacement with no dependencies other than C99
+homepage: https://gitea.treehouse.systems/ariadne/pkgconf
+license: ISC

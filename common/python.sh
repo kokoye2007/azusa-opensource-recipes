@@ -24,6 +24,20 @@ logrun() {
 	"$@"
 }
 
+check_fail_location() {
+	local T="$1"
+	# check if location is empty after clearing legacy stuff, fail if not
+	find "$T" -name azusafinder*.pyc | xargs rm -fv
+	find "$T" -name __pycache__ -type d | xargs rmdir --ignore-fail-on-non-empty -v
+	find "$T" -type c | xargs rm -fv # removed files are stored as character device files by overlayfs - we don't care about removed files
+	find "$T" -empty -type d -delete
+	if [ -e "$T" ]; then
+		echo "*** FOUND FILES IN LEGACY LOCATION"
+		find "$T" -ls
+		exit 1
+	fi
+}
+
 pythonsetup() {
 	acheck
 
@@ -78,17 +92,15 @@ pythonsetup() {
 		mkdir -p "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}"
 
 		if [ -d "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" ]; then
-			rsync -av --remove-source-files "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
+			check_fail_location "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}"
 		elif [ -d "${D}/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}" ]; then
 			rsync -av --remove-source-files "${D}/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}"/ "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
 		fi
 		if [ -d "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"* ]; then
-			# maybe installed lib folder here. Move it too
-			cp -arv "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
+			check_fail_location "/.pkg-main-rw/dev-lang.python.libs.${PYTHON_VERSION}"*
 		fi
 		if [ -d "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"* ]; then
-			# maybe installed bin folder. Move it too
-			cp -arv "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*/* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/"
+			check_fail_location "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*
 		fi
 	done
 	find "${D}" -name azusafinder*.pyc | xargs rm -fv
