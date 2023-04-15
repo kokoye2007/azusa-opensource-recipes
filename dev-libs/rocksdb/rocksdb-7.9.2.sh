@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/facebook/rocksdb/archive/refs/tags/v${PV}.tar.gz
+get https://github.com/facebook/rocksdb/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
 acheck
 
 cd "${S}"
