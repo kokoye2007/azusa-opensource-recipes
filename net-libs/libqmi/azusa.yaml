@@ -1,0 +1,3 @@
+description: Qualcomm MSM (Mobile Station Modem) Interface (QMI) modem protocol library
+homepage: https://www.freedesktop.org/wiki/Software/libqmi/ https://gitlab.freedesktop.org/mobile-broadband/libqmi
+license: LGPL-2

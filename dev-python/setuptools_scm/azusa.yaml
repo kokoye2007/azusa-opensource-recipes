@@ -1,0 +1,3 @@
+description: the blessed package to manage your versions by scm tags
+homepage: https://github.com/pypa/setuptools_scm/
+license: MIT

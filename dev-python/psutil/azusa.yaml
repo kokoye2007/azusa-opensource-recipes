@@ -1,0 +1,3 @@
+description: Cross-platform lib for process and system monitoring in Python.
+homepage: https://github.com/giampaolo/psutil
+license: BSD-3-Clause

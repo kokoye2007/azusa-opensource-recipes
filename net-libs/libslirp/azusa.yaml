@@ -1,0 +1,3 @@
+description: A TCP-IP emulator used to provide virtual networking services
+homepage: https://gitlab.freedesktop.org/slirp/libslirp
+license: BSD
