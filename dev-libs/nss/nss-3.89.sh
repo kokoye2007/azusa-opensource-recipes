@@ -9,6 +9,7 @@ cd "${P}/${PN}"
 
 importpkg nspr sqlite3 zlib
 
+/bin/bash -i
 ./build.sh --opt --system-nspr --system-sqlite
 
 cd ../dist

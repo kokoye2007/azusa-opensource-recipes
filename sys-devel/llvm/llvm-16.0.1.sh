@@ -6,7 +6,7 @@ source "../../common/init.sh"
 # no idea where to download "libc" from
 #LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind;openmp"
 LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind"
-LLVM_PROJECTS=""
+LLVM_PROJECTS="cmake"
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 OIFS="$IFS"

@@ -1,10 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://xorg.freedesktop.org/archive/individual/proto/xorgproto-${PV}.tar.bz2
+get https://archive.hadrons.org/software/libmd/${P}.tar.xz
 acheck
 
 cd "${T}"
+
+importpkg zlib
 
 doconf
 

@@ -6,14 +6,6 @@ MY_P=${PN}-${MY_PV}
 get https://thrysoee.dk/editline/${MY_P}.tar.gz
 acheck
 
-PATCHES=(
-	"${FILESDIR}/${PN}-20170329.3.1-tinfo.patch"
-)
-
-cd "$MY_P"
-apatch "${PATCHES[@]}"
-aautoreconf
-
 cd "${T}"
 
 importpkg tinfo

@@ -7,7 +7,7 @@ MY_P="${MY_PN}-${PV}"
 get https://dl.winehq.org/wine/source/${MAJOR_V}.x/${MY_P}.tar.xz
 acheck
 
-importpkg X opengl osmesa libpcap net-print/cups media-libs/openal net-nds/openldap #OpenCL
+importpkg X opengl osmesa net-libs/libpcap net-print/cups media-libs/openal net-nds/openldap #OpenCL
 
 cd "${T}"
 
@@ -41,7 +41,7 @@ CONFOPTS=(
 	#--with-opencl
 	--with-opengl
 	--with-osmesa
-	--with-pcap
+	#--with-pcap # FIXME
 	--with-pulse
 	--with-pthread
 	#--with-sane

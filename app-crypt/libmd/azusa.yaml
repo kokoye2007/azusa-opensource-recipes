@@ -1,0 +1,3 @@
+description: Message Digest functions from BSD systems
+homepage: https://www.hadrons.org/software/libmd/
+license: "|| ( BSD BSD-2 ISC BEER-WARE public-domain )"

@@ -6,7 +6,9 @@ acheck
 
 importpkg app-crypt/trousers openssl
 
-aautoreconf
+cd "${S}"
+
+aautoreconf -I .
 
 cd "${T}"
 
