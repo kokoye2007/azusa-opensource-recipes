@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg app-crypt/libmd
+
 doconf
 
 make

@@ -1,12 +1,11 @@
 #!/bin/sh
 source "../../common/init.sh"
-inherit waf
 
-get http://download.drobilla.net/${P}.tar.bz2
+get https://download.drobilla.net/${P}.tar.xz
 acheck
 
 cd "${T}"
 
-dowaf
+domeson -Ddocs=disabled
 
 finalize
