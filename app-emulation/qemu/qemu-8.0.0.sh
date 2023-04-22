@@ -4,6 +4,10 @@ source "../../common/init.sh"
 get https://download.qemu.org/${P}.tar.xz
 acheck
 
+cd "${S}"
+
+apatch "$FILESDIR/qemu-8.0.0-fix-syscalls.patch"
+
 cd "${T}"
 
 # --audio-drv-list=oss,alsa,sdl,pa
@@ -32,7 +36,6 @@ CONFOPTS=(
 	--enable-module-upgrades
 
 	--enable-virtfs
-	--enable-virtiofsd # error: ‘struct statx’ has no member named ‘stx_mnt_id’; did you mean ‘stx_uid’?
 	--enable-tools
 	--enable-curl
 
@@ -76,10 +79,6 @@ CONFOPTS=(
 	--enable-xkbcommon
 	--enable-gtk
 	--enable-vte
-
-	# memory
-	--enable-jemalloc
-	#--enable-malloc-trim
 )
 
 callconf "${CONFOPTS[@]}"
