@@ -1,0 +1,22 @@
+files:
+    nginx-1.21.6.tar.gz:
+        size: 1073364
+        added: 0001-01-01T00:00:00Z
+        hashes:
+            sha1: 3e6d39a714f6716861286630a5f9df3044668d5a
+            sha3-256: 28d8d1447fa6dfceac780cba80440ea906c59063fec24d45c4fe37ad2a064996
+            sha256: 66dc7081488811e9f925719e34d1b4504c2801c81dee2920e5452a86b11405ae
+    nginx-1.22.0.tar.gz:
+        size: 1073322
+        added: 0001-01-01T00:00:00Z
+        hashes:
+            sha1: 419efb77b80f165666e2ee406ad8ae9b845aba93
+            sha3-256: 13d95aad37682945c80180773b9d0cd227106f437f15277258557de7ed945726
+            sha256: b33d569a6f11a01433a57ce17e83935e953ad4dc77cdd4d40f896c88ac26eb53
+    nginx-1.23.4.tar.gz:
+        size: 1112403
+        added: 2023-04-15T22:21:59.109132301+09:00
+        hashes:
+            sha1: 5851825756071fc86518ebbb5bde3d9eaf4caca9
+            sha3-256: 698a0b87f6eb4b604717a0b50c05e73a0fb05af671a6b4bf4bece192aaf0e9c3
+            sha256: d43300e36bb249a7e6edc60bca1b0fc372a0bafce2f346d76acfb677a8790fc0
