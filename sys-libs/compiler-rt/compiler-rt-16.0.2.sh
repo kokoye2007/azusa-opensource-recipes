@@ -1,17 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
+inherit llvm
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 acheck
 
 cd "${T}"
 
+importpkg zlib dev-libs/libffi
+
 # see http://llvm.org/docs/CMake.html
-
-# make it possible to run llvm tools within a non-azusa linux (TEMP)
-export LLVM_DIR=/pkg/main/sys-devel.llvm.dev.${PV}/lib64/cmake/llvm
-
-CMAKE_ROOT="${CHPATH}/${P}.src"
 
 CMAKE_OPTS=(
 	-DCOMPILER_RT_INSTALL_PATH="/pkg/main/${PKG}.core.${PVRF}"
@@ -23,13 +21,13 @@ CMAKE_OPTS=(
 	-DCOMPILER_RT_BUILD_SANITIZERS=OFF
 	-DCOMPILER_RT_BUILD_XRAY=OFF
 
-	-DPython3_EXECUTABLE="/bin/python"
+	-DPython3_EXECUTABLE="/bin/python3"
 )
 
 case "$ARCH" in
 	amd64)
 		CMAKE_OPTS+=(
-			-DCAN_TARGET_i386=ON
+			#-DCAN_TARGET_i386=ON
 			-DCAN_TARGET_x86_64=ON
 		)
 		;;

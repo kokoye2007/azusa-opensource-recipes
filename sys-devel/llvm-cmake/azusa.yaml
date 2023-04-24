@@ -1,0 +1,3 @@
+description: Low Level Virtual Machine cmake files
+homepage: https://llvm.org/
+license: "UoI-NCSA rc BSD public-domain llvm_targets_ARM? ( LLVM-Grant )"

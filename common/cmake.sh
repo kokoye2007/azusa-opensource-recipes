@@ -62,6 +62,10 @@ EOF
 	if [ x"$CMAKE_TARGET_ALL" = x ]; then
 		CMAKE_TARGET_ALL="all"
 	fi
+	if [ x"$CMAKE_TARGET_ALL" = x"skip" ]; then
+		# do not build (yet)
+		return
+	fi
 	if [ x"$CMAKE_TARGET_INSTALL" = x ]; then
 		CMAKE_TARGET_INSTALL="install"
 	fi

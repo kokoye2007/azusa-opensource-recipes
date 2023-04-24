@@ -5,8 +5,10 @@ source "../../common/init.sh"
 # libunwind requires being built in a monorepo layout with libcxx available
 # no idea where to download "libc" from
 #LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind;openmp"
-LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind"
-LLVM_PROJECTS="cmake"
+LLVM_RUNTIMES=""
+LLVM_PROJECTS=""
+
+inherit llvm
 
 get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
 OIFS="$IFS"
@@ -28,7 +30,7 @@ export CXXFLAGS="${CPPFLAGS}"
 
 CMAKE_OPTS=(
 	#-DLLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
-	#-DLLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES" # ain't working right 
+	#-DLLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES"
 	-DLLVM_HOST_TRIPLE="${CHOST}"
 
 	-DLLVM_APPEND_VC_REV=OFF
@@ -37,6 +39,7 @@ CMAKE_OPTS=(
 	-DBUILD_SHARED_LIBS=ON
 	-DLLVM_INCLUDE_TESTS=OFF
 	-DLLVM_INCLUDE_BENCHMARKS=OFF
+	-DLLVM_BUILD_TESTS=OFF
 
 	# ffi requires extra info to be passed
 	-DLLVM_ENABLE_FFI=ON
@@ -51,6 +54,7 @@ CMAKE_OPTS=(
 	-DLLVM_ENABLE_EH=ON
 	-DLLVM_ENABLE_RTTI=ON
 	-DLLVM_ENABLE_Z3_SOLVER=ON
+	-DLLVM_ENABLE_ZSTD=ON
 
 	# stuff
 	-DLLVM_BUILD_DOCS=ON
@@ -63,6 +67,8 @@ CMAKE_OPTS=(
 	-DLLVM_INSTALL_SPHINX_HTML_DIR=/pkg/main/${PKG}.doc.${PVRF}/html
 	-DSPHINX_WARNINGS_AS_ERRORS=OFF
 	-DLLVM_ENABLE_THREADS=ON
+
+	-DPython3_EXECUTABLE=python3
 
 	-DLLVM_USE_LINKER=gold
 	-DLLVM_ENABLE_LIBCXX=ON

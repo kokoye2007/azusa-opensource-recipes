@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/boost dev-libs/gmp
+importpkg dev-libs/boost dev-libs/gmp dev-libs/isl
 
 # configure & build
 doconf
