@@ -10,7 +10,7 @@ importpkg dev-libs/gmp dev-libs/libunistring libunbound dev-libs/libtasn1 app-ar
 
 doconf
 
-make
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 finalize

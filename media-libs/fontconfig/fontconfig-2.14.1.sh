@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/fontconfig/release/${P}.tar.bz2
+get https://www.freedesktop.org/software/fontconfig/release/${P}.tar.xz
 acheck
 
 cd "${T}"
