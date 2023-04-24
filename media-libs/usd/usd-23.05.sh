@@ -1,0 +1,13 @@
+#!/bin/sh
+source "../../common/init.sh"
+
+get https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+acheck
+
+cd "${T}"
+
+importpkg X dev-libs/boost dev-cpp/tbb:2020 media-libs/mesa media-libs/opensubdiv
+
+docmake -DPXR_BUILD_IMAGING=OFF -DPXR_BUILD_USDVIEW=OFF
+
+finalize

@@ -9,7 +9,7 @@ cd "${T}"
 importpkg media-libs/openexr dev-libs/log4cplus dev-libs/c-blosc zlib dev-libs/boost media-libs/mesa media-libs/glu
 
 CMAKEOPTS=(
-	-DOPENVDB_ABI_VERSION_NUMBER="8"
+	-DOPENVDB_ABI_VERSION_NUMBER="9"
 	-DOPENVDB_BUILD_DOCS=ON
 	-DOPENVDB_BUILD_UNITTESTS=OFF
 	-DOPENVDB_BUILD_VDB_LOD=ON

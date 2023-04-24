@@ -2,14 +2,15 @@
 source "../../common/init.sh"
 inherit python
 
-get https://down/load.blender.org/source/${P}.tar.xz
+get https://download.blender.org/source/${P}.tar.xz
 acheck
 
 cd "${S}"
 
 apatch "$FILESDIR/blender-3.0.1-openexr.patch" \
 	"$FILESDIR/blender-3.0.1-openimageio-2.3.patch" \
-	"$FILESDIR/blender-3.0.1-ffmpeg-5.0.patch"
+	"$FILESDIR/blender-3.0.1-ffmpeg-5.0.patch" \
+	"$FILESDIR/blender-3.3.0-fix-build-with-boost-1.81.patch"
 
 # slot
 BV="${PV%.*}"
@@ -39,6 +40,7 @@ cd "${T}"
 PKGS=(
 	libjpeg
 	libpng
+	zlib
 	media-libs/openjpeg
 	media-libs/tiff
 
@@ -54,7 +56,7 @@ PKGS=(
 	media-libs/libsndfile
 	sci-libs/fftw
 	dev-libs/jemalloc
-	media-gfx/openvdb
+	media-gfx/openvdb:9
 	dev-libs/boost
 	media-libs/libharu
 	dev-libs/lzo
@@ -131,8 +133,8 @@ CMAKEOPTS=(
 	-DWITH_PUGIXML=ON
 	-DWITH_PULSEAUDIO=ON
 	-DWITH_PYTHON_INSTALL=OFF
-	-DPYTHON_NUMPY_PATH=/pkg/main/dev-lang.python-modules.core/lib/python${PYTHON_LATEST%.*}/site-packages/numpy
-	-DPYTHON_NUMPY_INCLUDE_DIRS=/pkg/main/dev-lang.python-modules.core/lib/python${PYTHON_LATEST%.*}/site-packages/numpy/core/include
+	-DPYTHON_NUMPY_PATH=/pkg/main/dev-python.numpy.mod/lib/python${PYTHON_LATEST%.*}/site-packages/numpy
+	-DPYTHON_NUMPY_INCLUDE_DIRS=/pkg/main/dev-python.numpy.mod/lib/python${PYTHON_LATEST%.*}/site-packages/numpy/core/include
 	-DWITH_SDL=ON
 	-DWITH_STATIC_LIBS=OFF
 	-DWITH_SYSTEM_EIGEN3=ON
@@ -155,8 +157,8 @@ cat >"${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}" <<EOF
 #!/bin/bash
 export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_LATEST%.*}"
 export PYTHONPATH=":/pkg/main/dev-lang.python-modules.core.${PYTHON_LATEST%.*}/lib/python${PYTHON_LATEST%.*}:\$PYTHONHOME/lib/python${PYTHON_LATEST%.*}/lib-dynload"
-exec "/pkg/main/${PKG}.core.${PVRF}/libexec/blender-${BV}" "$@"
+exec "/pkg/main/${PKG}.core.${PVRF}/libexec/blender-${BV}" "\$@"
 EOF
-chmod -x "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}"
+chmod +x "${D}/pkg/main/${PKG}.core.${PVRF}/bin/blender-${BV}"
 
 finalize
