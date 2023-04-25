@@ -5,8 +5,6 @@ source "../../common/init.sh"
 # libunwind requires being built in a monorepo layout with libcxx available
 # no idea where to download "libc" from
 #LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind;openmp"
-LLVM_RUNTIMES=""
-LLVM_PROJECTS=""
 
 inherit llvm
 
