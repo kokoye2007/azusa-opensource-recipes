@@ -8,7 +8,7 @@ cd "${S}"
 
 export PKG PVRF LIB_SUFFIX
 
-cp -v "$FILESDIR/uclibc-1.0.33-${ARCH}" .config
+cp -v "$FILESDIR/uclibc-1.0.43-${ARCH}" .config
 
 make
 make install DESTDIR="${D}"
