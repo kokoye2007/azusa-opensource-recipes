@@ -4,26 +4,41 @@ source "../../common/init.sh"
 get https://static.rust-lang.org/dist/rustc-${PV}-src.tar.gz
 envcheck
 
-importpkg zlib
+importpkg zlib sys-libs/llvm-libunwind dev-libs/libffi
 
 cd "rustc-${PV}-src"
 
-# https://github.com/rust-lang/rust/blob/master/config.toml.example
+# https://github.com/rust-lang/rust/blob/master/config.example.toml
 
 cat << EOF > config.toml
+changelog-seen = 2
+
 [llvm]
+# llvm won't be compiled by rust since we provide llvm-config in targets below
+download-ci-llvm = false
+optimize = true
+release-debuginfo = false
+assertions = false
 targets = "X86"
+experimental-targets = ""
 
 # When using system llvm prefer shared libraries
 link-shared = true
 
-cflags="${CPPFLAGS} -O2"
-cxxflags="${CPPFLAGS} -O2"
-ldflags="${LDFLAGS}"
-
 [build]
+build-stage = 2
+test-stage = 2
+
 # omit docs to save time and space (default is to build them)
 docs = false
+compiler-docs = false
+submodules = false
+python = "python3"
+locked-deps = true
+vendor = true
+verbose = 2
+sanitizers = false
+cargo-native-static = false
 
 # install cargo as well as rust
 extended = true
@@ -31,27 +46,78 @@ extended = true
 [install]
 prefix = "/pkg/main/${PKG}.core.${PVRF}"
 sysconfdir = "etc"
+docdir= "/pkg/main/${PKG}.doc.${PVRF}/rust"
+bindir = "bin"
+libdir = "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+mandir = "/pkg/main/${PKG}.doc.${PVRF}/man"
 
 [rust]
+codegen-units-std = 1
+optimize = true
+debug = false
+debug-assertions = false
+debug-assertions-std = false
+debuginfo-level = 0
+debuginfo-level-rustc = 0
+debuginfo-level-std = 0
+debuginfo-level-tools = 0
+debuginfo-level-tests = 0
+
+backtrace = true
+incremental = false
+
 channel = "stable"
+description = "azusa"
 rpath = false
+verbose-tests = true
+optimize-tests = true
+dist-src = false
+remap-debuginfo = true
+backtrace-on-ice = true
+jemalloc = false
 
 # BLFS does not install the FileCheck executable from llvm,
 # so disable codegen tests
 codegen-tests = false
 
+[dist]
+src-tarball = false
+compression-formats = ["xz"]
+
 [target.x86_64-unknown-linux-gnu]
-# NB the output of llvm-config (i.e. help options) may be
-# dumped to the screen when config.toml is parsed.
-llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
+#llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
+ar = "ar"
+cc = "clang"
+cxx = "clang++"
+linker = "clang"
+ranlib = "ranlib"
+llvm-libunwind = "system"
 
 [target.i686-unknown-linux-gnu]
-# NB the output of llvm-config (i.e. help options) may be
-# dumped to the screen when config.toml is parsed.
-llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
+#llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
+ar = "ar"
+cc = "clang"
+cxx = "clang++"
+linker = "clang"
+ranlib = "ranlib"
+llvm-libunwind = "system"
+
+[target.wasm32-unknown-unknown]
+linker = "lld"
+profiler = false
 EOF
 
-export RUSTFLAGS="$RUSTFLAGS -C link-arg=-L/pkg/main/dev-libs.libffi.libs/lib$LIB_SUFFIX -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
+# looks like there is no better way to pass LDFLAGS etc than through RUSTFLAGS
+# see also: RUSTFLAGS_BOOTSTRAP RUSTFLAGS_NOT_BOOTSTRAP MAGIC_EXTRA_RUSTFLAGS
+# see: https://doc.rust-lang.org/rustc/codegen-options/index.html
+for lib in $LDFLAGS; do
+	# $lib is typically a -L/pkg/main/...
+	export RUSTFLAGS="$RUSTFLAGS -C link-arg=$lib"
+done
+
+export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
+
+echo "Using RUSTFLAGS = $RUSTFLAGS"
 
 # attempt to make libssh2 work, see https://github.com/rust-lang/rust/issues/69552
 # giving up on libssh2 and libgit 
@@ -64,9 +130,11 @@ export DEP_OPENSSL_INCLUDE=`pkg-config --variable=includedir openssl`
 # thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48
 mkdir -p "/pkg/main/${PKG}.core.${PVRF}"
 
-python3 ./x.py build --exclude src/tools/miri
+echo "Running python3 ./x.py build"
+python3 ./x.py build
 
-DESTDIR="${D}" python3 ./x.py install
+echo "Running DESTDIR=$D python3 ./x.py install"
+DESTDIR="${D}" python3 ./x.py install || /bin/bash -i
 
 # add +x flag on libs so ldconfig indexes these
 chmod -v +x "${D}/pkg/main/${PKG}.core.${PVRF}"/lib*/*.so

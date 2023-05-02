@@ -382,6 +382,13 @@ archive() {
 		fi
 	fi
 
+	if [ x"$SKIPSYMLINKS" != x ]; then
+		for foo in "${D}/pkg/main"/*; do
+			echo "Marking $(basename "$foo") as excluded from global symlinks..."
+			touch "$foo/.skipsymlinks"
+		done
+	fi
+
 	if [ -d "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" ]; then
 		# build .ld.so.cache file
 		echo "Building ld.so.cache ..."
@@ -409,6 +416,10 @@ archive() {
 	if [ x"$HSM" != x ]; then
 		apkg-convert $APKGOUT/*.squashfs
 	fi
+}
+
+skipsymlinks() {
+	SKIPSYMLINKS=true
 }
 
 finalize() {

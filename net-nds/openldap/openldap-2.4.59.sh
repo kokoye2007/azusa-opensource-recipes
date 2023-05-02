@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg sys-libs/db openssl dev-libs/cyrus-sasl
+importpkg sys-libs/db:5.3 openssl dev-libs/cyrus-sasl
 
 doconf
 

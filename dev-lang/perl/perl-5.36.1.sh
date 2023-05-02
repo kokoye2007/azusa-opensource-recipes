@@ -74,7 +74,7 @@ CONFOPTS=(
 
 sh "${CHPATH}/${P}/Configure" "${CONFOPTS[@]}"
 
-make
+make || /bin/bash -i
 make install DESTDIR="${D}"
 
 mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"

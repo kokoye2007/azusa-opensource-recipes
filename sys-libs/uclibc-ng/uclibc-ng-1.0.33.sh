@@ -13,5 +13,6 @@ cp -v "$FILESDIR/uclibc-1.0.33-${ARCH}" .config
 make
 make install DESTDIR="${D}"
 
+mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}"
 skipsymlinks
 finalize

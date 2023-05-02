@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://ftp.gnu.org/gnu/binutils/${P}.tar.xz
 acheck
 
-importpkg zlib
+importpkg zlib dev-libs/elfutils
 
 # default libpath should include glibc path so gcc can find -lc
 export LIB_PATH=/lib:/pkg/main/sys-devel.gcc.libs/lib$LIB_SUFFIX:/pkg/main/sys-libs.glibc.libs/lib$LIB_SUFFIX

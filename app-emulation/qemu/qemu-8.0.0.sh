@@ -12,7 +12,9 @@ cd "${T}"
 
 # --audio-drv-list=oss,alsa,sdl,pa
 
-importpkg media-libs/alsa-lib sys-fs/udev media-libs/libepoxy egl dev-libs/libaio sys-libs/libcap-ng app-arch/bzip2 dev-libs/jemalloc dev-libs/libgcrypt net-libs/libssh2 dev-libs/lzo app-arch/snappy sys-process/numactl zlib dev-libs/pmdk sys-block/ndctl sys-libs/liburing gdk-pixbuf-2.0
+importpkg media-libs/alsa-lib sys-fs/udev media-libs/libepoxy egl dev-libs/libaio sys-libs/libcap-ng app-arch/bzip2 dev-libs/jemalloc dev-libs/libgcrypt net-libs/libssh2 dev-libs/lzo app-arch/snappy sys-process/numactl zlib dev-libs/pmdk sys-block/ndctl sys-libs/liburing gdk-pixbuf-2.0 dev-libs/capstone
+# sys-kernel/linux
+export CPPFLAGS="${CPPFLAGS} -isystem /pkg/main/sys-kernel.linux.dev/include"
 export CFLAGS="$CPPFLAGS"
 
 CONFOPTS=(
@@ -42,6 +44,7 @@ CONFOPTS=(
 	--disable-guest-agent
 	--disable-werror
 	--disable-gcrypt
+	--enable-malloc=jemalloc
 
 	--enable-plugins
 	--enable-attr
@@ -83,7 +86,7 @@ CONFOPTS=(
 
 callconf "${CONFOPTS[@]}"
 
-make -j"$NPROC"
+make -j"$NPROC" || /bin/bash -i
 make install DESTDIR="${D}"
 
 finalize

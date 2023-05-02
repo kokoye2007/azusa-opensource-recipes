@@ -22,7 +22,7 @@ CONFIGURE=(
 	--disable-werror
 	--enable-bind-now
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
-	--with-pkgversion="Azusa glibc ${PVRF}"
+	--with-pkgversion="Azusa glibc ${PVR}"
 	--disable-crypt
 #	--enable-systemtap
 	--enable-nscd

@@ -1,22 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
-# options:
-# clang clang-tools-extra compiler-rt libc libclc libcxx libcxxabi libunwind lld lldb mlir openmp parallel-libs polly pstl flang
-# libunwind requires being built in a monorepo layout with libcxx available
-# no idea where to download "libc" from
-#LLVM_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind;openmp"
+# this is only the base llvm
 
 inherit llvm
 
-get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
-OIFS="$IFS"
-IFS="; "
-for project in $LLVM_PROJECTS $LLVM_RUNTIMES; do
-	get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${project}-${PV}.src.tar.xz
-	mv "${project}-${PV}.src" "${project}"
-done
-IFS="$OIFS"
-
+llvmget llvm
 acheck
 
 cd "${T}"
@@ -25,6 +13,14 @@ importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib
 # importpkg will set CPPFLAGS but that's not read by llvm
 export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
+
+if [ -e /pkg/main/sys-devel.clang.core/bin/clang ]; then
+	# -flto can only be used with clang, see https://bugs.gentoo.org/873670
+	export CC=/pkg/main/sys-devel.clang.core/bin/clang
+	export CXX=/pkg/main/sys-devel.clang.core/bin/clang++
+	export CPPFLAGS="${CPPFLAGS} -flto"
+	export LDFLAGS="-fuse-ld=lld"
+fi
 
 CMAKE_OPTS=(
 	#-DLLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
@@ -68,20 +64,16 @@ CMAKE_OPTS=(
 
 	-DPython3_EXECUTABLE=python3
 
-	-DLLVM_USE_LINKER=gold
+	-DLLVM_USE_LINKER=lld
 	-DLLVM_ENABLE_LIBCXX=ON
 
 	#-DHAVE_LIBXAR=ON
 	-DOCAMLFIND=NO
 	#-DLLVM_BUILD_LLVM_DYLIB=ON
 	#-DLLVM_LINK_LLVM_DYLIB=ON
-
-	-DLIBCXX_INCLUDE_BENCHMARKS=OFF
 )
 
-# see http://llvm.org/docs/CMake.html
-CMAKE_ROOT="${CHPATH}/${P}.src"
-
+# do not use llvmbuild since we are biulding llvm itself
 docmake "${CMAKE_OPTS[@]}"
 
 # fix dev pkg so bin is available there

@@ -63,6 +63,10 @@ for pn in $(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${AR
 		# not available?
 		continue
 	fi
+	if [ -e "${p}/.skipsymlinks" ]; then
+		# skip
+		continue
+	fi
 
 	case $pn in
 		sys-kernel.linux.modules.*)
