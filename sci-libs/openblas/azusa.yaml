@@ -1,0 +1,3 @@
+description: Optimized BLAS library based on GotoBLAS2
+homepage: https://github.com/xianyi/OpenBLAS
+license: BSD

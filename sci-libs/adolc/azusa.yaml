@@ -1,0 +1,3 @@
+description: Automatic differentiation system for C/C++
+homepage: https://projects.coin-or.org/ADOL-C/
+license: "|| ( EPL-1.0 GPL-2 )"

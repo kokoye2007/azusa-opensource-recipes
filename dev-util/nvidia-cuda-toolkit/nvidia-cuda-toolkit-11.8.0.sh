@@ -22,6 +22,9 @@ builddirs=(
 	builds/cuda_{cccl,cudart,cuobjdump,cuxxfilt,memcheck,nvcc,nvdisasm,nvml_dev,nvprune,nvrtc,nvtx}
 	builds/lib{cublas,cufft,curand,cusolver,cusparse,npp,nvjpeg}
 	builds/nvidia_fs
+	builds/cuda_nvprof builds/cuda_cupti
+	builds/cuda_nvvp
+	builds/cuda_gdb
 )
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"

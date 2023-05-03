@@ -204,3 +204,10 @@ pythonconfsetup() {
 		#mv "/.pkg-main-rw/dev-lang.python-modules.core.${PYTHON_VERSION}".* "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}"
 	done
 }
+
+python_domodule() {
+	for vers in $PYTHON_VERSIONS; do
+		mkdir -pv "${D}/pkg/main/${PKG}.mod.${PVR}.py${vers}.${OS}.${ARCH}/lib/python${vers%.*}/site-packages"
+		cp -avr "$1" "${D}/pkg/main/${PKG}.mod.${PVR}.py${vers}.${OS}.${ARCH}/lib/python${vers%.*}/site-packages"
+	done
+}
