@@ -43,11 +43,19 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 		echo " * Module: $pn"
 		if [ -d "${p}/lib/python${PYTHON_MINOR}/site-packages" ]; then
-			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*/__init__.py; do
-				foo="$(basename "$(dirname "$foo")")"
-				if [ "$foo" != "*" ]; then
-					echo "            '$foo': '${p}/lib/python${PYTHON_MINOR}/site-packages'," >>$FINDER
-				fi
+			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*/; do
+				foo="$(basename "$foo")"
+				case "$foo" in
+					'*'|__pycache__)
+						:
+						;;
+					*.egg-info|*.dist-info)
+						:
+						;;
+					*)
+						echo "            '$foo': '${p}/lib/python${PYTHON_MINOR}/site-packages'," >>$FINDER
+						;;
+				esac
 			done
 			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*.py; do
 				foo="$(basename "$foo" .py)"

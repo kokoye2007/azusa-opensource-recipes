@@ -206,8 +206,23 @@ pythonconfsetup() {
 }
 
 python_domodule() {
-	for vers in $PYTHON_VERSIONS; do
-		mkdir -pv "${D}/pkg/main/${PKG}.mod.${PVR}.py${vers}.${OS}.${ARCH}/lib/python${vers%.*}/site-packages"
-		cp -avr "$1" "${D}/pkg/main/${PKG}.mod.${PVR}.py${vers}.${OS}.${ARCH}/lib/python${vers%.*}/site-packages"
+	for PYTHON_VERSION in $PYTHON_VERSIONS; do
+		if [ x"$PYTHON_RESTRICT" != x ]; then
+			# need to make sure PYTHON_VERSION starts with one of the values in PYTHON_RESTRICT
+			python_found=0
+			for foo in $PYTHON_RESTRICT; do
+				if [[ "$PYTHON_VERSION" =~ ^$foo ]]; then
+					python_found=1
+					break
+				fi
+			done
+
+			if [ $python_found -eq 0 ]; then
+				echo "Skipping Python $PYTHON_VERSION due to PYTHON_RESTRICT"
+				continue
+			fi
+		fi
+		mkdir -pv "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION%.*}/site-packages"
+		cp -avr "$1" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION%.*}/site-packages"
 	done
 }

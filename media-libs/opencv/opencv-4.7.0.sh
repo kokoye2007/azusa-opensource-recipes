@@ -6,8 +6,25 @@ acheck
 
 cd "${T}"
 
-importpkg zlib
+importpkg zlib media-libs/openjpeg
 
-docmake -DBUILD_SHARED_LIBS=ON -DOPENCV_GENERATE_PKGCONFIG=YES
+OPTS=(
+	-DPYTHON_EXECUTABLE=OFF
+	-DINSTALL_PYTHON_EXAMPLES=OFF
+	-DBUILD_opencv_python2=OFF
+	-DBUILD_opencv_python3=OFF
+
+	-DBUILD_SHARED_LIBS=ON
+	-DOPENCV_GENERATE_PKGCONFIG=YES
+
+	-DENABLE_DOWNLOAD=OFF
+	-DWITH_QUIRC=OFF
+	-DWITH_EIGEN=ON
+	-DWITH_FFMPEG=ON
+	-DWITH_OPENJPEG=OFF # openjpeg cmake file is broken
+	# TODO
+)
+
+docmake "${OPTS[@]}"
 
 finalize
