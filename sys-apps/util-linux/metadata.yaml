@@ -6,6 +6,13 @@ files:
             sha1: d9268fd10d8984287cee191566a1f8eb9409913f
             sha3-256: 32876c910717ec7ef009a94784b1c5303efaa8f5ca07502274c836f45f521fe8
             sha256: 590c592e58cd6bf38519cb467af05ce6a1ab18040e3e3418f24bcfb2f55f9776
+    util-linux-2.38.1.tar.xz:
+        size: 7495904
+        added: 2023-05-05T06:38:15.292423424+09:00
+        hashes:
+            sha1: f62a7b6fe64ce7f4569b57d7d2d0875b39f79836
+            sha3-256: babefe228eb97246dd67c5d069a4337c80f74e5ff8c9bdadcaf72560b540c480
+            sha256: 60492a19b44e6cf9a3ddff68325b333b8b52b6c59ce3ebd6a0ecaa4c5117e84f
     util-linux-2.38.tar.xz:
         size: 7349140
         added: 2022-06-08T12:48:42.316924714+09:00

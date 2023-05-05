@@ -110,6 +110,9 @@ OPTS=(
 
 docmake "${OPTS[@]}"
 
-cp -v CMakeCache.txt "${D}/pkg/main/${PKG}.dev.${PVRF}/lib$LIB_SUFFIX"
+# prepare the stuff we need to build torch
+mkdir -pv "${D}/pkg/main/${PKG}.dev.${PVRF}/torch_build"
+cp -v CMakeCache.txt "${D}/pkg/main/${PKG}.dev.${PVRF}/torch_build"
+cp -v "${S}/torch/version.py" "${D}/pkg/main/${PKG}.dev.${PVRF}/torch_build" || /bin/bash -i
 
 finalize

@@ -7,6 +7,8 @@ PYTHON_RESTRICT="$PYTHON_LATEST"
 get https://github.com/pytorch/pytorch/releases/download/v${PV}/pytorch-v${PV}.tar.gz ${P}.tar.gz
 acheck
 
+importpkg sci-libs/caffe2
+
 cd "${S}"
 
 apatch \
@@ -18,7 +20,7 @@ apatch \
         "${FILESDIR}"/${P}-emptyso.patch \
 
 # ???
-#sed -i -e "/BUILD_DIR/s|build|/var/lib/caffe2/|" tools/setup_helpers/env.py
+sed -i -e "/BUILD_DIR/s|build|/pkg/main/sci-libs.caffe2.dev/|" tools/setup_helpers/env.py
 
 export PYTORCH_BUILD_VERSION="${PV}"
 export PYTORCH_BUILD_NUMBER=0
