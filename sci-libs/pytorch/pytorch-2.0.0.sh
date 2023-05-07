@@ -20,7 +20,7 @@ apatch \
         "${FILESDIR}"/${P}-emptyso.patch \
 
 # ???
-sed -i -e "/BUILD_DIR/s|build|/pkg/main/sci-libs.caffe2.dev/|" tools/setup_helpers/env.py
+sed -i -e "/BUILD_DIR/s|build|/pkg/main/sci-libs.caffe2.dev.${PV}/torch_build/|" tools/setup_helpers/env.py
 
 export PYTORCH_BUILD_VERSION="${PV}"
 export PYTORCH_BUILD_NUMBER=0
@@ -29,4 +29,8 @@ export CMAKE_BUILD_DIR="${T}"
 export BUILD_DIR=
 
 pythonsetup
+
+# copy version.py
+cp -v "/pkg/main/sci-libs.caffe2.dev.${PV}/torch_build/version.py" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_RESTRICT}.${OS}.${ARCH}/lib/python${PYTHON_RESTRICT%.*}/site-packages/torch/version.py"
+
 archive

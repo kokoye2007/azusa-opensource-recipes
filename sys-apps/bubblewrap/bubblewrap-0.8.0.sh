@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg sys-libs/libcap
+importpkg sys-libs/libcap sys-libs/libselinux
 
 doconf
 

@@ -1,8 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-#get https://github.com/libjxl/libjxl/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
-get https://api.github.com/repos/libjxl/libjxl/tarball/105bf1a20be35c2d0d7dd302c008f3669c2f998c ${P}.tar.gz
+get https://github.com/libjxl/libjxl/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
 acheck
 
 importpkg dev-cpp/highway lcms2 dev-cpp/gflags

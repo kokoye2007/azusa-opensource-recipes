@@ -11,20 +11,13 @@ importpkg zlib sys-libs/libcap sys-libs/ncurses sys-libs/readline
 CONFIGURE=(
 	--sysconfdir=/etc
 	--localstatedir=/var
-	--with-libtool
 	--with-openssl=/pkg/main/dev-libs.openssl.dev
 	--with-lmdb=/pkg/main/dev-db.lmdb.dev
 	--with-libxml2
 	--with-json-c
 	--with-zlib
 	--with-readline="readline"
-	--with-protobuf-c=/pkg/main/dev-libs.protobuf-c.dev
-	--with-libfstrm=/pkg/main/dev-libs.fstrm.dev
 	--with-libidn2=/pkg/main/net-dns.libidn2.dev
-	--with-dlz-postgres=/pkg/main/dev-db.postgresql.dev
-	--with-dlz-mysql=/pkg/main/dev-db.mariadb.dev
-	--with-dlz-bdb=/pkg/main/sys-libs.db.dev
-	--with-dlz-filesystem=yes
 )
 
 # bind seems to ignore CPPFLAGS
