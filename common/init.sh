@@ -140,7 +140,11 @@ download() {
 	fi
 
 	# failed download, get file, then upload...
-	wget -O "$BN" "$1" || true
+	if [ x"$DOWNLOAD_OVERRIDE" != x ]; then
+		$DOWNLOAD_OVERRIDE
+	else
+		wget -O "$BN" "$1" || true
+	fi
 	if [ ! -s "$BN" ]; then
 		# try gentoo mirror
 		wget -O "$BN" "https://ftp.iij.ad.jp/pub/linux/gentoo/distfiles/$BN"

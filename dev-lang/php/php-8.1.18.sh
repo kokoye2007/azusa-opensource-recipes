@@ -50,6 +50,7 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--with-bz2=shared,/pkg/main/app-arch.bzip2.dev")
 	#CONFIGURE+=("--enable-zip=/pkg/main/dev-libs.libzip.dev") # TODO configure: error: could not find usable libzip
 	CONFIGURE+=("--with-openssl=shared")
+	CONFIGURE+=("--with-sodium")
 	CONFIGURE+=("--with-sqlite3=shared,/pkg/main/dev-db.sqlite.dev")
 	CONFIGURE+=("--enable-bcmath=shared")
 	CONFIGURE+=("--enable-calendar")
