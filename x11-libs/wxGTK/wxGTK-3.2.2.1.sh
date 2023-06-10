@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}.tar.bz2
 acheck
 
-importpkg zlib libpng libjpeg expat media-libs/mesa media-libs/glu media-libs/gstreamer
+importpkg X zlib libpng libjpeg expat media-libs/mesa media-libs/glu media-libs/gstreamer
 
 cd "${T}"
 

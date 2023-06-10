@@ -6,6 +6,8 @@ get https://github.com/audacity/audacity/archive/${MY_P}.tar.gz
 get https://dev.gentoo.org/~fordfrog/distfiles/${PN}-manual-${PV}.zip
 acheck
 
+importpkg zlib
+
 cd "${T}"
 
 CMAKEOPTS=(
