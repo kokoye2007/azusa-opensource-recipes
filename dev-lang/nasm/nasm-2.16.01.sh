@@ -4,7 +4,9 @@ source "../../common/init.sh"
 get https://www.nasm.us/pub/nasm/releasebuilds/${PV}/${P}.tar.bz2
 acheck
 
-cd "${T}"
+# starting nasm 2.16(?) out of source compilation is not supported:
+# cc1: fatal error: asm/warnings.c: No such file or directory
+cd "${S}"
 
 # configure & build
 doconf

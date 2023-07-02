@@ -2,6 +2,7 @@
 source "../../common/init.sh"
 
 get https://sourceforge.net/projects/giflib/files/${P}.tar.gz
+acheck
 
 cd "${P}"
 

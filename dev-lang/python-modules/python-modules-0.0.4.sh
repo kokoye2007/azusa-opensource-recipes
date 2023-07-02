@@ -31,19 +31,43 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	echo "    def __init__(self):" >>$FINDER
 	echo "        self.modules = {" >>$FINDER
 
+	unset modules
+	unset modpaths
+	declare -A modules
+	declare -A modpaths
 
 	for pn in `curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_VERSION"`; do
 		p=/pkg/main/${pn}
 		t=`echo "$pn" | cut -d. -f3`
+		n=`echo "$pn" | cut -d. -f2`
 
 		if [ x"$t" != x"mod" ]; then
 			# skip if not a module
 			continue
 		fi
+		modpaths[$n]=${pn}
+	done
+
+	for n in ${!modpaths[@]}; do
+		pn=${modpaths[$n]}
+		p=/pkg/main/${pn}
 
 		echo " * Module: $pn"
-		if [ -d "${p}/lib/python${PYTHON_MINOR}/site-packages" ]; then
-			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*/; do
+		modpath="lib/python${PYTHON_MINOR}/site-packages"
+
+		# handle some special cases
+		case $pn in
+			media-libs.usd.mod.*)
+				# usd has python modules in this path:
+				modpath="lib/python"
+				;;
+			dev-util.scons.mod.*)
+				modpath="lib/scons"
+				;;
+		esac
+
+		if [ -d "${p}/$modpath" ]; then
+			for foo in "${p}/$modpath"/*/; do
 				foo="$(basename "$foo")"
 				case "$foo" in
 					'*'|__pycache__)
@@ -52,19 +76,24 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 					*.egg-info|*.dist-info)
 						:
 						;;
+					*.egg)
+						# python_nghttp2-1.50.0-py3.10-linux-x86_64.egg
+						foo="$(echo "$foo" | cut -d- -f1)"
+						modules[$foo]="${modules[$foo]} ${p}/$modpath"
+						;;
 					*)
-						echo "            '$foo': '${p}/lib/python${PYTHON_MINOR}/site-packages'," >>$FINDER
+						modules[$foo]="${modules[$foo]} ${p}/$modpath"
 						;;
 				esac
 			done
-			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*.py; do
+			for foo in "${p}/$modpath"/*.py; do
 				foo="$(basename "$foo" .py)"
 				if [ "$foo" != "*" ]; then
-					echo "            '$foo': '${p}/lib/python${PYTHON_MINOR}/site-packages'," >>$FINDER
+					modules[$foo]="${modules[$foo]} ${p}/$modpath"
 				fi
 			done
 			# copy package infos
-			for foo in "${p}/lib/python${PYTHON_MINOR}/site-packages"/*.{egg,dist}-info; do
+			for foo in "${p}/$modpath"/*.{egg,dist}-info; do
 				if [ -e "$foo" ]; then
 					cp -r "$foo" -t "$TARGET"
 				fi
@@ -75,13 +104,23 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 		#cp -rsfT "$p" "$TARGET"
 	done
 
+	# iterate over modules
+	for mod in ${!modules[@]}; do
+		echo -n "            '$mod': [" >>$FINDER
+		for p in ${modules[$mod]}; do
+			echo -n "'$p'," >>$FINDER
+		done
+		echo "]," >>$FINDER
+	done
+
 	echo "        }" >>$FINDER
 	echo "    def find_spec(self, fullname, path=None, target=None):" >>$FINDER
 	echo "        \"\"\"Find the path of the given module in the static list.\"\"\"" >>$FINDER
 	echo "        if fullname in self.modules:" >>$FINDER
-	echo "            module_path = self.modules[fullname]" >>$FINDER
-	echo "            if module_path not in sys.path:" >>$FINDER
-	echo "                sys.path.append(module_path)" >>$FINDER
+	echo "            module_paths = self.modules[fullname]" >>$FINDER
+	echo "            for module_path in module_paths:" >>$FINDER
+	echo "                if module_path not in sys.path:" >>$FINDER
+	echo "                    sys.path.append(module_path)" >>$FINDER
 	echo "        return None" >>$FINDER
 	echo >>$FINDER
 	echo "sys.meta_path.insert(0, AzusaModuleFinder())" >>$FINDER

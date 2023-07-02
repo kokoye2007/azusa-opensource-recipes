@@ -16,6 +16,33 @@ importpkg \
 	dev-libs/rocksdb:6.15 dev-libs/boost dev-lang/lua sys-libs/liburing sys-libs/ncurses dev-libs/libnl dev-libs/icu \
 	net-libs/rabbitmq-c dev-libs/librdkafka dev-libs/pmdk dev-libs/userspace-rcu dev-libs/openssl
 
+PATCHES=(
+	"${FILESDIR}/ceph-12.2.0-use-provided-cpu-flag-values.patch"
+	"${FILESDIR}/ceph-14.2.0-cflags.patch"
+	"${FILESDIR}/ceph-12.2.4-boost-build-none-options.patch"
+	"${FILESDIR}/ceph-16.2.2-cflags.patch"
+	"${FILESDIR}/ceph-16.2.8-no-virtualenvs.patch"
+	"${FILESDIR}/ceph-13.2.2-dont-install-sysvinit-script.patch"
+	"${FILESDIR}/ceph-14.2.0-dpdk-cflags.patch"
+	"${FILESDIR}/ceph-14.2.0-cython-0.29.patch"
+	"${FILESDIR}/ceph-16.2.0-rocksdb-cmake.patch"
+	"${FILESDIR}/ceph-15.2.3-spdk-compile.patch"
+	"${FILESDIR}/ceph-16.2.0-spdk-tinfo.patch"
+	"${FILESDIR}/ceph-16.2.0-jaeger-system-boost.patch"
+	"${FILESDIR}/ceph-16.2.0-liburing.patch"
+	"${FILESDIR}/ceph-16.2.2-system-zstd.patch"
+	"${FILESDIR}/ceph-17.2.0-fuse3.patch"
+	"${FILESDIR}/ceph-17.2.0-gcc12-header.patch"
+	"${FILESDIR}/ceph-16.2.10-flags.patch"
+	"${FILESDIR}/ceph-17.2.5-boost-1.81.patch"
+	"${FILESDIR}/ceph-17.2.5-gcc13.patch"
+	"${FILESDIR}/ceph-17.2.5-gcc13-deux.patch"
+)
+
+cd "${S}"
+
+apatch "${PATCHES[@]}"
+
 cd "${T}"
 
 # minimal config to find plugins
