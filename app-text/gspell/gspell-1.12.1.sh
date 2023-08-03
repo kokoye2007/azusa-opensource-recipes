@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnome.org/pub/gnome/sources/gspell/1.8/${P}.tar.xz
+get https://ftp.gnome.org/pub/gnome/sources/gspell/${PV%.*}/${P}.tar.xz
 acheck
 
 cd "${T}"

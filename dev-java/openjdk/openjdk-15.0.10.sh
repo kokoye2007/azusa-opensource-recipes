@@ -72,4 +72,5 @@ for s in 16 24 32 48; do
 	install -vDm644 src/java.desktop/unix/classes/sun/awt/X11/java-icon${s}.png "${D}/pkg/main/${PKG}.core.${PVRF}/share/icons/hicolor/${s}x${s}/apps/java.png"
 done
 
-finalize
+fixelf
+archive
