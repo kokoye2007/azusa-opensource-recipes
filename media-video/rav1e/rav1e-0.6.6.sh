@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 get https://github.com/xiph/rav1e/archive/v${PV}.tar.gz
-acheck
+envcheck
 
 cd "${S}"
 
