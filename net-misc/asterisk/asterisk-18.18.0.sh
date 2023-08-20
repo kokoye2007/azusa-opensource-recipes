@@ -45,4 +45,8 @@ done
 make NOISY_BUILD=1 || /bin/bash -i
 make install DESTDIR="${D}"
 
-finalize
+# make asterisk work
+ln -snf /pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX ${D}/pkg/main/${PKG}.core.${PVRF}/lib
+
+fixelf
+archive
