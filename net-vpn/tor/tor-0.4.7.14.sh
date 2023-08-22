@@ -6,9 +6,9 @@ acheck
 
 cd "${T}"
 
-importpkg libevent openssl zlib
+importpkg libevent openssl zlib dev-libs/nss
 
-doconf
+doconf --enable-nss
 
 make
 make install DESTDIR="${D}"

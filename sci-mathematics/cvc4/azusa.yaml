@@ -1,0 +1,3 @@
+description: Automatic theorem prover for satisfiability modulo theories (SMT) problems
+homepage: https://cvc4.github.io/
+license: GPL-2

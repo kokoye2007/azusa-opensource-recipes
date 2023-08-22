@@ -1,0 +1,3 @@
+description: A command scheduler with extended capabilities over cron and anacron
+homepage: http://fcron.free.fr/
+license: GPL-2

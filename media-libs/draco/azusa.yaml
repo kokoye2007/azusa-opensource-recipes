@@ -1,0 +1,3 @@
+description: Draco is a library for compressing and decompressing 3D geometric meshes and point clouds
+homepage: https://google.github.io/draco/ https://github.com/google/draco
+license: Apache-2.0

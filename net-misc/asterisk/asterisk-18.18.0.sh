@@ -42,8 +42,21 @@ for foo in smsq streamplayer aelparse astman chan_mgcp res_pktccops pbx_dundi fu
 	./menuselect/menuselect --enable $foo menuselect.makeopts
 done
 
-make NOISY_BUILD=1 || /bin/bash -i
-make install DESTDIR="${D}"
+_make_args=(
+	"NOISY_BUILD=yes"
+	"ASTDBDIR=\$(ASTDATADIR)/astdb"
+	"ASTVARRUNDIR=/run/asterisk"
+	"ASTCACHEDIR=/var/cache/asterisk"
+	"OPTIMIZE="
+	"DEBUG="
+	"DESTDIR=${D}"
+	"CONFIG_SRC=configs/samples"
+	"CONFIG_EXTEN=.sample"
+	"AST_FORTIFY_SOURCE="
+)
+
+make "${_make_args[@]}"
+make "${_make_args[@]}" install install-headers install-configs DESTDIR="${D}"
 
 # make asterisk work
 ln -snf /pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX ${D}/pkg/main/${PKG}.core.${PVRF}/lib

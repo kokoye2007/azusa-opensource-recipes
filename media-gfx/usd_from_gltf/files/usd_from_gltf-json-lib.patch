@@ -1,0 +1,18 @@
+diff -bBrU3 usd_from_gltf-6d288cce8b68744494a226574ae1d7ba6a9c46eb/gltf/CMakeLists.txt usd_from_gltf-6d288cce8b68744494a226574ae1d7ba6a9c46eb-json/gltf/CMakeLists.txt
+--- usd_from_gltf-6d288cce8b68744494a226574ae1d7ba6a9c46eb/gltf/CMakeLists.txt	2023-06-11 10:39:40.000000000 +0900
++++ usd_from_gltf-6d288cce8b68744494a226574ae1d7ba6a9c46eb-json/gltf/CMakeLists.txt	2023-06-11 16:20:46.771305489 +0900
+@@ -12,13 +12,8 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-find_package(json)
+-if (NOT json_FOUND)
+-  message(FATAL_ERROR "JSON package not found.")
+-endif (NOT json_FOUND)
+-
+ include_directories(
+-  ${json_INCLUDE_DIR}
++  "/pkg/main/dev-cpp.nlohmann_json.dev/include/nlohmann"
+ )
+ 
+ add_library(gltf
