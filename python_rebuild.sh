@@ -4,10 +4,8 @@ source "common/init.sh"
 inherit python
 acheck
 
-PYTHON_VERSION="$(echo $PYTHON_VERSIONS | awk 'NF>1{print $NF}')"
-
-echo "Checking modules for python $PYTHON_VERSION"
-MODS=`curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_VERSION" || true`
+echo "Checking modules for python $PYTHON_LATEST"
+MODS=`curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_LATEST" || true`
 
 for foo in $ROOTDIR/dev-python/*; do
 	echo "$foo"
@@ -32,7 +30,7 @@ for foo in $ROOTDIR/dev-python/*; do
 done
 
 # check extra mods (python stuff that is not inside dev-python)
-EXTRA_MODS="$(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep '\.mod\.'  | grep '\.py' | cut -d. -f1-2 | sort -u | grep -v '^dev-python' | sed -e 's#\.#/#')"
+EXTRA_MODS="$(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep '\.mod\.'  | grep '\.py' | grep -v "\\.py$PYTHON_LATEST" | cut -d. -f1-2 | sort -u | grep -v '^dev-python' | sed -e 's#\.#/#')"
 for foo in $EXTRA_MODS; do
 	if [ "$foo" = "dev-lang/python" ]; then
 		# exclude python itself from check

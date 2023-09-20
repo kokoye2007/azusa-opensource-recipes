@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg libpng
+importpkg zlib libpng
 
 docmake -DBUILD_LENSTOOL=ON -DCMAKE_INSTALL_DOCDIR="/pkg/main/${PKG}.doc.${PVRF}/html" -DBUILD_DOC=ON -DBUILD_TESTS=OFF
 # -DBUILD_FOR_SSE=

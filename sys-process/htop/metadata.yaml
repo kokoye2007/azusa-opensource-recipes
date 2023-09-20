@@ -13,3 +13,10 @@ files:
             sha1: 84d0b0fc5de9f5e3a9b14bba15b447a2a982e204
             sha3-256: ef38b4212ec87c5c64dd00692b0cac31689ffa44266add04f57c998b6b8ac901
             sha256: 1a1dd174cc828521fe5fd0e052cff8c30aa50809cf80d3ce3a481c37d476ac54
+    htop-3.2.2.tar.gz:
+        size: 369873
+        added: 2023-09-02T10:46:24.010489301+09:00
+        hashes:
+            sha1: dcfc38733f2b7908e5627961bd1485778e292380
+            sha3-256: 4d8f224609fc19b7a5aa50df59da36e5aa40d47ca02450d6e20cb48451eef6de
+            sha256: 3829c742a835a0426db41bb039d1b976420c21ec65e93b35cd9bfd2d57f44ac8

@@ -69,4 +69,5 @@ sed -e "s:CUDA_SUPPORTED_GCC:${cuda_supported_gcc}:g" \
 	"${FILESDIR}"/cuda-config.in > "${D}/pkg/main/${PKG}.core.${PVRF}/bin/cuda-config"
 chmod -v +x "${D}/pkg/main/${PKG}.core.${PVRF}/bin/cuda-config"
 
+fixelf
 archive

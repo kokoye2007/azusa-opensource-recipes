@@ -3,6 +3,7 @@
 # currently active python versions (for modules, etc)
 PYTHON_VERSIONS="3.8.18 3.9.18 3.10.13 3.11.5"
 PYTHON_LATEST="$(echo "$PYTHON_VERSIONS" | sed -e 's/.* //')"
+#PYTHON_LATEST="$(echo $PYTHON_VERSIONS | awk 'NF>1{print $NF}')"
 
 PYTHON_MODS="dev-python/setuptools dev-python/pip dev-util/gyp dev-util/meson dev-python/pycairo dev-python/pygobject dev-python/numpy dev-util/scons"
 
@@ -225,4 +226,26 @@ python_domodule() {
 		mkdir -pv "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION%.*}/site-packages"
 		cp -avr "$1" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION%.*}/site-packages"
 	done
+}
+
+pythondownload() {
+	local PN="$1"
+	local PV="$2"
+	URL="$(curl -s "https://pypi.org/pypi/$PN/$PV/json" | jq -r '.urls[] | select(.python_version=="source") | .url')"
+	if [ x"$URL" != x ]; then
+		get "$URL"
+	else
+		get https://pypi.org/packages/source/\${PN:0:1}/\${PN}/\${P}.tar.gz
+	fi
+}
+
+python_do_standard_package() {
+	# perform all the steps for a python package
+	pythondownload "$PN" "$PV"
+	acheck
+
+	cd "${S}"
+
+	pythonsetup
+	archive
 }
