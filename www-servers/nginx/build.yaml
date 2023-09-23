@@ -1,7 +1,7 @@
 versions:
     list:
-        - 1.23.4
-    stable: 1.23.4
+        - 1.25.1
+    stable: 1.25.1
 build:
     - version: '*'
       import:

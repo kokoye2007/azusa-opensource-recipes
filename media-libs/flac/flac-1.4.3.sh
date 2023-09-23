@@ -1,10 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xiph.org/releases/flac/${P}.tar.xz
+get https://downloads.xiph.org/releases/flac/${P}.tar.xz
 acheck
 
 cd "${T}"
+
+importpkg ogg
 
 doconf
 

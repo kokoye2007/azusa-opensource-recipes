@@ -20,3 +20,10 @@ files:
             sha1: 5851825756071fc86518ebbb5bde3d9eaf4caca9
             sha3-256: 698a0b87f6eb4b604717a0b50c05e73a0fb05af671a6b4bf4bece192aaf0e9c3
             sha256: d43300e36bb249a7e6edc60bca1b0fc372a0bafce2f346d76acfb677a8790fc0
+    nginx-1.25.1.tar.gz:
+        size: 1213919
+        added: 2023-09-23T15:01:51.421356386+09:00
+        hashes:
+            sha1: 2a2358205a663266b85d4b789ee1e5a6dab49301
+            sha3-256: 9b7dcd6a642c449bfab5b43c7ac3607e6ab1a0d8b576c3a6df7a25bf0a50bb75
+            sha256: f09071ac46e0ea3adc0008ef0baca229fc6b4be4533baef9bbbfba7de29a8602
