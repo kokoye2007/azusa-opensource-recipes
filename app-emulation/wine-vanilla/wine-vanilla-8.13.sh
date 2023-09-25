@@ -4,7 +4,7 @@ source "../../common/init.sh"
 MY_PN="${PN%%-*}"
 MY_P="${MY_PN}-${PV}"
 
-get https://dl.winehq.org/wine/source/${MAJOR_V}.x/${MY_P}.tar.xz
+get https://dl.winehq.org/wine/source/8.x/${MY_P}.tar.xz
 acheck
 
 importpkg X opengl osmesa net-libs/libpcap net-print/cups media-libs/openal net-nds/openldap #OpenCL
@@ -28,7 +28,7 @@ CONFOPTS=(
 	--with-fontconfig
 	--with-gnutls
 	--enable-mshtml
-	#--with-gphoto
+	--with-gphoto
 	--with-gssapi
 	--with-gstreamer
 	--enable-hal

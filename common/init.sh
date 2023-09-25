@@ -147,7 +147,8 @@ download() {
 	fi
 	if [ ! -s "$BN" ]; then
 		# try gentoo mirror
-		wget -O "$BN" "https://ftp.iij.ad.jp/pub/linux/gentoo/distfiles/$BN"
+		local FILEHASH="$(echo -n "$BN" | b2sum)"
+		wget -O "$BN" "https://ftp.iij.ad.jp/pub/linux/gentoo/distfiles/${FILEHASH:0:2}/$BN"
 	fi
 
 	if [ -f "$HOME/.aws/credentials" ]; then

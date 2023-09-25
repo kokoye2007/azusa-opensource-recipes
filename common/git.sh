@@ -26,7 +26,7 @@ fetchgit() {
 	S="${PWD}"
 	echo "Checking out tag $tag ..."
 	git checkout --quiet --detach "$tag"
-	git submodule update --init
+	git submodule update --recursive --init
 	cd ..
 
 	if [ -f "$HOME/.aws/credentials" ]; then
