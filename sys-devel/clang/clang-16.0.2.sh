@@ -3,7 +3,12 @@ source "../../common/init.sh"
 
 inherit llvm
 
-llvmget clang
+if [ ! -d /pkg/main/sys-libs.compiler-rt.libs.${PVRF}/lib$LIB_SUFFIX ]; then
+	echo "compiler-rt for this version needs to be compiled first"
+	exit 1
+fi
+
+llvmget clang clang-tools-extra
 
 acheck
 
@@ -18,15 +23,24 @@ OPTS=(
 	-DLLVM_ENABLE_RTTI=ON
 	-DLLVM_APPEND_VC_REV=OFF
 	-DBUILD_SHARED_LIBS=ON
+	-DCLANG_DEFAULT_OPENMP_RUNTIME=libomp
+	-DCMAKE_DISABLE_FIND_PACKAGE_hsa-runtime64=ON
+	# enable static analyzer
+	-DCLANG_ENABLE_ARCMT=ON
+	-DCLANG_ENABLE_STATIC_ANALYZER=ON
 
 	-DCLANG_DEFAULT_CXX_STDLIB="libc++"
 	-DCLANG_DEFAULT_RTLIB="compiler-rt"
 	-DCLANG_DEFAULT_UNWINDLIB="libunwind"
 	-DCMAKE_CXX_STANDARD_LIBRARIES="-ldl"
+	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.core.${PVRF}/config"
 
 	-DDEFAULT_SYSROOT="/pkg/main/sys-libs.glibc.dev"
 	-DC_INCLUDE_DIRS="/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include:/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include/c++/v1"
 	#-DCLANG_PYTHON_BINDINGS_VERSIONS=""
+
+	# /build/clang-16.0.2/work/clang-tools-extra/pseudo/tool/HTMLForest.cpp:57:10: fatal error: HTMLForestResources.inc: No such file or directory
+	#-DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR="${WORKDIR}/clang-tools-extra"
 
 	# disable clang plugins because of:
 	# /usr/bin/ld: cannot open linker script file /build/clang-16.0.2/temp/lib/Analysis/plugins/SampleAnalyzer/SampleAnalyzerPlugin.exports: No such file or directory
@@ -35,6 +49,31 @@ OPTS=(
 	-DCLANG_INCLUDE_TESTS=OFF
 )
 
-llvmbuild "${OPTS[@]}" || /bin/bash -i
+llvmbuild "${OPTS[@]}"
+
+# /pkg/main/sys-devel.clang.core.16.0.2.linux.amd64/lib64/clang/16/lib/linux/libclang_rt.builtins-x86_64.a
+# this file is actually found as 
+# /pkg/main/sys-libs.compiler-rt.libs.16.0.2.linux.amd64/lib64/linux/libclang_rt.builtins-x86_64.a
+# clang_rt.crtbegin-x86_64.o  clang_rt.crtend-x86_64.o  libclang_rt.builtins-x86_64.a
+
+ln -snf /pkg/main/sys-libs.compiler-rt.libs.$PVRF/lib$LIB_SUFFIX "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/lib"
+
+# write config
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/config"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang++.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-cpp.cfg"
+cat >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-common.cfg" <<EOF
+--rtlib=libgcc
+--unwindlib=libgcc
+--stdlib=libstdc++
+-fuse-ld=bfd
+
+-L/pkg/main/sys-libs.libcxx.libs.${PVRF}/lib$LIB_SUFFIX
+-L/pkg/main/sys-libs.libcxxabi.libs.${PVRF}/lib$LIB_SUFFIX
+-lc++ -lc++abi
+EOF
+
+# TODO --gcc-install-dir= ?
 
 finalize

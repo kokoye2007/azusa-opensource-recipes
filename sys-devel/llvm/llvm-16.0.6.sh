@@ -9,18 +9,20 @@ acheck
 
 cd "${T}"
 
-importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib
-# importpkg will set CPPFLAGS but that's not read by llvm
-export CFLAGS="${CPPFLAGS}"
-export CXXFLAGS="${CPPFLAGS}"
+importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib sys-libs/llvm-libunwind sys-libs/libcxx sys-libs/libcxxabi
 
 if [ -e /pkg/main/sys-devel.clang.core/bin/clang ]; then
 	# -flto can only be used with clang, see https://bugs.gentoo.org/873670
 	export CC=/pkg/main/sys-devel.clang.core/bin/clang
 	export CXX=/pkg/main/sys-devel.clang.core/bin/clang++
 	export CPPFLAGS="${CPPFLAGS} -flto"
-	export LDFLAGS="-fuse-ld=lld"
+	export LDFLAGS="${LDFLAGS} -fuse-ld=lld"
+	export LIBS="-lc++ -lc++abi"
 fi
+
+# importpkg will set CPPFLAGS but that's not read by llvm
+export CFLAGS="${CPPFLAGS}"
+export CXXFLAGS="${CPPFLAGS}"
 
 CMAKE_OPTS=(
 	#-DLLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"

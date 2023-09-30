@@ -575,10 +575,12 @@ importpkg() {
 				export CPPFLAGS="$CPPFLAGS -I/pkg/main/${foo/\//.}.dev${vers}/include"
 				export CPATH="$CPATH:/pkg/main/${foo/\//.}.dev${vers}/include"
 				export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};/pkg/main/${foo/\//.}.dev${vers}/include"
+				export C_INCLUDE_PATH="$C_INCLUDE_PATH:/pkg/main/${foo/\//.}.dev${vers}/include"
 			fi
 			if [ -d "/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX" ]; then
 				export LDFLAGS="$LDFLAGS -L/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
 				export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
+				export RUSTFLAGS="${RUSTFLAGS} -L/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
 			fi
 		elif [ "$foo" = "X" ]; then
 			# import all of X11
@@ -602,10 +604,12 @@ importpkg() {
 		lib="$(pkg-config --libs-only-L "$PKGCFG")"
 		export CPPFLAGS="$CPPFLAGS $inc"
 		export LDFLAGS="$LDFLAGS $lib"
+		export RUSTFLAGS="${RUSTFLAGS} $lib"
 
 		for foo in $inc; do
 			# remove -I and add to CMAKE_SYSTEM_INCLUDE_PATH
 			export CMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH};${foo#-I}"
+			export C_INCLUDE_PATH="$C_INCLUDE_PATH:${foo#-I}"
 		done
 		for foo in $lib; do
 			# remove -L and add to CMAKE_SYSTEM_LIBRARY_PATH
