@@ -107,14 +107,7 @@ linker = "lld"
 profiler = false
 EOF
 
-# looks like there is no better way to pass LDFLAGS etc than through RUSTFLAGS
-# see also: RUSTFLAGS_BOOTSTRAP RUSTFLAGS_NOT_BOOTSTRAP MAGIC_EXTRA_RUSTFLAGS
-# see: https://doc.rust-lang.org/rustc/codegen-options/index.html
-for lib in $LDFLAGS; do
-	# $lib is typically a -L/pkg/main/...
-	export RUSTFLAGS="$RUSTFLAGS -C link-arg=$lib"
-done
-
+export LLVM_LINK_SHARED=1
 export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
 
 echo "Using RUSTFLAGS = $RUSTFLAGS"
