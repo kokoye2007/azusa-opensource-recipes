@@ -71,9 +71,9 @@ cat >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-common.cfg" <<EOF
 
 # fix clang include path order
 -nostdinc
--I/pkg/main/sys-libs.libcxx.dev/include/c++/v1
--I/pkg/main/sys-libs.glibc.dev.linux.amd64/include
--I/pkg/main/${PKG}.core.${PVRF}/lib64/clang/${PV/.*}/include
+-isystem /pkg/main/sys-libs.libcxx.dev/include/c++/v1
+-isystem /pkg/main/sys-libs.glibc.dev.linux.amd64/include
+-isystem /pkg/main/${PKG}.core.${PVRF}/lib64/clang/${PV/.*}/include
 
 # fix libcxx libs include
 -L/pkg/main/sys-libs.libcxx.libs.${PVRF}/lib$LIB_SUFFIX
