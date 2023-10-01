@@ -109,6 +109,12 @@ EOF
 
 export LLVM_LINK_SHARED=1
 export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
+export LIBGIT2_NO_VENDOR=1
+
+# this is a literally magic variable that gets through cargo cache, without it some
+# crates ignore RUSTFLAGS.
+# this variable can not contain leading space.
+export MAGIC_EXTRA_RUSTFLAGS="-L/pkg/main/sys-libs.llvm-libunwind.libs/lib$LIB_SUFFIX"
 
 echo "Using RUSTFLAGS = $RUSTFLAGS"
 
