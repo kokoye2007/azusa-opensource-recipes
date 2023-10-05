@@ -1,0 +1,3 @@
+description: Helper program to build and install c-like libraries
+homepage: https://github.com/lu-zero/cargo-c
+license: 0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions Boost-1.0 MIT MPL-2.0 Unlicense ZLIB
