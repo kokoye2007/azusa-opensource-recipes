@@ -8,9 +8,12 @@ cd "${T}"
 
 importpkg media-libs/libsdl2 media-libs/libjpeg-turbo media-libs/tiff media-libs/giflib media-libs/freeglut
 
-doconf --enable-everything
+# make thing work
+export LDFLAGS="${LDFLAGS} -L${T}/src/.libs"
 
-make
+doconf #--enable-everything
+
+make V=1
 make install DESTDIR="${D}"
 
 finalize

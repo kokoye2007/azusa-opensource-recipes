@@ -136,6 +136,7 @@ echo "Running DESTDIR=$D python3 ./x.py install"
 DESTDIR="${D}" python3 ./x.py install || /bin/bash -i
 
 # add +x flag on libs so ldconfig indexes these
-chmod -v +x "${D}/pkg/main/${PKG}.core.${PVRF}"/lib*/*.so
+chmod -v +x "${D}/pkg/main/${PKG}.libs.${PVRF}"/lib*/*.so
+
 
 finalize
