@@ -6,7 +6,10 @@ llvmget runtimes libcxx libcxxabi
 
 acheck
 
-importpkg sys-libs/llvm-libunwind zlib dev-libs/libffi
+importpkg sys-libs/llvm-libunwind zlib dev-libs/libffi sys-libs/compiler-rt
+
+export CC=clang
+export CXX=clang++
 
 # see http://llvm.org/docs/CMake.html
 
@@ -40,6 +43,6 @@ CMAKE_OPTS=(
 cd "$T"
 
 # build libcxxabi
-CMAKE_TARGET_ALL=cxxabi CMAKE_TARGET_INSTALL=install-cxxabi llvmbuild "${CMAKE_OPTS[@]}"
+CMAKE_TARGET_ALL=cxxabi CMAKE_TARGET_INSTALL=install-cxxabi llvmbuild "${CMAKE_OPTS[@]}" || /bin/bash -i
 
 finalize

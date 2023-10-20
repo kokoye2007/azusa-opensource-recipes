@@ -8,6 +8,9 @@ acheck
 
 importpkg sys-libs/llvm-libunwind zlib dev-libs/libffi
 
+export CC=/pkg/main/sys-devel.clang.core/bin/clang
+export CXX=/pkg/main/sys-devel.clang.core/bin/clang++
+
 # see http://llvm.org/docs/CMake.html
 
 CMAKE_OPTS=(

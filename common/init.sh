@@ -153,7 +153,7 @@ download() {
 
 	if [ -f "$HOME/.aws/credentials" ]; then
 		# upload if possible to aws
-		aws s3 cp "$BN" "s3://azusa-pkg/src/main/${PKG/.//}/${BN}"
+		aws s3 cp "$BN" "s3://azusa-pkg/src/main/${CATEGORY}/${PN}/${BN}"
 	fi
 }
 
@@ -616,6 +616,8 @@ importpkg() {
 			export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};${foo#-L}"
 		done
 	fi
+
+	export C_INCLUDE_PATH="${C_INCLUDE_PATH#:}"
 }
 
 # azusa check

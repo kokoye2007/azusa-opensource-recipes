@@ -36,7 +36,7 @@ OPTS=(
 	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.core.${PVRF}/config"
 
 	-DDEFAULT_SYSROOT="/pkg/main/sys-libs.glibc.dev"
-	-DC_INCLUDE_DIRS="/pkg/main/sys-libs.libcxx.dev/include/c++/v1:/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include:/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include/c++/v1"
+	-DC_INCLUDE_DIRS="/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
 	#-DCLANG_PYTHON_BINDINGS_VERSIONS=""
 
 	# /build/clang-16.0.2/work/clang-tools-extra/pseudo/tool/HTMLForest.cpp:57:10: fatal error: HTMLForestResources.inc: No such file or directory
@@ -62,12 +62,20 @@ ln -snf /pkg/main/sys-libs.compiler-rt.libs.$PVRF/lib$LIB_SUFFIX "${D}/pkg/main/
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/config"
 echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang.cfg"
 echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang++.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang++.cfg"
 echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-cpp.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-cpp.cfg"
+
 cat >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-common.cfg" <<EOF
 --rtlib=libgcc
 --unwindlib=libgcc
---stdlib=libstdc++
 -fuse-ld=bfd
+EOF
+
+# /pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include/c++/v1
+
+cat >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-cxx.cfg" <<EOF
+--stdlib=libstdc++
 
 # fix clang include path order
 -nostdinc
@@ -76,8 +84,8 @@ cat >"${D}/pkg/main/${PKG}.core.${PVRF}/config/clang-common.cfg" <<EOF
 -isystem /pkg/main/${PKG}.core.${PVRF}/lib64/clang/${PV/.*}/include
 
 # fix libcxx libs include
--L/pkg/main/sys-libs.libcxx.libs.${PVRF}/lib$LIB_SUFFIX
--L/pkg/main/sys-libs.libcxxabi.libs.${PVRF}/lib$LIB_SUFFIX
+-L/pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX
+-L/pkg/main/sys-libs.libcxxabi.libs/lib$LIB_SUFFIX
 -lc++ -lc++abi
 EOF
 

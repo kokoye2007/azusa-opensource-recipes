@@ -9,9 +9,6 @@ importpkg x11
 
 cd "${T}"
 
-domeson -Dx11=enabled -Dglx=enabled -Dtls=enabled
-
-ninja
-DESTDIR="${D}" ninja install
+domeson -Dx11=enabled -Dglx=enabled
 
 finalize

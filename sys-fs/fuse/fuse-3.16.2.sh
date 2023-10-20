@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.xz
+get https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz
 acheck
 
 cd "${S}"

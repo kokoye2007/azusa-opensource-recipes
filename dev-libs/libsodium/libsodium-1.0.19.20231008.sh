@@ -9,7 +9,7 @@ sodium_get() {
 		echo "Invalid request, libsodium-$PV is not available, please rename to libsodium-$FULLV"
 		exit 1
 	fi
-	wget -O "libsodium-$FULLV.tar.gz" "https://download.libsodium.org/libsodium/releases/libsodium-1.0.18-stable.tar.gz"
+	wget -O "libsodium-$FULLV.tar.gz" "https://download.libsodium.org/libsodium/releases/libsodium-${MY_PV}-stable.tar.gz"
 }
 
 DOWNLOAD_OVERRIDE=sodium_get get https://download.libsodium.org/libsodium/releases/${P}.tar.gz

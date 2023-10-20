@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 inherit llvm
-get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/${P}.src.tar.xz
+llvmget "${PN}"
 acheck
 
 cd "${T}"
@@ -33,6 +33,6 @@ case "$ARCH" in
 		;;
 esac
 
-docmake "${CMAKE_OPTS[@]}"
+llvmbuild "${CMAKE_OPTS[@]}"
 
 finalize
