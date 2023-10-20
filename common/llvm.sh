@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# ensure we have the right version of llvm-config in path first
+export PATH="/pkg/main/sys-devel.llvm.core.${PV}/bin:$PATH"
+
 llvmgetfull() {
 	CATEGORY=sys-devel PN=llvm get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/llvm-project-${PV}.src.tar.xz
 }
