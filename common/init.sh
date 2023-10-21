@@ -448,7 +448,7 @@ fixelf() {
 		local ft
 		ft="$(file -b "${fn}")"
 		case $ft in
-			ELF*dynamically*interpreter*)
+			*ELF*dynamically*interpreter*)
 				cur="$(/pkg/main/dev-util.patchelf.core/bin/patchelf --print-interpreter "${fn}")"
 				case $cur in
 					/lib64/ld-linux-x86-64.so.2)
