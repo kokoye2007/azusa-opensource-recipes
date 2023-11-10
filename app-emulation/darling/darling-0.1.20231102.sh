@@ -1,7 +1,7 @@
 #/bin/sh
 source "../../common/init.sh"
 
-COMMIT=7b2aa573bdd9b3ce143ef2f0acf54841e51b9895
+COMMIT=141c24aaa8187b4787cd1f0b002aeac0f35c43eb
 fetchgit https://github.com/darlinghq/darling.git $COMMIT
 acheck
 
