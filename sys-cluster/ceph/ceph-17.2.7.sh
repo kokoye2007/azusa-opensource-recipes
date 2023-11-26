@@ -21,7 +21,7 @@ PATCHES=(
 	"${FILESDIR}/ceph-17.2.1-no-virtualenvs.patch"
 	"${FILESDIR}/ceph-13.2.2-dont-install-sysvinit-script.patch"
 	"${FILESDIR}/ceph-14.2.0-dpdk-cflags.patch"
-	#"${FILESDIR}/ceph-16.2.0-rocksdb-cmake.patch"
+	"${FILESDIR}/ceph-16.2.0-rocksdb-cmake.patch"
 	"${FILESDIR}/ceph-16.2.0-spdk-tinfo.patch"
 	"${FILESDIR}/ceph-16.2.0-jaeger-system-boost.patch"
 	"${FILESDIR}/ceph-16.2.0-liburing.patch"
@@ -42,6 +42,12 @@ PATCHES=(
 	"${FILESDIR}/ceph-17.2.5-boost-1.81.patch"
 	# https://bugs.gentoo.org/901403
 	"${FILESDIR}/ceph-17.2.6-link-boost-context.patch"
+	# https://bugs.gentoo.org/905626
+	"${FILESDIR}/ceph-17.2.6-arrow-flatbuffers-c++14.patch"
+	# https://bugs.gentoo.org/868891
+	"${FILESDIR}/ceph-17.2.6-cmake.patch"
+	# https://bugs.gentoo.org/907739
+	"${FILESDIR}/ceph-18.2.0-cython3.patch"
 )
 
 cd "${S}"
@@ -49,7 +55,7 @@ cd "${S}"
 apatch "${PATCHES[@]}"
 
 # use system boost
-find "${S}" -name '*.cmake' -or -name 'CMakeLists.txt' -print0  | xargs --null sed -r -e 's|Boost::|boost_|g' -e 's|Boost_|boost_|g' -e 's|[Bb]oost_boost|boost_system|g' -i
+#find "${S}" -name '*.cmake' -or -name 'CMakeLists.txt' -print0  | xargs --null sed -r -e 's|Boost::|boost_|g' -e 's|Boost_|boost_|g' -e 's|[Bb]oost_boost|boost_system|g' -i
 
 export Snappy_LIB=/pkg/main/app-arch.snappy.libs.1.1.10/lib$LIB_SUFFIX
 export Snappy_INCLUDE_DIR=/pkg/main/app-arch.snappy.dev.1.1.10/include
@@ -95,7 +101,7 @@ CMAKEOPTS=(
 	-DENABLE_SHARED="ON"
 	-DALLOCATOR=tcmalloc
 	-DWITH_SYSTEM_PMDK=YES
-	#-DWITH_SYSTEM_BOOST=YES
+	-DWITH_SYSTEM_BOOST=YES
 	-DWITH_SYSTEM_ROCKSDB=ON
 	-DWITH_SYSTEM_ARROW=ON
 	-DWITH_RDMA=OFF
