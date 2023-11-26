@@ -28,7 +28,6 @@ set(CMAKE_INSTALL_DOCDIR "/pkg/main/${PKG}.doc.${PVRF}" CACHE PATH "")
 set(CMAKE_INSTALL_INFODIR "/pkg/main/${PKG}.doc.${PVRF}/info" CACHE PATH "")
 set(CMAKE_INSTALL_MANDIR "/pkg/main/${PKG}.doc.${PVRF}/man" CACHE PATH "")
 set(CMAKE_USER_MAKE_RULES_OVERRIDE "${build_rules}" CACHE FILEPATH "Azusa override rules")
-set(BUILD_SHARED_LIBS ON CACHE BOOL "")
 EOF
 
 	# for kde's extra-cmake-modules
@@ -47,7 +46,6 @@ EOF
 		-G "$CMAKE_BUILD_ENGINE" -Wno-dev \
 		-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.core.${PVRF}" \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DBUILD_SHARED_LIBS=ON \
 		-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}" \
 		-DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH}" \
 		-DCMAKE_C_FLAGS="${CPPFLAGS} -O2" \
