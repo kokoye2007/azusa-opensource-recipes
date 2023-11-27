@@ -15,7 +15,8 @@ importpkg \
 	sys-process/numactl dev-util/cunit dev-libs/libaio dev-db/sqlite dev-libs/leveldb app-arch/snappy:1.1.10 app-arch/lz4 \
 	dev-util/google-perftools sys-auth/oath-toolkit dev-lang/python sys-libs/zlib dev-util/lttng-ust \
 	dev-libs/rocksdb:6.15 dev-libs/boost dev-lang/lua sys-libs/liburing sys-libs/ncurses dev-libs/libnl dev-libs/icu \
-	net-libs/rabbitmq-c dev-libs/librdkafka dev-libs/pmdk dev-libs/userspace-rcu dev-libs/openssl app-arch/zstd
+	net-libs/rabbitmq-c dev-libs/librdkafka dev-libs/pmdk dev-libs/userspace-rcu dev-libs/openssl app-arch/zstd \
+	sys-libs/libcap-ng dev-libs/expat net-misc/curl
 
 PATCHES=(
 	"${FILESDIR}/ceph-12.2.0-use-provided-cpu-flag-values.patch"
@@ -84,6 +85,7 @@ CMAKEOPTS=(
 	-DWITH_ZBD=YES
 	-DWITH_ZFS=YES
 	-DENABLE_SHARED:BOOL=ON
+	-DWITH_MANPAGE:BOOL=OFF
 	-DALLOCATOR=tcmalloc
 	-DWITH_SYSTEM_PMDK=YES
 	-DWITH_SYSTEM_BOOST=YES
