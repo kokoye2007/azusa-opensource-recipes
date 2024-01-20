@@ -6,7 +6,7 @@ acheck
 
 cd "${T}"
 
-importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug icu-uc media-video/avisynth dev-util/nvidia-cuda-toolkit media-libs/nv-codec-headers
+importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug icu-uc media-video/avisynth dev-util/nvidia-cuda-toolkit media-libs/nv-codec-headers:12.0
 
 callconf --prefix=/pkg/main/${PKG}.core.${PVRF} \
 	--libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
