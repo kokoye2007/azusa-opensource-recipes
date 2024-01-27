@@ -39,6 +39,7 @@ export LDFLAGS="$LDFLAGS -L/pkg/main/dev-libs.jsoncpp.libs.$JSONCPP_VERSION/lib$
 CMAKEOPTS=(
 	-DUSE_CVC4=OFF
 	-DTESTS=OFF
+	-DBUILD_SHARED_LIBS=ON
 
 	-Djsoncpp_ROOT=/pkg/main/dev-libs.jsoncpp.dev.$JSONCPP_VERSION
 
