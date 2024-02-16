@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-COMMIT_HASH="d9974bed7134e043f7ccc593c0c19c67d2d45dc4"
+COMMIT_HASH="e11b9ed9f2c254bc894d844c0a64a0eb76bbb4fd"
 JSONCPP_VERSION="1.9.3" # solidity depends on an exact version of jsoncpp for some reason
 get https://github.com/ethereum/solidity/archive/refs/tags/v${PV}.tar.gz "${P}.tar.gz"
 acheck
