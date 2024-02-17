@@ -21,6 +21,9 @@ scanlibs() {
 			continue
 		fi
 		echo -ne "\rScanning: $pn\033[K"
+		if [ ! -f "${p}/.ld.so.cache" ]; then
+			echo -e "\rMissing ld config file: $pn"
+		fi
 		for foo in $LIBS; do
 			if [ -d "${p}/$foo" -a ! -L "${p}/$foo" ]; then
 				echo "${p}/$foo" >>etc/ld.so.conf.tmp
