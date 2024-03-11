@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-for foo in */; do
+pycheck() {
+	foo="$1"
 	# detect version
 	VERS=""
 	BASE="$(basename "$foo")"
@@ -50,4 +51,13 @@ EOF
 	"./$BASE-$LATEST_VERS.sh" || true
 	cd ..
 	#exit
+}
+
+if [ "$1" != "" ]; then
+	pycheck $1
+	exit $?
+fi
+
+for foo in */; do
+	pycheck "$foo"
 done
