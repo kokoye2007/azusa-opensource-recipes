@@ -2,8 +2,11 @@
 source "../../common/init.sh"
 
 get https://www.gnupg.org/ftp/gcrypt/${PN}/${P}.tar.bz2
+acheck
 
 cd "${T}"
+
+importpkg zlib
 
 doconf
 
