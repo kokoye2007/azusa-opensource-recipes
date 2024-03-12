@@ -29,6 +29,8 @@ for foo in $ROOTDIR/dev-python/*; do
 	yes 'n' | "$ROOTDIR/common/build.sh" "dev-python/$BASE/$(basename "$VERS")" || true
 done
 
+exit
+
 # check extra mods (python stuff that is not inside dev-python)
 EXTRA_MODS="$(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep '\.mod\.'  | grep '\.py' | grep -v "\\.py$PYTHON_LATEST" | cut -d. -f1-2 | sort -u | grep -v '^dev-python' | sed -e 's#\.#/#')"
 for foo in $EXTRA_MODS; do
