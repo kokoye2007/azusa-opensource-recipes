@@ -5,7 +5,7 @@ inherit python
 PYTHON_RESTRICT="$PYTHON_LATEST"
 
 # pytorch does not support cuda 12 yet, and not even 11.8
-CUDA_VERSION="11.7"
+CUDA_VERSION="11.8"
 # query cuda-config to find supported gcc versions
 GCC_VERSIONS="$(/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin/cuda-config -s)"
 for vers in $GCC_VERSIONS; do

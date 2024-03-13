@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # currently active python versions (for modules, etc)
-PYTHON_VERSIONS="3.10.13 3.11.8 3.12.2"
+PYTHON_VERSIONS="3.12.2"
 PYTHON_LATEST="$(echo "$PYTHON_VERSIONS" | sed -e 's/.* //')"
 #PYTHON_LATEST="$(echo $PYTHON_VERSIONS | awk 'NF>1{print $NF}')"
 
@@ -67,7 +67,11 @@ pythonsetup() {
 		local PYTHON_PACKAGES="/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}/site-packages/azusafinder.py"
 
 		export PYTHONHOME="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}"
-		export PYTHONPATH=":./site-packages:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}/site-packages:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
+		if [ "$PYTHONPATH_EXTRA" == "" ]; then
+			export PYTHONPATH=":./site-packages:/pkg/main/dev-python.Cython.mod.0.29.37.py3.12.2.linux.amd64/lib/python3.12/site-packages/:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}/site-packages:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
+		else
+			export PYTHONPATH=":./site-packages:$PYTHONPATH_EXTRA:/pkg/main/dev-python.Cython.mod.0.29.37.py3.12.2.linux.amd64/lib/python3.12/site-packages/:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}.${OS}.${ARCH}/lib/python${PYTHON_VERSION_MINOR}:/pkg/main/dev-lang.python-modules.core.${PYTHON_VERSION}/lib/python${PYTHON_VERSION_MINOR}/site-packages:$PYTHONHOME/lib/python${PYTHON_VERSION_MINOR}/lib-dynload"
+		fi
 		#export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 		echo " * PYTHONHOME=$PYTHONHOME"

@@ -1,0 +1,4 @@
+description: CUDA Profiler API Headers.
+homepage: https://developer.nvidia.com/cuda-toolkit
+license: LicenseRef-NVIDIA-End-User-License-Agreement
+license-url: https://docs.nvidia.com/cuda/eula/index.html
