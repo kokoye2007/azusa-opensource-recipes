@@ -21,6 +21,7 @@ export PYTORCH_NVCC="${CUDA_HOME}/bin/nvcc ${CPPFLAGS}" # -I${WORKDIR}/auto_gptq
 cd "$WORKDIR"
 
 # download from github because missing files
+# See: https://github.com/AutoGPTQ/AutoGPTQ/issues/594
 get https://github.com/AutoGPTQ/AutoGPTQ/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
 acheck
 
