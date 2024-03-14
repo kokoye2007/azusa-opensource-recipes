@@ -31,4 +31,8 @@ pythonsetup
 # copy version.py
 cp -v "/pkg/main/sci-libs.caffe2.dev.${PV}/torch_build/version.py" "${D}/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_RESTRICT}.${OS}.${ARCH}/lib/python${PYTHON_RESTRICT%.*}/site-packages/torch/version.py"
 
+# create symlink to caffe2
+# -I/pkg/main/sci-libs.pytorch.mod.2.2.1.py3.12.2.linux.amd64/lib/python3.12/site-packages/torch/include/torch/csrc/api/include
+ln -snfv $(realpath /pkg/main/sci-libs.caffe2.dev/include) $(echo ${D}/pkg/main/${PKG}.mod.*/lib/python*/site-packages/torch)/include
+
 archive
