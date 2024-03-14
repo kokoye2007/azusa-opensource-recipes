@@ -14,9 +14,8 @@ importpkg sci-libs/caffe2 dev-cpp/gflags
 # auto-gptq requires 7.5 minimum
 export TORCH_CUDA_ARCH_LIST="7.5;8.0;9.0+PTX"
 
-# add marlin to the include paths because reasons
-export PYTORCH_NVCC="${CUDA_HOME}/bin/nvcc ${CPPFLAGS}" # -I${WORKDIR}/auto_gptq-${PV}/autogptq_extension/marlin"
-# export C_INCLUDE_PATH="$C_INCLUDE_PATH:${WORKDIR}/auto_gptq-${PV}/autogptq_extension/marlin"
+# pytorch will not honor CPPFLAGS, so pass that directly to nvcc instead
+export PYTORCH_NVCC="${CUDA_HOME}/bin/nvcc ${CPPFLAGS}"
 
 cd "$WORKDIR"
 
