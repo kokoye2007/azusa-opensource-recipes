@@ -16,4 +16,7 @@ export TORCH_CUDA_ARCH_LIST="7.5;8.0;9.0+PTX"
 # pytorch will not honor CPPFLAGS, so pass that directly to nvcc instead
 export PYTORCH_NVCC="${CUDA_HOME}/bin/nvcc ${CPPFLAGS}"
 
+# avoid computer to die
+export MAX_JOBS=1
+
 python_do_standard_package
