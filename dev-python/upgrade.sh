@@ -31,7 +31,7 @@ EOF
 
 	if [ x"$FILTVERS" = x"$LATEST_VERS" ]; then
 		echo "No update needed"
-		continue
+		return
 	fi
 
 	echo "New version found: $LATEST_VERS"

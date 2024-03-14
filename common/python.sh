@@ -250,6 +250,8 @@ python_do_standard_package() {
 
 	cd "${S}"
 
+	apatch "${PATCHES[@]}"
+
 	pythonsetup
 	archive
 }

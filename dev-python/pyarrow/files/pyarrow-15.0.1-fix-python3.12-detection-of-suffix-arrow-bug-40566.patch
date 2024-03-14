@@ -1,0 +1,11 @@
+--- a/cmake_modules/FindPython3Alt.cmake	2024-03-15 08:23:55.852797981 +0900
++++ b/cmake_modules/FindPython3Alt.cmake	2024-03-15 08:24:40.612165582 +0900
+@@ -67,7 +67,7 @@
+ # detect it ourselves.
+ # (https://gitlab.kitware.com/cmake/cmake/issues/20408)
+ execute_process(COMMAND "${PYTHON_EXECUTABLE}" "-c"
+-                        "from distutils import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))"
++                        "import importlib.util; sysconfig = importlib.import_module('distutils.sysconfig') if importlib.util.find_spec('distutils') else importlib.import_module('sysconfig'); print(sysconfig.get_config_var('EXT_SUFFIX'))"
+                 RESULT_VARIABLE _PYTHON_RESULT
+                 OUTPUT_VARIABLE _PYTHON_STDOUT
+                 ERROR_VARIABLE _PYTHON_STDERR)
