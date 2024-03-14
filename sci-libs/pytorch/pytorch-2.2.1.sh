@@ -12,14 +12,12 @@ importpkg sci-libs/caffe2
 cd "${S}"
 
 apatch \
-        "${FILESDIR}"/0002-Don-t-build-libtorch-again-for-PyTorch-1.7.1.patch \
+	"${FILESDIR}"/pytorch-2.2.1-Don-t-build-libtorch-again.patch \
         "${FILESDIR}"/pytorch-1.9.0-Change-library-directory-according-to-CMake-build.patch \
-        "${FILESDIR}"/${P}-global-dlopen.patch \
+        "${FILESDIR}"/pytorch-2.0.0-global-dlopen.patch \
         "${FILESDIR}"/pytorch-1.7.1-torch_shm_manager.patch \
-        "${FILESDIR}"/${PN}-1.13.0-setup.patch \
-        "${FILESDIR}"/${P}-emptyso.patch \
+        "${FILESDIR}"/${PN}-1.13.0-setup.patch
 
-# ???
 sed -i -e "/BUILD_DIR/s|build|/pkg/main/sci-libs.caffe2.dev.${PV}/torch_build/|" tools/setup_helpers/env.py
 
 export PYTORCH_BUILD_VERSION="${PV}"

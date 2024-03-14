@@ -1,0 +1,18 @@
+--- setup.py.orig	2024-03-14 12:34:27.253566875 +0900
++++ setup.py	2024-03-14 12:34:38.353462207 +0900
+@@ -461,15 +461,6 @@
+     check_submodules()
+     check_pydep("yaml", "pyyaml")
+ 
+-    build_caffe2(
+-        version=version,
+-        cmake_python_library=cmake_python_library,
+-        build_python=True,
+-        rerun_cmake=RERUN_CMAKE,
+-        cmake_only=CMAKE_ONLY,
+-        cmake=cmake,
+-    )
+-
+     if CMAKE_ONLY:
+         report(
+             'Finished running cmake. Run "ccmake build" or '
