@@ -38,14 +38,19 @@ EOF
 
 	echo "New version found: $LATEST_VERS"
 
-	rm -f "$BASE/$BASE-$FILTVERS.sh"
-	cat >"$BASE/$BASE-$LATEST_VERS.sh" <<EOF
+	# keep file contents if upgrade
+	if [ -f "$BASE/$BASE-$FILTVERS.sh" ]; then
+		mv "$BASE/$BASE-$FILTVERS.sh" "$BASE/$BASE-$LATEST_VERS.sh"
+	else
+		cat >"$BASE/$BASE-$LATEST_VERS.sh" <<EOF
 #!/bin/sh
 source ../../common/init.sh
 inherit python
 
 python_do_standard_package
 EOF
+	fi
+
 	chmod +x "$BASE/$BASE-$LATEST_VERS.sh"
 
 	# trigger download

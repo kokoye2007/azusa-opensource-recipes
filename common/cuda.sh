@@ -19,6 +19,11 @@ initcuda() {
 	export CUDA_HOME=/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION
 
 	# force gcc-$GCC_VERSION
+	if [ "$CUDA_OLD_PATH" = "" ]; then
+		CUDA_OLD_PATH="$PATH"
+	else
+		PATH="$CUDA_OLD_PATH"
+	fi
 	export PATH="/pkg/main/sys-devel.gcc.core.$GCC_VERSION/bin:/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin:$PATH"
 	rm -f /usr/bin/gcc /usr/bin/g++ /usr/bin/nvcc
 
