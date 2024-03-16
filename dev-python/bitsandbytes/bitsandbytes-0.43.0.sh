@@ -13,7 +13,7 @@ cd "${S}"
 cmake -DCOMPUTE_BACKEND=cpu -DCMAKE_BUILD_TYPE=Release -S .
 cmake --build . --config Release
 
-for cuda_vers in 11.7 11.8 12.2 12.3 12.4; do
+for cuda_vers in 11.7 11.8 12.2 12.3; do
 	# reset importpkg
 	CPPFLAGS=""
 	CPATH=""
