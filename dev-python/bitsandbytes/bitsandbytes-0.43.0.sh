@@ -2,4 +2,10 @@
 source ../../common/init.sh
 inherit python
 
-python_do_standard_package
+get "https://github.com/TimDettmers/bitsandbytes/archive/refs/tags/${PV}.tar.gz" ${P}.tar.gz
+acheck
+
+cd "${S}"
+
+pythonsetup
+archive

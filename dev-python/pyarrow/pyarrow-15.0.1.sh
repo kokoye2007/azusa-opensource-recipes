@@ -2,8 +2,13 @@
 source ../../common/init.sh
 inherit python
 
+importpkg zlib
+
+# https://gitlab.kitware.com/cmake/cmake/-/issues/25777
+export ZLIB_ROOT=/pkg/main/sys-libs.zlib.dev
+
 export PYARROW_BUILD_VERBOSE=1
-export PYARROW_CXXFLAGS="${CXXFLAGS}"
+export PYARROW_CXXFLAGS="${CPPFLAGS} ${LDFLAGS} ${CXXFLAGS}"
 export PYARROW_BUNDLE_ARROW_CPP_HEADERS=0
 export PYARROW_CMAKE_GENERATOR=Ninja
 export PYARROW_WITH_HDFS=1

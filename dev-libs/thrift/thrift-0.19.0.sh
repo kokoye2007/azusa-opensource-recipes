@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://archive.apache.org/dist/${PV}/${P}.tar.gz
+get https://archive.apache.org/dist/${PN}/${PV}/${P}.tar.gz
 acheck
 
 cd "${T}"

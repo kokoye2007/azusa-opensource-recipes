@@ -248,6 +248,8 @@ python_do_standard_package() {
 	pythondownload "$PN" "$PV"
 	acheck
 
+	importpkg sys-libs/llvm-libunwind # needed quite often
+
 	cd "${S}"
 
 	apatch "${PATCHES[@]}"

@@ -23,6 +23,8 @@ pycheck() {
 	HOMEPAGE="$(echo "$INFO" | jq -r .info.home_page)"
 	LICENSE="$(echo "$INFO" | jq -r .info.license)"
 
+	mkdir -p "$BASE"
+
 	cat >"$BASE/azusa.yaml" <<EOF
 description: $SUMMARY
 homepage: $HOMEPAGE
