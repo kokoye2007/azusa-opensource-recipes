@@ -1,0 +1,3 @@
+description: Kalman filtering and optimal estimation library
+homepage: https://github.com/rlabbe/filterpy
+license: MIT

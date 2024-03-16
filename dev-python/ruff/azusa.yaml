@@ -1,0 +1,3 @@
+description: An extremely fast Python linter and code formatter, written in Rust.
+homepage: https://docs.astral.sh/ruff
+license: MIT

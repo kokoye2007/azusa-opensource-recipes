@@ -1,0 +1,3 @@
+description: Simple decorator to set attributes of target function or class in a DRY way.
+homepage: https://github.com/denis-ryzhkov/attr
+license: MIT

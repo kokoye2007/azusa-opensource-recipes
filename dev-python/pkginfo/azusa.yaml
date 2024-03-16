@@ -1,0 +1,3 @@
+description: Query metadata from sdists / bdists / installed packages.
+homepage: https://code.launchpad.net/~tseaver/pkginfo/trunk
+license: MIT
