@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-DRIVER_PV="515.43.04"
+DRIVER_PV="515.65.01"
 cuda_supported_gcc="8.5 9.4 9.5 10 10.3 10.4 11 11.1 11.2 11.3"
 
 get "https://developer.download.nvidia.com/compute/cuda/${PV}/local_installers/cuda_${PV}_${DRIVER_PV}_linux.run"
