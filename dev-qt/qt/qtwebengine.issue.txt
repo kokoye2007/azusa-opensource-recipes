@@ -1,8 +1,0 @@
-/bin/g++ -MMD -MF obj/base/base/base_jumbo_44.o.d -DUSE_SYMBOLIZE -DUSE_UDEV -DUSE_AURA=1 -DUSE_NSS_CERTS=1 -DUSE_OZONE=1 -DNO_TCMALLOC -DOFFICIAL_BUILD -DCHROMIUM_BUILD -DTOOLKIT_QT -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DNO_UNWIND_TABLES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DBASE_IMPLEMENTATION -I. -Igen -I../../../../../work/qt-everywhere-src-5.14.1/qtwebengine/src/3rdparty/chromium -Igen -I../../../../../work/qt-everywhere-src-5.14.1/qtwebengine/src/3rdparty/chromium/third_party/boringssl/src/include -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -fPIC -pipe -pthread -m64 -Wall -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -Wno-unused-local-typedefs -Wno-maybe-uninitialized -Wno-deprecated-declarations -Wno-comments -Wno-packed-not-aligned -Wno-dangling-else -Wno-missing-field-initializers -Wno-unused-parameter -fno-omit-frame-pointer -g0 -fvisibility=hidden -O2 -fno-ident -fdata-sections -ffunction-sections -std=gnu++14 -Wno-narrowing -Wno-class-memaccess -Wno-attributes -Wno-class-memaccess -Wno-subobject-linkage -Wno-invalid-offsetof -Wno-return-type -Wno-deprecated-copy -fno-exceptions -fno-rtti -fvisibility-inlines-hidden -c gen/base/base_jumbo_44.cc -o obj/base/base/base_jumbo_44.o
-In file included from ./../../../../../work/qt-everywhere-src-5.14.1/qtwebengine/src/3rdparty/chromium/base/message_loop/message_pump_libevent.cc:17,
-                 from gen/base/base_jumbo_44.cc:16:
-gen/base/third_party/libevent/event.h:5:10: fatal error: event.h: No such file or directory
-    5 | #include <event.h>
-      |          ^~~~~~~~~
-compilation terminated.
-
