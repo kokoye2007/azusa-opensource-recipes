@@ -54,6 +54,7 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 		echo " * Module: $pn"
 		modpath="lib/python${PYTHON_MINOR}/site-packages"
+		modskip=""
 
 		# handle some special cases
 		case $pn in
@@ -64,11 +65,18 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 			dev-util.scons.mod.*)
 				modpath="lib/scons"
 				;;
+			dev-python.attr.mod.*)
+				# this module shouldn't be added for "attr", only "dry_attr"
+				modskip="attr"
+				;;
 		esac
 
 		if [ -d "${p}/$modpath" ]; then
 			for foo in "${p}/$modpath"/*/; do
 				foo="$(basename "$foo")"
+				if [ "$foo" == "$modskip" ]; then
+					continue
+				fi
 				case "$foo" in
 					'*'|__pycache__)
 						:
@@ -88,6 +96,9 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 			done
 			for foo in "${p}/$modpath"/*.py; do
 				foo="$(basename "$foo" .py)"
+				if [ "$foo" == "$modskip" ]; then
+					continue
+				fi
 				if [ "$foo" != "*" ]; then
 					modules[$foo]="${modules[$foo]} ${p}/$modpath"
 				fi
