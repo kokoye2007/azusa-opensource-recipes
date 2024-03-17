@@ -8,6 +8,8 @@ acheck
 
 importpkg sys-devel/lld:$LLVM_VERSION sys-devel/clang:$LLVM_VERSION
 
+export PATH="/pkg/main/sys-devel.llvm.core.16/bin:$PATH"
+
 cd "${T}"
 
 # for some reason, zig is unable to find clang so we have to help it

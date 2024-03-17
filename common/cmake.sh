@@ -70,18 +70,18 @@ EOF
 
 	case $CMAKE_BUILD_ENGINE in
 		Ninja)
-			ninja "$CMAKE_TARGET_ALL" || return $?
+			ninja -v "$CMAKE_TARGET_ALL" || return $?
 			for tgt in $CMAKE_EXTRA_TARGETS; do
-				ninja "$tgt" || return $?
+				ninja -v "$tgt" || return $?
 			done
-			DESTDIR="${D}" ninja "$CMAKE_TARGET_INSTALL" || return $?
+			DESTDIR="${D}" ninja -v "$CMAKE_TARGET_INSTALL" || return $?
 			;;
 		Unix\ Makefiles)
-			make -j"$NPROC" "$CMAKE_TARGET_ALL" || return $?
+			make -j"$NPROC" "$CMAKE_TARGET_ALL" VERBOSE=1 || return $?
 			for tgt in $CMAKE_EXTRA_TARGETS; do
-				make -j"$NPROC" "$tgt" || return $?
+				make -j"$NPROC" "$tgt" VERBOSE=1 || return $?
 			done
-			make "$CMAKE_TARGET_INSTALL" DESTDIR="${D}" || return $?
+			make "$CMAKE_TARGET_INSTALL" VERBOSE=1 DESTDIR="${D}" || return $?
 			;;
 		*)
 			echo "Invalid value for CMAKE_BUILD_ENGINE: $CMAKE_BUILD_ENGINE"

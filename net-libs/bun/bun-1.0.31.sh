@@ -6,7 +6,6 @@ acheck
 
 cd "${S}"
 
-#make zig
-/bin/bash -i
+docmake
 
 finalize

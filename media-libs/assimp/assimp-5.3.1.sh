@@ -2,10 +2,8 @@
 source "../../common/init.sh"
 
 get https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
-acheck
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-5.2.5-fix-version.patch
 	"${FILESDIR}"/${PN}-5.2.5-disable-failing-tests.patch
 	"${FILESDIR}"/${PN}-5.2.5-disable-collada-tests.patch
 )
@@ -13,6 +11,8 @@ PATCHES=(
 cd "${S}"
 
 apatch "${PATCHES[@]}"
+
+acheck
 
 cd "${T}"
 

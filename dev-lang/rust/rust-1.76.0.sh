@@ -11,7 +11,7 @@ cd "rustc-${PV}-src"
 # https://github.com/rust-lang/rust/blob/master/config.example.toml
 
 cat << EOF > config.toml
-changelog-seen = 2
+change-id = 118703
 
 [llvm]
 # llvm won't be compiled by rust since we provide llvm-config in targets below

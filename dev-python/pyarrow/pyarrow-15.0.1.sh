@@ -2,7 +2,7 @@
 source ../../common/init.sh
 inherit python
 
-importpkg zlib
+importpkg zlib app-arch/bzip2
 
 # https://gitlab.kitware.com/cmake/cmake/-/issues/25777
 export ZLIB_ROOT=/pkg/main/sys-libs.zlib.dev
@@ -16,6 +16,7 @@ export PYARROW_WITH_DATASET=1
 export PYARROW_WITH_PARQUET=1
 export PYARROW_WITH_PARQUET_ENCRYPTION=1
 export PYARROW_WITH_SNAPPY=1
+export PYARROW_CMAKE_OPTIONS="-DZLIB_ROOT=/pkg/main/sys-libs.zlib.dev"
 
 PATCHES=("$FILESDIR/pyarrow-15.0.1-fix-python3.12-detection-of-suffix-arrow-bug-40566.patch")
 
