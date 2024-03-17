@@ -1,6 +1,6 @@
-bash-5.0# ../work/qt-everywhere-src-5.14.1/configure --help
+$ ./qt-everywhere-src-5.15.13/configure --help
 + cd qtbase
-+ /build/dev-qt.qt/5.14.1.linux.amd64/work/qt-everywhere-src-5.14.1/qtbase/configure -top-level --help
++ /home/magicaltux/tmp/build/qt-5.15.13/work/qt-everywhere-src-5.15.13/qtbase/configure -top-level --help
 Usage:  configure [options] [assignments]
 
 Configure understands variable assignments like VAR=value on the command line.
@@ -134,16 +134,18 @@ Build options:
                          Currently supported backends are 'etw' (Windows) and
                          'lttng' (Linux), or 'yes' for auto-detection. [no]
 
-  -sanitize {address|thread|memory|undefined}
+  -sanitize {address|thread|memory|fuzzer-no-link|undefined}
                          Instrument with the specified compiler sanitizer.
                          Note that some sanitizers cannot be combined;
                          for example, -sanitize address cannot be combined with
                          -sanitize thread.
 
-  -coverage {trace-pc-guard}
-                         Add code coverage instrumentation (Clang only)
+  -coverage {trace-pc-guard|source-based}
+                         Specify the 'trace-pc-guard' coverage instrumentation for
+                         sanitizers or generate instrumented code to collect execution
+                         counts and enable code coverage analysis, respectively. (Clang only)
 
-  -c++std <edition> .... Select C++ standard <edition> [c++2a/c++17/c++14/c++11]
+  -c++std <edition> .... Select C++ standard <edition> [c++2b/c++2a/c++17/c++14/c++11]
                          (Not supported with MSVC 2015)
 
   -sse2 ................ Use SSE2 instructions [auto]
@@ -165,8 +167,6 @@ Build options:
 
   -reduce-exports ...... Reduce amount of exported symbols [auto]
   -reduce-relocations .. Reduce amount of relocations [auto] (Unix only)
-
-  -relocatable ......... Enable the Qt installation to be relocated [auto]
 
   -plugin-manifests .... Embed manifests into plugins [no] (Windows only)
   -static-runtime ...... With -static, use static runtime [no] (Windows only)
@@ -210,6 +210,8 @@ Build environment:
                          [$ANDROID_NDK_HOST]
   -android-abis .......  Comma separated Android abis, default is:
                          armeabi-v7a,arm64-v8a,x86,x86_64
+  -android-javac-target  Set the javac build target version [7]
+  -android-javac-source  Set the javac build source version [7]
   -android-style-assets  Automatically extract style assets from the device at
                          run time. This option makes the Android style behave
                          correctly, but also makes the Android platform plugin
@@ -303,8 +305,7 @@ Gui, printing, widget options:
     -gbm ............... Enable backends for GBM [auto] (Linux only)
     -kms ............... Enable backends for KMS [auto] (Linux only)
     -linuxfb ........... Enable Linux Framebuffer support [auto] (Linux only)
-    -xcb ............... Enable X11 support. Select used xcb-* libraries [system/qt/no]
-                         (-qt-xcb still uses system version of libxcb itself)
+    -xcb ............... Enable X11 support [auto] (Linux only)
 
   Input backends:
     -libudev............ Enable udev support [auto]
@@ -313,7 +314,7 @@ Gui, printing, widget options:
     -libinput .......... Enable libinput support [auto]
     -mtdev ............. Enable mtdev support [auto]
     -tslib ............. Enable tslib support [auto]
-    -xcb-xinput ........ Enable XInput2 support [auto]
+    -bundled-xcb-xinput  Use bundled XInput2 support [auto]
     -xkbcommon ......... Enable key mapping support [auto]
 
   Image formats:
@@ -395,12 +396,14 @@ WebEngine options:
 
 
 
-bash-5.0# ../work/qt-everywhere-src-5.14.1/configure -list-libraries
+$ ./qt-everywhere-src-5.15.13/configure -list-libraries
 + cd qtbase
-+ /build/dev-qt.qt/5.14.1.linux.amd64/work/qt-everywhere-src-5.14.1/qtbase/configure -top-level -list-libraries
++ /home/magicaltux/tmp/build/qt-5.15.13/work/qt-everywhere-src-5.15.13/qtbase/configure -top-level -list-libraries
 Preparing build tree...
 Creating qmake...
-.Done.
+...............................................................................................Done.
+Info: creating super cache file /home/magicaltux/tmp/build/qt-5.15.13/work/.qmake.super
+Info: creating cache file /home/magicaltux/tmp/build/qt-5.15.13/work/.qmake.cache
 
 qtbase:
   dbus
@@ -510,7 +513,7 @@ imageformats:
   tiff
   webp
 assetimporters:
-  assimp
+  quick3d_assimp
 gamepad:
   sdl2
 3dcore:
@@ -542,7 +545,6 @@ multimedia:
   gstreamer
   gstreamer_app
   gstreamer_gl
-  gstreamer_imxcommon
   gstreamer_photography
   libresourceqt5
   mmrenderer
@@ -562,7 +564,6 @@ buildtools:
   webengine_harfbuzz
   webengine_icu
   webengine_jpeglib
-  webengine_jsoncpp
   webengine_lcms2
   webengine_libdrm
   webengine_libevent
@@ -572,7 +573,6 @@ buildtools:
   webengine_nss
   webengine_opus
   webengine_png
-  webengine_protobuf
   webengine_re2
   webengine_snappy
   webengine_webp
@@ -580,10 +580,12 @@ buildtools:
   webengine_xcomposite
   webengine_xcursor
   webengine_xi
+  webengine_xkbfile
+  webengine_xproto_gl
   webengine_xtst
   webengine_zlib
 webenginecore:
   webengine_alsa
+  webengine_gio
   webengine_poppler_cpp
   webengine_pulseaudio
-

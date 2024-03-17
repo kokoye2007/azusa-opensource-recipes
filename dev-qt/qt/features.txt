@@ -1,5 +1,6 @@
+$ ./qt-everywhere-src-5.15.13/configure -list-features
 + cd qtbase
-+ /build/dev-qt.qt/5.14.1.linux.amd64/work/qt-everywhere-src-5.14.1/qtbase/configure -top-level -list-features
++ /home/magicaltux/tmp/build/qt-5.15.13/work/qt-everywhere-src-5.15.13/qtbase/configure -top-level -list-features
 Preparing build tree...
 Creating qmake...
 .Done.
@@ -10,12 +11,16 @@ accessibility ........... Utilities: Provides accessibility support.
 action .................. Kernel: Provides widget actions.
 animation ............... Utilities: Provides a framework for animations.
 appstore-compliant ...... Disables code that is not allowed in platform app stores
+assistant ............... Qt Assistant is a tool for viewing on-line documentation in Qt help file format.
 bearermanagement ........ Networking: Provides bearer management for the network stack.
 big_codecs .............. Internationalization: Supports big codecs, e.g. CJK.
+binaryjson .............. Utilities: Provides support for the deprecated binary JSON format.
 build-qtpdf ............. Enables building the Qt PDF rendering module.
 build-qtwebengine-core .. Provides WebEngine Core support.
 buttongroup ............. Widgets: Supports organizing groups of button widgets.
 calendarwidget .......... Widgets: Provides a monthly based calendar widget allowing the user to select a date.
+cborstreamreader ........ Utilities: Provides support for reading the CBOR binary format.
+cborstreamwriter ........ Utilities: Provides support for writing the CBOR binary format.
 checkbox ................ Widgets: Provides a checkbox with a text label.
 clipboard ............... Kernel: Provides cut and paste operations.
 codecs .................. Internationalization: Supports non-unicode text conversions.
@@ -37,11 +42,13 @@ datawidgetmapper ........ ItemViews: Provides mapping between a section of a dat
 datestring .............. Data structures: Provides conversion between dates and strings.
 datetimeedit ............ Widgets: Supports editing dates and times.
 datetimeparser .......... Utilities: Provides support for parsing date-time texts.
+designer ................ Qt Designer is the Qt tool for designing and building graphical user interfaces (GUIs) with Qt Widgets. You can compose and customize your windows or dialogs in a what-you-see-is-what-you-get (WYSIWYG) manner, and test them using different styles and resolutions.
 desktopservices ......... Utilities: Provides methods for accessing common desktop services.
 dial .................... Widgets: Provides a rounded range control, e.g., like a speedometer.
 dialog .................. Dialogs: Base class of dialog windows.
 dialogbuttonbox ......... Dialogs: Presents buttons in a layout that is appropriate for the current widget style.
 dirmodel ................ ItemViews: Provides a data model for the local filesystem.
+distancefieldgenerator .. The Qt Distance Field Generator tool can be used to pregenerate the font cache in order to optimize startup performance.
 dnslookup ............... Networking: Provides API for DNS lookups.
 dockwidget .............. Widgets: Supports docking widgets inside a QMainWindow or floated as a top-level window on the desktop.
 dom ..................... File I/O: Supports the Document Object Model.
@@ -94,15 +101,19 @@ itemmodeltester ......... Provides a utility to test item models.
 itemviews ............... ItemViews: Provides the model/view architecture managing the relationship between data and the way it is presented to the user.
 jalalicalendar .......... Utilities: Support the Jalali (Persian) calendar
 keysequenceedit ......... Widgets: Provides a widget for editing QKeySequences.
+kmap2qmap ............... kmap2qmap is a tool to generate keymaps for use on Embedded Linux. The source files have to be in standard Linux kmap format that is e.g. understood by the kernel's loadkeys command.
 label ................... Widgets: Provides a text or image display.
 lcdnumber ............... Widgets: Provides LCD-like digits.
 library ................. File I/O: Provides a wrapper for dynamically loaded libraries.
 lineedit ................ Widgets: Provides single-line edits.
+linguist ................ Qt Linguist can be used by translator to translate text in Qt applications.
 listview ................ ItemViews: Provides a list or icon view onto a model.
 listwidget .............. Widgets: Provides item-based list widgets.
 localserver ............. Networking: Provides a local socket based server.
 location-labs-plugin .... Location: Provides experimental QtLocation QML types
+macdeployqt ............. The Mac deployment tool automates the process of creating a deployable application bundle that contains the Qt libraries as private frameworks.
 mainwindow .............. Widgets: Provides main application windows.
+makeqpf ................. makeqpf is a tool to generate pre-rendered fonts in QPF2 format for use on Embedded Linux.
 mdiarea ................. Widgets: Provides an area in which MDI windows are displayed.
 menu .................... Widgets: Provides popup-menus.
 menubar ................. Widgets: Provides pull-down menu items.
@@ -118,7 +129,17 @@ networkinterface ........ Networking: Supports enumerating a host's IP addresses
 networkproxy ............ Networking: Provides network proxy support.
 ocsp .................... Networking: Provides OCSP stapling support
 pdf ..................... Painting: Provides a PDF backend for QPainter.
+pdf-bitcode ............. Enables bitcode
+pdf-static-runtime ...... Enables static runtime
+pdf-v8 .................. Enables javascript support.
+pdf-widgets ............. Provides Qt PDF Widgets support.
+pdf-xfa ................. Enables XFA support.
+pdf-xfa-bmp ............. Enables XFA-BMP support.
+pdf-xfa-gif ............. Enables XFA-GIF support.
+pdf-xfa-png ............. Enables XFA-PNG support.
+pdf-xfa-tiff ............ Enables XFA-TIFF support.
 picture ................. Painting: Supports recording and replaying QPainter commands.
+pixeltool ............... The Qt Pixel Zooming Tool is a graphical application that magnifies the screen around the mouse pointer so you can look more closely at individual pixels.
 printdialog ............. Dialogs: Provides a dialog widget for specifying printer configuration.
 printer ................. Painting: Provides a printer backend of QPainter.
 printpreviewdialog ...... Dialogs: Provides a dialog for previewing and configuring page layouts for printer output.
@@ -130,6 +151,8 @@ progressdialog .......... Dialogs: Provides feedback on the progress of a slow o
 properties .............. Kernel: Supports scripting Qt-based applications.
 proxymodel .............. ItemViews: Supports processing of data passed between another model and a view.
 pushbutton .............. Widgets: Provides a command button.
+qdbus ................... qdbus is a communication interface for Qt-based applications.
+qev ..................... qev allows introspection of incoming events for a QWidget, similar to the X11 xev tool.
 qml-animation ........... QML: Provides support for animations and timers in QML.
 qml-debug ............... QML: Provides infrastructure and plugins for debugging and profiling.
 qml-delegate-model ...... QML: Provides the DelegateModel QML type.
@@ -152,8 +175,13 @@ qt3d-input .............. Aspects: Use the 3D Input Aspect library
 qt3d-logic .............. Aspects: Use the 3D Logic Aspect library
 qt3d-opengl-renderer .... Qt 3D Renderers: Use the OpenGL renderer
 qt3d-render ............. Aspects: Use the 3D Render Aspect library
+qt3d-rhi-renderer ....... Qt 3D Renderers: Use the RHI renderer
 qt3d-simd-avx2 .......... Use AVX2 SIMD instructions to accelerate matrix operations
 qt3d-simd-sse2 .......... Use SSE2 SIMD instructions to accelerate matrix operations
+qtattributionsscanner ... Qt Attributions Scanner generates attribution documents for third-party code in Qt.
+qtdiag .................. qtdiag outputs information about the Qt installation it was built with.
+qtpaths ................. qtpaths is a command line client to QStandardPaths.
+qtplugininfo ............ qtplugininfo dumps metadata about Qt plugins in JSON format.
 quick-animatedimage ..... Qt Quick: Provides the AnimatedImage item.
 quick-canvas ............ Qt Quick: Provides the Canvas item.
 quick-designer .......... Qt Quick: Provides support for the Qt Quick Designer in Qt Creator.
@@ -178,6 +206,7 @@ quicktemplates2-multitouch . Quick Templates 2: Provides support for multi-touch
 radiobutton ............. Widgets: Provides a radio button with a text label.
 raster-64bit ............ Painting: Internal painting support for 64 bit (16 bpc) rasterization.
 regularexpression ....... Kernel: Provides an API to Perl-compatible regular expressions.
+relocatable ............. Enable the Qt installation to be relocated.
 resizehandler ........... Widgets: Provides an internal resize handler for dock widgets.
 rubberband .............. Widgets: Supports using rubberbands to indicate selections and boundaries.
 scrollarea .............. Widgets: Supports scrolling views onto widgets.
@@ -244,26 +273,27 @@ valgrind ................ Profiling support with callgrind.
 validator ............... Widgets: Supports validation of input text.
 wayland-compositor-quick . Allows QtWayland compositor types to be used with QtQuick
 webengine-developer-build . Enables the developer build configuration.
-webengine-embedded-build . WebEngine: Enables the embedded build configuration.
+webengine-embedded-build . Enables the embedded build configuration.
 webengine-extensions .... WebEngine: Enables Chromium extensions within certain limits. Currently used for enabling the pdf viewer.
 webengine-full-debug-info . Enables debug information for Blink and V8.
 webengine-kerberos ...... WebEngine: Enables Kerberos Authentication Support
-webengine-native-spellchecker . WebEngine: Use the system's native spellchecking engine.
-webengine-pepper-plugins . WebEngine: Enables use of Pepper Flash plugins.
-webengine-printing-and-pdf . WebEngine: Provides printing and output to PDF.
-webengine-proprietary-codecs . WebEngine: Enables the use of proprietary codecs such as h.264/h.265 and MP3.
+webengine-native-spellchecker . Use the system's native spellchecking engine.
+webengine-pepper-plugins . Enables use of Pepper Flash plugins.
+webengine-printing-and-pdf . Provides printing and output to PDF.
+webengine-proprietary-codecs . Enables the use of proprietary codecs such as h.264/h.265 and MP3.
 webengine-qml ........... Provides WebEngine Qml support.
-webengine-spellchecker .. WebEngine: Provides a spellchecker.
-webengine-v8-snapshot ... Enables the v8 snapshot, for fast v8 context creation
+webengine-spellchecker .. Provides a spellchecker.
 webengine-webchannel .... WebEngine: Provides QtWebChannel integration.
-webengine-webrtc ........ WebEngine: Provides WebRTC support.
+webengine-webrtc ........ Provides WebRTC support.
+webengine-webrtc-pipewire . Provides PipeWire support in WebRTC using GIO.
 webengine-widgets ....... Provides WebEngine Widgets support.
 whatsthis ............... Widget Support: Supports displaying "What's this" help.
 wheelevent .............. Kernel: Supports wheel events.
 widgettextcontrol ....... Widgets: Provides text control functionality to other widgets.
+windeployqt ............. The Windows deployment tool is designed to automate the process of creating a deployable folder containing the Qt-related dependencies (libraries, QML imports, plugins, and translations) required to run the application from that folder. It creates a sandbox for Universal Windows Platform (UWP) or an installation tree for Windows desktop applications, which can be easily bundled into an installation package.
+winrtrunner ............. The WinRT Runner Tool installs, runs, and collects test results for packages made with Qt.
 wizard .................. Dialogs: Provides a framework for multi-page click-through dialogs.
 xml-schema .............. QtXmlPatterns: Provides XML schema validation.
 xmlstream ............... Kernel: Provides a simple streaming API for XML.
 xmlstreamreader ......... Kernel: Provides a well-formed XML parser with a simple streaming API.
 xmlstreamwriter ......... Kernel: Provides a XML writer with a simple streaming API.
-

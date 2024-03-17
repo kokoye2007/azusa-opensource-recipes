@@ -1,12 +1,11 @@
 #!/bin/bash
 source "../../common/init.sh"
 
-get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/single/qt-everywhere-src-${PV}.tar.xz
+get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/single/qt-everywhere-opensource-src-${PV}.tar.xz
 acheck
 
 cd "${S}"
 
-apatch "$FILESDIR/${P}"-*.patch
 importpkg libevent
 
 # bug 620444 - ensure local headers are used
@@ -27,6 +26,7 @@ EOF
 
 export CFLAGS="${CPPFLAGS} -O2"
 export CXXFLAGS="${CPPFLAGS} -O2"
+export LDFLAGS="${LDFLAGS} -fuse-ld=gold"
 
 # fix libevent include because Qt provides no way to pass CPPFLAGS to chromium
 # and will not honor WEBENGINE_LIBEVENT_PREFIX either, or same for X11, etc
@@ -66,19 +66,19 @@ CONFIGURE=(
 	-system-zlib
 	-system-libjpeg
 	-system-libpng
-	-system-xcb
 	-system-freetype
 	-system-pcre
 	-system-harfbuzz
 	-system-doubleconversion # thirdparty
 	-system-sqlite # db
+	-system-assimp
 
 	# webengine
 	-webengine-alsa
 	-webengine-pulseaudio
 	-system-webengine-icu
-	-system-webengine-opus # TODO: add opus to system then change this
-	-system-webengine-webp # TODO
+	-system-webengine-opus
+	-system-webengine-webp
 	-system-webengine-ffmpeg
 	-webengine-pepper-plugins
 	-webengine-printing-and-pdf
@@ -111,7 +111,6 @@ CONFIGURE=(
 	# vulkan
 	LIBINPUT_PREFIX=/pkg/main/dev-libs.libinput.dev
 	# TSLIB_PREFIX → x11-libs/tslib
-	XCB_PREFIX=/pkg/main/x11-libs.libxcb.dev
 
 	# sqldrivers
 	MYSQL_PREFIX=/pkg/main/dev-db.mariadb.dev
@@ -130,10 +129,10 @@ callconf "${CONFIGURE[@]}" | tee configure.log
 # trick to make errors shown in red in make
 make -j"$NPROC" || /bin/bash -i
 #	2> >(while IFS='' read -r line; do echo -e "\e[01;31m$line\e[0m" >&2; done)
-make install DESTDIR="${D}"
+make install INSTALL_ROOT="${D}"
 
-mkdir -p "${D}/pkg/main"
-mv /.pkg-main-rw/${PKG}.* "${D}/pkg/main"
+#mkdir -p "${D}/pkg/main"
+#mv -v /.pkg-main-rw/${PKG}.* "${D}/pkg/main"
 
 organize
 
