@@ -1,0 +1,11 @@
+--- a/basicsr/data/degradations.py	2024-03-17 16:34:44.737948212 +0900
++++ b/basicsr/data/degradations.py	2024-03-17 16:35:05.787685963 +0900
+@@ -5,7 +5,7 @@
+ import torch
+ from scipy import special
+ from scipy.stats import multivariate_normal
+-from torchvision.transforms.functional_tensor import rgb_to_grayscale
++from torchvision.transforms.functional import rgb_to_grayscale
+ 
+ # -------------------------------------------------------------------- #
+ # --------------------------- blur kernels --------------------------- #
