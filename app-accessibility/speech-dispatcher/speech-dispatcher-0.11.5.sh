@@ -4,13 +4,9 @@ source "../../common/init.sh"
 get https://github.com/brailcom/speechd/releases/download/${PV}/${P}.tar.gz
 acheck
 
-cd "${S}"
-
-apatch "$FILESDIR/speech-dispatcher-0.9.1-fno-common.patch"
-
 cd "${T}"
 
-importpkg sys-devel/libtool app-accessibility/espeak app-accessibility/flite
+importpkg sys-devel/libtool app-accessibility/espeak app-accessibility/flite media-libs/libsndfile dev-libs/dotconf
 
 doconf --disable-python --disable-static --with-baratinoo=no --with-ibmtts=no --with-kali=no --with-alsa --with-libao --with-espeak --with-flite --with-pulse
 
