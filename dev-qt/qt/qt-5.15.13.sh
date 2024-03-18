@@ -1,12 +1,16 @@
 #!/bin/bash
 source "../../common/init.sh"
+inherit gcc
 
 get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/single/qt-everywhere-opensource-src-${PV}.tar.xz
 acheck
 
 cd "${S}"
 
+apatch "$FILESDIR/qtquick3d-assimp-fix.patch"
+
 importpkg libevent
+switchgcc 12
 
 # bug 620444 - ensure local headers are used
 # + adding importpkg headers too
@@ -102,6 +106,7 @@ CONFIGURE=(
 	ICU_PREFIX=/pkg/main/dev-libs.icu.dev
 	PCRE2_PREFIX=/pkg/main/dev-libs.libpcre2.dev
 	OPENSSL_PREFIX=/pkg/main/dev-libs.openssl.dev
+	ASSIMP_PREFIX=/pkg/main/media-libs.assimp.dev
 
 	# gui
 	HARFBUZZ_PREFIX=/pkg/main/media-libs.harfbuzz.dev

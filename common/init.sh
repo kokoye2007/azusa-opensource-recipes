@@ -582,6 +582,7 @@ importpkg() {
 				export CMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH};/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
 				export RUSTFLAGS="${RUSTFLAGS} -L/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
 				export LIBRARY_PATH="$LIBRARY_PATH:/pkg/main/${foo/\//.}.libs${vers}/lib$LIB_SUFFIX"
+				export LIBRARY_PATH="${LIBRARY_PATH/:}"
 			fi
 		elif [ "$foo" = "X" ]; then
 			# import all of X11

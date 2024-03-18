@@ -70,11 +70,11 @@ EOF
 
 	case $CMAKE_BUILD_ENGINE in
 		Ninja)
-			ninja -v "$CMAKE_TARGET_ALL" || return $?
+			ninja -j"$NPROC" -v "$CMAKE_TARGET_ALL" || return $?
 			for tgt in $CMAKE_EXTRA_TARGETS; do
-				ninja -v "$tgt" || return $?
+				ninja -j"$NPROC" -v "$tgt" || return $?
 			done
-			DESTDIR="${D}" ninja -v "$CMAKE_TARGET_INSTALL" || return $?
+			DESTDIR="${D}" ninja -j"$NPROC" -v "$CMAKE_TARGET_INSTALL" || return $?
 			;;
 		Unix\ Makefiles)
 			make -j"$NPROC" "$CMAKE_TARGET_ALL" VERBOSE=1 || return $?
