@@ -4,8 +4,8 @@ inherit python
 
 PYTHON_RESTRICT="$PYTHON_LATEST"
 
-# pytorch does not support cuda 12 yet, and not even 11.8
-CUDA_VERSION="11.8"
+# pytorch standard is 12.1 ?
+CUDA_VERSION="12.1"
 # query cuda-config to find supported gcc versions
 GCC_VERSIONS="$(/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin/cuda-config -s)"
 for vers in $GCC_VERSIONS; do
@@ -17,13 +17,15 @@ done
 echo " * Using CUDA_VERSION=$CUDA_VERSION and GCC_VERSION=$GCC_VERSION"
 
 get https://github.com/pytorch/pytorch/releases/download/v${PV}/pytorch-v${PV}.tar.gz ${P}.tar.gz
+cd "${S}"
+apatch "$FILESDIR/caffe2-2.0.0-gcc13.patch"
 acheck
 
 importpkg sys-process/numactl dev-util/nvidia-cuda-toolkit:$CUDA_VERSION dev-util/nvidia-cuda-profiler-api:$CUDA_VERSION dev-lang/python dev-libs/cudnn dev-libs/gmp dev-libs/mpfr sci-libs/fftw dev-cpp/tbb dev-libs/protobuf media-libs/nv-codec-headers dev-cpp/eigen sci-libs/onnx dev-libs/sleef dev-libs/FP16
 
-# force gcc-$GCC_VERSION
-export PATH="/pkg/main/sys-devel.gcc.core.$GCC_VERSION/bin:/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin:$PATH"
-rm -f /usr/bin/gcc /usr/bin/g++ /usr/bin/nvcc
+# force cuda, we do not force gcc version but instead pass --compiler-bindir in CMAKE_CUDA_FLAGS
+export PATH="/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin:$PATH"
+rm -f /usr/bin/nvcc
 
 cd "${T}"
 
@@ -55,7 +57,8 @@ OPTS=(
 	-DUSE_CUDA=ON
 	-DUSE_CUDNN=ON
 	-DUSE_FAST_NVCC=ON
-	-DTORCH_CUDA_ARCH_LIST="3.5 5.0 7.5 8.0 8.6"
+	-DTORCH_CUDA_ARCH_LIST="7.5 8.0 8.6 8.9 9.0"
+	-DCMAKE_CUDA_FLAGS="--compiler-bindir /pkg/main/sys-devel.gcc.core.$GCC_VERSION/bin"
 	-DBUILD_NVFUSER=OFF
 	# -DUSE_DISTRIBUTED=ON # todo tensorpipe
 	-DUSE_DISTRIBUTED=OFF
@@ -106,8 +109,10 @@ OPTS=(
 	-DTORCH_INSTALL_LIB_DIR="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 	-DLIBSHM_INSTALL_LIB_SUBDIR="/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 
-	# -DCMAKE_CUDA_FLAGS=""
 )
+
+# building can take a lot of ram. My 64GB RAM have trouble with any more processes
+NPROC=4
 
 docmake "${OPTS[@]}"
 
