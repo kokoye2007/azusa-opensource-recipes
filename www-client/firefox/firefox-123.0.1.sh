@@ -6,8 +6,6 @@ acheck
 
 cd "${P}"
 
-patch -Np1 -i "${FILESDIR}/firefox-69.0.1-system_graphite2_harfbuzz-1.patch"
-
 echo "AIzaSyAqAvJEBBA813_wwOAFMlXJgJ2BSZmIGR4" > google-key # azusa key
 # TODO FIXME this is a LFS api key, pending Mozilla key
 # https://location.services.mozilla.com/api

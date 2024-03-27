@@ -9,6 +9,14 @@ cd "${S}"
 
 apatch "$FILESDIR/qtquick3d-assimp-fix.patch"
 
+# apply ffmpeg patch
+cd qtwebengine/src/3rdparty/chromium/third_party/ffmpeg
+
+apatch "$FILESDIR/ffmpeg-fix-assembling-with-binutils-2.41.patch"
+
+# return to $S
+cd "${S}"
+
 importpkg libevent
 switchgcc 12
 
@@ -83,7 +91,7 @@ CONFIGURE=(
 	-system-webengine-icu
 	-system-webengine-opus
 	-system-webengine-webp
-	-system-webengine-ffmpeg
+	#-system-webengine-ffmpeg
 	-webengine-pepper-plugins
 	-webengine-printing-and-pdf
 	-webengine-webrtc
@@ -124,7 +132,7 @@ CONFIGURE=(
 
 	# WEBENGINE_RE2_PREFIX → dev-libs/re2
 	WEBENGINE_OPUS_PREFIX=/pkg/main/media-libs.opus.dev
-	WEBENGINE_FFMPEG_PREFIX=/pkg/main/media-video.ffmpeg.dev
+	#WEBENGINE_FFMPEG_PREFIX=/pkg/main/media-video.ffmpeg.dev
 	WEBENGINE_SNAPPY_PREFIX=/pkg/main/app-arch.snappy.dev
 	WEBENGINE_LIBEVENT_PREFIX=/pkg/main/dev-libs.libevent.dev
 )

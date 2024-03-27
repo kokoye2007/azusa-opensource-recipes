@@ -21,14 +21,18 @@ CONFIGURE=(
 	--without-cvs
 	--disable-werror
 	--enable-bind-now
+	--enable-fortify-source
 	--with-bugurl=https://github.com/AzusaOS/azusa-opensource-recipes/issues
 	--with-pkgversion="Azusa glibc ${PVR}"
 	--disable-crypt
+	--enable-multi-arch
 #	--enable-systemtap
 	--enable-nscd
 	--disable-timezone-tools
 	libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
 )
+# ac_cv_path_PERL=/pkg/main/dev-lang.perl.core/bin/perl
+# libc_cv_complocaledir=...?
 
 if [ "$ARCH" == "amd64" ]; then
 	CONFIGURE+=(--enable-cet)

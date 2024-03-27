@@ -3,6 +3,8 @@ source ../../common/init.sh
 inherit python
 inherit cuda
 
+envcheck
+
 # empty CPPFLAGS since nvcc won't support -pipe etc
 CPPFLAGS=""
 
@@ -17,6 +19,6 @@ export TORCH_CUDA_ARCH_LIST="7.5;8.0;8.6;9.0+PTX"
 export PYTORCH_NVCC="${CUDA_HOME}/bin/nvcc ${CPPFLAGS}"
 
 # avoid computer to die
-export MAX_JOBS=4
+export MAX_JOBS=1
 
 python_do_standard_package
