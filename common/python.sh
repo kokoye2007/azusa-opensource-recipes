@@ -108,8 +108,8 @@ pythonsetup() {
 			check_fail_location "/.pkg-main-rw/dev-lang.python.core.${PYTHON_VERSION}"*
 		fi
 	done
-	find "${D}" -name azusafinder*.pyc | xargs rm -fv
-	find "${D}" -name __pycache__ -type d | xargs rmdir --ignore-fail-on-non-empty -v
+	find "${D}" -name azusafinder*.pyc | xargs -r rm -fv
+	find "${D}" -name __pycache__ -type d | xargs -r rmdir --ignore-fail-on-non-empty -v
 }
 
 pythonpackage() {
