@@ -6,7 +6,6 @@ acheck
 
 cd "${S}"
 
-apatch "$FILESDIR/${P}"-*.patch
 aautoreconf
 
 cd "${T}"
