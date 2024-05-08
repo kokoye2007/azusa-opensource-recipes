@@ -4,18 +4,12 @@ source "../../common/init.sh"
 get https://www.php.net/distributions/${P}.tar.xz
 acheck
 
-cd "${S}"
-
 # which PHP SAPIs to be compiled
 SAPIS="cli cgi fpm embed phpdbg"
 # apache2: fails because: apxs:Error: Config file /build/dev-lang.php/7.3.10/dist/etc/httpd.conf not found.
 
 # getting readline to work is a bit of a pain...
-importpkg sys-libs/ncurses sys-libs/readline sys-libs/libxcrypt dev-util/valgrind
-
-# override pkgconfig for openssl since this version of PHP doesn't like OpenSSL 3
-export OPENSSL_CFLAGS="-I$(realpath "/pkg/main/dev-libs.openssl.dev.1/include")"
-export OPENSSL_LIBS="-L$(realpath "/pkg/main/dev-libs.openssl.libs.1/lib$LIB_SUFFIX") -lcrypto -lssl"
+importpkg sys-libs/ncurses sys-libs/readline sys-libs/libxcrypt sys-libs/pam dev-util/valgrind
 
 for sapi in $SAPIS; do
 	echo
@@ -75,7 +69,7 @@ for sapi in $SAPIS; do
 	CONFIGURE+=("--with-gmp=shared,/pkg/main/dev-libs.gmp.dev")
 	CONFIGURE+=("--with-mhash")
 	CONFIGURE+=("--with-iconv")
-	#CONFIGURE+=("--with-imap=shared,/pkg/main/net-libs.c-client.dev" "--with-imap-ssl")
+	CONFIGURE+=("--with-imap=shared,/pkg/main/net-libs.c-client.dev" "--with-imap-ssl")
 	CONFIGURE+=("--enable-intl=shared,/pkg/main/dev-libs.icu.core")
 	CONFIGURE+=("--enable-mbstring")
 	CONFIGURE+=("--with-mysqli=shared,mysqlnd")
@@ -116,9 +110,9 @@ for sapi in $SAPIS; do
 
 	callconf --prefix="/pkg/main/${PKG}.core.$sapi.${PVRF}" --libdir="/pkg/main/${PKG}.libs.$sapi.${PVRF}" --includedir="/pkg/main/${PKG}.dev.$sapi.${PVRF}" "${CONFIGURE[@]}"
 
-	# replace libtool with system's (add --tag=CXX)
-	echo "#!/bin/sh" >libtool
-	echo "exec /bin/libtool --tag=CXX \"\$@\"">>libtool
+	# replace libtool
+	rm -fv libtool
+	cp -v /pkg/main/sys-devel.libtool.core/bin/libtool libtool
 
 	make -j"$NPROC"
 	make install INSTALL_ROOT="${D}"

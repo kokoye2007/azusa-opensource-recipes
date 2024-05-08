@@ -15,7 +15,8 @@ export PYTHON=python3
 
 doconf --without-zenmap
 
-make || /bin/bash -i
+make
 make install DESTDIR="${D}"
 
-finalize
+fixelf
+archive
