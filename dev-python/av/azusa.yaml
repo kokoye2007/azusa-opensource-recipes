@@ -1,0 +1,3 @@
+description: Pythonic bindings for FFmpeg's libraries.
+homepage: https://github.com/PyAV-Org/PyAV
+license: BSD

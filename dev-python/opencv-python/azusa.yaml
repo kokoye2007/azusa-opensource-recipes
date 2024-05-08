@@ -1,0 +1,3 @@
+description: Wrapper package for OpenCV python bindings.
+homepage: https://github.com/opencv/opencv-python
+license: Apache 2.0
