@@ -1,0 +1,3 @@
+description: GNU utility to convert program --help output to a man page
+homepage: https://www.gnu.org/software/help2man/ https://salsa.debian.org/bod/help2man
+license: GPL-3+ FSFAP
