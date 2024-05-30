@@ -74,7 +74,6 @@ build --repository_cache="${T}/bazel-cache/" --distdir="${T}/bazel-distdir/"
 build --define=PREFIX=/pkg/main/${PKG}.core.${PVRF}
 build --define=LIBDIR=/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}
 build --define=INCLUDEDIR=/pkg/main/${PKG}.dev.${PVRF}/include
-build --nodistinct_host_configuration
 	EOF
 }
 
@@ -82,7 +81,7 @@ abazel() {
 	abazel_setup_bazelrc
 
 	# --output_base="${output_base}"
-	set -- bazel --bazelrc="${T}/bazelrc" ${@}
+	set -- /pkg/main/dev-util.bazel.core/bin/bazel --bazelrc="${T}/bazelrc" ${@}
 	echo "${*}"
 	"${@}"
 	return $?
