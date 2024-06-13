@@ -407,7 +407,7 @@ archive() {
 		done
 		if [ -f "${D}/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf" ]; then
 			echo "Running ldconfig..."
-			ldconfig --format=new -v -r "${D}" -C "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.cache" -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf" 
+			/pkg/main/sys-libs.glibc.core/sbin/ldconfig --format=new -v -r "${D}" -C "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.cache" -f "/pkg/main/${PKG}.libs.${PVRF}/.ld.so.conf" 
 		fi
 	fi
 
