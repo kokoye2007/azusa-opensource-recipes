@@ -134,7 +134,7 @@ download() {
 	fi
 
 	# try to get from our system
-	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" "$(echo "https://pkg.azusa.jp/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g')" || true
+	wget --ca-certificate=/etc/ssl/certs/ca-certificates.crt -O "$BN" "$(echo "https://data.apkg.net/src/main/${CATEGORY}/${PN}/${BN}" | sed -e 's/+/%2B/g')" || true
 	if [ -s "$BN" ]; then
 		return
 	fi
