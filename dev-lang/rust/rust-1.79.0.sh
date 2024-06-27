@@ -9,6 +9,7 @@ importpkg zlib sys-libs/llvm-libunwind dev-libs/libffi
 cd "rustc-${PV}-src"
 
 # https://github.com/rust-lang/rust/blob/master/config.example.toml
+# AArch64;AMDGPU;ARM;AVR;BPF;Hexagon;Lanai;LoongArch;Mips;MSP430;NVPTX;PowerPC;RISCV;Sparc;SystemZ;VE;WebAssembly;X86;XCore
 
 cat << EOF > config.toml
 change-id = 118703
@@ -19,7 +20,7 @@ download-ci-llvm = false
 optimize = true
 release-debuginfo = false
 assertions = false
-targets = "X86"
+targets = "X86;AArch64;ARM;WebAssembly"
 experimental-targets = ""
 
 # When using system llvm prefer shared libraries
@@ -87,18 +88,18 @@ compression-formats = ["xz"]
 [target.x86_64-unknown-linux-gnu]
 #llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
 ar = "ar"
-cc = "clang"
+cc = "clang++"
 cxx = "clang++"
-linker = "clang"
+linker = "clang++"
 ranlib = "ranlib"
 llvm-libunwind = "system"
 
 [target.i686-unknown-linux-gnu]
 #llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
 ar = "ar"
-cc = "clang"
+cc = "clang++"
 cxx = "clang++"
-linker = "clang"
+linker = "clang++"
 ranlib = "ranlib"
 llvm-libunwind = "system"
 
