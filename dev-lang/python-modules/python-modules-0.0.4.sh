@@ -127,6 +127,8 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 	echo "        }" >>$FINDER
 	echo "    def find_spec(self, fullname, path=None, target=None):" >>$FINDER
 	echo "        \"\"\"Find the path of the given module in the static list.\"\"\"" >>$FINDER
+	echo "        if fullname == 'distutils':" >>$FINDER
+	echo "            __import__('_distutils_hack').add_shim()" >>$FINDER
 	echo "        if fullname in self.modules:" >>$FINDER
 	echo "            module_paths = self.modules[fullname]" >>$FINDER
 	echo "            for module_path in module_paths:" >>$FINDER
