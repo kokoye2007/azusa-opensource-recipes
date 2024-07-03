@@ -19,4 +19,7 @@ doconflight --enable-shared --enable-nls
 make
 make prefix="${D}/pkg/main/${PKG}.core.${PVRF}" libdir="${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" install install-compat -j1
 
+# rename the .pc file to avoid clashing with elfutils
+mv -v "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/pkgconfig/libelf.pc" "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/pkgconfig/libelf-legacy.pc"
+
 finalize
