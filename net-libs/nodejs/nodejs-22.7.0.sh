@@ -13,7 +13,7 @@ ulimit -n 65536
 
 doconflight --shared-cares --shared-libuv --shared-nghttp2 --shared-nghttp2-libpath=$(pkg-config --variable libdir libnghttp2) --shared-openssl --with-snapshot --shared-zlib --with-intl=system-icu
 
-make -j"$NPROC" || /bin/bash -i
+make -j"$NPROC"
 make install DESTDIR="${D}"
 
 # move "node_modules" to its own "mod" package
