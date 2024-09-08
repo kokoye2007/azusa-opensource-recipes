@@ -15,6 +15,6 @@ cd "${T}"
 
 importpkg dev-libs/boost dev-libs/libevent sys-libs/db:5.3 net-libs/miniupnpc net-libs/zeromq
 
-docmake -DBUILD_BITCOIN_QT=OFF -DBoost_ROOT=/pkg/main/dev-libs.boost.dev
+docmake -DBUILD_BITCOIN_QT=OFF -DBoost_ROOT=/pkg/main/dev-libs.boost.dev -DCLIENT_VERSION_IS_RELEASE=ON
 
 finalize
