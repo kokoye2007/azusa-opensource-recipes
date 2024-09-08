@@ -1,0 +1,14 @@
+--- src/net.cpp.orig	2024-09-08 18:24:14.578873287 +0900
++++ src/net.cpp	2024-09-08 18:24:16.225555257 +0900
+@@ -1545,7 +1545,11 @@
+     struct IGDdatas data;
+     int r;
+ 
++#if (MINIUPNPC_API_VERSION >= 18)
++    r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr), nullptr, 0);
++#else
+     r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr));
++#endif
+     if (r == 1) {
+         if (fDiscover) {
+             char externalIPAddress[40];

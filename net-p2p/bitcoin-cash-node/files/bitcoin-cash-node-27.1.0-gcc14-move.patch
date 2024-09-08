@@ -1,0 +1,11 @@
+--- src/validation.cpp.orig	2024-09-08 18:13:11.692713050 +0900
++++ src/validation.cpp	2024-09-08 18:13:17.562767595 +0900
+@@ -1329,7 +1329,7 @@
+     // if we know for sure that the coin did not already exist in the cache. As
+     // we have queried for that above using HaveCoin, we don't need to guess.
+     // When fClean is false, a coin already existed and it is an overwrite.
+-    view.AddCoin(out, std::move(undo), !fClean);
++    view.AddCoin(out, undo, !fClean);
+ 
+     return fClean ? DISCONNECT_OK : DISCONNECT_UNCLEAN;
+ }

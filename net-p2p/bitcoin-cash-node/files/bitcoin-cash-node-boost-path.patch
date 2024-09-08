@@ -1,0 +1,10 @@
+--- cmake/templates/NativeCmakeRunner.cmake.in.orig	2024-09-08 18:05:41.528535110 +0900
++++ cmake/templates/NativeCmakeRunner.cmake.in	2024-09-08 18:08:41.813538370 +0900
+@@ -4,6 +4,8 @@
+     -S "${CMAKE_SOURCE_DIR}" \
+     -B "${NATIVE_BUILD_DIR}" \
+     -D__IS_NATIVE_BUILD=1 \
++    -DBoost_ROOT=/pkg/main/dev-libs.boost.dev \
++    -DEvent_ROOT=/pkg/main/dev-libs.libevent.dev \
+     -DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM} \
+     ${ARGS}
