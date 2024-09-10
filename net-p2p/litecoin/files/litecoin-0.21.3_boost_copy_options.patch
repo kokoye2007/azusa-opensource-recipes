@@ -1,0 +1,14 @@
+--- src/wallet/bdb.cpp.orig	2024-09-10 01:18:04.281438062 +0900
++++ src/wallet/bdb.cpp	2024-09-10 01:30:30.738334543 +0900
+@@ -627,7 +627,11 @@
+                         return false;
+                     }
+ 
++#if BOOST_VERSION >= 107400
++                    fs::copy_file(pathSrc, pathDest, fs::copy_options::overwrite_existing);
++#else
+                     fs::copy_file(pathSrc, pathDest, fs::copy_option::overwrite_if_exists);
++#endif
+                     LogPrintf("copied %s to %s\n", strFile, pathDest.string());
+                     return true;
+                 } catch (const fs::filesystem_error& e) {

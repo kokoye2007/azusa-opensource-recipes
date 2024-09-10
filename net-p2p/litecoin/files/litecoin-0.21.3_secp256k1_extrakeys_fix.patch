@@ -1,0 +1,12 @@
+See: https://github.com/litecoin-project/litecoin/issues/825
+
+--- src/secp256k1-zkp/libsecp256k1-config.h.orig	2024-09-10 13:11:32.816337513 +0900
++++ src/secp256k1-zkp/libsecp256k1-config.h	2024-09-10 13:11:50.336500626 +0900
+@@ -133,6 +133,7 @@
+ #define ENABLE_MODULE_COMMITMENT 1
+ #define ENABLE_MODULE_GENERATOR 1
+ #define ENABLE_MODULE_BULLETPROOF 1
++#define ENABLE_MODULE_EXTRAKEYS 1
+ #define ENABLE_MODULE_AGGSIG 1
+ #define ENABLE_MODULE_SCHNORRSIG 1
+ 
