@@ -2,7 +2,7 @@
 
 docmake() {
 	echo "Running cmake..."
-	if [ x"$CMAKE_ROOT" = x ]; then
+	if [ "$CMAKE_ROOT" = "" ]; then
 		CMAKE_ROOT="${S}"
 	fi
 
@@ -37,7 +37,7 @@ EOF
 	echo "CMAKE_SYSTEM_INCLUDE_PATH = $CMAKE_SYSTEM_INCLUDE_PATH"
 	echo "CPPFLAGS = $CPPFLAGS"
 
-	if [ x"$CMAKE_BUILD_ENGINE" = x ]; then
+	if [ "$CMAKE_BUILD_ENGINE" = "" ]; then
 		CMAKE_BUILD_ENGINE="Ninja"
 	fi
 
@@ -57,14 +57,14 @@ EOF
 
 	echo "Invoking compiler..."
 
-	if [ x"$CMAKE_TARGET_ALL" = x ]; then
+	if [ "$CMAKE_TARGET_ALL" = "" ]; then
 		CMAKE_TARGET_ALL="all"
 	fi
-	if [ x"$CMAKE_TARGET_ALL" = x"skip" ]; then
+	if [ "$CMAKE_TARGET_ALL" = "skip" ]; then
 		# do not build (yet)
 		return
 	fi
-	if [ x"$CMAKE_TARGET_INSTALL" = x ]; then
+	if [ "$CMAKE_TARGET_INSTALL" = "" ]; then
 		CMAKE_TARGET_INSTALL="install"
 	fi
 

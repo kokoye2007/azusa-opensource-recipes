@@ -6,7 +6,7 @@ dowaf() {
 	fi
 
 	# can only build from source
-	cd "${S}"
+	cd "${S}" || exit
 
 	CCFLAGS="${CPPFLAGS} -O2" LINKFLAGS="${LDFLAGS}" "$WAF_BINARY" --prefix="/pkg/main/${PKG}.core.${PVRF}" "$@" configure
 

@@ -2,15 +2,15 @@
 set -e
 
 # go to root dir
-cd "$(dirname $0)/.."
-AZUSA_RECIPES_ROOT=`pwd`
+cd "$(dirname "$0")/.."
+AZUSA_RECIPES_ROOT=$(pwd)
 
 # Compile a given package ($1) within a jail
 PKG="$1"
 
 if [ -f "$PKG" ]; then
-	PKG_DIR=`dirname "$PKG"`
-	PKG_SCRIPT=`basename "$PKG"`
+	PKG_DIR=$(dirname "$PKG")
+	PKG_SCRIPT=$(basename "$PKG")
 elif [ -d "$PKG" ]; then
 	# try to locate script (latest version)
 	PKG_DIR="$PKG"
@@ -20,7 +20,7 @@ elif [ -d "$PKG" ]; then
 			PKG_SCRIPT="$foo"
 		fi
 	done
-	PKG_SCRIPT=`basename "$PKG_SCRIPT"`
+	PKG_SCRIPT=$(basename "$PKG_SCRIPT")
 else
 	echo "$PKG not found"
 	exit 1

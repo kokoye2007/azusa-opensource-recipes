@@ -3,7 +3,7 @@
 fetchgit() {
 	# fetchgit repository tag
 	local gitbase
-	gitbase="$(basename $1)"
+	gitbase="$(basename "$1")"
 	gitbase="${gitbase/.git}"
 	local tag
 	tag="$2"
@@ -22,7 +22,7 @@ fetchgit() {
 	# failed download, get file, then upload...
 	echo "Downloading from git: $1"
 	git clone --no-checkout --quiet "$1" "${gitbase}-${tag}"
-	cd "${gitbase}-${tag}"
+	cd "${gitbase}-${tag}" || exit
 	S="${PWD}"
 	echo "Checking out tag $tag ..."
 	git checkout --quiet --detach "$tag"

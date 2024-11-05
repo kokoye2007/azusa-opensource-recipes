@@ -3,7 +3,7 @@
 bazel_get() {
 	# download bazel files in $WORKDIR/bazel-distdir
 	mkdir "${T}/bazel-distdir"
-	cd "${T}/bazel-distdir"
+	cd "${T}/bazel-distdir" || exit
 	for foo in $@; do
 		if [ $(echo "$foo" | grep -c =) -eq 0 ]; then
 			# save as is
@@ -16,7 +16,7 @@ bazel_get() {
 			mv -v "$fn" "$(basename "$url")"
 		fi
 	done
-	cd -
+	cd - || exit
 }
 
 bazel_get_flags() {

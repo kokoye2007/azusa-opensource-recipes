@@ -151,7 +151,7 @@ pythonmesonsetup() {
 		fi
 
 		mkdir -p "${T}/build-${PYTHON_VERSION}"
-		cd "${T}/build-${PYTHON_VERSION}"
+		cd "${T}/build-${PYTHON_VERSION}" || exit
 		meson --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" -Dpython="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" "$base"
 		ninja
 		DESTDIR="${D}" ninja install
@@ -194,7 +194,7 @@ pythonconfsetup() {
 		fi
 
 		mkdir -p "${T}/build-${PYTHON_VERSION}"
-		cd "${T}/build-${PYTHON_VERSION}"
+		cd "${T}/build-${PYTHON_VERSION}" || exit
 		PYTHON="/pkg/main/dev-lang.python.core.${PYTHON_VERSION}/bin/python${PYTHON_VERSION:0:1}" "$base/configure" --prefix="/pkg/main/${PKG}.mod.${PVR}.py${PYTHON_VERSION}" "$@"
 		make
 		make install DESTDIR="${D}"
@@ -250,7 +250,7 @@ python_do_standard_package() {
 
 	importpkg sys-libs/llvm-libunwind # needed quite often
 
-	cd "${S}"
+	cd "${S}" || exit
 
 	apatch "${PATCHES[@]}"
 

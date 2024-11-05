@@ -1,6 +1,6 @@
-ARCH=`uname -m`
-BITS=`getconf LONG_BIT`
-OS=`uname -s | tr A-Z a-z`
+ARCH=$(uname -m)
+BITS=$(getconf LONG_BIT)
+OS=$(uname -s | tr A-Z a-z)
 MULTILIB=no
 
 case $ARCH in
@@ -11,7 +11,7 @@ case $ARCH in
 		BITS=32
 		;;
 	x86_64)
-		if [ $BITS -eq 32 ]; then
+		if [ "$BITS" -eq 32 ]; then
 			# let's force uname -m to be 32bits
 			exec setarch i686 /bin/bash "$0" "$@"
 			exit 1

@@ -3,7 +3,7 @@
 set -e
 
 BASEDIR="$(pwd)"
-if [ x"$ROOTDIR" = x ]; then
+if [ "$ROOTDIR" = "" ]; then
 	ROOTDIR=$(realpath "$BASEDIR/../..")
 fi
 source "$ROOTDIR/common/arch.sh"
@@ -22,7 +22,7 @@ PV="${P#"${PN}-"}"
 PVF="${PV}.${OS}.${ARCH}"
 PKG="${CATEGORY}.${PN}"
 FILESDIR="${BASEDIR}/files"
-if [ x"$NPROC" = x ]; then
+if [ "$NPROC" = "" ]; then
 	NPROC="$(nproc 2>/dev/null || echo 1)"
 fi
 
@@ -54,7 +54,7 @@ if [ x"$DEBUG" != x ]; then
 	catcherror() {
 		echo "ERR Trap debug console! Something went wrong but DEBUG=1 was provided, launching interactive console..."
 		/bin/bash -i || true
-		exit $1
+		exit "$1"
 	}
 	trap catcherror ERR
 fi
@@ -66,7 +66,7 @@ inherit() {
 }
 
 detect_src() {
-	if [ x"$S" = x ]; then
+	if [ "$S" = "" ]; then
 		local foo
 		for foo in */; do
 			if [ -d "$foo" ]; then
@@ -98,7 +98,7 @@ extract() {
 }
 
 get() {
-	if [ "x$2" = x"" ]; then
+	if [ "$2" = "" ]; then
 		BN=$(basename "$1")
 	else
 		BN="$2"
@@ -123,7 +123,7 @@ dpfx() {
 }
 
 download() {
-	if [ "x$2" = x"" ]; then
+	if [ "$2" = "" ]; then
 		BN=$(basename "$1")
 	else
 		BN="$2"
@@ -553,7 +553,7 @@ importcmakepkg() {
 	local PKGNAME="$1"
 	local PKGVARNAME="$2"
 
-	if [ x"$PKGVARNAME" = x ]; then
+	if [ "$PKGVARNAME" = "" ]; then
 		PKGVARNAME="$(echo "${PKGNAME#*/}" | tr a-z A-Z)"
 	fi
 
@@ -683,12 +683,12 @@ die() {
 # eg: makepkgconfig -lduktape
 makepkgconfig() {
 	local LIBS="$1"
-	if [ x"$LIBS" = x ]; then
+	if [ "$LIBS" = "" ]; then
 		die "need to specify libs in makepkgconfig"
 	fi
 
 	local PCFILE="$2"
-	if [ x"$PCFILE" = x ]; then
+	if [ "$PCFILE" = "" ]; then
 		PCFILE="$PN"
 	fi
 	local NAME="$PN"

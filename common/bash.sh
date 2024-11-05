@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # go to root dir
-cd "$(dirname $0)/.."
+cd "$(dirname "$0")/.." || exit
 
 source "common/env.sh"
 

@@ -2,7 +2,7 @@
 
 domeson() {
 	echo "Running meson..."
-	if [ x"$MESON_ROOT" = x ]; then
+	if [ "$MESON_ROOT" = "" ]; then
 		MESON_ROOT="${S}"
 	fi
 

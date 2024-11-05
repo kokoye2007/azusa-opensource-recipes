@@ -35,7 +35,7 @@ perlsetup() {
 		# fetch the installed module from /.pkg-main-rw/
 		for typ in core doc; do
 			ttyp="$typ"
-			if [ x"$ttyp" = x"core" ]; then
+			if [ "$ttyp" = "core" ]; then
 				ttyp="mod"
 			fi
 			if [ -d "/.pkg-main-rw/dev-lang.perl-modules.$typ.${PERL_VERSION}"* ]; then
