@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.cabextract.org.uk/libmspack/libmspack-${PV}.tar.gz
+get https://www.cabextract.org.uk/libmspack/libmspack-"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

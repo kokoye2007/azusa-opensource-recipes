@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MAJOR_P="${PV%.*}"
 MY_P="${PN}-${PV/_p/-patch}"
-get https://www.hdfgroup.org/ftp/HDF5/releases/${PN}-${MAJOR_P}/${MY_P}/src/${MY_P}.tar.bz2
+get https://www.hdfgroup.org/ftp/HDF5/releases/"${PN}"-"${MAJOR_P}"/"${MY_P}"/src/"${MY_P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 #importpkg sys-cluster/openmpi
 # --enable-parallel

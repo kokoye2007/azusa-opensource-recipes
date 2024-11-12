@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.mr511.de/software/${P}.tar.gz
-cd "${S}"
+get http://www.mr511.de/software/"${P}".tar.gz
+cd "${S}" || exit
 apatch "$FILESDIR/libelf-0.8.13-build.patch"
 aautoreconf
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 # prefix might want to play with this; unfortunately the stupid
 # macro used to detect whether we're building ELF is so screwed up

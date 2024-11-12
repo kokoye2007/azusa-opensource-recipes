@@ -1,20 +1,20 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mupdf.com/downloads/archive/${P}-source.tar.xz
+get https://mupdf.com/downloads/archive/"${P}"-source.tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PKGCONFIG="libopenjp2 glu gl glut harfbuzz"
-XCFLAGS="$(pkg-config --cflags ${PKGCONFIG}) -O2"
-XLIBS="$(pkg-config --libs ${PKGCONFIG})"
+XCFLAGS="$(pkg-config --cflags "${PKGCONFIG}") -O2"
+XLIBS="$(pkg-config --libs "${PKGCONFIG}")"
 
 echo "pkg-config: $PKGCONFIG"
 echo "XCFLAGS: $XCFLAGS"
 echo "XLIBS: $XLIBS"
 
-apatch $FILESDIR/${P}-*.patch
+apatch "$FILESDIR"/"${P}"-*.patch
 
 MAKEOPTS=(
 	XCFLAGS="$XCFLAGS"

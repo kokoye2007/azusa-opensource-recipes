@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.haproxy.org/download/${PV%.*}/src/${P}.tar.gz
+get http://www.haproxy.org/download/"${PV%.*}"/src/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg dev-lang/lua openssl libpcre zlib libxcrypt
 

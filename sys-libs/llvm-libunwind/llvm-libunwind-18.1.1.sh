@@ -24,7 +24,7 @@ CMAKE_OPTS=(
 	-DLIBUNWIND_USE_COMPILER_RT=ON
 )
 
-cd "$T"
+cd "$T" || exit
 
 llvmbuild "${CMAKE_OPTS[@]}"
 

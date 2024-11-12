@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xiph.org/releases/vorbis/${P}.tar.gz
+get http://downloads.xiph.org/releases/vorbis/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

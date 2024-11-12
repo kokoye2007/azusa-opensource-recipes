@@ -7,7 +7,7 @@ inherit llvm
 llvmget llvm
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib sys-libs/llvm-libunwind sys-libs/libcxx sys-libs/libcxxabi
 

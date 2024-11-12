@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.isc.org/isc/bind9/${PV}/${P}.tar.xz
+get https://downloads.isc.org/isc/bind9/"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib sys-libs/libcap sys-libs/ncurses sys-libs/readline
 

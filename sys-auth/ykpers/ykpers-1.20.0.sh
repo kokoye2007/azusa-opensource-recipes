@@ -2,16 +2,16 @@
 source "../../common/init.sh"
 inherit asciidoc
 
-get https://github.com/Yubico/yubikey-personalization/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/Yubico/yubikey-personalization/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
 importpkg sys-auth/libyubikey
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

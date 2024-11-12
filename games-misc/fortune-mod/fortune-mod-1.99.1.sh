@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.redellipse.net/code/downloads/${P}.tar.xz
+get http://www.redellipse.net/code/downloads/"${P}".tar.xz
 acheck
 
 importpkg app-text/recode
 
-cd "${S}"
+cd "${S}" || exit
 
 domake() {
 	make \
@@ -18,7 +18,7 @@ domake() {
 		BINMANDIR="$1/pkg/main/${PKG}.doc.${PVRF}/man/man1" \
 		FORTMANDIR="$1/pkg/main/${PKG}.doc.${PVRF}/man/man6" \
 		LDFLAGS="$LDFLAGS" \
-		$2
+		"$2"
 }
 
 domake

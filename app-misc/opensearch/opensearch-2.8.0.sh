@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 case $ARCH in
 	amd64)
-		get https://artifacts.opensearch.org/releases/bundle/${PN}/${PV}/${P}-linux-x64.tar.gz
+		get https://artifacts.opensearch.org/releases/bundle/"${PN}"/"${PV}"/"${P}"-linux-x64.tar.gz
 		;;
 	arm64)
-		get https://artifacts.opensearch.org/releases/bundle/${PN}/${PV}/${P}-linux-arm64.tar.gz
+		get https://artifacts.opensearch.org/releases/bundle/"${PN}"/"${PV}"/"${P}"-linux-arm64.tar.gz
 		;;
 	*)
 		die "no opensearch for this platform"
@@ -14,7 +14,7 @@ case $ARCH in
 esac
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 rm -rf jdk || die
 rm -f opensearch-tar-install.sh
@@ -27,13 +27,13 @@ mkdir -p extensions # opensearch 2.8.0 bug https://github.com/opensearch-project
 sed -i -e 's:JAVA=..OPENSEARCH_HOME.*$:JAVA="/pkg/main/dev-java.openjdk.core/bin/java":;s:bundled jdk:azusa jdk:' bin/opensearch-env
 #
 
-cd "${T}"
+cd "${T}" || exit
 mkdir -p "${D}/pkg/main"
 mv -v "${S}" "${D}/pkg/main/${PKG}.core.${PVRF}"
 
-cd "${D}/pkg/main/${PKG}.core.${PVRF}"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}" || exit
 mkdir etc
-mv -v config etc/${PN}
+mv -v config etc/"${PN}"
 
 # TODO opensearch group
 chown -vR root:root "etc"

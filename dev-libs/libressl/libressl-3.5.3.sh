@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/${P}.tar.gz
+get https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg zlib
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tar.gz
+get https://download.sourceforge.net/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 apatch \
 	"${FILESDIR}/${P}-windows.patch" \

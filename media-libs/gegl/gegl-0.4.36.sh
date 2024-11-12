@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit asciidoc
 
-get https://download.gimp.org/pub/${PN}/${PV:0:3}/${P}.tar.xz
+get https://download.gimp.org/pub/"${PN}"/"${PV:0:3}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libjpeg
 

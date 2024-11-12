@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get ftp://ftp.figlet.org/pub/figlet/program/unix/${P}.tar.gz
+get ftp://ftp.figlet.org/pub/figlet/program/unix/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 PREFIX="/pkg/main/${PKG}.core.${PVRF}"
 make prefix="$PREFIX" all

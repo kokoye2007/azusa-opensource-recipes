@@ -4,10 +4,10 @@ inherit python
 
 PYTHON_RESTRICT="$PYTHON_LATEST"
 
-get https://github.com/greenbone/gvm-tools/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/greenbone/gvm-tools/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 pythonsetup
 

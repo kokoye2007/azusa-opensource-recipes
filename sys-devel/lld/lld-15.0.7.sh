@@ -8,7 +8,7 @@ llvmget _lld libunwind
 
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 #importpkg zlib libffi sys-devel/llvm
 importpkg zlib

@@ -1,7 +1,7 @@
 #/bin/sh
 source "../../common/init.sh"
 
-get https://www.php.net/distributions/${P}.tar.xz
+get https://www.php.net/distributions/"${P}".tar.xz
 acheck
 
 # which PHP SAPIs to be compiled
@@ -20,7 +20,7 @@ for sapi in $SAPIS; do
 
 	rm -fr "${T}"
 	mkdir -p "${T}"
-	cd "${T}"
+	cd "${T}" || exit
 
 	CONFIGURE=("--disable-all" "--disable-static" "--enable-shared" "--enable-re2c-cgoto" "--with-libdir=lib$LIB_SUFFIX")
 
@@ -115,7 +115,7 @@ for sapi in $SAPIS; do
 
 	# move phpize and php-config /pkg/main/dev-lang.php.core.embed.7.3.10/bin/ if sapi isn't "cli"
 	if [ x"$sapi" != x"cli" ]; then
-		cd "${D}/pkg/main/${PKG}.core.$sapi.${PVRF}/bin"
+		cd "${D}/pkg/main/${PKG}.core.$sapi.${PVRF}/bin" || exit
 		mv phpize "phpize-$sapi"
 		mv php-config "php-config-$sapi"
 		if [ -f phpdbg ]; then

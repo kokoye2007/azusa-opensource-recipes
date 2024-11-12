@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://deb.debian.org/debian/pool/main/libg/libgsm/libgsm_${PV}.orig.tar.gz
+get http://deb.debian.org/debian/pool/main/libg/libgsm/libgsm_"${PV}".orig.tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/gsm-${PV}-shared.patch"
 

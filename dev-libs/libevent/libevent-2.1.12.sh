@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libevent/libevent/releases/download/release-${PV}-stable/${P}-stable.tar.gz
+get https://github.com/libevent/libevent/releases/download/release-"${PV}"-stable/"${P}"-stable.tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

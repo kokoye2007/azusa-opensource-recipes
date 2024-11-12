@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/docbook/xslt10-stylesheets/releases/download/release/${PV}/docbook-xsl-nons-${PV}.tar.bz2
+get https://github.com/docbook/xslt10-stylesheets/releases/download/release/"${PV}"/docbook-xsl-nons-"${PV}".tar.bz2
 acheck
 
-cd docbook-xsl-nons-${PV}
+cd docbook-xsl-nons-"${PV}" || exit
 
 apatch "$FILESDIR/docbook-xsl-nons-1.79.2-stack_fix-1.patch"
 

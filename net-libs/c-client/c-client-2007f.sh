@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.ntua.gr/pub/net/mail/imap/imap-${PV}.tar.gz
+get http://ftp.ntua.gr/pub/net/mail/imap/imap-"${PV}".tar.gz
 acheck
 
-cd "imap-${PV}"
+cd "imap-${PV}" || exit
 
 patch -p1 -i "$FILESDIR/c-client-2006k_GENTOO_amd64-so-fix.patch"
 patch -p1 -i "$FILESDIR/c-client-2007f-openssl-1.1.patch"
@@ -18,7 +18,7 @@ touch ip6 sslunix
 sed -i "s#-lcrypt#-L/pkg/main/sys-libs.libxcrypt.libs/lib$LIB_SUFFIX -lcrypt#" ./src/osdep/unix/Makefile
 
 # lnp?
-make slx EXTRACFLAGS="$CPPFLAGS -fPIC -I/pkg/main/dev-libs.openssl.dev/include/openssl" SSLTYPE=unix SHLIBBASE=c-client SHLIBNAME=libc-client.so.1 IP=6 SSLDIR=/etc/ssl SSLLIB=/pkg/main/dev-libs.openssl.libs/lib$LIB_SUFFIX
+make slx EXTRACFLAGS="$CPPFLAGS -fPIC -I/pkg/main/dev-libs.openssl.dev/include/openssl" SSLTYPE=unix SHLIBBASE=c-client SHLIBNAME=libc-client.so.1 IP=6 SSLDIR=/etc/ssl SSLLIB=/pkg/main/dev-libs.openssl.libs/lib"$LIB_SUFFIX"
 #make an build BUILDTYPE=lnp EXTRACFLAGS="$CPPFLAGS -I/pkg/main/dev-libs.openssl.dev/include/openssl"
 
 mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"

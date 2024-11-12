@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://linuxtv.org/downloads/${PN}/${P}.tar.gz
+get https://linuxtv.org/downloads/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=(
 	"${FILESDIR}/${P}_fix_leftover_on_shell_compatibility.patch"
@@ -20,7 +20,7 @@ apatch "${PATCHES[@]}"
 touch zbar/gettext.h
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X libjpeg media-libs/mesa zlib
 

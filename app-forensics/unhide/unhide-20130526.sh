@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://sourceforge.net/projects/unhide/files/${P}.tgz
+get http://sourceforge.net/projects/unhide/files/"${P}".tgz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 echo "Building unhide ..."
 gcc --static -pthread unhide-linux*.c unhide-output.c -o unhide

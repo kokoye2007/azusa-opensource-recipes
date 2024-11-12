@@ -1,17 +1,17 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/pmem/${PN}/archive/refs/tags/v${PV}.tar.gz
+get https://github.com/pmem/"${PN}"/archive/refs/tags/v"${PV}".tar.gz
 acheck
 
 inherit asciidoc
 
-cd "${S}"
+cd "${S}" || exit
 
 ./git-version-gen
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libkeyutils sys-apps/util-linux dev-libs/json-c
 

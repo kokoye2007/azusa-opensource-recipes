@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://anduin.linuxfromscratch.org/BLFS/iso-codes/${P}.tar.xz
+get http://anduin.linuxfromscratch.org/BLFS/iso-codes/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

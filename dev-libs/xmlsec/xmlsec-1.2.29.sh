@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.aleksey.com/xmlsec/download/${PN}1-${PV}.tar.gz
+get https://www.aleksey.com/xmlsec/download/"${PN}"1-"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-devel/libtool dev-libs/libgcrypt dev-libs/libgpg-error
 

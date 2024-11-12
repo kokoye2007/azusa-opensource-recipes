@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://gstreamer.freedesktop.org/src/${PN}/${P}.tar.xz
+get https://gstreamer.freedesktop.org/src/"${PN}"/"${P}".tar.xz
 acheck
 
 importpkg media-libs/libsdl zlib media-libs/glu
 
-cd "${T}"
+cd "${T}" || exit
 
 domeson -Dpackage-origin=http://www.linuxfromscratch.org/blfs/view/svn/ -Dpackage-name="GStreamer 1.16.2 BLFS"
 

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://static.rust-lang.org/dist/rustc-${PV}-src.tar.gz
+get https://static.rust-lang.org/dist/rustc-"${PV}"-src.tar.gz
 envcheck
 
 importpkg zlib sys-libs/llvm-libunwind dev-libs/libffi
 
-cd "rustc-${PV}-src"
+cd "rustc-${PV}-src" || exit
 
 # https://github.com/rust-lang/rust/blob/master/config.example.toml
 # AArch64;AMDGPU;ARM;AVR;BPF;Hexagon;Lanai;LoongArch;Mips;MSP430;NVPTX;PowerPC;RISCV;Sparc;SystemZ;VE;WebAssembly;X86;XCore
@@ -123,8 +123,8 @@ echo "Using RUSTFLAGS = $RUSTFLAGS"
 # giving up on libssh2 and libgit 
 
 # Alternatively, this works too:
-export DEP_Z_INCLUDE=`pkg-config --variable=includedir zlib`
-export DEP_OPENSSL_INCLUDE=`pkg-config --variable=includedir openssl`
+export DEP_Z_INCLUDE=$(pkg-config --variable=includedir zlib)
+export DEP_OPENSSL_INCLUDE=$(pkg-config --variable=includedir openssl)
 
 # to avoid errors such as
 # thread 'main' panicked at 'could not canonicalize /pkg/main/dev-lang.rust.core.1.35.0', src/bootstrap/install.rs:71:48

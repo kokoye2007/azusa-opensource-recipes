@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 #get https://pagure.io/volume_key/archive/${P}/volume_key-${P}.tar.gz
-get http://releases.pagure.org/${PN}/${P}.tar.xz
+get http://releases.pagure.org/"${PN}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg app-crypt/gpgme dev-libs/libgpg-error sys-apps/util-linux
 

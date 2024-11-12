@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnome.org/pub/gnome/sources/${PN}/${PV%.*}/${P}.tar.xz
+get https://ftp.gnome.org/pub/gnome/sources/"${PN}"/"${PV%.*}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 # -Dtools=false ?
 # Prevents installation of python modules (uses install_data from meson which does not optimize the modules)

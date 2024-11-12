@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/imageworks/OpenShadingLanguage/archive/Release-${PV}-dev.tar.gz "${P}.tar.gz"
+get https://github.com/imageworks/OpenShadingLanguage/archive/Release-"${PV}"-dev.tar.gz "${P}.tar.gz"
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost zlib media-libs/partio
 

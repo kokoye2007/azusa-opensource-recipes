@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://bitmath.org/code/mtdev/${P}.tar.bz2
+get http://bitmath.org/code/mtdev/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

@@ -3,7 +3,7 @@ source "../../common/init.sh"
 
 inherit llvm
 
-if [ ! -d /pkg/main/sys-libs.compiler-rt.libs.${PVRF}/lib$LIB_SUFFIX ]; then
+if [ ! -d /pkg/main/sys-libs.compiler-rt.libs."${PVRF}"/lib"$LIB_SUFFIX" ]; then
 	echo "compiler-rt for this version needs to be compiled first"
 	exit 1
 fi
@@ -17,7 +17,7 @@ acheck
 
 importpkg zlib
 
-cd "${T}"
+cd "${T}" || exit
 
 OPTS=(
 	-DLLVM_ENABLE_TERMINFO=ON
@@ -59,7 +59,7 @@ llvmbuild "${OPTS[@]}" || /bin/bash -i
 # /pkg/main/sys-libs.compiler-rt.libs.16.0.2.linux.amd64/lib64/linux/libclang_rt.builtins-x86_64.a
 # clang_rt.crtbegin-x86_64.o  clang_rt.crtend-x86_64.o  libclang_rt.builtins-x86_64.a
 
-ln -snf /pkg/main/sys-libs.compiler-rt.libs.$PVRF/lib$LIB_SUFFIX "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/clang/${PV}/lib"
+ln -snf /pkg/main/sys-libs.compiler-rt.libs."$PVRF"/lib"$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/clang/${PV}/lib"
 #ln -snf /pkg/main/sys-libs.compiler-rt.libs.$PVRF/lib$LIB_SUFFIX "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/lib"
 
 # write config

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.cairographics.org/releases/${P}.tar.gz
+get https://www.cairographics.org/releases/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
 

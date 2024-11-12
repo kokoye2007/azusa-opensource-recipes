@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tar.gz
+get https://download.sourceforge.net/"${PN}"/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg media-sound/gsm media-sound/lame libpng
 

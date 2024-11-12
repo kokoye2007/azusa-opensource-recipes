@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/upx/upx/releases/download/v${PV}/${P}-src.tar.xz
+get https://github.com/upx/upx/releases/download/v"${PV}"/"${P}"-src.tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 make all -j"$NPROC"
 

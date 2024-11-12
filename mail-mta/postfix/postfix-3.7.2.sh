@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://mirror.postfix.jp/postfix-release/official/${P}.tar.gz
+get http://mirror.postfix.jp/postfix-release/official/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg dev-db/lmdb dev-libs/cyrus-sasl sys-libs/db
 

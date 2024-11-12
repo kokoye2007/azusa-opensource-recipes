@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/${P}.tar.gz
+get https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 MAKEOPTS=(
 	PREFIX="/pkg/main/${PKG}.core.${PVRF}"

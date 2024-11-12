@@ -2,9 +2,9 @@
 source "../../common/init.sh"
 
 mkdir -p "${D}/pkg/main/"
-cd "${D}/pkg/main/"
+cd "${D}/pkg/main/" || exit
 
-get https://github.com/handshake-org/${PN}/archive/v${PV}.tar.gz
+get https://github.com/handshake-org/"${PN}"/archive/v"${PV}".tar.gz
 acheck
 
 mv "$P" "${PKG}.data.${PVRF}"
@@ -12,7 +12,7 @@ rm -f "v${PV}.tar.gz"
 
 importpkg libunbound
 
-cd "${PKG}.data.${PVRF}"
+cd "${PKG}.data.${PVRF}" || exit
 
 npm install --production
 

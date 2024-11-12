@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://libvirt.org/sources/${P}.tar.xz
+get https://libvirt.org/sources/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-apps/attr sys-process/audit libtirpc dev-libs/yajl sys-fs/lvm2 libsasl2
 

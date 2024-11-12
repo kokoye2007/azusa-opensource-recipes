@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.asterisk.org/pub/telephony/asterisk/releases/${P}.tar.gz
+get https://downloads.asterisk.org/pub/telephony/asterisk/releases/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg sys-apps/util-linux dev-libs/libxml2 dev-libs/icu dev-db/sqlite dev-lang/lua libxcrypt media-libs/speex media-libs/libvorbis sys-libs/libcap net-libs/pjproject net-dns/unbound sys-libs/zlib media-libs/codec2 dev-libs/popt media-libs/alsa-lib media-libs/libsdl dev-libs/openssl dev-db/mariadb
 
@@ -59,7 +59,7 @@ make "${_make_args[@]}"
 make "${_make_args[@]}" install install-headers install-configs DESTDIR="${D}"
 
 # make asterisk work
-ln -snf /pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX ${D}/pkg/main/${PKG}.core.${PVRF}/lib
+ln -snf /pkg/main/"${PKG}".libs."${PVRF}"/lib"$LIB_SUFFIX" "${D}"/pkg/main/"${PKG}".core."${PVRF}"/lib
 
 fixelf
 archive

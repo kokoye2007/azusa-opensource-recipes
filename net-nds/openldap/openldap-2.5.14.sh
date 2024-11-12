@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${P}.tgz
+get ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/"${P}".tgz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/db openssl dev-libs/cyrus-sasl
 

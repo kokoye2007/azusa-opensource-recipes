@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/pmem/${PN}/releases/download/${PV}/${P}.tar.gz
+get https://github.com/pmem/"${PN}"/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg ncurses libuv
 

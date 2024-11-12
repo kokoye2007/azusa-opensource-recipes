@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 # aarch64
 #get https://static.rust-lang.org/dist/rust-${PV}-i686-unknown-linux-gnu.tar.xz
-get https://static.rust-lang.org/dist/rust-${PV}-x86_64-unknown-linux-gnu.tar.xz
+get https://static.rust-lang.org/dist/rust-"${PV}"-x86_64-unknown-linux-gnu.tar.xz
 envcheck
 
-cd "${S}"
+cd "${S}" || exit
 
 INSTALL_OPTS=(
 	--destdir="${D}"

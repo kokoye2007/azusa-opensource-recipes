@@ -40,7 +40,7 @@ CMAKE_OPTS=(
 	#-DLIBCXX_TARGET_TRIPLE="${CHOST}"
 )
 
-cd "$T"
+cd "$T" || exit
 
 # build libcxx
 CMAKE_TARGET_ALL=cxx CMAKE_TARGET_INSTALL=install-cxx llvmbuild "${CMAKE_OPTS[@]}"

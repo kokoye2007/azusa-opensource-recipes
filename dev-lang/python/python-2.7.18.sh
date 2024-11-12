@@ -1,17 +1,17 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz
+get https://www.python.org/ftp/python/"${PV}"/Python-"${PV}".tar.xz
 acheck
 
-cd "Python-${PV}"
+cd "Python-${PV}" || exit
 
 # ensure python can build its "bits" for the following packages
 importpkg libffi expat ncurses openssl zlib sqlite3 readline app-arch/bzip2 sys-libs/gdbm
 
 echo "DEBUG"
-echo $CFLAGS
-echo $LDFLAGS
+echo "$CFLAGS"
+echo "$LDFLAGS"
 
 callconf --prefix="/pkg/main/dev-lang.python-modules.core.${PV}" --exec-prefix="/pkg/main/${PKG}.core.${PVRF}" --sysconfdir=/etc --localstatedir=/var --includedir="\${exec_prefix}/include" --datarootdir="\${exec_prefix}/share" \
 	--infodir="/pkg/main/${PKG}.doc.${PVRF}/info" --mandir="/pkg/main/${PKG}.doc.${PVRF}/man" --docdir="/pkg/main/${PKG}.doc.${PVRF}" \

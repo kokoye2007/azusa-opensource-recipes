@@ -1,17 +1,17 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/${PV}/${P}.tar.xz
+get https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 sed -i '/LIBPOSTFIX="64"/s/64//' configure.ac
 rm -frv libltdl # old libtool, do not autoreconf
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libxcrypt x11-libs/gdk-pixbuf harfbuzz expat x11-libs/libXaw zlib media-libs/gd x11-base/xorg-proto x11-libs/libX11 dev-scheme/guile dev-lang/lua x11-libs/cairo dev-libs/libatomic_ops media-libs/mesa dev-lang/perl
 

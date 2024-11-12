@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit python
 
-get https://www.gnupg.org/ftp/gcrypt/${PN}/${P}.tar.bz2
+get https://www.gnupg.org/ftp/gcrypt/"${PN}"/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/libassuan dev-libs/libgpg-error
 
@@ -17,7 +17,7 @@ doconf --disable-gpgconf-test --disable-gpg-test --disable-gpgsm-test --disable-
 make
 make install DESTDIR="${D}"
 
-cd lang/python
+cd lang/python || exit
 
 pythonsetup
 

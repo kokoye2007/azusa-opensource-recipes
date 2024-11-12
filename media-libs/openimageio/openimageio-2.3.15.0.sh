@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/OpenImageIO/oiio/archive/refs/tags/v${PV}.tar.gz
+get https://github.com/OpenImageIO/oiio/archive/refs/tags/v"${PV}".tar.gz
 acheck
 
 PKGS=(
@@ -33,7 +33,7 @@ PKGS=(
 
 importpkg "${PKGS[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKEOPTS=(
 	-DVERBOSE=ON

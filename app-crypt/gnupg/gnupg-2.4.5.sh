@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.gnupg.org/ftp/gcrypt/gnupg/${P}.tar.bz2
+get https://www.gnupg.org/ftp/gcrypt/gnupg/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg net-libs/gnutls dev-libs/libgcrypt net-nds/openldap sys-libs/readline
 

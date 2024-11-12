@@ -3,10 +3,10 @@ source ../../common/init.sh
 inherit python
 inherit cuda
 
-get "https://github.com/TimDettmers/bitsandbytes/archive/refs/tags/${PV}.tar.gz" ${P}.tar.gz
+get "https://github.com/TimDettmers/bitsandbytes/archive/refs/tags/${PV}.tar.gz" "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # bitsandbytes/libbitsandbytes_cuda122_nocublaslt.so
 

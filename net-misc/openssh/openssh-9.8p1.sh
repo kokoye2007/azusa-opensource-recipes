@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/${P}.tar.gz
+get https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib sys-libs/pam sys-process/audit
 

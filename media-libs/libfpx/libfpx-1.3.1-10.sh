@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get ftp://ftp.imagemagick.org/pub/ImageMagick/delegates/${P}.tar.bz2
+get ftp://ftp.imagemagick.org/pub/ImageMagick/delegates/"${P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/${PN}-1.2.0.13-export-symbols.patch"
 

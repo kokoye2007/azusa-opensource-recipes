@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://gitlab.com/lib${PN}/${PN}/-/archive/${PV}/${P}.tar.gz
+get https://gitlab.com/lib"${PN}"/"${PN}"/-/archive/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost dev-util/nvidia-cuda-toolkit:11.7 sci-libs/klu
 

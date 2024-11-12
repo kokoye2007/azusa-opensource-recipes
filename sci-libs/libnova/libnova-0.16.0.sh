@@ -4,11 +4,11 @@ source "../../common/init.sh"
 fetchgit https://git.code.sf.net/p/libnova/libnova v0.16
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

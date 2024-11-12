@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://lttng.org/files/urcu/${P}.tar.bz2
+get https://lttng.org/files/urcu/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

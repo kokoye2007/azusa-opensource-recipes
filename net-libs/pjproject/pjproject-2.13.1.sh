@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/pjsip/${PN}/archive/${PV}.tar.gz ${P}.tar.gz
+get https://github.com/pjsip/"${PN}"/archive/"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg media-libs/speex media-libs/speexdsp media-sound/gsm net-libs/libsrtp media-libs/portaudio media-libs/libsamplerate
 

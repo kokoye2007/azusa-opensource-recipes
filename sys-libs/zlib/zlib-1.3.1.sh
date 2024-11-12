@@ -1,14 +1,14 @@
 #/bin/sh
 source "../../common/init.sh"
 
-get http://zlib.net/${P}.tar.gz
+get http://zlib.net/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 # configure & build
 doconflight
 make
-make install DESTDIR=${D}
+make install DESTDIR="${D}"
 
 finalize

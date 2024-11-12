@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/coin-or/ADOL-C/archive/releases/${PV}.tar.gz ${P}.tar.gz
+get https://github.com/coin-or/ADOL-C/archive/releases/"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "${FILESDIR}/adolc-2.7.2-swig-python-configure.patch"
 

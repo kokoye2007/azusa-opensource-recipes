@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/docbook/xslt10-stylesheets/releases/download/release/${PV}/docbook-xsl-${PV}.tar.bz2
+get https://github.com/docbook/xslt10-stylesheets/releases/download/release/"${PV}"/docbook-xsl-"${PV}".tar.bz2
 acheck
 
-cd docbook-xsl-${PV}
+cd docbook-xsl-"${PV}" || exit
 
 mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xsl-stylesheets-${PV}"
 

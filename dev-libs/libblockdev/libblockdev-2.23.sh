@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/storaged-project/libblockdev/releases/download/${PV}-1/${P}.tar.gz
+get https://github.com/storaged-project/libblockdev/releases/download/"${PV}"-1/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/volume_key sys-apps/kmod zlib liblzma dev-libs/libbytesize dev-libs/gmp mpfr libpcre2-8 sys-apps/util-linux
 

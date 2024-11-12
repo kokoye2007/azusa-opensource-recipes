@@ -2,8 +2,8 @@
 source "../../common/init.sh"
 inherit waf
 
-get https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz ${P}.tar.gz
-cd "${S}"
+get https://github.com/mpv-player/mpv/archive/v"${PV}".tar.gz "${P}".tar.gz
+cd "${S}" || exit
 get https://waf.io/waf-2.0.20
 mv waf-2.0.20 waf
 chmod +x waf
@@ -11,7 +11,7 @@ acheck
 
 importpkg libjpeg dev-lang/lua
 
-cd "${T}"
+cd "${T}" || exit
 
 CONFOPTS=(
 	--disable-libmpv-static

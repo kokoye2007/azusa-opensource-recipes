@@ -2,13 +2,13 @@
 source "../../common/init.sh"
 
 MY_P="Audacity-${PV}"
-get https://github.com/audacity/audacity/archive/${MY_P}.tar.gz
-get https://dev.gentoo.org/~fordfrog/distfiles/${PN}-manual-${PV}.zip
+get https://github.com/audacity/audacity/archive/"${MY_P}".tar.gz
+get https://dev.gentoo.org/~fordfrog/distfiles/"${PN}"-manual-"${PV}".zip
 acheck
 
 importpkg zlib
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKEOPTS=(
 	-Daudacity_lib_preference=system

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2
+get https://archive.apache.org/dist/httpd/httpd-"${PV}".tar.bz2
 acheck
 
 importpkg expat libxcrypt
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-authnz-fcgi --enable-mods-shared="all cgi" --enable-mpms-shared=all --enable-suexec=shared \
 	--with-apr=/pkg/main/dev-libs.apr.core/bin/apr-1-config \
@@ -17,7 +17,7 @@ doconf --enable-authnz-fcgi --enable-mods-shared="all cgi" --enable-mpms-shared=
 make
 make install DESTDIR="${D}"
 
-cd "${D}"
+cd "${D}" || exit
 
 # keep etc in core for easy initial setup
 mv etc "pkg/main/${PKG}.core.${PVRF}"

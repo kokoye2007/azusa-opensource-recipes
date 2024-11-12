@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 COMMIT_HASH="e11b9ed9f2c254bc894d844c0a64a0eb76bbb4fd"
 JSON_VERSION="3.11.3" # solidity depends on an exact version of nlohmann_json for some reason
-get https://github.com/ethereum/solidity/archive/refs/tags/v${PV}.tar.gz "${P}.tar.gz"
+get https://github.com/ethereum/solidity/archive/refs/tags/v"${PV}".tar.gz "${P}.tar.gz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # configure for release version
 echo "$COMMIT_HASH" >commit_hash.txt
@@ -29,7 +29,7 @@ done
 echo "set_target_properties(phaser PROPERTIES VERSION $PV SOVERSION $PV)" >>tools/CMakeLists.txt
 echo "set_target_properties(solcli PROPERTIES VERSION $PV SOVERSION $PV)" >>solc/CMakeLists.txt
 
-cd "${T}"
+cd "${T}" || exit
 
 # ensure solidity can find z3
 importpkg sci-mathematics/z3

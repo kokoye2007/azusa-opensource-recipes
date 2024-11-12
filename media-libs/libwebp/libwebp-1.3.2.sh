@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://storage.googleapis.com/downloads.webmproject.org/releases/webp/${P}.tar.gz
+get https://storage.googleapis.com/downloads.webmproject.org/releases/webp/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg media-libs/libsdl2 media-libs/libjpeg-turbo media-libs/tiff media-libs/giflib media-libs/freeglut
 

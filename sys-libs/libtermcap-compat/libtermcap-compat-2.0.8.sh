@@ -1,15 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.jaist.ac.jp/pub/Linux/Gentoo/distfiles/termcap-${PV}.tar.bz2
-cd termcap-${PV}
-get http://ftp.jaist.ac.jp/pub/Linux/Gentoo/distfiles/termcap-${PV}-patches-2.tar.bz2
+get http://ftp.jaist.ac.jp/pub/Linux/Gentoo/distfiles/termcap-"${PV}".tar.bz2
+cd termcap-"${PV}" || exit
+get http://ftp.jaist.ac.jp/pub/Linux/Gentoo/distfiles/termcap-"${PV}"-patches-2.tar.bz2
 apatch patch/*.patch
 get http://www.catb.org/~esr/terminfo/termtypes.tc.gz
 mv termtypes.tc termcap
 apatch patch/tc.file/*.patch
 
-apatch $FILESDIR/${P}-relative-lib-symlink.patch
+apatch "$FILESDIR"/"${P}"-relative-lib-symlink.patch
 acheck
 
 make CFLAGS="-O2 -I."

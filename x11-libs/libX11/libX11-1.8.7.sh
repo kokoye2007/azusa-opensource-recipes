@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://xorg.freedesktop.org/archive/individual/lib/${P}.tar.xz
+get https://xorg.freedesktop.org/archive/individual/lib/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 #importpkg dev-libs/libbsd
 

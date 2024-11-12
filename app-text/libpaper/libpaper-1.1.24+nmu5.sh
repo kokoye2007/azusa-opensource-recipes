@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_${PV}.tar.gz
+get http://ftp.debian.org/debian/pool/main/libp/libpaper/libpaper_"${PV}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --sysconfdir=/etc --disable-static
 

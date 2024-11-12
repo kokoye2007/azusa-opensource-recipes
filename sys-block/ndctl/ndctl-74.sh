@@ -1,16 +1,16 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/pmem/ndctl/archive/refs/tags/v${PV}.tar.gz
+get https://github.com/pmem/ndctl/archive/refs/tags/v"${PV}".tar.gz
 acheck
 
 inherit asciidoc
 
-cd "${S}"
+cd "${S}" || exit
 
-$(dirname $0)/git-version-gen
+$(dirname "$0")/git-version-gen
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-apps/keyutils sys-apps/util-linux dev-libs/json-c dev-libs/iniparser
 

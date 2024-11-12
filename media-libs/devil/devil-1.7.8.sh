@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 MY_P=DevIL-${PV}
-get https://download.sourceforge.net/openil/${MY_P}.tar.gz
+get https://download.sourceforge.net/openil/"${MY_P}".tar.gz
 acheck
 
-cd "$S"
+cd "$S" || exit
 PATCHES=(
 	"${FILESDIR}/${P}"-CVE-2009-3994.patch
 	"${FILESDIR}/${P}"-libpng14.patch
@@ -18,7 +18,7 @@ PATCHES=(
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

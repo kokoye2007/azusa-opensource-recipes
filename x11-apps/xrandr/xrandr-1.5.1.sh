@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/app/${P}.tar.xz
+get https://www.x.org/pub/individual/app/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --localstatedir=/var
 

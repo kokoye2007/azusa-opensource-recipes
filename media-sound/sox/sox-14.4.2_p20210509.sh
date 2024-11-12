@@ -6,19 +6,19 @@ source "../../common/init.sh"
 # Recommend mirroring the snapshot; unclear if they are stable URIs.
 COMMIT="42b3557e13e0fe01a83465b672d89faddbe65f49"
 MY_P="sox-code-${COMMIT}"
-get https://dev.gentoo.org/~fordfrog/distfiles/${MY_P}.zip ${P}.zip
+get https://dev.gentoo.org/~fordfrog/distfiles/${MY_P}.zip "${P}".zip
 #get https://download.sourceforge.net/${PN}/${P}.tar.gz
 
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # gentoo bug #386027
 sed -i -e 's|CFLAGS="-g"|CFLAGS="$CFLAGS -g"|' configure.ac
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg vorbis media-sound/gsm media-sound/lame libpng sys-devel/libtool sys-apps/file media-libs/libid3tag media-libs/opencore-amr media-libs/libmad media-sound/twolame media-libs/libsndfile media-sound/wavpack media-libs/alsa-lib
 

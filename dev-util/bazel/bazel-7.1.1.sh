@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/bazelbuild/bazel/releases/download/${PV}/${P}-dist.zip
+get https://github.com/bazelbuild/bazel/releases/download/"${PV}"/"${P}"-dist.zip
 acheck
 
 apatch "$FILESDIR/bazel-5.0.0-allow-pkg-sys-includes-azusa.patch"

@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/P-H-C/phc-winner-argon2/archive/${PV}.tar.gz
+get https://github.com/P-H-C/phc-winner-argon2/archive/"${PV}".tar.gz
 acheck
 
-cd "phc-winner-argon2-${PV}"
+cd "phc-winner-argon2-${PV}" || exit
 
-make PREFIX="/pkg/main/${PKG}.core.${PVRF}" LIBRARY_REL=lib$LIB_PREFIX
-make install DESTDIR="${D}" PREFIX="/pkg/main/${PKG}.core.${PVRF}" LIBRARY_REL=lib$LIB_PREFIX
+make PREFIX="/pkg/main/${PKG}.core.${PVRF}" LIBRARY_REL=lib"$LIB_PREFIX"
+make install DESTDIR="${D}" PREFIX="/pkg/main/${PKG}.core.${PVRF}" LIBRARY_REL=lib"$LIB_PREFIX"
 
 fixelf
 organize

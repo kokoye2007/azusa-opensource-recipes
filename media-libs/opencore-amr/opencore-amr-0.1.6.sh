@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tar.gz
+get https://download.sourceforge.net/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

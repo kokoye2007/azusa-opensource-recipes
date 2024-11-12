@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.gz
+get https://github.com/"${PN}"/"${PN}"/releases/download/v"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

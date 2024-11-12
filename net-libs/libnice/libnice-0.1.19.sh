@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://nice.freedesktop.org/releases/${P}.tar.gz
+get https://nice.freedesktop.org/releases/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 domeson
 

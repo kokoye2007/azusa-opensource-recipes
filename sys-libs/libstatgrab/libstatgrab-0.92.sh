@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/${P}.tar.gz
+get http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/AOMediaCodec/libavif/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/AOMediaCodec/libavif/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
 importpkg X media-video/rav1e media-libs/libaom zlib libpng media-libs/libjpeg-turbo dev-libs/glib x11-libs/gdk-pixbuf
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKEOPTS=(
 	-DBUILD_SHARED_LIBS=ON

@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 inherit python
 
-get https://download.ceph.com/tarballs/${P}.tar.gz
+get https://download.ceph.com/tarballs/"${P}".tar.gz
 acheck
 
 # use system boost
@@ -42,11 +42,11 @@ PATCHES=(
 	"${FILESDIR}/ceph-18.2.0-cython3.patch"
 )
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 # minimal config to find plugins
 cat <<EOF > ceph.conf

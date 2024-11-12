@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/troglobit/sntpd/releases/download/${PV/./_}/${P/./_}.tar.xz
+get https://github.com/troglobit/sntpd/releases/download/"${PV/./_}"/"${P/./_}".tar.xz
 acheck
 
-cd "${P/./_}"
+cd "${P/./_}" || exit
 
 apatch "${FILESDIR}/ntpclient-2018.244-linux-headers-5.2.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

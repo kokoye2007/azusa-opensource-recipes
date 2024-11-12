@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://0pointer.de/lennart/projects/libdaemon/${P}.tar.gz
+get http://0pointer.de/lennart/projects/libdaemon/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

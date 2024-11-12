@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/jbeder/yaml-cpp/archive/${P}.tar.gz
+get https://github.com/jbeder/yaml-cpp/archive/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/${P}-gtest.patch"
 
@@ -23,7 +23,7 @@ Libs: -L${libdir} -lyaml-cpp
 Cflags: -I${includedir}
 EOF
 
-cd "${T}"
+cd "${T}" || exit
 
 # tools: util/parse util/read util/sandbox
 

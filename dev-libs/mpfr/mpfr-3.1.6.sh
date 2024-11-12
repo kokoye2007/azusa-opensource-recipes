@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/mpfr/${P}.tar.xz
+get https://ftp.gnu.org/gnu/mpfr/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 # configure & build
 doconf --disable-static --enable-thread-safe

@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 MY_PV="${PV/_/-}"
-get https://github.com/opencontainers/${PN}/archive/v${MY_PV}.tar.gz
+get https://github.com/opencontainers/"${PN}"/archive/v"${MY_PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://libmpeg2.sourceforge.net/files/${P}.tar.gz
+get http://libmpeg2.sourceforge.net/files/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg media-libs/libsdl
 

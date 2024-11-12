@@ -1,11 +1,11 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.nico.schottelius.org/software/gpm/archives/${P}.tar.lzma
+get https://www.nico.schottelius.org/software/gpm/archives/"${P}".tar.lzma
 #get http://anduin.linuxfromscratch.org/BLFS/gpm/${P}.tar.bz2
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg ncurses
 

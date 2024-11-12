@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/fontforge/fontforge/releases/download/${PV}/fontforge-${PV}.tar.xz
+get https://github.com/fontforge/fontforge/releases/download/"${PV}"/fontforge-"${PV}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib libpng libjpeg media-libs/tiff media-libs/libspiro libuninameslist x11-base/xorg-proto x11-libs/libX11 x11-libs/gtk+ sys-libs/readline x11-libs/cairo media-libs/giflib freetype2
 

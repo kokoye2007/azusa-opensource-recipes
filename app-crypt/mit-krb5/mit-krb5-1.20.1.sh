@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://kerberos.org/dist/krb5/1.19/krb5-${PV}.tar.gz
+get https://kerberos.org/dist/krb5/1.19/krb5-"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 CONFPATH="${S}/src/configure" doconf
 

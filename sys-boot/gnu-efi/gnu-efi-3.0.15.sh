@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tar.bz2
+get https://download.sourceforge.net/"${PN}"/"${P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 sed -i -e "s/-Werror//" Make.defaults
 

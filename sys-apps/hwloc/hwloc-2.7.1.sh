@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.open-mpi.org/software/${PN}/${PV%.*}/downloads/${P}.tar.bz2
+get https://www.open-mpi.org/software/"${PN}"/"${PV%.*}"/downloads/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X
 

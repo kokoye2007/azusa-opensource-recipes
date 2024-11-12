@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/SELinuxProject/selinux/releases/download/${PV}/${P}.tar.gz
+get https://github.com/SELinuxProject/selinux/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
 importpkg sys-libs/libsepol
@@ -9,7 +9,7 @@ importpkg sys-libs/libsepol
 CPPFLAGS="${CPPFLAGS} -DPIE -fPIE -fno-semantic-interposition -Wno-stringop-truncation"
 LDFLAGS="${LDFLAGS} -pthread"
 
-cd "${S}"
+cd "${S}" || exit
 
 MAKEOPTS=(
 	USE_PCRE2=y

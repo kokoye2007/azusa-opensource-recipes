@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://invisible-mirror.net/archives/${PN}/${P}.tgz
+get https://invisible-mirror.net/archives/"${PN}"/"${P}".tgz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconflight
 

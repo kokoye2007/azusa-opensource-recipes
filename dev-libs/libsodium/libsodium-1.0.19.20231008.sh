@@ -12,10 +12,10 @@ sodium_get() {
 	wget -O "libsodium-$FULLV.tar.gz" "https://download.libsodium.org/libsodium/releases/libsodium-${MY_PV}-stable.tar.gz"
 }
 
-DOWNLOAD_OVERRIDE=sodium_get get https://download.libsodium.org/libsodium/releases/${P}.tar.gz
+DOWNLOAD_OVERRIDE=sodium_get get https://download.libsodium.org/libsodium/releases/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-asm
 

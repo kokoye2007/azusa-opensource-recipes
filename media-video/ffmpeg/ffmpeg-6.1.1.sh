@@ -1,19 +1,19 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ffmpeg.org/releases/${P}.tar.bz2
+get https://ffmpeg.org/releases/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/gmp media-sound/gsm media-sound/lame theora media-libs/xvid libgcrypt libmodplug icu-uc media-video/avisynth media-libs/libaom dev-util/nvidia-cuda-toolkit media-libs/nv-codec-headers:12.0
 
 # force nv-codec-headers version 12.0
 export PKG_CONFIG_PATH="/pkg/main/media-libs.nv-codec-headers.dev.12.0/pkgconfig"
 
-callconf --prefix=/pkg/main/${PKG}.core.${PVRF} \
-	--libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
-	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/doc \
+callconf --prefix=/pkg/main/"${PKG}".core."${PVRF}" \
+	--libdir=/pkg/main/"${PKG}".libs."${PVRF}"/lib"$LIB_SUFFIX" \
+	--mandir=/pkg/main/"${PKG}".doc."${PVRF}"/man --docdir=/pkg/main/"${PKG}".doc."${PVRF}"/doc \
 	--enable-gpl --enable-nonfree --enable-rpath \
 	--enable-shared --disable-static \
 	--enable-avisynth --enable-gmp --enable-version3 --enable-gcrypt --enable-openssl --enable-libgsm --enable-libmp3lame --enable-libmodplug \

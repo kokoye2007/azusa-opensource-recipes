@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
+get https://ftp.gnu.org/gnu/"${PN}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-apps/util-linux sys-fs/lvm2 sys-libs/readline sys-libs/ncurses
 

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/embree/embree/archive/v${PV}.tar.gz "${P}.tar.gz"
+get https://github.com/embree/embree/archive/v"${PV}".tar.gz "${P}.tar.gz"
 acheck
 
 importpkg media-libs/libpng media-libs/libjpeg-turbo gl dev-libs/imath
 
-cd "${T}"
+cd "${T}" || exit
 
 export LDFLAGS="-Wl,--copy-dt-needed-entries"
 

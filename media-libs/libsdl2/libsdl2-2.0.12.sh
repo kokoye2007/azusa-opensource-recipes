@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.libsdl.org/release/SDL2-${PV}.tar.gz
+get http://www.libsdl.org/release/SDL2-"${PV}".tar.gz
 acheck
 
-cd "SDL2-${PV}"
+cd "SDL2-${PV}" || exit
 
 importpkg sys-fs/udev app-i18n/ibus dev-libs/wayland X
 

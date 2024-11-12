@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://freedesktop.org/software/farstream/releases/${PN}/${P}.tar.gz
+get https://freedesktop.org/software/farstream/releases/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

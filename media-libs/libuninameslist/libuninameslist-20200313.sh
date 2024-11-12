@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/fontforge/${PN}/releases/download/${PV}/${PN}-dist-${PV}.tar.gz
+get https://github.com/fontforge/"${PN}"/releases/download/"${PV}"/"${PN}"-dist-"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static --enable-frenchlib
 

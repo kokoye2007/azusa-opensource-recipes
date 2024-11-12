@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MYPN=Cbc
 
-get http://www.coin-or.org/download/source/${MYPN}/${MYPN}-${PV}.tgz
+get http://www.coin-or.org/download/source/${MYPN}/${MYPN}-"${PV}".tgz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 sed -i \
 	-e "s:lib/pkgconfig:lib$LIB_SUFFIX/pkgconfig:g" \

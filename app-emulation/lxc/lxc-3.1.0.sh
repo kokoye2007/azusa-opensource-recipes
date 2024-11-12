@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://linuxcontainers.org/downloads/lxc/${P}.tar.gz
+get https://linuxcontainers.org/downloads/lxc/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 doconf
 

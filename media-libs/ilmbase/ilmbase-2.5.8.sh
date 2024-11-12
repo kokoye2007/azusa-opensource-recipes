@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/AcademySoftwareFoundation/openexr/archive/v${PV}.tar.gz
+get https://github.com/AcademySoftwareFoundation/openexr/archive/v"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

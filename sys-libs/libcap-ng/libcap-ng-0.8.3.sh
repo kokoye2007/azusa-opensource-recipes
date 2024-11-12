@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://people.redhat.com/sgrubb/libcap-ng/${P}.tar.gz
+get https://people.redhat.com/sgrubb/libcap-ng/"${P}".tar.gz
 acheck
 
 importpkg libcrypt sys-kernel/linux
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --with-capability_header=/pkg/main/azusa.symlinks.core/full/include/linux/capability.h
 

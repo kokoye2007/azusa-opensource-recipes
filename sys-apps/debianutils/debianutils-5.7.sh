@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get mirror://debian/pool/main/d/${PN}/${PN}_${PV}.orig.tar.gz
+get mirror://debian/pool/main/d/"${PN}"/"${PN}"_"${PV}".orig.tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

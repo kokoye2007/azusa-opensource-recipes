@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloadmirror.intel.com/777395/sde-external-${PV}-2023-04-24-lin.tar.xz
+get https://downloadmirror.intel.com/777395/sde-external-"${PV}"-2023-04-24-lin.tar.xz
 acheck
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"

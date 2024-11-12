@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ndevilla/iniparser/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/ndevilla/iniparser/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 make
 make check

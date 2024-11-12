@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://archive.xfce.org/src/xfce/${PN}/${PV%.*}/${P}.tar.bz2
+get http://archive.xfce.org/src/xfce/"${PN}"/"${PV%.*}"/"${P}".tar.bz2
 acheck
 
 importpkg zlib
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

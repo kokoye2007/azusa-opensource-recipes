@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.gimp.org/mirror/pub/gimp/v${PV%.*}/${P}.tar.bz2
+get https://download.gimp.org/mirror/pub/gimp/v"${PV%.*}"/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libjpeg media-libs/tiff zlib app-arch/bzip2 app-text/ghostscript-gpl
 

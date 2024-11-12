@@ -1,15 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.savannah.gnu.org/releases/freetype/${P}.tar.xz
+get https://download.savannah.gnu.org/releases/freetype/"${P}".tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg
 sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" -i include/freetype/config/ftoption.h
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg app-arch/bzip2
 

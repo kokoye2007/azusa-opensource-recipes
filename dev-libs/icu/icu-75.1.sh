@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/unicode-org/icu/releases/download/release-${PV//./-}/icu4c-${PV//./_}-src.tgz
+get https://github.com/unicode-org/icu/releases/download/release-"${PV//./-}"/icu4c-"${PV//./_}"-src.tgz
 acheck
 
 S="${S}/source"
 
-cd "${T}"
+cd "${T}" || exit
 
 CC=gcc CXX=g++ doconf --disable-debug --disable-samples --enable-static
 

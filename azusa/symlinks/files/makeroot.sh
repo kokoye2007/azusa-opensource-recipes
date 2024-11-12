@@ -6,7 +6,7 @@
 
 BASE="$1"
 
-if [ x"$BASE" = x -o ! -d "$BASE" ]; then
+if [ "$BASE" = "" -o ! -d "$BASE" ]; then
 	echo "Usage: $0 directory"
 	exit 1
 fi
@@ -22,7 +22,7 @@ chmod 01777 "$BASE/tmp" "$BASE/var/tmp"
 chmod 0750 "$BASE/root"
 
 # configure /var
-mkdir -p $BASE/var/{log,mail,spool,cache,lib/{color,misc,locate},lock}
+mkdir -p "$BASE"/var/{log,mail,spool,cache,lib/{color,misc,locate},lock}
 
 # TODO multilib: limit lib64 to x86_64
 for foo in bin sbin lib lib32 lib64; do
@@ -66,7 +66,7 @@ if [ "$(id -u)" -eq 0 ]; then
 	mknod -m 666 "$BASE/dev/fuse" c 10 229
 	mknod -m 444 "$BASE/dev/random" c 1 8
 	mknod -m 444 "$BASE/dev/urandom" c 1 9
-	chown root:tty $BASE/dev/{console,ptmx,tty}
+	chown root:tty "$BASE"/dev/{console,ptmx,tty}
 else
 	echo "Not populating /dev (please run as root)"
 fi
@@ -75,7 +75,7 @@ fi
 find /pkg/main/azusa.baselayout.core.linux.__ARCH__/ '(' -type f -o -type l ')' -printf '%P\n' | while read foo; do
 	if [ ! -f "$BASE/$foo" ]; then
 		# file is missing, copy it. But first...
-		foo_dir=`dirname "$foo"`
+		foo_dir=$(dirname "$foo")
 		if [ ! -d "$BASE/$foo_dir" ]; then
 			# make dir if missing
 			mkdir -p "$BASE/$foo_dir"

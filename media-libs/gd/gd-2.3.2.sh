@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libgd/libgd/releases/download/${P}/lib${P}.tar.xz
+get https://github.com/libgd/libgd/releases/download/"${P}"/lib"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libjpeg libwebp uuid app-arch/bzip2 liblzma libbsd
 

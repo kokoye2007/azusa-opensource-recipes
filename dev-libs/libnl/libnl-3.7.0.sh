@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/thom311/libnl/releases/download/libnl3_5_0/${P}.tar.gz
+get https://github.com/thom311/libnl/releases/download/libnl3_5_0/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static --enable-cli=sbin
 

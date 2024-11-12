@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://studio-neutrino.com/downloads/v${PV}/NEUTRINO-Online-v${PV}.zip
+get https://studio-neutrino.com/downloads/v"${PV}"/NEUTRINO-Online-v"${PV}".zip
 acheck
 
 mkdir -v -p "${D}/pkg/main/${PKG}.data.${PVRF}"
 mv -v "${S}" "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 # go into new pkg
-cd "${D}/pkg/main/${PKG}.core.${PVRF}"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}" || exit
 
 # move models to separate package
 rm -fr model

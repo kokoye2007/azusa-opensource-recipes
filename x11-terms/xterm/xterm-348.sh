@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://invisible-mirror.net/archives/${PN}/${P}.tgz
+get http://invisible-mirror.net/archives/"${PN}"/"${P}".tgz
 
-cd "${P}"
+cd "${P}" || exit
 
 sed -i '/v0/{n;s/new:/new:kb=^?:/}' termcap
 printf '\tkbs=\\177,\n' >> terminfo
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg ncurses
 

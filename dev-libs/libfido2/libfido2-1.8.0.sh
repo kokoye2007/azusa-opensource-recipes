@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/Yubico/${PN}/archive/${PV}.tar.gz
+get https://github.com/Yubico/"${PN}"/archive/"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/libcbor
 

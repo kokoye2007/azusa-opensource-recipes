@@ -1,16 +1,16 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/trousers/${PN}/${P}.tar.gz
+get https://download.sourceforge.net/trousers/"${PN}"/"${P}".tar.gz
 acheck
 
 importpkg app-crypt/trousers openssl
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf -I .
 
-cd "${T}"
+cd "${T}" || exit
 
 # TODO enable-nls cause an issue with building
 doconf --disable-nls

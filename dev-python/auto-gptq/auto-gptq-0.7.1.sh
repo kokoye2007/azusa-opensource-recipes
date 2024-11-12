@@ -17,14 +17,14 @@ export TORCH_CUDA_ARCH_LIST="7.5;8.0;9.0+PTX"
 # pytorch will not honor CPPFLAGS, so pass that directly to nvcc instead
 export PYTORCH_NVCC="${CUDA_HOME}/bin/nvcc ${CPPFLAGS}"
 
-cd "$WORKDIR"
+cd "$WORKDIR" || exit
 
 # download from github because missing files
 # See: https://github.com/AutoGPTQ/AutoGPTQ/issues/594
-get https://github.com/AutoGPTQ/AutoGPTQ/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/AutoGPTQ/AutoGPTQ/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 pythonsetup
 archive

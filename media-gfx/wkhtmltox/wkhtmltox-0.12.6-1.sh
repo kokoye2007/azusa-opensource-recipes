@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/wkhtmltopdf/packaging/releases/download/${PV}/wkhtmltox_${PV}.bionic_amd64.deb
+get https://github.com/wkhtmltopdf/packaging/releases/download/"${PV}"/wkhtmltox_"${PV}".bionic_amd64.deb
 acheck
 
-ar x wkhtmltox_${PV}.bionic_amd64.deb
+ar x wkhtmltox_"${PV}".bionic_amd64.deb
 tar xvf data.tar.xz
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"

@@ -5,7 +5,7 @@ inherit python
 # list of programs to expose in bin
 PROGRAMS="fixOpacity usdARKitChecker usdzaudioimport usdzconvert usdzcreateassetlib"
 
-get https://github.com/KarpelesLab/usdpython/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/KarpelesLab/usdpython/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 #get https://download.developer.apple.com/WWDC_2022/USDPython_${PV}/USDPython${PV}.zip
 #/pkg/main/app-arch.xar.core/bin/xar -x -f "USDPython-${PV}.pkg"
 #cd "USDPython.component.pkg"
@@ -15,7 +15,7 @@ get https://github.com/KarpelesLab/usdpython/archive/refs/tags/v${PV}.tar.gz ${P
 
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # we only care about usdzconvert, since we already have USD through media-libs/usd
 mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}"
@@ -23,7 +23,7 @@ mv -v usdzconvert "${D}/pkg/main/${PKG}.core.${PVRF}/usdzconvert"
 mkdir -pv "${D}/pkg/main/${PKG}.doc.${PVRF}"
 mv README.md LICENSE samples "${D}/pkg/main/${PKG}.doc.${PVRF}"
 
-cd "${D}/pkg/main/${PKG}.core.${PVRF}"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}" || exit
 mkdir bin
 
 for prog in $PROGRAMS; do

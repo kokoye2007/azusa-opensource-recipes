@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}.tar.bz2
+get https://github.com/wxWidgets/wxWidgets/releases/download/v"${PV}"/wxWidgets-"${PV}".tar.bz2
 acheck
 
 importpkg X zlib libpng libjpeg expat media-libs/tiff media-libs/mesa media-libs/libglvnd media-libs/glu media-libs/gstreamer
 
-cd "${T}"
+cd "${T}" || exit
 
 CONF=(
 	--with-zlib=sys

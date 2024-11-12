@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/eclipse/paho.mqtt.c/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/eclipse/paho.mqtt.c/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg dev-libs/openssl
 

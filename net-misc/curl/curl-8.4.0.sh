@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://curl.haxx.se/download/${P}.tar.xz
+get https://curl.haxx.se/download/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libbrotlidec app-arch/zstd net-libs/libssh2
 

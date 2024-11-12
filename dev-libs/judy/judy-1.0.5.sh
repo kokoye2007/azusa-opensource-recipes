@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get mirror://sourceforge/judy/Judy-${PV}.tar.gz
+get mirror://sourceforge/judy/Judy-"${PV}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 doconf
 

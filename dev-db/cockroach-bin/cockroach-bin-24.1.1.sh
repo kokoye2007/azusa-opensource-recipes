@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://binaries.cockroachdb.com/cockroach-v${PV}.${OS}-${ARCH}.tgz
+get https://binaries.cockroachdb.com/cockroach-v"${PV}"."${OS}"-"${ARCH}".tgz
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 

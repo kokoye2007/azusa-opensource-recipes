@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MY_P="${PN}-${PV/_/-}"
 
-get https://download.sourceforge.net/project/${PN}/${PN}/${PV/_/-}/${MY_P}.tar.bz2
+get https://download.sourceforge.net/project/"${PN}"/"${PN}"/"${PV/_/-}"/"${MY_P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 cat >qwtconfig.pri <<-EOF
 QWT_INSTALL_LIBS = "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"

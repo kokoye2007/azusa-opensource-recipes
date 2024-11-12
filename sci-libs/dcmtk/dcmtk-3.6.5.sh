@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dicom.offis.de/download/dcmtk/release/${P}.tar.gz
+get https://dicom.offis.de/download/dcmtk/release/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib media-libs/openjpeg media-libs/libsndfile dev-libs/icu
 

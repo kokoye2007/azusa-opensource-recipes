@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.digitalforensicssolutions.com/Scalpel/${P}.tar.gz
+get http://www.digitalforensicssolutions.com/Scalpel/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 # Set the default config file location
 sed -i -e "s:scalpel.conf:/etc/\0:" src/scalpel.h
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/tre
 

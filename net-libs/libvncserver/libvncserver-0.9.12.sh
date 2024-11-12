@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MY_P="LibVNCServer-${PV}"
 
-get https://github.com/LibVNC/${PN}/archive/${MY_P}.tar.gz
+get https://github.com/LibVNC/"${PN}"/archive/"${MY_P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 PATCHES=(
 	"${FILESDIR}"/${P}-cmake-libdir.patch
 	"${FILESDIR}"/${P}-pkgconfig-libdir.patch
@@ -19,7 +19,7 @@ PATCHES=(
 )
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/openssl
 

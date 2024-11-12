@@ -2,15 +2,15 @@
 source "../../common/init.sh"
 
 MY_PV=${PV:2}
-get https://bitcoincore.org/bin/bitcoin-core-${MY_PV}/bitcoin-${MY_PV}.tar.gz "bitcoin-${PV}.tar.gz"
+get https://bitcoincore.org/bin/bitcoin-core-"${MY_PV}"/bitcoin-"${MY_PV}".tar.gz "bitcoin-${PV}.tar.gz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 /bin/bash -i
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost dev-libs/libevent sys-libs/db:4.8
 

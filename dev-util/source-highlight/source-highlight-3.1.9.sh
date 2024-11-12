@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnu.org/pub/gnu/src-highlite/${P}.tar.gz
+get http://ftp.gnu.org/pub/gnu/src-highlite/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost
 

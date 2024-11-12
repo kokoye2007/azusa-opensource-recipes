@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit python
 
-get https://github.com/greenbone/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/greenbone/"${PN}"/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 pythonsetup
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-fetchgit https://github.com/tinygo-org/tinygo.git v${PV}
+fetchgit https://github.com/tinygo-org/tinygo.git v"${PV}"
 envcheck
 
 export PATH="/pkg/main/dev-lang.go.dev/bin:$PATH"
@@ -9,7 +9,7 @@ export PATH="/pkg/main/dev-lang.go.dev/bin:$PATH"
 echo -n "Using: "
 go version
 
-cd "${S}"
+cd "${S}" || exit
 make llvm-source
 make llvm-build
 make build/release

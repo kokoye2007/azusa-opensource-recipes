@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://libbsd.freedesktop.org/releases/${P}.tar.xz
+get https://libbsd.freedesktop.org/releases/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg app-crypt/libmd
 

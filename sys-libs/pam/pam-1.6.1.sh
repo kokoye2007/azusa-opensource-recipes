@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/linux-pam/linux-pam/releases/download/v${PV}/Linux-PAM-${PV}.tar.xz
+get https://github.com/linux-pam/linux-pam/releases/download/v"${PV}"/Linux-PAM-"${PV}".tar.xz
 acheck
 
 importpkg sys-libs/libxcrypt
 
-cd "${T}"
+cd "${T}" || exit
 
 export TIRPC_CFLAGS="-I/pkg/main/net-libs.libtirpc.dev/include/tirpc"
 

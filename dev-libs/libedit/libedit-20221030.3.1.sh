@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MY_PV=${PV/./-}
 MY_P=${PN}-${MY_PV}
-get https://thrysoee.dk/editline/${MY_P}.tar.gz
+get https://thrysoee.dk/editline/"${MY_P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg tinfo
 

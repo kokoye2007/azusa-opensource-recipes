@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://archive.apache.org/dist/serf/${P}.tar.bz2
+get https://archive.apache.org/dist/serf/"${P}".tar.bz2
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 sed -i "/Append/s:RPATH=libdir,::"          SConstruct
 sed -i "/Default/s:lib_static,::"           SConstruct

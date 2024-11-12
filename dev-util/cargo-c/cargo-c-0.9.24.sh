@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/lu-zero/cargo-c/archive/refs/tags/v${PV}.tar.gz
+get https://github.com/lu-zero/cargo-c/archive/refs/tags/v"${PV}".tar.gz
 envcheck
 
 importpkg sys-libs/llvm-libunwind net-libs/libssh2
 
-cd "${S}"
+cd "${S}" || exit
 
 export LIBSSH2_SYS_USE_PKG_CONFIG=1
 export LIBGIT2_SYS_USE_PKG_CONFIG=1

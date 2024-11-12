@@ -4,10 +4,10 @@ inherit python
 
 PYTHON_RESTRICT="3.8"
 
-get https://releases.ansible.com/${PN}/${P}.tar.gz
+get https://releases.ansible.com/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 pythonsetup
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://oligarchy.co.uk/xapian/${PV}/xapian-core-${PV}.tar.xz
+get http://oligarchy.co.uk/xapian/"${PV}"/xapian-core-"${PV}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

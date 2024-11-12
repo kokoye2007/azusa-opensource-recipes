@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit perl
 
-get https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/${P}.tgz
+get https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/"${P}".tgz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 perlsetup
 finalize

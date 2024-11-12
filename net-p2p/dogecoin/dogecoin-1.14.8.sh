@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/dogecoin/dogecoin/releases/download/v${PV}/dogecoin-${PV}.tar.gz
+get https://github.com/dogecoin/dogecoin/releases/download/v"${PV}"/dogecoin-"${PV}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost dev-libs/libevent sys-libs/db:5.3
 

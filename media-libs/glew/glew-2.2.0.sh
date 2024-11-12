@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tgz
+get https://download.sourceforge.net/"${PN}"/"${P}".tgz
 acheck
 
 importpkg X media-libs/mesa
 
-cd "${S}"
+cd "${S}" || exit
 
-apatch "${FILESDIR}"/${PN}-2.0.0-install-headers.patch
+apatch "${FILESDIR}"/"${PN}"-2.0.0-install-headers.patch
 
 sed -i \
 	-e '/INSTALL/s:-s::' \

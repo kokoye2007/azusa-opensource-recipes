@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/yaml/libyaml/archive/${PV}/libyaml-dist-${PV}.tar.gz
+get https://github.com/yaml/libyaml/archive/"${PV}"/libyaml-dist-"${PV}".tar.gz
 
-cd "${P}"
+cd "${P}" || exit
 
 #./bootstrap
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

@@ -10,7 +10,7 @@ go version
 
 export GOBIN="${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 mkdir -pv "$GOBIN"
-go install -v github.com/KarpelesLab/hlsmaker@v${PV}
+go install -v github.com/KarpelesLab/hlsmaker@v"${PV}"
 if [ ! -f "$GOBIN/hlsmaker" ]; then
 	echo "Build failed"
 	exit

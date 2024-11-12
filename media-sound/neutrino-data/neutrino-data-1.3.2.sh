@@ -18,8 +18,8 @@ voices["jsut"]=https://studio-neutrino.com/downloads/v${NEUTRINO_PV}/JSUT%EF%BC%
 
 for voice in ${!voices[@]}; do
 	mkdir -p "${D}/pkg/main/${PKG}.data.${voice}.${NEUTRINO_PV}.${PVRF}/model"
-	cd "${D}/pkg/main/${PKG}.data.${voice}.${NEUTRINO_PV}.${PVRF}/model"
-	download ${voices[$voice]} "neutrino-data-${PV}-${voice}.zip"
+	cd "${D}/pkg/main/${PKG}.data.${voice}.${NEUTRINO_PV}.${PVRF}/model" || exit
+	download "${voices[$voice]}" "neutrino-data-${PV}-${voice}.zip"
 	unzip -j "neutrino-data-${PV}-${voice}.zip"
 	rm -f "neutrino-data-${PV}-${voice}.zip"
 done

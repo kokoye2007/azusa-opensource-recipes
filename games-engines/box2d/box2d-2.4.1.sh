@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/erincatto/Box2D/archive/v${PV}.tar.gz
+get https://github.com/erincatto/Box2D/archive/v"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 docmake -DBOX2D_BUILD_TESTBED=OFF -DBOX2D_BUILD_DOCS=ON
 

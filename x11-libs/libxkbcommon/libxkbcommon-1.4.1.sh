@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://xkbcommon.org/download/${P}.tar.xz
+get https://xkbcommon.org/download/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 domeson
 

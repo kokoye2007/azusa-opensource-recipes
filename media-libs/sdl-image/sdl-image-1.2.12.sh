@@ -8,7 +8,7 @@ acheck
 
 importpkg X media-libs/libjpeg-turbo media-libs/tiff
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static --disable-jpg-shared --disable-png-shared --disable-tif-shared --disable-webp-shared --enable-gif --enable-jpg --enable-tif --enable-png --enable-webp --enable-bmp --enable-lbm --enable-pcx --enable-pnm --enable-tga --enable-xcf --enable-xpm --enable-xv
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dev.gentoo.org/~sultan/distfiles/dev-util/gn/${P}.tar.xz
+get https://dev.gentoo.org/~sultan/distfiles/dev-util/gn/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 export CC=gcc
 export CXX=g++

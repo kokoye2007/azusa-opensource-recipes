@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/libqmi/${P}.tar.xz
+get https://www.freedesktop.org/software/libqmi/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

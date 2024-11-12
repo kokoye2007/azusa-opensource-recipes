@@ -2,12 +2,12 @@
 source "../../common/init.sh"
 inherit libs
 
-get https://download.sourceforge.net/mad/${P}.tar.gz
+get https://download.sourceforge.net/mad/"${P}".tar.gz
 acheck
 
 preplib
 
-cd "$S"
+cd "$S" || exit
 
 PATCHES=(
 	"${FILESDIR}"/${P}-cflags.patch
@@ -18,7 +18,7 @@ PATCHES=(
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 doconflight --enable-accuracy --disable-static
 

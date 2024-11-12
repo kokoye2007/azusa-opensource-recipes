@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/apple-oss-distributions/xar/archive/refs/tags/${P}.tar.gz
+get https://github.com/apple-oss-distributions/xar/archive/refs/tags/"${P}".tar.gz
 acheck
 
 importpkg libxml-2.0 zlib app-arch/bzip2 dev-libs/openssl
 
 S="${S}/xar"
 
-cd "$S"
+cd "$S" || exit
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.6.1-ext2.patch
@@ -30,7 +30,7 @@ echo ".PRECIOUS: @objroot@src/%.o" >> src/Makefile.inc.in
 cd "${S}"/include || die
 mv ../lib/*.h . || die
 
-cd "${T}"
+cd "${T}" || exit
 
 export LIBS="$(pkg-config --libs openssl)"
 

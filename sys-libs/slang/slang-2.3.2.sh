@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.jedsoft.org/releases/slang/${P}.tar.bz2
+get https://www.jedsoft.org/releases/slang/"${P}".tar.bz2
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg sys-libs/libtermcap-compat oniguruma ncurses libpcre zlib sys-libs/readline libpng
 

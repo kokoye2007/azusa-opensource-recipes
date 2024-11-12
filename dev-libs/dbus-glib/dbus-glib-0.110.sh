@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dbus.freedesktop.org/releases/dbus-glib/${P}.tar.gz
+get https://dbus.freedesktop.org/releases/dbus-glib/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --sysconfdir=/etc --disable-static
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/aria2/${PN}/releases/download/release-${PV}/${P}.tar.xz
+get https://github.com/aria2/"${PN}"/releases/download/release-"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg gmp net-libs/libssh2
 

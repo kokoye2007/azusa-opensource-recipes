@@ -1,17 +1,17 @@
 #!/bin/sh
-ROOTDIR="`pwd`"
+ROOTDIR="$(pwd)"
 source "common/init.sh"
 inherit perl
 acheck
 
 for PERL_VERSION in $PERL_VERSIONS; do
 	echo "Checking modules for perl $PERL_VERSION"
-	MODS=`curl -s http://localhost:100/apkgdb/main?action=list | grep "perl$PERL_VERSION" || true`
+	MODS=$(curl -s http://localhost:100/apkgdb/main?action=list | grep "perl$PERL_VERSION" || true)
 
 	for foo in $ROOTDIR/dev-perl/*; do
 		echo "$foo"
-		BASE=`basename "$foo"`
-		if [ `echo "$MODS" | grep -c "$BASE\\.mod"` -gt 0 ]; then
+		BASE=$(basename "$foo")
+		if [ $(echo "$MODS" | grep -c "$BASE\\.mod") -gt 0 ]; then
 			# already have
 			#continue
 			:
@@ -23,7 +23,7 @@ for PERL_VERSION in $PERL_VERSIONS; do
 				VERS="$V"
 			fi
 		done
-		if [ x"$VERS" = x ]; then
+		if [ "$VERS" = "" ]; then
 			echo "No version found for dev-perl/$BASE"
 			continue
 		fi

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/rhinstaller/efivar/releases/download/${PV}/${P}.tar.bz2
+get https://github.com/rhinstaller/efivar/releases/download/"${PV}"/"${P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=(
 	"${FILESDIR}"/efivar-38-march-native.patch

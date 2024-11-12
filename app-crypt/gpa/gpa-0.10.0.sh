@@ -1,11 +1,11 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.gnupg.org/ftp/gcrypt/${PN}/${P}.tar.bz2
-get https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${P}-autoconf.patch.xz
+get https://www.gnupg.org/ftp/gcrypt/"${PN}"/"${P}".tar.bz2
+get https://dev.gentoo.org/~sam/distfiles/"${CATEGORY}"/"${PN}"/"${P}"-autoconf.patch.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

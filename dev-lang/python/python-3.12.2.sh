@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.python.org/ftp/python/${PV}/Python-${PV}.tar.xz
+get https://www.python.org/ftp/python/"${PV}"/Python-"${PV}".tar.xz
 acheck
 
-cd "Python-${PV}"
+cd "Python-${PV}" || exit
 
 # ensure python can build its "bits" for the following packages
 importpkg libffi expat ncurses openssl zlib sqlite3 sys-libs/readline liblzma app-arch/bzip2 sys-libs/gdbm sys-apps/util-linux
@@ -19,7 +19,7 @@ callconf --prefix="$MODDIR" --exec-prefix="/pkg/main/${PKG}.core.${PVRF}" --sysc
 make
 make install DESTDIR="${D}"
 
-cd "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}/bin" || exit
 if [ ! -f python ]; then
 	# create symlink
 	if [ -L python3 ]; then

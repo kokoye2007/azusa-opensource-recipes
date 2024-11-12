@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-CATEGORY=sys-devel PN=llvm PKG="sys-devel.llvm" get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/llvm-project-${PV}.src.tar.xz
+CATEGORY=sys-devel PN=llvm PKG="sys-devel.llvm" get https://github.com/llvm/llvm-project/releases/download/llvmorg-"${PV}"/llvm-project-"${PV}".src.tar.xz
 S="$S/runtimes"
 
 acheck
@@ -24,7 +24,7 @@ CMAKE_OPTS=(
 	-DLIBUNWIND_USE_COMPILER_RT=OFF # fails
 )
 
-cd "$T"
+cd "$T" || exit
 
 # build libcxxabi
 CMAKE_TARGET_INSTALL=install-unwind docmake "${CMAKE_OPTS[@]}"

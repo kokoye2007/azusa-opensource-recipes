@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/NixOS/${PN}/releases/download/${PV}/${P}.tar.bz2
+get https://github.com/NixOS/"${PN}"/releases/download/"${PV}"/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

@@ -2,18 +2,18 @@
 source "../../common/init.sh"
 
 MY_PV="${PV/_*/}"
-get https://ftp.gnu.org/gnu/${PN}/${PN}-${MY_PV}.tar.gz
+get https://ftp.gnu.org/gnu/"${PN}"/"${PN}"-"${MY_PV}".tar.gz
 
-cd "${PN}-${MY_PV}"
+cd "${PN}-${MY_PV}" || exit
 
-for foo in `seq -f '%03.f' 1 "${PV/*_p/}"`; do
-	get https://ftp.gnu.org/gnu/readline/${PN}-${MY_PV}-patches/readline82-$foo
+for foo in $(seq -f '%03.f' 1 "${PV/*_p/}"); do
+	get https://ftp.gnu.org/gnu/readline/"${PN}"-"${MY_PV}"-patches/readline82-"$foo"
 	patch -p0 <"readline82-$foo"
 done
 
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg ncursesw
 

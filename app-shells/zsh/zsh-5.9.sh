@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.zsh.org/pub/${P}.tar.xz
+get https://www.zsh.org/pub/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/ncurses
 

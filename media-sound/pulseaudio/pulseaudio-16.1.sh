@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/${PN}/releases/${P}.tar.xz
+get https://www.freedesktop.org/software/"${PN}"/releases/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-devel/libtool sys-libs/libcap dev-libs/check dev-libs/libbsd zlib net-dns/avahi x11-libs/libxcb
 

@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get ftp://tug.org/texlive/historic/${PV:0:4}/texlive-${PV}-source.tar.xz
+get ftp://tug.org/texlive/historic/"${PV:0:4}"/texlive-"${PV}"-source.tar.xz
 acheck
 
-cd "texlive-${PV}-source"
+cd "texlive-${PV}-source" || exit
 
 mkdir texlive-build
-cd texlive-build
+cd texlive-build || exit
 
 TEXMF="/pkg/main/app-text.texlive-texmf.misc.${PV}/"
 

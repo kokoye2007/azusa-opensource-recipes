@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.abisource.com/downloads/wv/${PV}/${P}.tar.gz
+get http://www.abisource.com/downloads/wv/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 # libpng is not diectly required but is a dep of libwmf
 importpkg dev-libs/icu libpng

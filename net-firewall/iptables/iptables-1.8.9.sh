@@ -1,15 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.netfilter.org/projects/iptables/files/${P}.tar.xz
+get https://www.netfilter.org/projects/iptables/files/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 rm include/linux/{kernel,types}.h
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

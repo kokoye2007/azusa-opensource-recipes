@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/LibVNC/x11vnc/archive/${PV}.tar.gz ${P}.tar.gz
+get https://github.com/LibVNC/x11vnc/archive/"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "$S"
+cd "$S" || exit
 
 PATCHES=(
 	"${FILESDIR}"/${P}-crypto.patch # https://github.com/LibVNC/x11vnc/issues/86
@@ -16,7 +16,7 @@ PATCHES=(
 apatch "${PATCHES[@]}"
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X net-dns/avahi dev-libs/openssl
 

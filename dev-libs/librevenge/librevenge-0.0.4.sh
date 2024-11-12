@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sf.net/projects/libwpd/files/${PN}/${P}/${P}.tar.xz
+get https://sf.net/projects/libwpd/files/"${PN}"/"${P}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost
 

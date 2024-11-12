@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://netfilter.org/projects/libmnl/files/${P}.tar.bz2
+get https://netfilter.org/projects/libmnl/files/"${P}".tar.bz2
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

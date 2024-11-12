@@ -1,19 +1,19 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://hg.openjdk.java.net/jdk-updates/jdk12u/archive/jdk-${PV}.tar.bz2
+get http://hg.openjdk.java.net/jdk-updates/jdk12u/archive/jdk-"${PV}".tar.bz2
 
 BOOT_JDK="/pkg/main/dev-java.openjdk.core"
 
 if [ ! -d "$BOOT_JDK" ]; then
 	# grab LFS bootjdk
-	cd "${T}"
+	cd "${T}" || exit
 	get https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz
 	BOOT_JDK="${T}/jdk-12.0.2"
 fi
 
 # grab tests
-cd "${CHPATH}/jdk12u-jdk-${PV}"
+cd "${CHPATH}/jdk12u-jdk-${PV}" || exit
 get http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-12.0.2/jtreg-4.2-b13-517.tar.gz
 
 acheck
@@ -25,7 +25,7 @@ bash configure --enable-unlimited-crypto \
 	--disable-warnings-as-errors \
 	--with-stdc++lib=dynamic \
 	--with-giflib=system \
-	--with-jtreg=$PWD/jtreg \
+	--with-jtreg="$PWD"/jtreg \
 	--with-lcms=system \
 	--with-libjpeg=system \
 	--with-libpng=system \

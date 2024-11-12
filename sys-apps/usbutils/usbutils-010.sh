@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.kernel.org/pub/linux/utils/usb/${PN}/${P}.tar.xz
+get https://www.kernel.org/pub/linux/utils/usb/"${PN}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

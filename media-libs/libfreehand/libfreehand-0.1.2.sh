@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dev-www.libreoffice.org/src/libfreehand/${P}.tar.xz
+get https://dev-www.libreoffice.org/src/libfreehand/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
-apatch $FILESDIR/${P}-*.patch
+apatch "$FILESDIR"/"${P}"-*.patch
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost
 

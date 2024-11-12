@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/AbiWord/enchant/releases/download/v${PV}/${P}.tar.gz
+get https://github.com/AbiWord/enchant/releases/download/v"${PV}"/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

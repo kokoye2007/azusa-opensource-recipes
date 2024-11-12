@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dri.freedesktop.org/libdrm/${P}.tar.xz
+get https://dri.freedesktop.org/libdrm/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg app-arch/bzip2 sys-apps/util-linux dev-libs/libbsd
 

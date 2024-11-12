@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://archive.apache.org/dist/subversion/${P}.tar.bz2
+get https://archive.apache.org/dist/subversion/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/expat uuid net-libs/serf
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ueno/${PN}/releases/download/${PV}/${P}.tar.xz
+get https://github.com/ueno/"${PN}"/releases/download/"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-introspection --enable-nls --enable-static
 

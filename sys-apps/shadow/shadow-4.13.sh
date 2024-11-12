@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/shadow-maint/shadow/releases/download/${PV}/${P}.tar.xz
+get https://github.com/shadow-maint/shadow/releases/download/"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/pam sys-libs/acl sys-libs/libxcrypt
 

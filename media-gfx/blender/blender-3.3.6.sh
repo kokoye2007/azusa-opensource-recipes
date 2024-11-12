@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit python
 
-get https://download.blender.org/source/${P}.tar.xz
+get https://download.blender.org/source/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/blender-3.3.0-fix-build-with-boost-1.81.patch"
 
@@ -26,11 +26,11 @@ sed -e "s|Name=Blender|Name=Blender ${PV}|" -i release/freedesktop/blender.deskt
 sed -e "s|Exec=blender|Exec=blender-${BV}|" -i release/freedesktop/blender.desktop
 sed -e "s|Icon=blender|Icon=blender-${BV}|" -i release/freedesktop/blender.desktop
 
-mv release/freedesktop/icons/scalable/apps/blender.svg release/freedesktop/icons/scalable/apps/blender-${BV}.svg
-mv release/freedesktop/icons/symbolic/apps/blender-symbolic.svg release/freedesktop/icons/symbolic/apps/blender-${BV}-symbolic.svg
-mv release/freedesktop/blender.desktop release/freedesktop/blender-${BV}.desktop
+mv release/freedesktop/icons/scalable/apps/blender.svg release/freedesktop/icons/scalable/apps/blender-"${BV}".svg
+mv release/freedesktop/icons/symbolic/apps/blender-symbolic.svg release/freedesktop/icons/symbolic/apps/blender-"${BV}"-symbolic.svg
+mv release/freedesktop/blender.desktop release/freedesktop/blender-"${BV}".desktop
 
-cd "${T}"
+cd "${T}" || exit
 
 PKGS=(
 	libjpeg

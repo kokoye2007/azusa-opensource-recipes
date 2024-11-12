@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/${PN}/${P}.tar.gz
+get https://ftp.gnu.org/gnu/"${PN}"/"${P}".tar.gz
 acheck
 
 importpkg libgcrypt
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

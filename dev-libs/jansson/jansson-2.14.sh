@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.digip.org/jansson/releases/${P}.tar.gz
+get http://www.digip.org/jansson/releases/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

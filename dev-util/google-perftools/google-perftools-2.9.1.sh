@@ -2,14 +2,14 @@
 source "../../common/init.sh"
 
 MY_P="gperftools-${PV}"
-get https://github.com/gperftools/gperftools/archive/${MY_P}.tar.gz
+get https://github.com/gperftools/gperftools/archive/"${MY_P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

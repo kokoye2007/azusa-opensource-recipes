@@ -3,7 +3,7 @@ source "../../common/init.sh"
 inherit xmlcatalog
 
 MY_P="docbkx${PV//./}"
-get https://docbook.org/xml/${PV}/${MY_P}.zip
+get https://docbook.org/xml/"${PV}"/"${MY_P}".zip
 acheck
 
 mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xml-dtd-${PV}"

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz
+get https://www.freedesktop.org/software/ModemManager/ModemManager-"${PV}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

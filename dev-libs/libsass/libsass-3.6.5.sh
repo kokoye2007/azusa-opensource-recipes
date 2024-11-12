@@ -1,15 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/sass/libsass/archive/${PV}/${P}.tar.gz
+get https://github.com/sass/libsass/archive/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 libtoolize -fi
 autoreconf -fi
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static --disable-tests --enable-shared
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/apple/cups/releases/download/v${PV}/${P}-source.tar.gz
+get https://github.com/apple/cups/releases/download/v"${PV}"/"${P}"-source.tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 sed -i 's:444:644:' Makedefs.in
 sed 's#^.SILENT:##g' -i Makedefs.in

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://wgetpaste.zlin.dk/${P}.tar.bz2
+get http://wgetpaste.zlin.dk/"${P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=( "${FILESDIR}/${P}-fix-bpaste.patch" )
 apatch "${PATCHES[@]}"

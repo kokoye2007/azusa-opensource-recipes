@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.prelude-siem.org/attachments/download/1176/${P}.tar.gz
+get https://www.prelude-siem.org/attachments/download/1176/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg icu-uc
 

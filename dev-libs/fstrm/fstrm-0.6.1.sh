@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dl.farsightsecurity.com/dist/${PN}/${P}.tar.gz
+get https://dl.farsightsecurity.com/dist/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

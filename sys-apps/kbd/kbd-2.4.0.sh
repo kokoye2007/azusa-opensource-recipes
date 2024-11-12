@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mirrors.edge.kernel.org/pub/linux/utils/kbd/${P}.tar.xz
+get https://mirrors.edge.kernel.org/pub/linux/utils/kbd/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/pam dev-libs/check
 

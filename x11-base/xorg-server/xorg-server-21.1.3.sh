@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/xserver/${P}.tar.xz
+get https://www.x.org/pub/individual/xserver/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg app-arch/bzip2 dev-libs/libbsd sys-libs/libunwind app-arch/xz media-libs/mesa media-libs/libepoxy
 

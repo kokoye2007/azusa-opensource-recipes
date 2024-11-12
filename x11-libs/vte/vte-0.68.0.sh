@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.nara.wide.ad.jp/pub/X11/GNOME/sources/vte/${PV:0:4}/${P}.tar.xz
+get http://ftp.nara.wide.ad.jp/pub/X11/GNOME/sources/vte/"${PV:0:4}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib x11-libs/cairo
 

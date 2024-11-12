@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/mp4v2/mp4v2-${PV}.tar.bz2
+get https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/mp4v2/mp4v2-"${PV}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=(
     "${FILESDIR}/${P}-gcc7.patch"
@@ -19,7 +19,7 @@ PATCHES=(
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

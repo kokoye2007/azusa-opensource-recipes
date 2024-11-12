@@ -1,11 +1,11 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://developers.yubico.com/yubihsm-connector/Releases/${P}.tar.gz
+get https://developers.yubico.com/yubihsm-connector/Releases/"${P}".tar.gz
 envcheck
 # do not use acheck so we keep networking
 
-cd "${S}"
+cd "${S}" || exit
 
 export PATH="/pkg/main/dev-lang.go.dev/bin:$PATH"
 

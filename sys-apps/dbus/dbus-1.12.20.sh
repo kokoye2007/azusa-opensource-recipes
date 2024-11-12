@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dbus.freedesktop.org/releases/dbus/${P}.tar.gz
+get https://dbus.freedesktop.org/releases/dbus/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X
 

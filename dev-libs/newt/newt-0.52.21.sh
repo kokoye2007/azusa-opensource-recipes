@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://releases.pagure.org/newt/${P}.tar.gz
+get https://releases.pagure.org/newt/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

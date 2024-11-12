@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/xianyi/OpenBLAS/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/xianyi/OpenBLAS/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 export USE_THREAD=1
 export USE_OPENMP=0 # pthread
@@ -18,7 +18,7 @@ export NUM_PARALLEL=8
 export NUM_THREADS=64
 export NO_STATIC=1
 export BUILD_RELAPACK=1
-export PREFIX=/pkg/main/${PKG}.core.${PVRF}
+export PREFIX=/pkg/main/"${PKG}".core."${PVRF}"
 
 sed -e "/^all ::/s/tests //" -i Makefile
 

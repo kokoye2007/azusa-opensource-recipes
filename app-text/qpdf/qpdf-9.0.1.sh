@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/qpdf/qpdf/releases/download/release-${P}/${P}.tar.gz
+get https://github.com/qpdf/qpdf/releases/download/release-"${P}"/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 doconf --disable-static
 

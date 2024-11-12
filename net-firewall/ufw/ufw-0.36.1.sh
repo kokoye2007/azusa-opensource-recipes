@@ -4,10 +4,10 @@ inherit python
 
 PYTHON_RESTRICT="$PYTHON_LATEST"
 
-get https://launchpad.net/${PN}/${PV%.*}/${PV}/+download/${P}.tar.gz
+get https://launchpad.net/"${PN}"/"${PV%.*}"/"${PV}"/+download/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 pythonsetup
 

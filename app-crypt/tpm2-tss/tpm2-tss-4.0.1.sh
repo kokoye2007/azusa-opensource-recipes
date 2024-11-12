@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/tpm2-software/${PN}/releases/download/${PV}/${P}.tar.gz
+get https://github.com/tpm2-software/"${PN}"/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-apps/util-linux dev-libs/openssl
 

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://weechat.org/files/src/${P}.tar.xz
+get https://weechat.org/files/src/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/libgcrypt sys-libs/ncurses sys-libs/zlib net-libs/gnutls app-text/aspell sys-libs/glibc dev-lang/lua dev-lang/tcl dev-libs/libgpg-error dev-libs/libatomic_ops
 

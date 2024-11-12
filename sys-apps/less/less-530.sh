@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.greenwoodsoftware.com/less/${P}.tar.gz
+get http://www.greenwoodsoftware.com/less/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

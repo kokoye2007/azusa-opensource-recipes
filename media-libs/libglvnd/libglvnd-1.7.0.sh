@@ -7,7 +7,7 @@ acheck
 
 importpkg x11
 
-cd "${T}"
+cd "${T}" || exit
 
 domeson -Dx11=enabled -Dglx=enabled
 

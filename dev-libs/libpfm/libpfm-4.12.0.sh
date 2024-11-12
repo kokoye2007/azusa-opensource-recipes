@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}4/${P}.tar.gz
+get https://download.sourceforge.net/"${PN}"4/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PREFIX="/pkg/main/${PKG}.core.${PVRF}"
 sed -e "s:SLDFLAGS=:SLDFLAGS=\$(LDFLAGS) :g" \

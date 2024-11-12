@@ -1,15 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://download.savannah.nongnu.org/releases/sysvinit/${P}.tar.xz
+get http://download.savannah.nongnu.org/releases/sysvinit/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 make
 make install ROOT="${D}/pkg/main/${PKG}.core.${PVRF}"
 
-cd "${D}"
+cd "${D}" || exit
 # move stuff around
 mkdir "pkg/main/${PKG}.doc.${PVRF}"
 mkdir "pkg/main/${PKG}.dev.${PVRF}"

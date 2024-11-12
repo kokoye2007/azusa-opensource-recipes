@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://portland.freedesktop.org/download/${P}.tar.gz
+get https://portland.freedesktop.org/download/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 doconf
 

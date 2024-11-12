@@ -2,12 +2,12 @@
 source "../../common/init.sh"
 
 MY_P="Argyll_V${PV}"
-get http://www.argyllcms.com/${MY_P}_src.zip
+get http://www.argyllcms.com/"${MY_P}"_src.zip
 acheck
 
 importpkg media-libs/tiff media-libs/libjpeg-turbo X
 
-cd "${S}"
+cd "${S}" || exit
 
 # Make it respect LDFLAGS
 echo "LINKFLAGS += ${LDFLAGS} ;" >> Jamtop
@@ -20,7 +20,7 @@ export CFLAGS="$CFLAGS -DUNIX -D_THREAD_SAFE -O2 ${CPPFLAGS}"
 
 sed -e 's:CCFLAGS:CFLAGS:g' -i Jambase
 
-export PREFIX=/pkg/main/${PKG}.core.${PVRF}
+export PREFIX=/pkg/main/"${PKG}".core."${PVRF}"
 export DESTDIR="${D}"
 
 jam -dx -fJambase

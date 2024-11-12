@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnome.org/pub/gnome/sources/vala/${PV%.*}/${P}.tar.xz
+get http://ftp.gnome.org/pub/gnome/sources/vala/"${PV%.*}"/"${P}".tar.xz
 acheck
 
 # vala requires libtool to be in /usr/lib$LIB_SUFFIX/libltdl.la - this should be configurable but doesn't seem to be the case
 # so we force it manually
-ln -snfv /pkg/main/sys-devel.libtool.libs/lib$LIB_SUFFIX/* /usr/lib$LIB_SUFFIX/
+ln -snfv /pkg/main/sys-devel.libtool.libs/lib"$LIB_SUFFIX"/* /usr/lib"$LIB_SUFFIX"/
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg media-gfx/graphviz
 

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/linuxwacom/xf86-input-wacom/releases/download/${P}/${P}.tar.bz2
+get https://github.com/linuxwacom/xf86-input-wacom/releases/download/"${P}"/"${P}".tar.bz2
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --localstatedir=/var
 

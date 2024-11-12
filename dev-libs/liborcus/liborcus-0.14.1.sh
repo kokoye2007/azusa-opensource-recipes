@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://kohei.us/files/orcus/src/${P}.tar.xz
+get https://kohei.us/files/orcus/src/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost zlib
 

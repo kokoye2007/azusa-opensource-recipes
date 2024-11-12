@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/thkukuk/rpcsvc-proto/releases/download/v${PV}/${P}.tar.xz
+get https://github.com/thkukuk/rpcsvc-proto/releases/download/v"${PV}"/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

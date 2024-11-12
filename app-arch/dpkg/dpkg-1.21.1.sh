@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.jp.debian.org/debian/pool/main/d/${PN}/${P/-/_}.tar.xz
+get http://ftp.jp.debian.org/debian/pool/main/d/"${PN}"/"${P/-/_}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg ncurses zlib liblzma app-arch/bzip2
 

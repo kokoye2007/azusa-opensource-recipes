@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.x.org/pub/individual/driver/${P}.tar.bz2
+get https://www.x.org/pub/individual/driver/"${P}".tar.bz2
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --localstatedir=/var
 

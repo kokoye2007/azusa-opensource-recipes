@@ -5,16 +5,16 @@ MY_PN=LibRaw
 MY_PV="${PV/_b/-B}"
 MY_P="${MY_PN}-${MY_PV}"
 
-get https://www.libraw.org/data/${MY_P}.tar.gz
+get https://www.libraw.org/data/"${MY_P}".tar.gz
 acheck
 
 importpkg libjpeg
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static --disable-jasper --disable-examples --enable-jpeg --enable-lcms --enable-openmp
 

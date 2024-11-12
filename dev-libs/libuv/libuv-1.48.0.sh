@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dist.libuv.org/dist/v${PV}/libuv-v${PV}.tar.gz
+get https://dist.libuv.org/dist/v"${PV}"/libuv-v"${PV}".tar.gz
 acheck
 
-cd "libuv-v${PV}"
+cd "libuv-v${PV}" || exit
 
 sh autogen.sh
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mirrors.edge.kernel.org/pub/linux/utils/boot/${PN}/${P}.tar.gz
+get https://mirrors.edge.kernel.org/pub/linux/utils/boot/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 patch -p1 <"$FILESDIR/syslinux-6.03-sysmacros.patch"
 
 # make sure makefiles won't override ldflags

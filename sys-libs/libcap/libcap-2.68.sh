@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/${P}.tar.gz
+get https://git.kernel.org/pub/scm/libs/libcap/libcap.git/snapshot/"${P}".tar.gz
 acheck
 
-cd ${P}
+cd "${P}" || exit
 
 sed -i '/install.*STALIBNAME/d' libcap/Makefile
 
@@ -12,7 +12,7 @@ sed -i '/install.*STALIBNAME/d' libcap/Makefile
 make
 make install RAISE_SETFCAP=no prefix="${D}/pkg/main/${PKG}.core.${PVRF}"
 
-cd "${D}"
+cd "${D}" || exit
 
 rm -fr "pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/pkgconfig"
 

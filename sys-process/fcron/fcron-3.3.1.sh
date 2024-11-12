@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://fcron.free.fr/archives/${P}.src.tar.gz
+get http://fcron.free.fr/archives/"${P}".src.tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 sed -i -e '/LIBS/ s/CFLAGS/LDFLAGS/' Makefile.in
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/libxcrypt
 

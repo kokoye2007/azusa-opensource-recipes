@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sourceforge.net/projects/ibmswtpm2/files/ibmtpm${PV}.tar.gz
+get https://sourceforge.net/projects/ibmswtpm2/files/ibmtpm"${PV}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # fix makefile
 sed -i 's/^CCFLAGS +=.*/CCFLAGS += $(shell pkg-config --cflags openssl)/' makefile11

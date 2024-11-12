@@ -1,6 +1,6 @@
 #!/bin/sh
 source ../../common/init.sh
-source ${ROOTDIR}/common/python.sh
+source "${ROOTDIR}"/common/python.sh
 
 acheck
 
@@ -23,23 +23,23 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 	# generate finder
 	FINDER="${D}/pkg/main/${PKG}.core.${PYTHON_VERSION}/lib/python${PYTHON_MINOR}/site-packages/azusafinder.py"
-	echo "import importlib.abc" >$FINDER
-	echo "import importlib.machinery" >>$FINDER
-	echo "import sys" >>$FINDER
-	echo >>$FINDER
-	echo "class AzusaModuleFinder(importlib.abc.MetaPathFinder):" >>$FINDER
-	echo "    def __init__(self):" >>$FINDER
-	echo "        self.modules = {" >>$FINDER
+	echo "import importlib.abc" >"$FINDER"
+	echo "import importlib.machinery" >>"$FINDER"
+	echo "import sys" >>"$FINDER"
+	echo >>"$FINDER"
+	echo "class AzusaModuleFinder(importlib.abc.MetaPathFinder):" >>"$FINDER"
+	echo "    def __init__(self):" >>"$FINDER"
+	echo "        self.modules = {" >>"$FINDER"
 
 	unset modules
 	unset modpaths
 	declare -A modules
 	declare -A modpaths
 
-	for pn in `curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_VERSION"`; do
+	for pn in $(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_VERSION"); do
 		p=/pkg/main/${pn}
-		t=`echo "$pn" | cut -d. -f3`
-		n=`echo "$pn" | cut -d. -f2`
+		t=$(echo "$pn" | cut -d. -f3)
+		n=$(echo "$pn" | cut -d. -f2)
 
 		if [ x"$t" != x"mod" ]; then
 			# skip if not a module
@@ -117,27 +117,27 @@ for PYTHON_VERSION in $PYTHON_VERSIONS; do
 
 	# iterate over modules
 	for mod in ${!modules[@]}; do
-		echo -n "            '$mod': [" >>$FINDER
+		echo -n "            '$mod': [" >>"$FINDER"
 		for p in ${modules[$mod]}; do
-			echo -n "'$p'," >>$FINDER
+			echo -n "'$p'," >>"$FINDER"
 		done
-		echo "]," >>$FINDER
+		echo "]," >>"$FINDER"
 	done
 
-	echo "        }" >>$FINDER
-	echo "    def find_spec(self, fullname, path=None, target=None):" >>$FINDER
-	echo "        \"\"\"Find the path of the given module in the static list.\"\"\"" >>$FINDER
-	echo "        if fullname == 'distutils':" >>$FINDER
-	echo "            finder = __import__('_distutils_hack').DistutilsMetaFinder()" >>$FINDER
-	echo "            return finder.spec_for_distutils()" >>$FINDER
-	echo "        if fullname in self.modules:" >>$FINDER
-	echo "            module_paths = self.modules[fullname]" >>$FINDER
-	echo "            for module_path in module_paths:" >>$FINDER
-	echo "                if module_path not in sys.path:" >>$FINDER
-	echo "                    sys.path.append(module_path)" >>$FINDER
-	echo "        return None" >>$FINDER
-	echo >>$FINDER
-	echo "sys.meta_path.insert(0, AzusaModuleFinder())" >>$FINDER
+	echo "        }" >>"$FINDER"
+	echo "    def find_spec(self, fullname, path=None, target=None):" >>"$FINDER"
+	echo "        \"\"\"Find the path of the given module in the static list.\"\"\"" >>"$FINDER"
+	echo "        if fullname == 'distutils':" >>"$FINDER"
+	echo "            finder = __import__('_distutils_hack').DistutilsMetaFinder()" >>"$FINDER"
+	echo "            return finder.spec_for_distutils()" >>"$FINDER"
+	echo "        if fullname in self.modules:" >>"$FINDER"
+	echo "            module_paths = self.modules[fullname]" >>"$FINDER"
+	echo "            for module_path in module_paths:" >>"$FINDER"
+	echo "                if module_path not in sys.path:" >>"$FINDER"
+	echo "                    sys.path.append(module_path)" >>"$FINDER"
+	echo "        return None" >>"$FINDER"
+	echo >>"$FINDER"
+	echo "sys.meta_path.insert(0, AzusaModuleFinder())" >>"$FINDER"
 
 	# autoload finder
 	echo "import azusafinder" >"${D}/pkg/main/${PKG}.core.${PYTHON_VERSION}/lib/python${PYTHON_MINOR}/site-packages/azusafinder.pth"

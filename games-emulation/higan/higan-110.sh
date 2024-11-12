@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/byuu/higan/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/byuu/higan/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/${P}-make-install.patch"
 
-cd "${S}/higan"
+cd "${S}/higan" || exit
 
 importpkg X media-libs/mesa media-libs/alsa-lib media-libs/libao media-libs/openal media-sound/pulseaudio media-libs/libsdl2 libudev zlib
 

@@ -11,11 +11,11 @@ fi
 fetchgit https://github.com/shaka-project/shaka-packager.git 56d33040452b64fd31a4d8c2497a122f5f97ac07
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/shaka-packager-2.6.1.20221217-error_ignore.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg net-dns/c-ares
 

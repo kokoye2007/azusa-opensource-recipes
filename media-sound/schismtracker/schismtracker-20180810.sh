@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/${PN}/${PN}/archive/${PV}.tar.gz ${P}.tar.gz
+get https://github.com/"${PN}"/"${PN}"/archive/"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
@@ -15,7 +15,7 @@ sed -e "/^Categories/ s/Audio/AudioVideo;Audio/" -i sys/fd.org/schism.desktop ||
 # /bin/sh: auto/default-font.c: No such file or directory
 mkdir auto
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

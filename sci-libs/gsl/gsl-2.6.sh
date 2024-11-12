@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ftp.gnu.org/gnu/gsl/${P}.tar.gz
+get https://ftp.gnu.org/gnu/gsl/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

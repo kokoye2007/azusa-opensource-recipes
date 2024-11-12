@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/desktop-file-utils/releases/${P}.tar.xz
+get https://www.freedesktop.org/software/desktop-file-utils/releases/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

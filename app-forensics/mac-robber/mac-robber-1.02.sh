@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://prdownloads.sourceforge.net/mac-robber/${P}.tar.gz
+get http://prdownloads.sourceforge.net/mac-robber/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 make linux
 

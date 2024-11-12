@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/openjdk/jdk17u/archive/jdk-${PV}-ga.tar.gz
+get https://github.com/openjdk/jdk17u/archive/jdk-"${PV}"-ga.tar.gz
 
 BOOT_JDK="/pkg/main/dev-java.openjdk.core"
 
@@ -27,8 +27,8 @@ if [ ! -d "$BOOT_JDK" ]; then
 fi
 
 # grab tests
-cd "${S}"
-get http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-${PV}/jtreg-4.2.0-tip.tar.gz
+cd "${S}" || exit
+get http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-"${PV}"/jtreg-4.2.0-tip.tar.gz
 acheck
 
 export CPPFLAGS="${CPPFLAGS} -fno-stack-protector"
@@ -40,7 +40,7 @@ bash configure --enable-unlimited-crypto \
 	--disable-warnings-as-errors \
 	--with-stdc++lib=dynamic \
 	--with-giflib=system \
-	--with-jtreg=$PWD/jtreg \
+	--with-jtreg="$PWD"/jtreg \
 	--with-lcms=system \
 	--with-libjpeg=system \
 	--with-libpng=system \

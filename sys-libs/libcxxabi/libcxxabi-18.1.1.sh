@@ -39,7 +39,7 @@ CMAKE_OPTS=(
 	#-DLIBCXX_TARGET_TRIPLE="${CHOST}"
 )
 
-cd "$T"
+cd "$T" || exit
 
 llvmbuild "${CMAKE_OPTS[@]}"
 

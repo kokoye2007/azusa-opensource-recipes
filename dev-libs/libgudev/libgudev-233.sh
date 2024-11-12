@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnome.org/pub/gnome/sources/libgudev/${PV}/${P}.tar.xz
+get http://ftp.gnome.org/pub/gnome/sources/libgudev/"${PV}"/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-umockdev
 

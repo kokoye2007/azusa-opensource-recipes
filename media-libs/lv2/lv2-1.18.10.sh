@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://lv2plug.in/spec/${P}.tar.xz
+get https://lv2plug.in/spec/"${P}".tar.xz
 acheck
 
 inherit asciidoc
 
-cd "${T}"
+cd "${T}" || exit
 
 domeson
 

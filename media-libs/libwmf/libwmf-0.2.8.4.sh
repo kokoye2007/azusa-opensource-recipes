@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.sourceforge.net/wvware/${P}.tar.gz
+get https://downloads.sourceforge.net/wvware/"${P}".tar.gz
 acheck
 
 PATCHES=(
@@ -17,12 +17,12 @@ PATCHES=(
 	"${FILESDIR}"/${P}-use-system-fonts.patch
 	)
 
-cd "${P}"
+cd "${P}" || exit
 
 apatch "${PATCHES[@]}"
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib libpng icu-uc
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://download.savannah.gnu.org/releases/${PN}/${P}.tar.xz
+get http://download.savannah.gnu.org/releases/"${PN}"/"${P}".tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 MAKEOPTS=(
 	DESTDIR="${D}"

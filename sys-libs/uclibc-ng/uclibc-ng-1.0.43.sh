@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.uclibc-ng.org/releases/${PV}/uClibc-ng-${PV}.tar.xz
+get https://downloads.uclibc-ng.org/releases/"${PV}"/uClibc-ng-"${PV}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 export PKG PVRF LIB_SUFFIX
 

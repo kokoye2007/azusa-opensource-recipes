@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://busybox.net/downloads/${P}.tar.bz2
+get https://busybox.net/downloads/"${P}".tar.bz2
 acheck
 
 echo "Compiling ${P} ..."
-cd "${P}"
-cp $FILESDIR/config-${PV} .config
+cd "${P}" || exit
+cp "$FILESDIR"/config-"${PV}" .config
 
 make CC="musl-gcc -I /pkg/main/sys-kernel.linux.dev/include"
 make install CC="musl-gcc -I /pkg/main/sys-kernel.linux.dev/include"

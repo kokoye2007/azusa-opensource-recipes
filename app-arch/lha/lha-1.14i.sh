@@ -6,11 +6,11 @@ acheck
 
 prepare
 
-cd "${T}"
+cd "${T}" || exit
 
-callconf --prefix=/pkg/main/${PKG}.core.${PVRF} --sysconfdir=/etc \
-	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib \
-	--mandir=/pkg/main/${PKG}.doc.${PVRF}/man
+callconf --prefix=/pkg/main/"${PKG}".core."${PVRF}" --sysconfdir=/etc \
+	--includedir=/pkg/main/"${PKG}".dev."${PVRF}"/include --libdir=/pkg/main/"${PKG}".libs."${PVRF}"/lib \
+	--mandir=/pkg/main/"${PKG}".doc."${PVRF}"/man
 
 make
 make install DESTDIR="${D}"

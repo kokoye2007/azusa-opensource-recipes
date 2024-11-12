@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/sddm/sddm/releases/download/v${PV}/${P}.tar.xz
+get https://github.com/sddm/sddm/releases/download/v"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.12.0-respect-user-flags.patch"
@@ -21,7 +21,7 @@ PATCHES=(
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/pam
 export CXXFLAGS="${CPPFLAGS} -O2"

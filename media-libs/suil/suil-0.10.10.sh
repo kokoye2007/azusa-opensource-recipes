@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit waf
 
-get http://download.drobilla.net/${P}.tar.bz2
+get http://download.drobilla.net/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 dowaf
 

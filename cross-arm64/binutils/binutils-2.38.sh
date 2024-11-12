@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 # we force category so this will get binutils from the right path
-CATEGORY=sys-devel get https://ftp.gnu.org/gnu/binutils/${P}.tar.xz
+CATEGORY=sys-devel get https://ftp.gnu.org/gnu/binutils/"${P}".tar.xz
 
 CATEGORY=cross-arm64
 acheck
@@ -10,9 +10,9 @@ acheck
 importpkg zlib dev-libs/elfutils
 
 # default libpath should include glibc path so gcc can find -lc
-export LIB_PATH=/lib:`realpath /pkg/main/sys-libs.glibc.libs/lib$LIB_SUFFIX`
+export LIB_PATH=/lib:$(realpath /pkg/main/sys-libs.glibc.libs/lib"$LIB_SUFFIX")
 
-cd "${T}"
+cd "${T}" || exit
 
 # make sure -lz works
 export LDFLAGS="$(pkg-config zlib --libs-only-L)"

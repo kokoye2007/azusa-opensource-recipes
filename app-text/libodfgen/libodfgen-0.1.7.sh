@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/libwpd/${P}.tar.xz
+get https://download.sourceforge.net/libwpd/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static --with-docs
 

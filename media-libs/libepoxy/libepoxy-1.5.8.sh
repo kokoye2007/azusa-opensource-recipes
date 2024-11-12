@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/anholt/libepoxy/releases/download/${PV}/${P}.tar.xz
+get https://github.com/anholt/libepoxy/releases/download/"${PV}"/"${P}".tar.xz
 acheck
 
 importpkg x11 egl
 
-cd "${T}"
+cd "${T}" || exit
 
 meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
 

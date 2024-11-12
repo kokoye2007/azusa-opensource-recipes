@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://gitlab.com/virtio-fs/virtiofsd/-/archive/v${PV}/${PN}-v${PV}.tar.gz ${P}.tar.gz
+get https://gitlab.com/virtio-fs/virtiofsd/-/archive/v"${PV}"/"${PN}"-v"${PV}".tar.gz "${P}".tar.gz
 #acheck
 envcheck # cargo requires network access, need to find a way to fix that
 
 importpkg sys-libs/libseccomp sys-libs/libcap-ng
 
-cd "${S}"
+cd "${S}" || exit
 
 export RUSTFLAGS="$LDFLAGS"
 

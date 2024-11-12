@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/cjlin1/liblinear/archive/v${PV}/${P}.tar.gz
+get https://github.com/cjlin1/liblinear/archive/v"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 make lib
 

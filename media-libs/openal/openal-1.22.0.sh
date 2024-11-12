@@ -2,12 +2,12 @@
 source "../../common/init.sh"
 
 MY_P="${PN}-soft-${PV}"
-get https://www.openal-soft.org/openal-releases/${MY_P}.tar.bz2 "${P}.tar.bz2"
+get https://www.openal-soft.org/openal-releases/"${MY_P}".tar.bz2 "${P}.tar.bz2"
 acheck
 
 importpkg media-libs/alsa-lib media-sound/pulseaudio media-libs/libsdl2 sys-libs/zlib
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKEOPTS=(
 	-DALSOFT_REQUIRE_ALSA=ON

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://avahi.org/download/${P}.tar.gz
+get http://avahi.org/download/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 importpkg expat sys-libs/gdbm dev-libs/libdaemon
 
 export PYTHON=/pkg/main/dev-lang.python.core/bin/python3

@@ -5,10 +5,10 @@ OS=any
 ARCH=any
 
 MY_PN="${PN/timidity-/}"
-get http://freepats.opensrc.org/${MY_PN}-${PV}.tar.bz2
+get http://freepats.opensrc.org/"${MY_PN}"-"${PV}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 echo "dir /pkg/main/${PKG}.data.${PVR}.any.any" > timidity.cfg
 cat freepats.cfg >> timidity.cfg

@@ -3,7 +3,7 @@ source "../../common/init.sh"
 
 if [ ! -d "/pkg/main/${PKG}.src.${PV}.linux.any" ]; then
 	echo "Dir /pkg/main/${PKG}.src.${PV}.linux.any not found"
-	get https://cdn.kernel.org/pub/linux/kernel/v5.x/${P}.tar.xz
+	get https://cdn.kernel.org/pub/linux/kernel/v5.x/"${P}".tar.xz
 
 	mkdir -p "${D}/pkg/main"
 	mv "${P}" "${D}/pkg/main/${PKG}.src.${PV}.linux.any"
@@ -18,9 +18,9 @@ acheck
 for GOARCH in $TGT; do
 	mkdir -p "${T}/$GOARCH"
 
-	cd "${T}/$GOARCH"
+	cd "${T}/$GOARCH" || exit
 	echo "include /pkg/main/${PKG}.src.${PV}.linux.any/Makefile" >Makefile
-	cp -v $FILESDIR/config-${PV}-$GOARCH ".config"
+	cp -v "$FILESDIR"/config-"${PV}"-"$GOARCH" ".config"
 
 	echo "Building kernel for $GOARCH..."
 
@@ -33,14 +33,14 @@ for GOARCH in $TGT; do
 	./source/scripts/config --set-str LOCALVERSION "-azusa" --enable LOCALVERSION_AUTO --set-str DEFAULT_HOSTNAME "localhost"
 
 	# re-copy file
-	cp .config $FILESDIR/config-${PV}-$GOARCH
+	cp .config "$FILESDIR"/config-"${PV}"-"$GOARCH"
 
-	FULLVER=`make -s kernelrelease`
-	IMGFILE=`make -s image_name`
+	FULLVER=$(make -s kernelrelease)
+	IMGFILE=$(make -s image_name)
 
-	echo " * Building `basename "$IMGFILE"`..."
+	echo " * Building $(basename "$IMGFILE")..."
 
-	make -j"$NPROC" -s `basename "$IMGFILE"`
+	make -j"$NPROC" -s $(basename "$IMGFILE")
 
 	echo " * Building modules..."
 

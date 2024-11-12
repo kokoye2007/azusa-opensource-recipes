@@ -1,7 +1,7 @@
 #!/bin/bash
-ROOTDIR="`pwd`"
+ROOTDIR="$(pwd)"
 source "common/init.sh"
-cd "$ROOTDIR"
+cd "$ROOTDIR" || exit
 
 for foo in */*; do
 	if [ ! -d "$foo" ]; then

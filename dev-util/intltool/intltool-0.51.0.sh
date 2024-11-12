@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://launchpad.net/intltool/trunk/${PV}/+download/${P}.tar.gz
+get https://launchpad.net/intltool/trunk/"${PV}"/+download/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

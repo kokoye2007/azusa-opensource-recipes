@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/Exiv2/exiv2/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/Exiv2/exiv2/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib app-arch/brotli dev-libs/inih
 

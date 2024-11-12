@@ -6,10 +6,10 @@ CUDA_MA="11"
 CUDA_MI="8"
 CUDA_V="${CUDA_MA}.${CUDA_MI}"
 
-get https://developer.download.nvidia.com/compute/redist/cudnn/v${PV%.*}/local_installers/${CUDA_V}/cudnn-linux-x86_64-${PV}_cuda${CUDA_MA}-archive.tar.xz
+get https://developer.download.nvidia.com/compute/redist/cudnn/v"${PV%.*}"/local_installers/${CUDA_V}/cudnn-linux-x86_64-"${PV}"_cuda${CUDA_MA}-archive.tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}"
 

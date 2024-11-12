@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/trousers/${PN}/${P}.tar.gz
+get https://download.sourceforge.net/trousers/"${PN}"/"${P}".tar.gz
 acheck
 
 importpkg openssl
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --with-gui=openssl
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mdocml.bsd.lv/snapshots/${P}.tar.gz
+get https://mdocml.bsd.lv/snapshots/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg zlib
 

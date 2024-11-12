@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://${PN}.twibright.com/download/${P}.tar.bz2
+get http://"${PN}".twibright.com/download/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/gpm zlib app-arch/bzip2 app-arch/brotli dev-libs/libevent app-arch/lzma
 

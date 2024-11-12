@@ -1,16 +1,16 @@
 #!/bin/sh
-ROOTDIR="`pwd`"
+ROOTDIR="$(pwd)"
 source "common/init.sh"
 inherit python
 acheck
 
 echo "Checking modules for python $PYTHON_LATEST"
-MODS=`curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_LATEST" || true`
+MODS=$(curl -s "http://localhost:100/apkgdb/main?action=list&sub=${OS}.${ARCH}" | grep "py$PYTHON_LATEST" || true)
 
 for foo in $ROOTDIR/dev-python/*; do
 	echo "$foo"
-	BASE=`basename "$foo"`
-	if [ `echo "$MODS" | grep -c "$BASE\\.mod"` -gt 0 ]; then
+	BASE=$(basename "$foo")
+	if [ $(echo "$MODS" | grep -c "$BASE\\.mod") -gt 0 ]; then
 		# already have
 		continue
 	fi
@@ -21,7 +21,7 @@ for foo in $ROOTDIR/dev-python/*; do
 			VERS="$V"
 		fi
 	done
-	if [ x"$VERS" = x ]; then
+	if [ "$VERS" = "" ]; then
 		echo "No version found for dev-python/$BASE"
 		continue
 	fi
@@ -39,9 +39,9 @@ for foo in $EXTRA_MODS; do
 		continue
 	fi
 	echo "extra: $foo"
-	BASE=`basename "$foo"`
+	BASE=$(basename "$foo")
 	PKGNAME="$(echo "$foo" | sed -e 's#/#.#')" # as pkg name
-	if [ `echo "$MODS" | grep -c "$BASE\\.mod"` -gt 0 ]; then
+	if [ $(echo "$MODS" | grep -c "$BASE\\.mod") -gt 0 ]; then
 		# already have
 		continue
 	fi
@@ -52,7 +52,7 @@ for foo in $EXTRA_MODS; do
 			VERS="$V"
 		fi
 	done
-	if [ x"$VERS" = x ]; then
+	if [ "$VERS" = "" ]; then
 		echo "No version found for $foo"
 		continue
 	fi

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.oberhumer.com/opensource/lzo/download/${P}.tar.gz
+get http://www.oberhumer.com/opensource/lzo/download/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-shared --disable-static
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.kernel.org/pub/linux/bluetooth/${P}.tar.xz
+get https://www.kernel.org/pub/linux/bluetooth/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-fs/eudev sys-libs/readline dev-libs/libical
 

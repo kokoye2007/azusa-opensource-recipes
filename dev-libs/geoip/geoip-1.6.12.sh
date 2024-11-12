@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/maxmind/${PN}-api-c/archive/v${PV}.tar.gz
+get https://github.com/maxmind/"${PN}"-api-c/archive/v"${PV}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

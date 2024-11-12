@@ -31,7 +31,7 @@ homepage: $HOMEPAGE
 license: $LICENSE
 EOF
 
-	if [ x"$FILTVERS" = x"$LATEST_VERS" ]; then
+	if [ "$FILTVERS" = "$LATEST_VERS" ]; then
 		echo "No update needed"
 		return
 	fi
@@ -61,7 +61,7 @@ EOF
 }
 
 if [ "$1" != "" ]; then
-	pycheck $1
+	pycheck "$1"
 	exit $?
 fi
 

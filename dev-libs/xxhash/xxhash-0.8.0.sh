@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/Cyan4973/xxHash/archive/v${PV}.tar.gz
+get https://github.com/Cyan4973/xxHash/archive/v"${PV}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # do not define libdir as it'd prevent generation of pkg-config file, instead let finalize cleanup the thing
 MAKEOPTS=(

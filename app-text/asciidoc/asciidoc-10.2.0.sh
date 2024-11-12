@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit python
 
-get https://github.com/asciidoc-py/asciidoc-py/releases/download/${PV}/${P}.tar.gz
+get https://github.com/asciidoc-py/asciidoc-py/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 

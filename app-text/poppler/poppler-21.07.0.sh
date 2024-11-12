@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://poppler.freedesktop.org/${P}.tar.xz
+get https://poppler.freedesktop.org/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg x11-libs/gtk+ x11-libs/pango x11-libs/cairo zlib dev-libs/atk x11-libs/gdk-pixbuf dev-libs/glib media-libs/freetype libjpeg libpng media-libs/tiff
 

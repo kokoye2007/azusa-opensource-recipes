@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ibus/ibus/releases/download/${PV}/${P}.tar.gz
+get https://github.com/ibus/ibus/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libbsd app-arch/bzip2 uuid xi
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mkvtoolnix.download/sources/${P}.tar.xz
+get https://mkvtoolnix.download/sources/"${P}".tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg ogg vorbis dev-libs/boost zlib
 

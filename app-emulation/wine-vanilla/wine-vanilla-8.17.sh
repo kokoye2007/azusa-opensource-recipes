@@ -4,12 +4,12 @@ source "../../common/init.sh"
 MY_PN="${PN%%-*}"
 MY_P="${MY_PN}-${PV}"
 
-get https://dl.winehq.org/wine/source/8.x/${MY_P}.tar.xz
+get https://dl.winehq.org/wine/source/8.x/"${MY_P}".tar.xz
 acheck
 
 importpkg X opengl osmesa net-libs/libpcap net-print/cups media-libs/openal net-nds/openldap #OpenCL
 
-cd "${T}"
+cd "${T}" || exit
 
 #configure: OpenCL 64-bit development files not found, OpenCL won't be supported.
 #configure: libsane 64-bit development files not found, scanners won't be supported.

@@ -5,7 +5,7 @@ inherit llvm
 llvmget "${PN}"
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib dev-libs/libffi
 

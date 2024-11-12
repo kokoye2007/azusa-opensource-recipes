@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/CVC4/CVC4-archived/archive/refs/tags/${PV}.tar.gz "${P}.tar.gz"
+get https://github.com/CVC4/CVC4-archived/archive/refs/tags/"${PV}".tar.gz "${P}.tar.gz"
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg gmp sys-libs/readline
 

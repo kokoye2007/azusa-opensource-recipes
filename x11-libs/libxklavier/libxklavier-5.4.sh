@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://people.freedesktop.org/~svu/${P}.tar.bz2
+get https://people.freedesktop.org/~svu/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-gtk-doc --enable-introspection --enable-vala #--with-xkb-base=/usr/share/X11/xkb --with-xkb-bin-base=/usr/bin
 

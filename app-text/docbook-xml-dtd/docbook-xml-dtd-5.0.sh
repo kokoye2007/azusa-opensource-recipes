@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://docbook.org/xml/${PV}/docbook-${PV}.zip
+get https://docbook.org/xml/"${PV}"/docbook-"${PV}".zip
 acheck
 
-cd docbook-$PV
+cd docbook-"$PV" || exit
 
 mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook"/schema/{dtd,rng,sch,xsd}/5.0
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sourceforge.net/projects/slim.berlios/files/${P}.tar.gz
+get https://sourceforge.net/projects/slim.berlios/files/"${P}".tar.gz
 acheck
 
 # patches from gentoo (seems like slim isn't exactly maintained, so a lot of stuff needs fixing)
@@ -19,11 +19,11 @@ PATCHES=(
     "${FILESDIR}"/${P}-envcpy-bad-pointer-arithmetic.patch
 )
 
-cd "${P}"
+cd "${P}" || exit
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libpng libjpeg zlib sys-libs/pam x11-base/xorg-proto
 

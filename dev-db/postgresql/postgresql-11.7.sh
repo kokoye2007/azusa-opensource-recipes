@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2
+get http://ftp.postgresql.org/pub/source/v"${PV}"/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-libs/ncurses sys-libs/readline zlib
 

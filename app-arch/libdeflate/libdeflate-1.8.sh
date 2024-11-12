@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ebiggers/libdeflate/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/ebiggers/libdeflate/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 MAKEOPTS=(
 	USE_SHARED_LIB=1

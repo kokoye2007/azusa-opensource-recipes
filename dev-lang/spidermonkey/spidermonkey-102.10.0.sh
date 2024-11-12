@@ -27,10 +27,10 @@ done
 
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
-"${S}/js/src/configure" --prefix=/pkg/main/${PKG}.core.${PVRF} \
-	--includedir=/pkg/main/${PKG}.dev.${PVRF}/include --libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX \
+"${S}/js/src/configure" --prefix=/pkg/main/"${PKG}".core."${PVRF}" \
+	--includedir=/pkg/main/"${PKG}".dev."${PVRF}"/include --libdir=/pkg/main/"${PKG}".libs."${PVRF}"/lib"$LIB_SUFFIX" \
 	--with-intl-api --with-system-zlib --with-system-icu --disable-jemalloc --enable-readline
 
 make

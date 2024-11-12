@@ -7,7 +7,7 @@ get "https://downloads.sourceforge.net/infozip/unzip${MY_PV}.tar.gz"
 get "http://ftp.us.debian.org/debian/pool/main/u/${PN}/${PN}_${PV/_p/-}.debian.tar.xz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 deb="${WORKDIR}"/debian/patches
 rm "${deb}"/02-this-is-debian-unzip.patch

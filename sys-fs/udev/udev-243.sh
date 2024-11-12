@@ -1,25 +1,25 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/systemd/systemd/archive/v${PV}/systemd-${PV}.tar.gz
+get https://github.com/systemd/systemd/archive/v"${PV}"/systemd-"${PV}".tar.gz
 echo "udev disabled, use eudev"
 exit 1
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-apps/kmod sys-libs/libcap sys-process/audit
 
 meson "${CHPATH}/systemd-${PV}" --prefix="/pkg/main/${PKG}.core.${PVRF}" -Dacl=false -Defi=false -Dkmod=true -Dselinux=false -Dlink-udev-shared=false -Dsplit-usr=true -Dgcrypt=false -Dlibcryptsetup=false -Dlibidn=false -Dlibidn2=false -Dlibiptc=false -Dseccomp=false -Dlz4=false -Dxz=false
 
-libudev=`readlink src/udev/libudev.so.1`
+libudev=$(readlink src/udev/libudev.so.1)
 #S="${CHPATH}/systemd-${PV}"
 
-ninja src/udev/$libudev systemd-udevd udevadm src/udev/ata_id src/udev/cdrom_id src/udev/mtd_probe src/udev/scsi_id src/udev/v4l_id man/udev.conf.5 man/systemd.link.5 man/hwdb.7 man/udev.7 man/systemd-udevd.service.8 man/udevadm.8
+ninja src/udev/"$libudev" systemd-udevd udevadm src/udev/ata_id src/udev/cdrom_id src/udev/mtd_probe src/udev/scsi_id src/udev/v4l_id man/udev.conf.5 man/systemd.link.5 man/hwdb.7 man/udev.7 man/systemd-udevd.service.8 man/udevadm.8
 
 mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 
-install -vm755 src/udev/{${libudev},libudev.so.1,libudev.so} "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+install -vm755 src/udev/{"${libudev}",libudev.so.1,libudev.so} "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
 
 mkdir -p "${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig"
 #install -vm644 src/libudev/libudev.pc src/udev/udev.pc "${D}/pkg/main/${PKG}.dev.${PVRF}/pkgconfig"
@@ -69,6 +69,6 @@ install -vm644 "${S}/src/libudev/libudev.h" "${D}/pkg/main/${PKG}.dev.${PVRF}/in
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/udev/rules.d"
 
-install -vm644 ${S}/rules/*.rules "${D}/pkg/main/${PKG}.core.${PVRF}/udev/rules.d"
+install -vm644 "${S}"/rules/*.rules "${D}/pkg/main/${PKG}.core.${PVRF}/udev/rules.d"
 
 archive

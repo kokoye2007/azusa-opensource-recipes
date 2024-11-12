@@ -2,13 +2,13 @@
 source "../../common/init.sh"
 inherit asciidoc
 
-get https://github.com/OCL-dev/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/OCL-dev/"${PN}"/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-pthread-once
 

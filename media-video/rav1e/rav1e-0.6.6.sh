@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/xiph/rav1e/archive/v${PV}.tar.gz
+get https://github.com/xiph/rav1e/archive/v"${PV}".tar.gz
 envcheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg zlib sys-libs/llvm-libunwind
 

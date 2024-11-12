@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.gnome.org/sources/${PN}/${PV%.*}/${P}.tar.xz
+get https://download.gnome.org/sources/"${PN}"/"${PV%.*}"/"${P}".tar.xz
 acheck
 
 importpkg zlib
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-orbit --disable-static
 

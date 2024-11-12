@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.litecoin.org/${P}/src/${P}.tar.gz
+get https://download.litecoin.org/"${P}"/src/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch \
 	"$FILESDIR/litecoin-0.21.3_boost_copy_options.patch" \
@@ -13,7 +13,7 @@ apatch \
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost dev-libs/libevent sys-libs/db:4.8 libcrypto dev-libs/libfmt
 

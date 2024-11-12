@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.riken.jp/net/apache/${PN}/${P}.tar.bz2
+get http://ftp.riken.jp/net/apache/"${PN}"/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

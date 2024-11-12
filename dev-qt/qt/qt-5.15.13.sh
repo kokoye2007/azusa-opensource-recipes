@@ -2,20 +2,20 @@
 source "../../common/init.sh"
 inherit gcc
 
-get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/single/qt-everywhere-opensource-src-${PV}.tar.xz
+get https://download.qt.io/official_releases/qt/"${PV%.*}"/"${PV}"/single/qt-everywhere-opensource-src-"${PV}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/qtquick3d-assimp-fix.patch"
 
 # apply ffmpeg patch
-cd qtwebengine/src/3rdparty/chromium/third_party/ffmpeg
+cd qtwebengine/src/3rdparty/chromium/third_party/ffmpeg || exit
 
 apatch "$FILESDIR/ffmpeg-fix-assembling-with-binutils-2.41.patch"
 
 # return to $S
-cd "${S}"
+cd "${S}" || exit
 
 importpkg libevent
 switchgcc 12
@@ -46,9 +46,9 @@ export LDFLAGS="${LDFLAGS} -fuse-ld=gold"
 #ln -snfT /pkg/main/azusa.symlinks.core/full/include /pkg/main/sys-libs.glibc.dev/include
 #rsync -a --force /pkg/main/sys-libs.glibc.dev/include.orig/ /pkg/main/azusa.symlinks.core/full/include/
 rsync --ignore-existing -a /pkg/main/azusa.symlinks.core/full/include/ /pkg/main/sys-libs.glibc.dev/include/
-rsync --ignore-existing -a /pkg/main/azusa.symlinks.core/full/lib$LIB_SUFFIX/ /pkg/main/sys-libs.glibc.dev/lib$LIB_SUFFIX/
+rsync --ignore-existing -a /pkg/main/azusa.symlinks.core/full/lib"$LIB_SUFFIX"/ /pkg/main/sys-libs.glibc.dev/lib"$LIB_SUFFIX"/
 
-cd "${T}"
+cd "${T}" || exit
 
 # https://doc.qt.io/qt-5/configure-options.html
 CONFIGURE=(

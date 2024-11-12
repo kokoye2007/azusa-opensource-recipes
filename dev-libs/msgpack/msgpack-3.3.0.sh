@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/${PN}/${PN}-c/releases/download/cpp-${PV}/${P}.tar.gz
+get https://github.com/"${PN}"/"${PN}"-c/releases/download/cpp-"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 docmake -DMSGPACK_BUILD_EXAMPLES=OFF -DMSGPACK_BUILD_TESTS=OFF
 

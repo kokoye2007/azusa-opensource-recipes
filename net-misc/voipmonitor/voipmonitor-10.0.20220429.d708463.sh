@@ -6,7 +6,7 @@ inherit git
 fetchgit https://github.com/voipmonitor/sniffer.git "${PV/*.}"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/voipmonitor-10.0.20220429.d708463-heapsafe_fix.patch"
 

@@ -2,12 +2,12 @@
 source "../../common/init.sh"
 
 MY_P="webkitgtk-${PV}"
-get https://www.webkitgtk.org/releases/${MY_P}.tar.xz
+get https://www.webkitgtk.org/releases/"${MY_P}".tar.xz
 acheck
 
 importpkg dev-libs/icu
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKE_OPTS=(
 	-DENABLE_UNIFIED_BUILDS=OFF # jumbo-build?

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}-ng/${PN}-ng-${PV}.tar.xz
+get https://download.sourceforge.net/"${PN}"-ng/"${PN}"-ng-"${PV}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg ncurses
 

@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/sahlberg/libiscsi/archive/refs/tags/${PV}.tar.gz
+get https://github.com/sahlberg/libiscsi/archive/refs/tags/"${PV}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

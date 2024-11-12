@@ -2,20 +2,20 @@
 source "../../common/init.sh"
 inherit libs
 
-get http://liba52.sourceforge.net/files/${P}.tar.gz
+get http://liba52.sourceforge.net/files/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch \
-	"${FILESDIR}"/${P}-build.patch \
-	"${FILESDIR}"/${P}-freebsd.patch \
-	"${FILESDIR}"/${P}-tests-optional.patch \
-	"${FILESDIR}"/${P}-test-hidden-symbols.patch
+	"${FILESDIR}"/"${P}"-build.patch \
+	"${FILESDIR}"/"${P}"-freebsd.patch \
+	"${FILESDIR}"/"${P}"-tests-optional.patch \
+	"${FILESDIR}"/"${P}"-test-hidden-symbols.patch
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 preplib
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.jetbrains.com/go/${P}.tar.gz
+get https://download.jetbrains.com/go/"${P}".tar.gz
 acheck
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"

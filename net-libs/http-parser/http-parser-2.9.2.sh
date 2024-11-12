@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/nodejs/${PN}/archive/v${PV}.tar.gz
+get https://github.com/nodejs/"${PN}"/archive/v"${PV}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 MAKEOPTS=(
 	PREFIX="/pkg/main/${PKG}.core.${PVRF}"

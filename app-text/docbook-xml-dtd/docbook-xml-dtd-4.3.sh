@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 inherit xmlcatalog
 
-get http://www.docbook.org/xml/${PV}/docbook-xml-${PV}.zip
+get http://www.docbook.org/xml/"${PV}"/docbook-xml-"${PV}".zip
 acheck
 
 mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook/xml-dtd-${PV}"

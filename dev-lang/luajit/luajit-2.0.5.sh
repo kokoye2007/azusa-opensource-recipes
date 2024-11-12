@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MY_PV="${PV/_beta/-beta}"
 MY_P="LuaJIT-${MY_PV}"
-get https://luajit.org/download/${MY_P}.tar.gz
+get https://luajit.org/download/"${MY_P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/CVE-2020-15890.patch" "$FILESDIR/luajit-2-ldconfig.patch"
 

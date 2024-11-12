@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://lttng.org/files/${PN}/${P}.tar.bz2
+get https://lttng.org/files/"${PN}"/"${P}".tar.bz2
 acheck
 
 inherit asciidoc
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/userspace-rcu sys-apps/kmod dev-libs/popt
 

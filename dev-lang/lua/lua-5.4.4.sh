@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.lua.org/ftp/${P}.tar.gz
+get http://www.lua.org/ftp/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg sys-libs/readline sys-libs/ncurses
 

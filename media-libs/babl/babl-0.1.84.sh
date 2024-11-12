@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.gimp.org/pub/babl/0.1/${P}.tar.xz
+get https://download.gimp.org/pub/babl/0.1/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg lcms2
 

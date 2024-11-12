@@ -38,12 +38,12 @@ bazel_external_uris="
     https://github.com/Maratyszcza/FXdiv/archive/63058eff77e11aa15bf531df5dd34395ec3017c8.zip=FXdiv-63058eff77e11aa15bf531df5dd34395ec3017c8.zip
 "
 
-bazel_get $bazel_external_uris
+bazel_get "$bazel_external_uris"
 
-get https://github.com/${PN}/${PN}/archive/v${MY_PV}.tar.gz ${P}.tar.gz
-get https://dev.gentoo.org/~perfinion/patches/tensorflow-patches-${PVR}.tar.bz2
+get https://github.com/"${PN}"/"${PN}"/archive/v"${MY_PV}".tar.gz "${P}".tar.gz
+get https://dev.gentoo.org/~perfinion/patches/tensorflow-patches-"${PVR}".tar.bz2
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "${WORKDIR}/patches/"*.patch
 

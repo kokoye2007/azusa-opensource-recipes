@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/brailcom/speechd/releases/download/${PV}/${P}.tar.gz
+get https://github.com/brailcom/speechd/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-devel/libtool app-accessibility/espeak app-accessibility/flite media-libs/libsndfile dev-libs/dotconf
 

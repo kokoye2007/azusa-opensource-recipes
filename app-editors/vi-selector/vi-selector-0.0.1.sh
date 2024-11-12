@@ -4,7 +4,7 @@ source "../../common/init.sh"
 acheck
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
-cd "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
+cd "${D}/pkg/main/${PKG}.core.${PVRF}/bin" || exit
 
 cat >vi <<EOF
 #!/bin/sh

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/${P}.tgz
+get https://sourceware.org/ftp/docbook-tools/new-trials/SOURCES/"${P}".tgz
 
-cd "${P}"
+cd "${P}" || exit
 
 patch -p1 <"$FILESDIR/sgml-common-0.6.3-manpage-1.patch"
 autoreconf -f -i

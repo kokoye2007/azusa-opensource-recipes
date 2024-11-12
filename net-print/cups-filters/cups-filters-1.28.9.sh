@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.openprinting.org/download/cups-filters/${P}.tar.xz
+get https://www.openprinting.org/download/cups-filters/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libjpeg libtiff-4 net-dns/avahi
 

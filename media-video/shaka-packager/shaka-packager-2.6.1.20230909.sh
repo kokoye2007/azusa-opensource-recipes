@@ -9,7 +9,7 @@ REVISION="8465f5f020b5c6152d24107a6d164301e05c3176"
 #get https://github.com/shaka-project/shaka-packager/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
 #fetchgit https://github.com/shaka-project/shaka-packager.git "$REVISION"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg net-dns/c-ares
 
@@ -19,8 +19,8 @@ touch depot_tools/.disable_auto_update
 export PATH="${T}/depot_tools:$PATH"
 
 # force python2
-echo -e "#!/bin/sh\nexec /bin/python2 \"\$@\"" >${T}/depot_tools/python
-chmod +x ${T}/depot_tools/python
+echo -e "#!/bin/sh\nexec /bin/python2 \"\$@\"" >"${T}"/depot_tools/python
+chmod +x "${T}"/depot_tools/python
 
 export VPYTHON_BYPASS="manually managed python not supported by chrome operations"
 
@@ -37,7 +37,7 @@ sed -i '/#include <vector>/a #include <cstdint>' src/packager/media/base/buffer_
 ninja -C src/out/Release
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
-cd src/out/Release
+cd src/out/Release || exit
 mv packager "${D}/pkg/main/${PKG}.core.${PVRF}/bin/shaka-packager"
 mv mpd_generator "${D}/pkg/main/${PKG}.core.${PVRF}/bin"
 

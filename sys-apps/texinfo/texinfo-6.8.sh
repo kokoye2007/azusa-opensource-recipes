@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnu.org/gnu/${PN}/${P}.tar.xz
+get http://ftp.gnu.org/gnu/"${PN}"/"${P}".tar.xz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

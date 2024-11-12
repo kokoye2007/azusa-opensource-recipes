@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xiph.org/releases/speex/${P}.tar.gz
+get http://downloads.xiph.org/releases/speex/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/speex-1.2.0-configure.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 # TODO cpu flags
 # --enable-sse

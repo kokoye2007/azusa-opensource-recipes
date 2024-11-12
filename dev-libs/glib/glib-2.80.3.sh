@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnome.org/pub/gnome/sources/${PN}/${PV%.*}/${P}.tar.xz
+get http://ftp.gnome.org/pub/gnome/sources/"${PN}"/"${PV%.*}"/"${P}".tar.xz
 acheck
 
 importpkg dev-libs/libelf dev-libs/libffi
 
-cd "${T}"
+cd "${T}" || exit
 
 # TODO: eventially enable doc once we have docbook
 

@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 MYPN=CoinMP
 
-get http://www.coin-or.org/download/source/${MYPN}/${MYPN}-${PV}.tgz
+get http://www.coin-or.org/download/source/${MYPN}/${MYPN}-"${PV}".tgz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 sed -i \
 	-e "s:lib/pkgconfig:lib$LIB_SUFFIX/pkgconfig:g" \
@@ -17,7 +17,7 @@ sed -i \
 	-e 's/$(DESTDIR)$(DESTDIR)/$(DESTDIR)/g' \
 	Makefile.in
 
-cd "${T}"
+cd "${T}" || exit
 
 doconflight --enable-dependency-linking --with-coin-instdir="/pkg/main/${PKG}.core.${PVRF}" --datadir=/usr/share
 

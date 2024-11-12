@@ -1,20 +1,20 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/"${PN}"/"${PN}"/archive/v"${PV}".tar.gz "${P}".tar.gz
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-5.2.5-disable-failing-tests.patch
 	"${FILESDIR}"/${PN}-5.2.5-disable-collada-tests.patch
 )
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "${PATCHES[@]}"
 
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

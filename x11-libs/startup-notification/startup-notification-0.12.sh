@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/${PN}/releases/${P}.tar.gz
+get https://www.freedesktop.org/software/"${PN}"/releases/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg x11
 

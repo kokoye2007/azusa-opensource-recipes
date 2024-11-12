@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 git clone --no-checkout https://github.com/skk-dev/dict.git 
-cd dict
+cd dict || exit
 git checkout -q "master@{${PV//./-}}"
 acheck
 

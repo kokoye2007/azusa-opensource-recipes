@@ -1,16 +1,16 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/stefanberger/swtpm/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/stefanberger/swtpm/archive/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
 importpkg openssl dev-libs/libtpms
 
-cd "${S}"
+cd "${S}" || exit
 
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

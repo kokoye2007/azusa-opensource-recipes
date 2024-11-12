@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xiph.org/releases/xspf/${P}.tar.bz2
+get http://downloads.xiph.org/releases/xspf/"${P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "${FILESDIR}/${P}"-*.patch
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg expat dev-libs/uriparser
 

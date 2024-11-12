@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 inherit python
 
-get https://boostorg.jfrog.io/artifactory/main/release/${PV}/source/boost_${PV//./_}.tar.bz2
+get https://boostorg.jfrog.io/artifactory/main/release/"${PV}"/source/boost_"${PV//./_}".tar.bz2
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.81.0-disable_icu_rpath.patch
@@ -12,7 +12,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.81.0-phoenix-multiple-definitions.patch
 )
 
-cd "$S"
+cd "$S" || exit
 apatch "${PATCHES[@]}"
 
 acheck
@@ -22,7 +22,7 @@ importpkg dev-libs/icu zlib app-arch/bzip2 app-arch/xz app-arch/zstd
 BOOST_BUILD_PATH="${CHPATH}/boost_${PV//./_}"
 BOOST_PYTHON="${PYTHON_LATEST%.*}"
 
-cd "$BOOST_BUILD_PATH"
+cd "$BOOST_BUILD_PATH" || exit
 
 export CPPFLAGS="$CPPFLAGS -I/pkg/main/dev-lang.python.core.${BOOST_PYTHON}/include/python${BOOST_PYTHON}"
 

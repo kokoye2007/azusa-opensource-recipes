@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://archive.mozilla.org/pub/firefox/releases/${PV}/source/${P}.source.tar.xz
+get https://archive.mozilla.org/pub/firefox/releases/"${PV}"/source/"${P}".source.tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 echo "AIzaSyAqAvJEBBA813_wwOAFMlXJgJ2BSZmIGR4" > google-key # azusa key
 # TODO FIXME this is a LFS api key, pending Mozilla key
@@ -111,13 +111,13 @@ case $(uname -m) in
 esac
 
 export CC=gcc CXX=g++
-export MOZBUILD_STATE_PATH=${PWD}/mozbuild
+export MOZBUILD_STATE_PATH="${PWD}"/mozbuild
 export SHELL=/bin/sh
 
 ./mach build
 ./mach install
 
 mkdir -p "${D}/pkg/main"
-mv /.pkg-main-rw/${PKG}.core.${PVRF} "${D}/pkg/main/${PKG}.core.${PVRF}"
+mv /.pkg-main-rw/"${PKG}".core."${PVRF}" "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

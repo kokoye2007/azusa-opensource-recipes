@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://osdn.net/dl/anthy/anthy-9100h.tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

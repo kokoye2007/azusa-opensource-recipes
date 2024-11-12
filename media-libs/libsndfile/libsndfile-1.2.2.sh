@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libsndfile/libsndfile/releases/download/${PV}/${P}.tar.xz
+get https://github.com/libsndfile/libsndfile/releases/download/"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg media-libs/alsa-lib media-libs/opus media-sound/lame
 

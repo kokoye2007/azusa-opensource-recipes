@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/FreeRDP/FreeRDP/archive/${PV}.tar.gz
+get https://github.com/FreeRDP/FreeRDP/archive/"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X zlib dev-libs/libusb x11-libs/cairo net-print/cups sys-apps/pcsc-lite media-libs/libjpeg-turbo media-libs/x264 media-libs/openh264 media-libs/soxr
 

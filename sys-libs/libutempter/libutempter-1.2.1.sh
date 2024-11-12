@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get ftp://ftp.altlinux.org/pub/people/ldv/${PN}/${P}.tar.gz
+get ftp://ftp.altlinux.org/pub/people/ldv/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 MAKEOPTS=(
 	libdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX

@@ -19,10 +19,10 @@ vscodearch() {
 	esac
 }
 
-get https://update.code.visualstudio.com/${PV}/linux-$(vscodearch)/stable "${P}-${ARCH}.tar.gz"
+get https://update.code.visualstudio.com/"${PV}"/linux-$(vscodearch)/stable "${P}-${ARCH}.tar.gz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # Cleanup
 rm -r ./resources/app/ThirdPartyNotices.txt || die
@@ -34,7 +34,7 @@ sed -e "/updateUrl/d" -i ./resources/app/product.json || die
 chmod 4711 chrome-sandbox
 
 mkdir -p "${D}/pkg/main"
-cd "${T}"
+cd "${T}" || exit
 mv "${S}" "${D}/pkg/main/${PKG}.core.${PVRF}"
 
 finalize

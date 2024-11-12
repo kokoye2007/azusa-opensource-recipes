@@ -6,7 +6,7 @@ acheck
 
 importpkg dev-cpp/gtest
 
-cd "${T}"
+cd "${T}" || exit
 
 docmake -G Ninja -DSNAPPY_BUILD_TESTS:BOOL=OFF -DSNAPPY_BUILD_BENCHMARKS=OFF -DHAVE_LIBZ=NO -DHAVE_LIBLZO2=NO -DHAVE_LIBLZ4=NO
 

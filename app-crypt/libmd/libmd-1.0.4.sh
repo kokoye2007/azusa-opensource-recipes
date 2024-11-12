@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://archive.hadrons.org/software/libmd/${P}.tar.xz
+get https://archive.hadrons.org/software/libmd/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

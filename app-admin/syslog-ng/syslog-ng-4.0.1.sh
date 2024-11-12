@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/balabit/syslog-ng/releases/download/${P}/${P}.tar.gz
+get https://github.com/balabit/syslog-ng/releases/download/"${P}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg json-c openssl dev-libs/hiredis
 

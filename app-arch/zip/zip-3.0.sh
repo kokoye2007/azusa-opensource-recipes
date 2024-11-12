@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get "https://downloads.sourceforge.net/infozip/${PN}${PV//./}.tar.gz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 make -f unix/Makefile generic_gcc
 make -f unix/Makefile install prefix="${D}/pkg/main/${PKG}.core.${PVRF}"

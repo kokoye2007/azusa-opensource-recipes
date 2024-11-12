@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/snapcore/${PN}/releases/download/${PV}/${PN}_${PV}.vendor.tar.xz
+get https://github.com/snapcore/"${PN}"/releases/download/"${PV}"/"${PN}"_"${PV}".vendor.tar.xz
 acheck
 
 MAKEOPTS=(
@@ -12,11 +12,11 @@ MAKEOPTS=(
 	#SYSTEMDSYSTEMUNITDIR=
 )
 
-cd "${S}"
+cd "${S}" || exit
 sed -i 's:command -v git >/dev/null:false:' mkversion.sh
 ./mkversion.sh "${PV}"
 
-cd "${S}/cmd"
+cd "${S}/cmd" || exit
 export CGO_ENABLED="1"
 export CGO_CFLAGS="${CFLAGS}"
 export CGO_CPPFLAGS="${CPPFLAGS}"

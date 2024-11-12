@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.mariadb.org/interstitial/${P}/source/${P}.tar.gz
+get https://downloads.mariadb.org/interstitial/"${P}"/source/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/mariadb-10.6.12-gcc-13.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libpcre2-8 app-arch/lz4 dev-libs/lzo app-arch/snappy sys-libs/ncurses dev-libs/icu dev-libs/boost libcurl zlib app-arch/bzip2 app-arch/xz dev-libs/libfmt dev-util/systemtap dev-libs/judy app-arch/zstd dev-libs/rocksdb
 

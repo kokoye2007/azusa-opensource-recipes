@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://storage.googleapis.com/aom-releases/${P}.tar.gz
+get https://storage.googleapis.com/aom-releases/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKEOPTS=(
 	-DENABLE_CCACHE=OFF

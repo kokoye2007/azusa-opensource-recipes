@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://xcb.freedesktop.org/dist/${P}.tar.xz
+get https://xcb.freedesktop.org/dist/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

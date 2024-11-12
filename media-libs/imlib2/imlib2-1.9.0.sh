@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.sourceforge.net/enlightenment/${P}.tar.xz
+get https://downloads.sourceforge.net/enlightenment/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X media-libs/giflib app-arch/bzip2 media-libs/libjxl
 
@@ -27,12 +27,12 @@ CONFOPTS=(
 	--with-jxl
 )
 
-if [ x"$ARCH" = x"amd64" ]; then
+if [ "$ARCH" = "amd64" ]; then
 	CONFOPTS+=(--enable-amd64 --disable-mmx)
 else
 	CONFOPTS+=(--disable-amd64)
 fi
-if [ x"$ARCH" = x"386" ]; then
+if [ "$ARCH" = "386" ]; then
 	CONFOPTS+=(--enable-mmx)
 fi
 

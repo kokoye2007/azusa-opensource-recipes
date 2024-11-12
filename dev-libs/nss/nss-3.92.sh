@@ -2,17 +2,17 @@
 source "../../common/init.sh"
 
 
-get https://ftp.mozilla.org/pub/security/nss/releases/NSS_${PV//./_}_RTM/src/${P}.tar.gz
+get https://ftp.mozilla.org/pub/security/nss/releases/NSS_"${PV//./_}"_RTM/src/"${P}".tar.gz
 acheck
 
-cd "${P}/${PN}"
+cd "${P}/${PN}" || exit
 
 importpkg nspr sqlite3 zlib
 
 /bin/bash -i
 ./build.sh --opt --system-nspr --system-sqlite
 
-cd ../dist
+cd ../dist || exit
 
 mkdir Release/bin-test
 mv Release/bin/*_gtest Release/bin-test

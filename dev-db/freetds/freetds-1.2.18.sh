@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 MY_PN="${PN}-dev"
-get ftp://ftp.freetds.org/pub/${PN}/current/${MY_PN}.${PV}.tar.gz
+get ftp://ftp.freetds.org/pub/"${PN}"/current/"${MY_PN}"."${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/libgcrypt dev-libs/libgpg-error dev-libs/gmp
 

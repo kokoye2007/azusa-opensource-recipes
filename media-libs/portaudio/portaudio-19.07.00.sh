@@ -3,10 +3,10 @@ source "../../common/init.sh"
 
 get http://files.portaudio.com/archives/pa_stable_v190700_20210406.tgz
 
-cd "${S}"
-get https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${P}-audacity.patch.bz2
-bunzip2 ${P}-audacity.patch.bz2
-apatch ${P}-audacity.patch
+cd "${S}" || exit
+get https://dev.gentoo.org/~sam/distfiles/"${CATEGORY}"/"${PN}"/"${P}"-audacity.patch.bz2
+bunzip2 "${P}"-audacity.patch.bz2
+apatch "${P}"-audacity.patch
 
 acheck
 
@@ -16,7 +16,7 @@ export CFLAGS="${CPPFLAGS} ${LDFLAGS} -O2"
 export CXXFLAGS="${CPPFLAGS} ${LDFLAGS} -O2"
 
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-cxx --disable-static --with-alsa
 

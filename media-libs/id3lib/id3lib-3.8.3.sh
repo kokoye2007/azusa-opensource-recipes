@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P/_}.tar.gz
+get https://download.sourceforge.net/"${PN}"/"${P/_}".tar.gz
 acheck
 
-cd "$S"
+cd "$S" || exit
 
 PATCHES=(
 	"${FILESDIR}"/${P}-zlib.patch
@@ -20,7 +20,7 @@ PATCHES=(
 apatch "${PATCHES[@]}"
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

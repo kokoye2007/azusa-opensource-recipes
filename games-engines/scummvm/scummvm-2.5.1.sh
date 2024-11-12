@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://scummvm.org/frs/scummvm/${PV}/${P}.tar.xz
+get https://scummvm.org/frs/scummvm/"${PV}"/"${P}".tar.xz
 acheck
 
 importpkg X readline media-libs/sdl2-net media-libs/libtheora media-libs/libogg media-libs/libvorbis media-libs/alsa-lib app-accessibility/speech-dispatcher media-libs/libmpeg2 libjpeg media-libs/flac media-libs/libmad media-libs/faad2 media-libs/a52dec
@@ -9,7 +9,7 @@ importpkg X readline media-libs/sdl2-net media-libs/libtheora media-libs/libogg 
 export CPPFLAGS="${CPPFLAGS} -I/pkg/main/media-libs.sdl2-net.dev/include/SDL2"
 #export LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
 
-cd "${S}"
+cd "${S}" || exit
 
 # -g isn't needed for nasm here
 sed -i \
@@ -21,7 +21,7 @@ sed -i \
 	-e 's/-s //' \
 	ports.mk
 
-cd "${T}"
+cd "${T}" || exit
 
 CONFOPTS=(
 	--backend=sdl

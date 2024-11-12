@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/keepassxreboot/keepassxc/archive/${PV/_/-}.tar.gz ${P}.tar.gz
+get https://github.com/keepassxreboot/keepassxc/archive/"${PV/_/-}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg sys-auth/libyubikey sys-auth/ykpers media-gfx/qrencode dev-libs/libgpg-error dev-libs/libgcrypt app-crypt/argon2 sys-libs/zlib
 

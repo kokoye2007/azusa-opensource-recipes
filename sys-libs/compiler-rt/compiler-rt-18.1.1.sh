@@ -5,7 +5,7 @@ inherit llvm
 llvmget runtimes
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib dev-libs/libffi
 

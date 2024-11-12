@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://files.libburnia-project.org/releases/${P}.tar.gz
+get http://files.libburnia-project.org/releases/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

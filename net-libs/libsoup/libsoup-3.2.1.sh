@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnome.org/pub/gnome/sources/libsoup/2.68/${P}.tar.xz
+get http://ftp.gnome.org/pub/gnome/sources/libsoup/2.68/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 export VAPIGEN=vapigen-0.40
 export VALAC=valac-0.40

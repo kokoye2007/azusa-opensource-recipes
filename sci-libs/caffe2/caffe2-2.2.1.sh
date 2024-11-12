@@ -9,15 +9,15 @@ CUDA_VERSION="12.1"
 # query cuda-config to find supported gcc versions
 GCC_VERSIONS="$(/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin/cuda-config -s)"
 for vers in $GCC_VERSIONS; do
-	if [ -e /pkg/main/sys-devel.gcc.core.$vers/bin/gcc ]; then
+	if [ -e /pkg/main/sys-devel.gcc.core."$vers"/bin/gcc ]; then
 		GCC_VERSION="$vers"
 	fi
 done
 
 echo " * Using CUDA_VERSION=$CUDA_VERSION and GCC_VERSION=$GCC_VERSION"
 
-get https://github.com/pytorch/pytorch/releases/download/v${PV}/pytorch-v${PV}.tar.gz ${P}.tar.gz
-cd "${S}"
+get https://github.com/pytorch/pytorch/releases/download/v"${PV}"/pytorch-v"${PV}".tar.gz "${P}".tar.gz
+cd "${S}" || exit
 apatch "$FILESDIR/caffe2-2.0.0-gcc13.patch"
 acheck
 
@@ -27,7 +27,7 @@ importpkg sys-process/numactl dev-util/nvidia-cuda-toolkit:$CUDA_VERSION dev-uti
 export PATH="/pkg/main/dev-util.nvidia-cuda-toolkit.core.$CUDA_VERSION/bin:$PATH"
 rm -f /usr/bin/nvcc
 
-cd "${T}"
+cd "${T}" || exit
 
 # https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/
 export NVCC_PREPEND_FLAGS="-L/pkg/main/dev-util.nvidia-cuda-toolkit.libs.$CUDA_VERSION/lib$LIB_SUFFIX"

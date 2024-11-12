@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.mplayerhq.hu/MPlayer/releases/MPlayer-${PV}.tar.xz
+get http://www.mplayerhq.hu/MPlayer/releases/MPlayer-"${PV}".tar.xz
 acheck
 
-cd "MPlayer-${PV}"
+cd "MPlayer-${PV}" || exit
 
 # fix attempts to access ffmpeg includes
 rm -fr ffmpeg

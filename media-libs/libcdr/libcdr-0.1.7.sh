@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://dev-www.libreoffice.org/src/libcdr/${P}.tar.xz
+get https://dev-www.libreoffice.org/src/libcdr/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost
 

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.libssh.org/files/${PV%.*}/${P}.tar.xz
+get https://www.libssh.org/files/"${PV%.*}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib
 

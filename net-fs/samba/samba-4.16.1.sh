@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit waf
 
-get https://download.samba.org/pub/samba/stable/${P}.tar.gz
+get https://download.samba.org/pub/samba/stable/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg app-crypt/gpgme libbsd dev-libs/icu app-arch/libarchive sys-apps/acl sys-libs/pam sys-libs/libunwind net-print/cups zlib sys-libs/ldb net-nds/openldap dev-libs/libgpg-error sys-libs/ncurses sys-libs/libxcrypt
 

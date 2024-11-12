@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 # fetch xz, compile, build
-get http://ftp.jaist.ac.jp/pub/GNU/libc/${P}.tar.xz
+get http://ftp.jaist.ac.jp/pub/GNU/libc/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 # sysconfdir defines where ld.so.cache is found:
 # ./sysdeps/generic/dl-cache.h:38:# define LD_SO_CACHE SYSCONFDIR "/ld.so.cache"
@@ -65,7 +65,7 @@ echo "Generating locales ..."
 mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n"
 sed -e "/^#/d" -e "/SUPPORTED-LOCALES=/d" -e "s: \\\\::g" -e "s:/: :g" "${S}"/localedata/SUPPORTED > "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/SUPPORTED"
 
-locale_list=`echo "C.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/SUPPORTED"`
+locale_list=$(echo "C.UTF-8 UTF-8"; cat "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/SUPPORTED")
 
 mkdir -p "${D}/pkg/main/${PKG}.data.locale.${PVRF}"
 
@@ -89,8 +89,8 @@ mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/locale"
 OIFS="$IFS"
 IFS=$'\n'
 for foo in $locale_list; do
-	locale=`echo "$foo" | cut -f1 -d' '`
-	charset=`echo "$foo" | cut -f2 -d' '`
+	locale=$(echo "$foo" | cut -f1 -d' ')
+	charset=$(echo "$foo" | cut -f2 -d' ')
 	locale_short=${locale%%.*}
 	echo " * Generating locale $locale_short ($charset)"
 	localedef -c --no-archive -i "${D}/pkg/main/${PKG}.core.${PVRF}/share/i18n/locales/$locale_short" -f "$charset" -A "${D}/pkg/main/${PKG}.core.${PVRF}/share/locale/locale.alias" --prefix "${D}" "${locale}"
@@ -120,7 +120,7 @@ ln -snfTv . "${D}/pkg/main/${PKG}.dev.${PVRF}/usr"
 
 # linux includes
 for foo in /pkg/main/sys-kernel.linux.dev/include/*; do
-	BASE=`basename "$foo"`
+	BASE=$(basename "$foo")
 	if [ -d "${D}/pkg/main/${PKG}.dev.${PVRF}/include/$BASE" ]; then
 		# already a dir there, need to do a cp operation
 		cp -rsfT "$foo" "${D}/pkg/main/${PKG}.dev.${PVRF}/include/$BASE"
@@ -131,11 +131,11 @@ done
 
 # c++ includes + libs
 ln -snfv /pkg/main/sys-libs.libcxx.dev/include/c++ "${D}/pkg/main/${PKG}.dev.${PVRF}/include/"
-ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc++.so"
+ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib"$LIB_SUFFIX"/libc++.so "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc++.so"
 
 # add link to ld.so.conf and ld.so.cache since binutils will be looking for it here
 mkdir "${D}/pkg/main/${PKG}.dev.${PVRF}/etc"
-ln -snf /pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
+ln -snf /pkg/main/azusa.ldso.data."${OS}"."${ARCH}"/etc/ld.so.* "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"
 
 # move etc/rpc
 mv -v "${D}/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc/rpc" "${D}/pkg/main/${PKG}.dev.${PVRF}/etc/"

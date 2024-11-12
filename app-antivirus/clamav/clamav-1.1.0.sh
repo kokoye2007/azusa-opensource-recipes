@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/Cisco-Talos/clamav/archive/refs/tags/${P}.tar.gz
+get https://github.com/Cisco-Talos/clamav/archive/refs/tags/"${P}".tar.gz
 #acheck
 envcheck # clamav requires network access to build because of rust
 
 importpkg zlib app-arch/bzip2 dev-libs/libpcre2 dev-libs/libmspack
 
-cd "${T}"
+cd "${T}" || exit
 
 OPTS=(
 	-DAPP_CONFIG_DIRECTORY=/etc/clamav

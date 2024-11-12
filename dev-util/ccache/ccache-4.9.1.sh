@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ccache/ccache/releases/download/v${PV}/${P}.tar.xz
+get https://github.com/ccache/ccache/releases/download/v"${PV}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg app-arch/zstd
 

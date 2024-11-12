@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/g-truc/glm/archive/${PV}.tar.gz ${P}.tar.gz
+get https://github.com/g-truc/glm/archive/"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 docmake
 

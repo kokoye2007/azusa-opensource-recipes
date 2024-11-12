@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.libarchive.org/downloads/${P}.tar.gz
+get https://www.libarchive.org/downloads/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib app-arch/bzip2 app-arch/zstd dev-libs/lzo app-arch/lz4 app-arch/xz dev-libs/nettle
 

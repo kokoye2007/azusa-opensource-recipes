@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xiph.org/releases/ao/${P}.tar.gz
+get http://downloads.xiph.org/releases/ao/"${P}".tar.gz
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

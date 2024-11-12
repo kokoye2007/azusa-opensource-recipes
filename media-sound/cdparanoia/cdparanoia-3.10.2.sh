@@ -2,11 +2,11 @@
 source "../../common/init.sh"
 
 MY_P="${PN}-III-10.2"
-get http://downloads.xiph.org/releases/cdparanoia/${MY_P}.src.tgz
+get http://downloads.xiph.org/releases/cdparanoia/"${MY_P}".src.tgz
 
-cd "${MY_P}"
+cd "${MY_P}" || exit
 
-get https://dev.gentoo.org/~ssuominen/${MY_P}-patches-2.tbz2
+get https://dev.gentoo.org/~ssuominen/"${MY_P}"-patches-2.tbz2
 apatch patches/*.patch
 
 acheck

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.spice-space.org/download/releases/spice-server/${P}.tar.bz2
+get https://www.spice-space.org/download/releases/spice-server/"${P}".tar.bz2
 acheck
 
 inherit asciidoc
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg libjpeg zlib openssl libsasl2
 

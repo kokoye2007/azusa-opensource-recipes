@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 inherit python
 
-get https://download.ceph.com/tarballs/${P}.tar.gz
+get https://download.ceph.com/tarballs/"${P}".tar.gz
 acheck
 
 # snappy 1.1.9 will fail
@@ -50,17 +50,17 @@ PATCHES=(
 	"${FILESDIR}/ceph-18.2.0-cython3.patch"
 )
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "${PATCHES[@]}"
 
 # use system boost
 #find "${S}" -name '*.cmake' -or -name 'CMakeLists.txt' -print0  | xargs --null sed -r -e 's|Boost::|boost_|g' -e 's|Boost_|boost_|g' -e 's|[Bb]oost_boost|boost_system|g' -i
 
-export Snappy_LIB=/pkg/main/app-arch.snappy.libs.1.1.10/lib$LIB_SUFFIX
+export Snappy_LIB=/pkg/main/app-arch.snappy.libs.1.1.10/lib"$LIB_SUFFIX"
 export Snappy_INCLUDE_DIR=/pkg/main/app-arch.snappy.dev.1.1.10/include
 
-cd "${T}"
+cd "${T}" || exit
 
 # minimal config to find plugins
 cat <<EOF > ceph.conf

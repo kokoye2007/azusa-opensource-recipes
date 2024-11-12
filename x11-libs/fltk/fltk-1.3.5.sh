@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.fltk.org/pub/fltk/${PV}/${P}-source.tar.bz2
+get https://www.fltk.org/pub/fltk/"${PV}"/"${P}"-source.tar.bz2
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg X zlib libpng libjpeg fontconfig media-libs/mesa x11-libs/cairo x11-libs/pixman
 

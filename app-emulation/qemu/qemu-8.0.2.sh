@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.qemu.org/${P}.tar.xz
+get https://download.qemu.org/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/qemu-8.0.0-fix-syscalls.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 # --audio-drv-list=oss,alsa,sdl,pa
 

@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libjxl/libjxl/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/libjxl/libjxl/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
 importpkg dev-cpp/highway lcms2 dev-cpp/gflags zlib libpng media-libs/giflib libjpeg
 
-cd "${T}"
+cd "${T}" || exit
 
 CMAKEOPTS=(
 	-DBUILD_TESTING=OFF

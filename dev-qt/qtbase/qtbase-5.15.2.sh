@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/submodules/${PN}-everywhere-src-${PV}.tar.xz
+get https://download.qt.io/official_releases/qt/"${PV%.*}"/"${PV}"/submodules/"${PN}"-everywhere-src-"${PV}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # fix missing qt_version_tag symbol w/ LTO, bug 674382
 sed -i -e 's/^gcc:ltcg/gcc/' "${S}/src/corelib/global/global.pri"
@@ -19,7 +19,7 @@ eval(QMAKE_CFLAGS_RELEASE += \$\$(CPPFLAGS))
 eval(QMAKE_LFLAGS_RELEASE += \$\$(LDFLAGS))
 EOF
 
-cd "${T}"
+cd "${T}" || exit
 
 # https://doc.qt.io/qt-5/configure-options.html
 CONFIGURE=(

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://security.appspot.com/downloads/${P}.tar.gz
+get https://security.appspot.com/downloads/"${P}".tar.gz
 
-cd "${P}"
+cd "${P}" || exit
 
 echo "#define VSF_BUILD_SSL" >>builddefs.h
 

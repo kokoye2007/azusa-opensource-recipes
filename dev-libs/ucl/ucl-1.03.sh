@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://www.oberhumer.com/opensource/ucl/download/${P}.tar.gz
+get http://www.oberhumer.com/opensource/ucl/download/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconflight --enable-shared CFLAGS="-std=c90 -O2"
 

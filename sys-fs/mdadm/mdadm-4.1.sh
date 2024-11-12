@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.kernel.org/pub/linux/utils/raid/mdadm/${P}.tar.xz
+get https://www.kernel.org/pub/linux/utils/raid/mdadm/"${P}".tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 sed 's@-Werror@@' -i Makefile
 

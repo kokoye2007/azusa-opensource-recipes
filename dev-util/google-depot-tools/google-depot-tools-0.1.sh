@@ -3,7 +3,7 @@ source "../../common/init.sh"
 
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 S="${CHPATH}/depot_tools"
-cd "${S}"
+cd "${S}" || exit
 
 echo "Running ensure_bootstrap"
 PATH=".:$PATH" ./ensure_bootstrap
@@ -11,15 +11,15 @@ PATH=".:$PATH" ./ensure_bootstrap
 acheck
 
 # grab last commit date/time as version (YYYYMMDD.HHMMSS)
-DEPOT_VER=`git log -1 --format=%at | xargs -I{} date -d @{} +%Y%m%d.%H%M%S`
+DEPOT_VER=$(git log -1 --format=%at | xargs -I{} date -d @{} +%Y%m%d.%H%M%S)
 
 TARGET="/pkg/main/${PKG}.core.${PVR}.${DEPOT_VER}.${OS}.${ARCH}"
 mkdir -pv "${D}$TARGET"
 
-cd "$T"
+cd "$T" || exit
 
 mv -vT "$S" "${D}$TARGET/depot_tools"
-cd "${D}$TARGET/depot_tools"
+cd "${D}$TARGET/depot_tools" || exit
 
 # remove useless git stuff
 rm -fr .git .gitattributes .gitignore
@@ -28,7 +28,7 @@ rm -fr .git .gitattributes .gitignore
 touch .disable_auto_update
 
 mkdir -pv "${D}$TARGET/bin"
-cd "${D}$TARGET/bin"
+cd "${D}$TARGET/bin" || exit
 
 # note: depot_tools depend on itself being in path, so we provide it in the wrapper
 cat >gclient <<EOF
@@ -42,7 +42,7 @@ chmod +x gclient
 
 # list of depot_tools commands we expose (we do not want to expose stuff like ninja that we already provide)
 for foo in fetch ../depot_tools/git-* ; do
-	ln -snfTv gclient `basename "$foo"`
+	ln -snfTv gclient $(basename "$foo")
 done
 
 finalize

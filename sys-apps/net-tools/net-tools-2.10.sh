@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://download.sourceforge.net/${PN}/${P}.tar.xz
+get https://download.sourceforge.net/"${PN}"/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # go with the default options
 yes '' | ./configure.sh config.in

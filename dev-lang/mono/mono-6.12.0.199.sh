@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 inherit libs
 
-get http://download.mono-project.com/sources/mono/${P}.tar.xz
+get http://download.mono-project.com/sources/mono/"${P}".tar.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 preplib
 

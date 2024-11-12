@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.nethack.org/download/${PV}/nethack-362-src.tgz
+get https://www.nethack.org/download/"${PV}"/nethack-362-src.tgz
 acheck
 
 importpkg ncurses
 
-cd "${S}"
+cd "${S}" || exit
 
 export HACKDIR="/pkg/main/${PKG}.core.${PVRF}/nethack"
 export INSTDIR="${D}$HACKDIR"

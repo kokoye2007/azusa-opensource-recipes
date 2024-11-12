@@ -4,7 +4,7 @@ source "../../common/init.sh"
 fetchgit https://github.com/sullo/nikto.git fed0c5cab5ed00c4b8f07a781a8fcde25fe3bce2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 mkdir -pv "${D}/pkg/main/${PKG}.core.${PVRF}"
 mv -v program "${D}/pkg/main/${PKG}.core.${PVRF}/nikto"

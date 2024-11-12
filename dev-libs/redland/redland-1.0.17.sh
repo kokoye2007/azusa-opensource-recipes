@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://download.librdf.org/source/${P}.tar.gz
+get http://download.librdf.org/source/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg mariadb dev-libs/rasqal
 

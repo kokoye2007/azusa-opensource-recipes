@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.xz
+get http://ftp.gnu.org/pub/gnu/"${PN}"/"${P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

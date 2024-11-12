@@ -1,11 +1,11 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/fmtlib/fmt/archive/${PV}.tar.gz
+get https://github.com/fmtlib/fmt/archive/"${PV}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
-docmake -DFMT_CMAKE_DIR=/pkg/main/${PKG}.dev.${PVRF}/cmake/fmt -DFMT_LIB_DIR=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX -DFMT_TEST=NO
+docmake -DFMT_CMAKE_DIR=/pkg/main/"${PKG}".dev."${PVRF}"/cmake/fmt -DFMT_LIB_DIR=/pkg/main/"${PKG}".libs."${PVRF}"/lib"$LIB_SUFFIX" -DFMT_TEST=NO
 
 finalize

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://mirrors.kernel.org/sourceware/lvm2/LVM2.${PV}.tgz
+get http://mirrors.kernel.org/sourceware/lvm2/LVM2."${PV}".tgz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/libaio
 export CFLAGS="$CPPFLAGS"

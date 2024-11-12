@@ -1,12 +1,12 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mesa.freedesktop.org/archive/${P}.tar.xz
+get https://mesa.freedesktop.org/archive/"${P}".tar.xz
 acheck
 
 GALLIUM_DRV="i915,nouveau,r600,radeonsi,svga,swrast,virgl"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg zlib X x11-libs/libxshmfence x11-libs/libXext x11-libs/libX11 x11-libs/libXxf86vm x11-libs/libXfixes x11-libs/libXdamage sys-libs/libunwind sys-apps/lm-sensors
 

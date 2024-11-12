@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://doxygen.nl/files/${P}.src.tar.gz
+get http://doxygen.nl/files/"${P}".src.tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/doxygen-1.9.4-gcc12-include.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/xapian zlib sqlite3
 

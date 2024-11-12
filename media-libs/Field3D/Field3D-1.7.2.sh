@@ -4,11 +4,11 @@ source "../../common/init.sh"
 get "https://github.com/imageworks/Field3D/archive/v${PV}.tar.gz" "${P}.tar.gz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/${P}-Use-PkgConfig-for-IlmBase.patch"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg dev-libs/boost media-libs/openexr dev-libs/imath zlib
 

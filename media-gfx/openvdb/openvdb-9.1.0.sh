@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/AcademySoftwareFoundation/${PN}/archive/v${PV}.tar.gz "${P}.tar.gz"
+get https://github.com/AcademySoftwareFoundation/"${PN}"/archive/v"${PV}".tar.gz "${P}.tar.gz"
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg media-libs/openexr dev-libs/log4cplus dev-libs/c-blosc zlib dev-libs/boost media-libs/mesa media-libs/glu
 

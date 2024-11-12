@@ -3,7 +3,7 @@ source "../../common/init.sh"
 inherit utils
 
 CD_VERSION="1.2"
-get https://downloads.sourceforge.net/scummvm/BASS-Floppy-${PV}.zip
+get https://downloads.sourceforge.net/scummvm/BASS-Floppy-"${PV}".zip
 get https://downloads.sourceforge.net/scummvm/bass-cd-${CD_VERSION}.zip
 acheck
 

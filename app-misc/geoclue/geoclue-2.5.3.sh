@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/${PV}/${P}.tar.bz2
+get https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/"${PV}"/"${P}".tar.bz2
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 meson --prefix="/pkg/main/${PKG}.core.${PVRF}" "${CHPATH}/${P}"
 

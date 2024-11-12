@@ -2,11 +2,11 @@
 source "../../common/init.sh"
 
 MOZVER=39
-get https://github.com/cisco/${PN}/archive/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/cisco/"${PN}"/archive/v"${PV}".tar.gz "${P}".tar.gz
 get https://github.com/mozilla/gmp-api/archive/Firefox${MOZVER}.tar.gz gmp-api-Firefox${MOZVER}.tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 ln -s "$CHPATH/gmp-api-Firefox${MOZVER}" gmp-api
 

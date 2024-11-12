@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://libspectre.freedesktop.org/releases/${P}.tar.gz
+get https://libspectre.freedesktop.org/releases/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 importpkg app-text/ghostscript-gpl
 

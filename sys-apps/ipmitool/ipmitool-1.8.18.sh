@@ -12,7 +12,7 @@ get https://dev.gentoo.org/~robbat2/distfiles/ipmitool_1.8.18-9.debian-ported-ge
 get https://dev.gentoo.org/~robbat2/distfiles/enterprise-numbers.2020-10-21.xz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 if [ -d "${S}"/debian ] ; then
 	mv "${S}"/debian{,.package}
@@ -23,8 +23,8 @@ if [ -d "${S}"/debian ] ; then
 		-e '/0120-openssl1.1.patch/d' \
 		debian/patches/series
 	for p in $(cat debian/patches/series) ; do
-		echo ${p}
-		apatch debian/patches/${p}
+		echo "${p}"
+		apatch debian/patches/"${p}"
 	done
 fi
 	
@@ -51,7 +51,7 @@ aautoreconf
 # If this file is not present, then ipmitool will try to download it during make install!
 cp -al "${WORKDIR}/enterprise-numbers.2020-10-21" "${S}"/enterprise-numbers
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg tinfo sys-libs/readline openssl sys-libs/freeipmi
 

@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://downloads.sourceforge.net/${PN}/${P}.tar.gz
+get https://downloads.sourceforge.net/"${PN}"/"${P}".tar.gz
 
-cd "${P}"
+cd "${P}" || exit
 
 patch -p1 <"$FILESDIR/lcms-1.19-cve_2013_4276-1.patch"
 

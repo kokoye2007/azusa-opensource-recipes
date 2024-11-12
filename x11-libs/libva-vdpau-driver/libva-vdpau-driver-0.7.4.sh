@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.freedesktop.org/software/vaapi/releases/libva-vdpau-driver/${P}.tar.bz2
+get https://www.freedesktop.org/software/vaapi/releases/libva-vdpau-driver/"${P}".tar.bz2
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=(
     "${FILESDIR}"/${P}-glext-missing-definition.patch
@@ -15,7 +15,7 @@ PATCHES=(
 )
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X vdpau media-libs/mesa
 

@@ -1,13 +1,13 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://ftp.gnu.org/pub/gnu/${PN}/${P}.tar.gz
+get http://ftp.gnu.org/pub/gnu/"${PN}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 export EMACS=no
-doconf --program-suffix=-${PV}
+doconf --program-suffix=-"${PV}"
 
 make
 make install DESTDIR="${D}"

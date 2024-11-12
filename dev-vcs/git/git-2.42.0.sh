@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://mirrors.edge.kernel.org/pub/software/scm/git/${P}.tar.xz
+get https://mirrors.edge.kernel.org/pub/software/scm/git/"${P}".tar.xz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg zlib openssl libpcre2-8 libcurl expat
 

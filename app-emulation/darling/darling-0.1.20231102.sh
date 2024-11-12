@@ -7,11 +7,11 @@ acheck
 
 export CPPFLAGS="${CPPFLAGS} -I/pkg/main/sys-libs.libcxxabi.dev/include/c++/v1/"
 
-cd "${S}"
+cd "${S}" || exit
 
 sed -i '/-Werror/d' src/external/corecrypto/CMakeLists.txt
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X media-libs/freetype zlib media-libs/libpng media-libs/tiff media-libs/libjpeg-turbo media-libs/giflib media-libs/libglvnd media-sound/pulseaudio dev-libs/libbsd app-crypt/libmd sys-libs/libcxxabi media-libs/fontconfig
 

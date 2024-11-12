@@ -20,13 +20,13 @@ case $file in
 		;;
 esac
 
-base=`basename "$file" .tar.gz`
-pkg=`echo "$base" | sed -r -e 's/(.*)-.*/\1/'`
-URL_REPL=`echo "$file" | sed -e "s/${base}/\\\${P}/"`
+base=$(basename "$file" .tar.gz)
+pkg=$(echo "$base" | sed -r -e 's/(.*)-.*/\1/')
+URL_REPL=$(echo "$file" | sed -e "s/${base}/\\\${P}/")
 
 if [ -f "$pkg/$base.sh" ]; then
 	echo "File exists, build with:"
-	ROOTDIR=`realpath ..`
+	ROOTDIR=$(realpath ..)
 	echo "$ROOTDIR/common/build.sh dev-perl/$pkg/$base.sh"
 	exit
 fi
@@ -55,6 +55,6 @@ EOF
 chmod +x "$pkg/$base.sh"
 
 # cause download now
-cd $pkg
-./$base.sh
+cd "$pkg" || exit
+./"$base".sh
 

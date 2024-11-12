@@ -4,7 +4,7 @@ source "../../common/init.sh"
 MY_PV="${PV/0.}"
 MY_PV="${MY_PV/./_}"
 
-get http://www.bay12games.com/dwarves/df_${MY_PV}_linux.tar.bz2
+get http://www.bay12games.com/dwarves/df_"${MY_PV}"_linux.tar.bz2
 acheck
 
 # TODO we should be able to re-build libgraphics.so

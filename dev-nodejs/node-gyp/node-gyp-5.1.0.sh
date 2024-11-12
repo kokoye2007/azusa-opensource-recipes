@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://registry.npmjs.org/${PN}/-/${P}.tgz
+get https://registry.npmjs.org/"${PN}"/-/"${P}".tgz
 acheck
 
 npm install -g --prefix "${D}/pkg/main/${PKG}.core.${PVRF}" "${P}.tgz"

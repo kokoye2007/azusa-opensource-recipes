@@ -1,9 +1,9 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/Kitware/CMake/releases/download/v${PV}/${P}.tar.gz
+get https://github.com/Kitware/CMake/releases/download/v"${PV}"/"${P}".tar.gz
 
-cd "${S}"
+cd "${S}" || exit
 
 apatch "$FILESDIR/cmake-3.22.2-use-absolute-paths.patch"
 
@@ -32,7 +32,7 @@ if [ -d /pkg/main/app-arch.zstd.core ]; then
 	CMAKEOPTS+=(-DCMAKE_USE_SYSTEM_ZSTD:BOOL=ON)
 fi
 
-cd "${T}"
+cd "${T}" || exit
 
 # configure & build
 if [ -f /bin/cmake ]; then
@@ -40,7 +40,7 @@ if [ -f /bin/cmake ]; then
 	# CMake_BUILD_LTO:BOOL=OFF
 	# CMake_RUN_CLANG_TIDY:BOOL=OFF
 else
-	callconf --no-qt-gui --prefix=/pkg/main/${PKG}.core.${PVRF} --mandir=/pkg/main/${PKG}.doc.${PVRF}/man --docdir=/pkg/main/${PKG}.doc.${PVRF}/doc -- "${CMAKEOPTS[@]}"
+	callconf --no-qt-gui --prefix=/pkg/main/"${PKG}".core."${PVRF}" --mandir=/pkg/main/"${PKG}".doc."${PVRF}"/man --docdir=/pkg/main/"${PKG}".doc."${PVRF}"/doc -- "${CMAKEOPTS[@]}"
 	make -j"$NPROC"
 	make install DESTDIR="${D}"
 fi

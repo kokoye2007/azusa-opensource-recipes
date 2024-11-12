@@ -1,11 +1,11 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://downloads.xvid.org/downloads/xvidcore-${PV}.tar.bz2
+get http://downloads.xvid.org/downloads/xvidcore-"${PV}".tar.bz2
 
 acheck
 
-cd xvidcore/build/generic
+cd xvidcore/build/generic || exit
 
 doconf
 

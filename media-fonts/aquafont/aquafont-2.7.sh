@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 MY_P="${PN/font/}${PV/\./_}"
-get http://www.geocities.jp/teardrops_in_aquablue/fnt/${MY_P}.zip
+get http://www.geocities.jp/teardrops_in_aquablue/fnt/"${MY_P}".zip
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 mkdir -pv "${D}/pkg/main/${PKG}.fonts.${PVRF}/ttf" "${D}/pkg/main/${PKG}.doc.${PVRF}/"
 

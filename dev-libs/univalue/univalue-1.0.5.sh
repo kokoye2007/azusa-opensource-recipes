@@ -1,15 +1,15 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/jgarzik/univalue/archive/v${PV}.tar.gz
+get https://github.com/jgarzik/univalue/archive/v"${PV}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 libtoolize --install --force
 autoreconf -fi
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-static
 

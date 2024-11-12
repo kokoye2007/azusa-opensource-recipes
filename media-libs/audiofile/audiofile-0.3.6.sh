@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://audiofile.68k.org/${P}.tar.gz
+get https://audiofile.68k.org/"${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 PATCHES=(
     "${FILESDIR}"/${PN}-0.3.6-gcc6-build-fixes.patch
@@ -16,7 +16,7 @@ PATCHES=(
 
 apatch "${PATCHES[@]}"
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg alsa
 

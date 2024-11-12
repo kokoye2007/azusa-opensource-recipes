@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ArtifexSoftware/${PN}/archive/${PV}.tar.gz ${P}.tar.gz
+get https://github.com/ArtifexSoftware/"${PN}"/archive/"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 # We only need configure.ac and config_types.h.in
 sed -i \
@@ -15,7 +15,7 @@ sed -i \
 ./autogen.sh
 aautoreconf
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --enable-static --with-libpng
 

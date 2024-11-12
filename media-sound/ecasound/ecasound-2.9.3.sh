@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://ecasound.seul.org/download/${P}.tar.gz
+get https://ecasound.seul.org/download/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg ncurses media-libs/audiofile media-libs/alsa-lib media-libs/libsamplerate
 

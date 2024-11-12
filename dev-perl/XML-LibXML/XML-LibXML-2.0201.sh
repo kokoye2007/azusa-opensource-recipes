@@ -5,10 +5,10 @@ inherit perl
 importpkg dev-libs/icu
 export INC="$CPPFLAGS"
 
-get https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/${P}.tar.gz
+get https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 perlsetup
 finalize

@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 MY_PN=DirectX-Headers
-get https://github.com/microsoft/${MY_PN}/archive/refs/tags/v${PV}.tar.gz ${P}.tar.gz
+get https://github.com/microsoft/${MY_PN}/archive/refs/tags/v"${PV}".tar.gz "${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 domeson -Dbuild-test=false
 

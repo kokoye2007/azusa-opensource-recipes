@@ -2,10 +2,10 @@
 source "../../common/init.sh"
 
 MY_P=${P/graphicsm/GraphicsM}
-get https://download.sourceforge.net/${PN}/${MY_P}.tar.xz
+get https://download.sourceforge.net/"${PN}"/"${MY_P}".tar.xz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 importpkg X sys-devel/libtool zlib app-arch/zstd app-arch/bzip2 media-libs/libfpx app-arch/xz media-libs/lcms libpng libjpeg media-libs/tiff media-libs/libwebp libxml-2.0 media-libs/libwmf
 # TODO jbig.h

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz
+get https://nodejs.org/dist/v"${PV}"/node-v"${PV}".tar.xz
 acheck
 
-cd "node-v${PV}"
+cd "node-v${PV}" || exit
 
 # fix include
 sed -i 's|ares_nameser.h|arpa/nameser.h|' src/cares_wrap.h

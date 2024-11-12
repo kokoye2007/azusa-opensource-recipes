@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get http://download.savannah.gnu.org/releases/lzip/${P}.tar.gz
+get http://download.savannah.gnu.org/releases/lzip/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf
 

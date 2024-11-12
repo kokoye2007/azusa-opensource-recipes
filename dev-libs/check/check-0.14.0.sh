@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/libcheck/check/releases/download/${PV}/${P}.tar.gz
+get https://github.com/libcheck/check/releases/download/"${PV}"/"${P}".tar.gz
 acheck
 
-cd "${T}"
+cd "${T}" || exit
 
 doconf --disable-subunit
 

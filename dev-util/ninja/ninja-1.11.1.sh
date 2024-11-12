@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/ninja-build/ninja/archive/v${PV}.tar.gz
+get https://github.com/ninja-build/ninja/archive/v"${PV}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 if [ "$ARCH" = "386" ]; then
 	# enable 64bit mode

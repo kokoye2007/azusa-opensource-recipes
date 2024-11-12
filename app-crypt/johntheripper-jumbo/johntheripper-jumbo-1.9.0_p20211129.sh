@@ -5,7 +5,7 @@ HASH_COMMIT="5d0c85f16f96ca7b6dd06640e95a5801081d6e20"
 get https://github.com/openwall/john/archive/${HASH_COMMIT}.tar.gz "$P.tar.gz"
 acheck
 
-cd "${S}/src"
+cd "${S}/src" || exit
 
 importpkg sys-cluster/openmpi dev-libs/openssl net-libs/libpcap dev-libs/gmp zlib sys-libs/libxcrypt app-arch/bzip2 dev-util/opencl-headers dev-util/nvidia-cuda-toolkit
 
@@ -13,7 +13,7 @@ doconf --enable-pkg-config --disable-native-march --disable-native-tests --disab
 
 make
 
-cd "${S}"
+cd "${S}" || exit
 
 mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}/sbin"
 # pax-mark -mr "${ED}/usr/sbin/john"

@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://www.cpan.org/src/5.0/${P}.tar.gz
+get https://www.cpan.org/src/5.0/"${P}".tar.gz
 acheck
 
-cd "${P}"
+cd "${P}" || exit
 
 importpkg sys-libs/glibc app-arch/bzip2 zlib sys-libs/gdbm
 

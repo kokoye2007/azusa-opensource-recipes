@@ -1,10 +1,10 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/vim/vim/archive/v${PV}.tar.gz "${P}.tar.gz"
+get https://github.com/vim/vim/archive/v"${PV}".tar.gz "${P}.tar.gz"
 acheck
 
-cd "${S}"
+cd "${S}" || exit
 
 echo "#define SYS_VIMRC_FILE \"/pkg/main/${PKG}.core.${PVRF}/etc/vimrc\"" >> src/feature.h
 
@@ -15,7 +15,7 @@ doconf
 make
 make install DESTDIR="${D}"
 
-cd "${D}"
+cd "${D}" || exit
 
 mkdir -p "pkg/main/${PKG}.core.${PVRF}/etc"
 

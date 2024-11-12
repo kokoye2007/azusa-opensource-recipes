@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://docbook.org/xml/${PV}/docbook-v${PV}-os.zip
+get https://docbook.org/xml/"${PV}"/docbook-v"${PV}"-os.zip
 acheck
 
 mkdir -p "${D}/pkg/main/${PKG}.sgml.${PVRF}/docbook"/schema/{rng,sch}/5.1

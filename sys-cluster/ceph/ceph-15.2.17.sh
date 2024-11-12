@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 inherit python
 
-get https://download.ceph.com/tarballs/${P}.tar.gz
+get https://download.ceph.com/tarballs/"${P}".tar.gz
 acheck
 
 # use system boost
@@ -16,7 +16,7 @@ importpkg \
 	dev-libs/rocksdb:6.15 dev-libs/boost dev-lang/lua sys-libs/liburing sys-libs/ncurses dev-libs/libnl dev-libs/icu \
 	net-libs/rabbitmq-c dev-libs/librdkafka dev-libs/pmdk dev-libs/userspace-rcu dev-libs/openssl
 
-cd "${T}"
+cd "${T}" || exit
 
 # minimal config to find plugins
 cat <<EOF > ceph.conf
