@@ -20,3 +20,10 @@ files:
             sha1: 4d2fd8fc62d2cd1ca6355f1412c6ad66462fd196
             sha3-256: 4f9cb6b587d6778c5103855dcf492f998c4865f331827d230a4d26086f92575c
             sha256: 6d111cbe4d55b336db2f1fbeffbc65b89908704c01136371d32aa9bec373eb64
+    util-linux-2.40.2.tar.xz:
+        size: 8854820
+        added: 2024-11-12T16:12:31.844779321+09:00
+        hashes:
+            sha1: 59d363aa55d8b74abd7663545c29b353524294af
+            sha3-256: 6cfe339e782e0b9caa02be49fd952197327f9d6145d1d6ae9f4d00729d51fbb0
+            sha256: d78b37a66f5922d70edf3bdfb01a6b33d34ed3c3cafd6628203b2a2b67c8e8b3

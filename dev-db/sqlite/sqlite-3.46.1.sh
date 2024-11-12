@@ -2,7 +2,7 @@
 source "../../common/init.sh"
 
 SRC_PV="$(printf "%u%02u%02u%02u" $(echo "$PV" | tr '.' ' '))"
-get https://sqlite.org/2023/sqlite-autoconf-$SRC_PV.tar.gz
+get https://sqlite.org/2024/sqlite-autoconf-$SRC_PV.tar.gz
 acheck
 
 cd "${T}"
