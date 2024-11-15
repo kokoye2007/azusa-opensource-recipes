@@ -1,7 +1,7 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/openjdk/jdk17u/archive/jdk-${PV}-ga.tar.gz
+get https://github.com/openjdk/jdk21u/archive/jdk-${PV}-ga.tar.gz
 
 BOOT_JDK="/pkg/main/dev-java.openjdk.core"
 
@@ -28,7 +28,7 @@ fi
 
 # grab tests
 cd "${S}"
-get http://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-${PV}/jtreg-4.2.0-tip.tar.gz
+get https://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-21.0.2/jtreg-7.3.1+1.tar.gz
 acheck
 
 export CPPFLAGS="${CPPFLAGS} -fno-stack-protector"
