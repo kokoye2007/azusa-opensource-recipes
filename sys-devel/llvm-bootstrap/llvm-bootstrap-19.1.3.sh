@@ -15,6 +15,8 @@ importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib sys-libs/llvm-libunwind sys-
 export CFLAGS="${CPPFLAGS}"
 export CXXFLAGS="${CPPFLAGS}"
 
+unset CC CXX
+
 # https://llvm.org/docs/CMake.html
 
 CMAKE_OPTS=(
@@ -35,6 +37,11 @@ CMAKE_OPTS=(
 
 	-DLLVM_APPEND_VC_REV=OFF
 	-DLLVM_LIBDIR_SUFFIX=$LIB_SUFFIX
+
+	-DDEFAULT_SYSROOT="/pkg/main/sys-libs.glibc.dev"
+	-DC_INCLUDE_DIRS="/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
+	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.mod.${PVRF}/config"
+	-DCLANG_PLUGIN_SUPPORT=OFF
 
 	-DBUILD_SHARED_LIBS=OFF # bootstrap, so let's build everything static
 	-DLLVM_INCLUDE_TESTS=OFF
@@ -75,4 +82,38 @@ cmake -S "${S}" -B "${T}" -G Ninja -Wno-dev "${CMAKE_OPTS[@]}"
 ninja -j"$NPROC" -v all
 DESTDIR="${D}" ninja -j"$NPROC" -v install
 
+# write config
+mkdir -p "${D}/pkg/main/${PKG}.mod.${PVRF}/config"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang++.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang++.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-cpp.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-cpp.cfg"
+
+cat >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-common.cfg" <<EOF
+--rtlib=libgcc
+--unwindlib=libgcc
+-fuse-ld=bfd
+EOF
+
+# /pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include/c++/v1
+
+cat >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-cxx.cfg" <<EOF
+--stdlib=libstdc++
+
+# fix clang include path order
+-nostdinc
+-isystem /pkg/main/sys-libs.libcxx.dev/include/c++/v1
+-isystem /pkg/main/sys-libs.glibc.dev.linux.amd64/include
+-isystem /pkg/main/${PKG}.mod.${PVRF}/lib${LIB_SUFFIX}/clang/${PV/.*}/include
+
+# fix libcxx libs include
+-L/pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX
+-L/pkg/main/sys-libs.libcxxabi.libs/lib$LIB_SUFFIX
+-lc++ -lc++abi
+EOF
+
+# TODO --gcc-install-dir= ?
+
+fixelf
 archive

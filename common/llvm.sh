@@ -1,7 +1,18 @@
 #!/bin/sh
 
-# ensure we have the right version of llvm-config in path first
-export PATH="/pkg/main/sys-devel.llvm.core.${PV}/bin:$PATH"
+# make our bootstrap available (clang, etc)
+export PATH="/pkg/main/sys-devel.llvm.core.${PV}/bin:/pkg/main/sys-devel.llvm-bootstrap.mod.${PV}/bin:$PATH"
+
+if [ -f "/pkg/main/sys-devel.clang.core.${PV}/bin/clang" ]; then
+	CC="/pkg/main/sys-devel.clang.core.${PV}/bin/clang"
+	CXX="/pkg/main/sys-devel.clang.core.${PV}/bin/clang++"
+	echo "llvm: CC=$CC"
+else
+	CC="/pkg/main/sys-devel.llvm-bootstrap.mod.${PV}/bin/clang"
+	CXX="/pkg/main/sys-devel.llvm-bootstrap.mod.${PV}/bin/clang++"
+	echo "llvm: using bootstrap for clang: $CC"
+fi
+export CC CXX
 
 llvmgetfull() {
 	CATEGORY=sys-devel PN=llvm get https://github.com/llvm/llvm-project/releases/download/llvmorg-${PV}/llvm-project-${PV}.src.tar.xz
