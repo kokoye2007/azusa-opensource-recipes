@@ -1,0 +1,45 @@
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/net_processing.cpp monacoin-0.20.4/src/net_processing.cpp
+--- monacoin-0.20.4.orig/src/net_processing.cpp	2024-11-20 12:00:49.827716871 +0900
++++ monacoin-0.20.4/src/net_processing.cpp	2024-11-20 12:01:06.404533472 +0900
+@@ -29,6 +29,7 @@
+ 
+ #include <memory>
+ #include <typeinfo>
++#include <array>
+ 
+ #if defined(NDEBUG)
+ # error "Monacoin cannot be compiled without assertions."
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/support/lockedpool.cpp monacoin-0.20.4/src/support/lockedpool.cpp
+--- monacoin-0.20.4.orig/src/support/lockedpool.cpp	2024-11-20 12:00:49.837716962 +0900
++++ monacoin-0.20.4/src/support/lockedpool.cpp	2024-11-20 12:30:50.384559966 +0900
+@@ -23,6 +23,7 @@
+ #endif
+ 
+ #include <algorithm>
++#include <stdexcept>
+ #ifdef ARENA_DEBUG
+ #include <iomanip>
+ #include <iostream>
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/util/bip32.h monacoin-0.20.4/src/util/bip32.h
+--- monacoin-0.20.4.orig/src/util/bip32.h	2024-11-20 12:00:49.837716962 +0900
++++ monacoin-0.20.4/src/util/bip32.h	2024-11-20 12:37:31.981704371 +0900
+@@ -8,6 +8,7 @@
+ #include <attributes.h>
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ /** Parse an HD keypaths like "m/7/0'/2000". */
+ NODISCARD bool ParseHDKeypath(const std::string& keypath_str, std::vector<uint32_t>& keypath);
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/wallet/db.cpp monacoin-0.20.4/src/wallet/db.cpp
+--- monacoin-0.20.4.orig/src/wallet/db.cpp	2024-11-20 12:00:49.841050325 +0900
++++ monacoin-0.20.4/src/wallet/db.cpp	2024-11-20 12:15:50.612614623 +0900
+@@ -878,7 +878,7 @@
+                         return false;
+                     }
+ 
+-                    fs::copy_file(pathSrc, pathDest, fs::copy_option::overwrite_if_exists);
++                    fs::copy_file(pathSrc, pathDest, fs::copy_options::overwrite_existing);
+                     LogPrintf("copied %s to %s\n", strFile, pathDest.string());
+                     return true;
+                 } catch (const fs::filesystem_error& e) {
