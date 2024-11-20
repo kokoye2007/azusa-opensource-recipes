@@ -1,3 +1,65 @@
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/test/miner_tests.cpp monacoin-0.20.4/src/test/miner_tests.cpp
+--- monacoin-0.20.4.orig/src/test/miner_tests.cpp	2024-11-20 12:23:57.383901691 +0900
++++ monacoin-0.20.4/src/test/miner_tests.cpp	2024-11-20 18:09:28.117646995 +0900
+@@ -386,8 +386,8 @@
+     }
+     BOOST_CHECK(pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey));
+     // Extend to a 210000-long block chain.
+-    while (chainActive.Tip()->nHeight < 105120000) {
+-        CBlockIndex* prev = chainActive.Tip();
++    while (::ChainActive().Tip()->nHeight < 105120000) {
++        CBlockIndex* prev = ::ChainActive().Tip();
+         CBlockIndex* next = new CBlockIndex();
+         next->phashBlock = new uint256(InsecureRand256());
+         ::ChainstateActive().CoinsTip().SetBestBlock(next->GetBlockHash());
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/test/util/blockfilter.cpp monacoin-0.20.4/src/test/util/blockfilter.cpp
+--- monacoin-0.20.4.orig/src/test/util/blockfilter.cpp	2024-11-20 12:23:57.400568518 +0900
++++ monacoin-0.20.4/src/test/util/blockfilter.cpp	2024-11-20 19:04:55.970443425 +0900
+@@ -11,7 +11,7 @@
+ bool ComputeFilter(BlockFilterType filter_type, const CBlockIndex* block_index, BlockFilter& filter)
+ {
+     CBlock block;
+-    if (!ReadBlockFromDisk(block, block_index->GetBlockPos(), Params().GetConsensus())) {
++    if (!ReadBlockFromDisk(block, block_index->GetBlockPos(), block_index->nHeight, Params().GetConsensus())) {
+         return false;
+     }
+ 
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/validation.h monacoin-0.20.4/src/validation.h
+--- monacoin-0.20.4.orig/src/validation.h	2024-11-20 12:23:57.423902077 +0900
++++ monacoin-0.20.4/src/validation.h	2024-11-20 19:04:27.840150242 +0900
+@@ -360,7 +360,7 @@
+ 
+ 
+ /** Functions for disk access for blocks */
+-bool ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos, const Consensus::Params& consensusParams);
++bool ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos, int nHeight, const Consensus::Params& consensusParams);
+ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus::Params& consensusParams);
+ bool ReadRawBlockFromDisk(std::vector<uint8_t>& block, const FlatFilePos& pos, const CMessageHeader::MessageStartChars& message_start);
+ bool ReadRawBlockFromDisk(std::vector<uint8_t>& block, const CBlockIndex* pindex, const CMessageHeader::MessageStartChars& message_start);
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/wallet/test/db_tests.cpp monacoin-0.20.4/src/wallet/test/db_tests.cpp
+--- monacoin-0.20.4.orig/src/wallet/test/db_tests.cpp	2024-11-20 12:23:57.430568808 +0900
++++ monacoin-0.20.4/src/wallet/test/db_tests.cpp	2024-11-20 18:21:20.487850396 +0900
+@@ -18,7 +18,7 @@
+     std::string test_name = "test_name.dat";
+     const fs::path datadir = GetDataDir();
+     fs::path file_path = datadir / test_name;
+-    std::ofstream f(file_path.BOOST_FILESYSTEM_C_STR);
++    std::ofstream f(file_path.string());
+     f.close();
+ 
+     std::string filename;
+diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/wallet/test/init_test_fixture.cpp monacoin-0.20.4/src/wallet/test/init_test_fixture.cpp
+--- monacoin-0.20.4.orig/src/wallet/test/init_test_fixture.cpp	2024-11-20 12:23:57.430568808 +0900
++++ monacoin-0.20.4/src/wallet/test/init_test_fixture.cpp	2024-11-20 17:49:22.526030371 +0900
+@@ -30,7 +30,7 @@
+     fs::create_directories(m_walletdir_path_cases["default"]);
+     fs::create_directories(m_walletdir_path_cases["custom"]);
+     fs::create_directories(m_walletdir_path_cases["relative"]);
+-    std::ofstream f(m_walletdir_path_cases["file"].BOOST_FILESYSTEM_C_STR);
++    std::ofstream f(m_walletdir_path_cases["file"].string());
+     f.close();
+ }
+ 
 diff '--color=auto' -bBrU3 monacoin-0.20.4.orig/src/wallet/walletutil.cpp monacoin-0.20.4/src/wallet/walletutil.cpp
 --- monacoin-0.20.4.orig/src/wallet/walletutil.cpp	2024-11-20 12:23:57.437235539 +0900
 +++ monacoin-0.20.4/src/wallet/walletutil.cpp	2024-11-20 12:24:30.400887443 +0900
