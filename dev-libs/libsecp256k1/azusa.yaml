@@ -1,0 +1,3 @@
+description: Optimized C library for EC operations on curve secp256k1
+homepage: https://github.com/bitcoin-core/secp256k1
+license: MIT
