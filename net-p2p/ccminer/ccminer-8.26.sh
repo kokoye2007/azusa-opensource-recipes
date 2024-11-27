@@ -5,7 +5,7 @@ get https://github.com/KlausT/ccminer/archive/refs/tags/${PV}.tar.gz ${P}.tar.gz
 acheck
 
 inherit cuda
-initcuda
+initcuda 12.2
 
 cd "${S}"
 
@@ -19,8 +19,12 @@ cd "${T}"
 
 importpkg dev-libs/openssl net-misc/curl
 
+export CFLAGS="${CFLAGS} -ftrivial-auto-var-init=zero"
+
 doconf
 
+echo "make NVCC=\"nvcc -I${S}\""
+/bin/bash -i; exit 1
 make NVCC="nvcc -I${S}"
 make install DESTDIR="${D}"
 

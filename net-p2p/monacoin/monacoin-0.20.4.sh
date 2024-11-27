@@ -26,6 +26,7 @@ doconf --with-boost-libdir="/pkg/main/dev-libs.boost.libs/lib$LIB_SUFFIX" --enab
 #--with-miniupnpc --enable-upnp-default --enable-zmq --disable-util-cli --disable-util-tx --disable-util-wallet
 
 make -j"$NPROC"
+/bin/bash -i
 make install DESTDIR="${D}"
 
 finalize
