@@ -19,6 +19,6 @@ ln -snfv /pkg/main/app-arch.dpkg.core/share/dpkg /usr/share/dpkg
 #  Could not find docbook xsl
 
 
-docmake -DWITH_DOC=OFF -DDPKG_DATADIR=/var/lib/dpkg
+docmake -DWITH_DOC=OFF -DDPKG_DATADIR=/pkg/main/app-arch.dpkg.core/share/dpkg -DSTATE_DIR=/var/lib/apt -DCACHE_DIR=/var/cache/apt -DLOG_DIR=/var/log/apt -DCONF_DIR=/etc/apt
 
 finalize
