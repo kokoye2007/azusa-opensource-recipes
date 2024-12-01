@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # currently active perl versions (for modules, etc)
-PERL_VERSIONS="5.36.1"
+PERL_VERSIONS="5.40.0"
 
 PERL_MODS=""
 
