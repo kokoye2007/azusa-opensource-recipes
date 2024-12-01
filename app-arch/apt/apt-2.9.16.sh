@@ -19,6 +19,6 @@ ln -snfv /pkg/main/app-arch.dpkg.core/share/dpkg /usr/share/dpkg
 #  Could not find docbook xsl
 
 
-docmake -DWITH_DOC=OFF
+docmake -DWITH_DOC=OFF -DDPKG_DATADIR=/var/lib/dpkg
 
 finalize
