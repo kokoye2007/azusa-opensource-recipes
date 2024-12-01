@@ -4,7 +4,10 @@ source "../../common/init.sh"
 get https://www.cpan.org/src/5.0/${P}.tar.gz
 acheck
 
-cd "${P}"
+cd "${S}"
+
+# see: https://serverfault.com/a/145299
+sed -i -e 's#include <poll.h#include <sys/poll.h#' dist/IO/poll.h
 
 importpkg sys-libs/glibc app-arch/bzip2 zlib sys-libs/gdbm
 
