@@ -4,7 +4,7 @@ source "../../common/init.sh"
 get https://github.com/SELinuxProject/selinux/releases/download/${PV}/${P}.tar.gz
 acheck
 
-importpkg sys-libs/libsepol
+importpkg sys-libs/libsepol dev-libs/libpcre2
 
 CPPFLAGS="${CPPFLAGS} -DPIE -fPIE -fno-semantic-interposition -Wno-stringop-truncation"
 LDFLAGS="${LDFLAGS} -pthread"
@@ -22,5 +22,11 @@ MAKEOPTS=(
 
 make "${MAKEOPTS[@]}"
 make install "${MAKEOPTS[@]}"
+
+# fix pkgconfig file
+# ${D}/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}/pkgconfig
+
+echo "Fixing libselinux.pc"
+sed -i -re 's/^Libs:(.*)/Libs:\1 -lpcre2/' "${D}/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}/pkgconfig/libselinux.pc"
 
 finalize
