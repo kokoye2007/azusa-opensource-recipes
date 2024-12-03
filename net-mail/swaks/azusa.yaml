@@ -1,0 +1,3 @@
+description: Swiss Army Knife SMTP; Command line SMTP testing, including TLS and AUTH
+homepage: https://www.jetmore.org/john/code/swaks/ https://github.com/jetmore/swaks
+license: GPL-2+
