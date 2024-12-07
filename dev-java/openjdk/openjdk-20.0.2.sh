@@ -1,14 +1,14 @@
 #!/bin/sh
 source "../../common/init.sh"
 
-get https://github.com/openjdk/jdk21u/archive/jdk-${PV}-ga.tar.gz
+get https://github.com/openjdk/jdk${PV/.*}u/archive/jdk-${PV}-ga.tar.gz
 
 BOOT_JDK="/pkg/main/dev-java.openjdk.core"
 
 if [ -f "$BOOT_JDK/bin/java" ]; then
 	VERSION="$("$BOOT_JDK/bin/java" --version | head -n1 | awk '{ print $2 }')" # 15.0.2
 	case $VERSION in
-		20*|21*)
+		19*|20*)
 			# good
 			:
 			;;

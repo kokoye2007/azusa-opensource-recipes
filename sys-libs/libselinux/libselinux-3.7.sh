@@ -27,6 +27,6 @@ make install "${MAKEOPTS[@]}"
 # ${D}/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}/pkgconfig
 
 echo "Fixing libselinux.pc"
-sed -i -re 's/^Libs:(.*)/Libs:\1 -lpcre2/' "${D}/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}/pkgconfig/libselinux.pc"
+sed -i -re 's/^Libs:(.*)/Libs:\1 -lpcre2-8/' "${D}/pkg/main/${PKG}.libs.${PVRF}/lib${LIB_SUFFIX}/pkgconfig/libselinux.pc"
 
 finalize
