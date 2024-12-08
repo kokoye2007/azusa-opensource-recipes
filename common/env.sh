@@ -31,6 +31,10 @@ mount -o mode=1777 -t tmpfs tmpfs "$tmp_dir/dev/shm"
 mount -t devpts devpts "$tmp_dir/dev/pts"
 chroot "$tmp_dir" /bin/sh -c "dbus-uuidgen --ensure=/etc/machine-id" || true
 
+# force ld.so.cache to be /pkg/main/ld.so.cache
+#rm -f "$tmp_dir/pkg/main/azusa.ldso.data/etc/ld.so.cache"
+#ln -snf /pkg/main/ld.so.cache "$tmp_dir/pkg/main/azusa.ldso.data/etc/ld.so.cache"
+
 cleanuptmp() {
 	echo "Cleaning up $tmp_dir"
 	umount "$tmp_dir/proc" || umount -l "$tmp_dir/proc" || true

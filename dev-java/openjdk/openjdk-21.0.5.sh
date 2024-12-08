@@ -36,9 +36,17 @@ export CPPFLAGS="${CPPFLAGS} -fno-stack-protector"
 unset JAVA_HOME
 importpkg x11 libjpeg media-libs/giflib zlib lcms2
 
+# avoid openjdk erronously including pipewire from full/include
+rm -fr /pkg/main/azusa.symlinks.core/full/include/spa /pkg/main/azusa.symlinks.core/full/include/pipewire
+
 bash configure --enable-unlimited-crypto \
 	--disable-warnings-as-errors \
+	--disable-ccache \
+	--disable-precompiled-headers \
+	--enable-full-docs=no \
 	--with-stdc++lib=dynamic \
+	--with-freetype=system \
+	--with-harfbuzz=system \
 	--with-giflib=system \
 	--with-jtreg=$PWD/jtreg \
 	--with-lcms=system \
@@ -49,11 +57,16 @@ bash configure --enable-unlimited-crypto \
 	--with-version-pre="" \
 	--with-version-opt="" \
 	--with-boot-jdk="$BOOT_JDK" \
+	--with-vendor-name="Azusa" \
+	--with-vendor-url="https://www.azusa.jp" \
+	--with-vendor-version-string="${PVR}" \
+	--enable-headless-only=no \
 	--x-includes="/pkg/main/azusa.symlinks.core/full/include" \
 	--x-libraries="/pkg/main/azusa.symlinks.core/full/lib$LIB_SUFFIX" \
 	--with-cups-include="/pkg/main/net-print.cups.dev/include" \
 	--with-fontconfig-include="/pkg/main/media-libs.fontconfig.dev/include" \
 	--with-extra-cflags="$CPPFLAGS" --with-extra-cxxflags="$CPPFLAGS" --with-extra-ldflags="$LDFLAGS"
+	#--enable-jvm-feature-dtrace=yes \
 #	--x-includes="/pkg/main/x11-libs.libX11.dev/include"
 #	--x-libraries="/pkg/main/x11-libs.libX11.dev/lib$LIB_SUFFIX"
 #	--with-cacerts-file=/etc/pki/tls/java/cacerts

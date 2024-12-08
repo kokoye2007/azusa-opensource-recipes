@@ -6,6 +6,8 @@ acheck
 
 cd "${T}"
 
+importpkg dev-libs/libunistring
+
 doconf
 
 make
