@@ -129,9 +129,9 @@ for foo in /pkg/main/sys-kernel.linux.dev/include/*; do
 	fi
 done
 
-# c++ includes + libs
-ln -snfv /pkg/main/sys-libs.libcxx.dev/include/c++ "${D}/pkg/main/${PKG}.dev.${PVRF}/include/"
-ln -snfvT /pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX/libc++.so "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libc++.so"
+# c++ includes from gcc + libs
+ln -snfv /pkg/main/sys-devel.gcc.dev/include/c++ "${D}/pkg/main/${PKG}.dev.${PVRF}/include/"
+ln -snfvT /pkg/main/sys-devel.gcc.libs/lib64/libstdc++.so "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/libstdc++.so"
 
 # add link to ld.so.conf and ld.so.cache since binutils will be looking for it here
 mkdir "${D}/pkg/main/${PKG}.dev.${PVRF}/etc"
