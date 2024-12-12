@@ -26,7 +26,7 @@ CONFIGURE=(
 	--with-pkgversion="Azusa glibc ${PVR}"
 	--disable-crypt
 	--enable-multi-arch
-#	--enable-systemtap
+	--enable-systemtap
 	--enable-nscd
 	--disable-timezone-tools
 	libc_cv_slibdir=/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX
