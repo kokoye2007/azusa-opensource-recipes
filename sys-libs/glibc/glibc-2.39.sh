@@ -46,7 +46,7 @@ if [ "$ARCH" == "386" ]; then
 fi
 
 # configure & build
-doconf "${CONFIGURE[@]}"
+doconf "${CONFIGURE[@]}" || /bin/bash -i
 
 make -j"$NPROC"
 make install DESTDIR="${D}"

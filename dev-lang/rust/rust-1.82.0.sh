@@ -10,6 +10,9 @@ cd "rustc-${PV}-src"
 
 # https://github.com/rust-lang/rust/blob/master/config.example.toml
 # AArch64;AMDGPU;ARM;AVR;BPF;Hexagon;Lanai;LoongArch;Mips;MSP430;NVPTX;PowerPC;RISCV;Sparc;SystemZ;VE;WebAssembly;X86;XCore
+#
+# We use sys-devel/llvm-bootstrap since it's easier
+export PATH="/pkg/main/sys-devel.llvm-bootstrap.data/bin:$PATH"
 
 cat << EOF > config.toml
 change-id = 118703
@@ -86,7 +89,7 @@ src-tarball = false
 compression-formats = ["xz"]
 
 [target.x86_64-unknown-linux-gnu]
-#llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
+llvm-config = "/pkg/main/sys-devel.llvm-bootstrap.data/bin/llvm-config"
 ar = "ar"
 cc = "clang++"
 cxx = "clang++"
@@ -95,7 +98,7 @@ ranlib = "ranlib"
 llvm-libunwind = "system"
 
 [target.i686-unknown-linux-gnu]
-#llvm-config = "/pkg/main/sys-devel.llvm.dev/bin/llvm-config"
+llvm-config = "/pkg/main/sys-devel.llvm-bootstrap.data/bin/llvm-config"
 ar = "ar"
 cc = "clang++"
 cxx = "clang++"
@@ -109,7 +112,7 @@ profiler = false
 EOF
 
 export LLVM_LINK_SHARED=1
-export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(llvm-config --libdir)"
+export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(/pkg/main/sys-devel.llvm-bootstrap.data/bin/llvm-config --libdir)"
 export LIBGIT2_NO_VENDOR=1
 
 # this is a literally magic variable that gets through cargo cache, without it some

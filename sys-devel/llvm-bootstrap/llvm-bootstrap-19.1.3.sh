@@ -13,7 +13,7 @@ importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib sys-libs/llvm-libunwind sys-
 
 # importpkg will set CPPFLAGS but that's not read by llvm
 export CFLAGS="${CPPFLAGS}"
-export CXXFLAGS="${CPPFLAGS}"
+export CXXFLAGS="${CPPFLAGS} -I/pkg/main/sys-libs.libcxx.dev/include/c++/v1"
 
 unset CC CXX
 
@@ -21,15 +21,15 @@ unset CC CXX
 
 CMAKE_OPTS=(
 	-DCMAKE_BUILD_TYPE=Release
-	-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.mod.${PVRF}" # use mod to avoid addition to PATH
+	-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.data.${PVRF}" # use data to avoid addition to PATH
 
 	-DCMAKE_C_FLAGS="${CPPFLAGS} -O2"
 	-DCMAKE_CXX_FLAGS="${CPPFLAGS} -O2"
 	-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}"
 	-DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH}"
 
-	-DLLVM_ENABLE_PROJECTS="clang;lld" # bolt;clang;clang-tools-extra;compiler-rt;cross-project-tests;libc;libclc;lld;lldb;mlir;openmp;polly;pstl
-	#-DLLVM_ENABLE_RUNTIMES="libcxxabi;libcxx;compiler-rt;openmp" # libc;libunwind;libcxxabi;pstl;libcxx;compiler-rt;openmp;llvm-libgcc;offload
+	-DLLVM_ENABLE_PROJECTS="clang;lld;openmp" # bolt;clang;clang-tools-extra;compiler-rt;cross-project-tests;libc;libclc;lld;lldb;mlir;openmp;polly;pstl
+	-DLLVM_ENABLE_RUNTIMES="libunwind;libcxxabi;libcxx;compiler-rt" # libc;libunwind;libcxxabi;pstl;libcxx;compiler-rt;openmp;llvm-libgcc;offload
 
 	-DLLVM_HOST_TRIPLE="${CHOST}"
 
@@ -40,7 +40,7 @@ CMAKE_OPTS=(
 
 	-DDEFAULT_SYSROOT="/pkg/main/sys-libs.glibc.dev"
 	-DC_INCLUDE_DIRS="/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
-	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.mod.${PVRF}/config"
+	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.data.${PVRF}/config"
 	-DCLANG_PLUGIN_SUPPORT=OFF
 
 	-DBUILD_SHARED_LIBS=OFF # bootstrap, so let's build everything static
@@ -77,20 +77,20 @@ CMAKE_OPTS=(
 )
 
 # do not use llvmbuild since we are building llvm itself
-# do not use docmake either since we want this to be contained in a mod dir
+# do not use docmake either since we want this to be contained in a data dir
 cmake -S "${S}" -B "${T}" -G Ninja -Wno-dev "${CMAKE_OPTS[@]}"
 ninja -j"$NPROC" -v all
 DESTDIR="${D}" ninja -j"$NPROC" -v install
 
 # write config
-mkdir -p "${D}/pkg/main/${PKG}.mod.${PVRF}/config"
-echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang.cfg"
-echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang++.cfg"
-echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang++.cfg"
-echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-cpp.cfg"
-echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-cpp.cfg"
+mkdir -p "${D}/pkg/main/${PKG}.data.${PVRF}/config"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang++.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang++.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cpp.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cpp.cfg"
 
-cat >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-common.cfg" <<EOF
+cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-common.cfg" <<EOF
 --rtlib=libgcc
 --unwindlib=libgcc
 -fuse-ld=bfd
@@ -98,14 +98,14 @@ EOF
 
 # /pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include/c++/v1
 
-cat >"${D}/pkg/main/${PKG}.mod.${PVRF}/config/clang-cxx.cfg" <<EOF
+cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cxx.cfg" <<EOF
 --stdlib=libstdc++
 
 # fix clang include path order
 -nostdinc
 -isystem /pkg/main/sys-libs.libcxx.dev/include/c++/v1
 -isystem /pkg/main/sys-libs.glibc.dev.linux.amd64/include
--isystem /pkg/main/${PKG}.mod.${PVRF}/lib${LIB_SUFFIX}/clang/${PV/.*}/include
+-isystem /pkg/main/${PKG}.data.${PVRF}/lib${LIB_SUFFIX}/clang/${PV/.*}/include
 
 # fix libcxx libs include
 -L/pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX

@@ -13,6 +13,7 @@ cd "${S}"
 make install
 
 cp README.md LICENSE "${D}/pkg/main/${PKG}.core.${PVRF}/"
+cp -r packaging/templates/config "${D}/pkg/main/${PKG}.core.${PVRF}/"
 
 if [ ! -f "$GOBIN/heimdalld" ]; then
 	echo "Build failed"
