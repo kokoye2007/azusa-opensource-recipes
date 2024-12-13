@@ -9,7 +9,22 @@ S="$S/llvm"
 
 cd "${T}"
 
-importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib
+importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib dev-libs/libedit
+
+# somehow, clang fails to find the system includes at some point
+#export CPPFLAGS="${CPPFLAGS} -isystem /pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
+export C_INCLUDE_PATH="$C_INCLUDE_PATH:/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
+
+# do we already have a boostrapped llvm?
+if [ -d /pkg/main/sys-devel.llvm-bootstrap.data ]; then
+	#export CC=/pkg/main/sys-devel.llvm-bootstrap.data/bin/clang
+	TRIPLE="$(gcc -dumpmachine)"
+	# ensure -lc++ can be found
+	export LIBRARY_PATH="${LIBRARY_PATH}:/pkg/main/sys-devel.llvm-bootstrap.data/lib$LIB_SUFFIX/$TRIPLE"
+else
+	# fallback on hopefully installed libcxx
+	export LIBRARY_PATH="${LIBRARY_PATH}:/pkg/main/sys-libs.libcxx.libs/lib$LIB_SUFFIX:/pkg/main/sys-libs.libcxxabi.libs/lib$LIB_SUFFIX"
+fi
 
 # importpkg will set CPPFLAGS but that's not read by llvm
 export CFLAGS="${CPPFLAGS}"
@@ -30,6 +45,9 @@ CMAKE_OPTS=(
 	-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}"
 	-DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH}"
 
+	-DZLIB_LIBRARY=/pkg/main/sys-libs.zlib.libs.${OS}.${ARCH}/lib$LIB_SUFFIX/libz.so
+	-DZLIB_INCLUDE_DIR=/pkg/main/sys-libs.zlib.dev.${OS}.${ARCH}/include
+
 	-DLLVM_HOST_TRIPLE="${CHOST}"
 
 	-DLLVM_LIBDIR_SUFFIX=$LIB_SUFFIX
@@ -40,6 +58,14 @@ CMAKE_OPTS=(
 	-DLIBCXXABI_USE_LLVM_UNWINDER=OFF
 
 	-DPython3_EXECUTABLE=/bin/python3
+
+	# force llvm defaults
+	-DCLANG_DEFAULT_CXX_STDLIB="libc++"
+	#-DCLANG_DEFAULT_RTLIB="compiler-rt"
+	#-DCLANG_DEFAULT_UNWINDLIB="libunwind"
+
+	# ensure DEFAULT_SYSROOT is passed to the subsequent clang
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="DEFAULT_SYSROOT;CMAKE_SYSTEM_INCLUDE_PATH;CMAKE_SYSTEM_LIBRARY_PATH;LLVM_HOST_TRIPLE;LLVM_LIBDIR_SUFFIX;ZLIB_LIBRARY;ZLIB_INCLUDE_DIR;LIBCXXABI_USE_LLVM_UNWINDER;CLANG_DEFAULT_CXX_STDLIB;CLANG_DEFAULT_RTLIB;CLANG_DEFAULT_UNWINDLIB"
 )
 
 # do not use llvmbuild since we are building llvm itself
