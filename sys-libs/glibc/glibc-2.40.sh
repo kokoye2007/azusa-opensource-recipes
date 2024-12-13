@@ -10,6 +10,8 @@ cd "${T}"
 # sysconfdir defines where ld.so.cache is found:
 # ./sysdeps/generic/dl-cache.h:38:# define LD_SO_CACHE SYSCONFDIR "/ld.so.cache"
 
+importpkg dev-util/systemtap
+
 CONFIGURE=(
 	--host="$CHOST"
 	--sysconfdir="/pkg/main/azusa.ldso.data.${OS}.${ARCH}/etc"
