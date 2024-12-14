@@ -11,6 +11,9 @@ cd "${T}"
 
 importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib dev-libs/libedit
 
+# Testing the c++ compiler:
+# echo -e '#include <iostream>\nint main() { std::cout << "hello world" << std::endl; return 0; }' | /pkg/main/sys-devel.llvm-bootstrap.data/bin/clang++ -x c++ -o test -
+
 # somehow, clang fails to find the system includes at some point
 #export CPPFLAGS="${CPPFLAGS} -isystem /pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
 export C_INCLUDE_PATH="$C_INCLUDE_PATH:/pkg/main/sys-libs.glibc.dev.${OS}.${ARCH}/include"
@@ -63,16 +66,44 @@ CMAKE_OPTS=(
 	-DCLANG_DEFAULT_CXX_STDLIB="libc++"
 	#-DCLANG_DEFAULT_RTLIB="compiler-rt"
 	#-DCLANG_DEFAULT_UNWINDLIB="libunwind"
+	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.data.${PVRF}/config"
 
 	# ensure DEFAULT_SYSROOT is passed to the subsequent clang
-	-DCLANG_BOOTSTRAP_PASSTHROUGH="DEFAULT_SYSROOT;CMAKE_SYSTEM_INCLUDE_PATH;CMAKE_SYSTEM_LIBRARY_PATH;LLVM_HOST_TRIPLE;LLVM_LIBDIR_SUFFIX;ZLIB_LIBRARY;ZLIB_INCLUDE_DIR;LIBCXXABI_USE_LLVM_UNWINDER;CLANG_DEFAULT_CXX_STDLIB;CLANG_DEFAULT_RTLIB;CLANG_DEFAULT_UNWINDLIB"
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="DEFAULT_SYSROOT;CMAKE_SYSTEM_INCLUDE_PATH;CMAKE_SYSTEM_LIBRARY_PATH;LLVM_HOST_TRIPLE;LLVM_LIBDIR_SUFFIX;ZLIB_LIBRARY;ZLIB_INCLUDE_DIR;LIBCXXABI_USE_LLVM_UNWINDER;CLANG_DEFAULT_CXX_STDLIB;CLANG_DEFAULT_RTLIB;CLANG_DEFAULT_UNWINDLIB;CLANG_CONFIG_FILE_SYSTEM_DIR"
 )
 
 # do not use llvmbuild since we are building llvm itself
 # do not use docmake either since we want this to be contained in a data dir
 cmake -S "${S}" -B "${T}" -G Ninja -Wno-dev "${CMAKE_OPTS[@]}"
 ninja -j"$NPROC" -v stage2-distribution || /bin/bash -i
+
+if [ x"$LIB_SUFFIX" != x ]; then
+	# pre-create a symlink for lib → lib$LIB_SUFFIX
+	mkdir -p "${D}/pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX"
+	ln -snf "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.data.${PVRF}/lib"
+fi
+
 DESTDIR="${D}" ninja -j"$NPROC" -v stage2-install-distribution
+
+mkdir -p "${D}/pkg/main/${PKG}.data.${PVRF}/config"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang++.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang++.cfg"
+echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cpp.cfg"
+echo "@clang-cxx.cfg" >>"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cpp.cfg"
+
+cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-common.cfg" <<EOF
+--rtlib=compiler-rt
+--unwindlib=libgcc
+-fuse-ld=bfd
+EOF
+
+cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cxx.cfg" <<EOF
+--stdlib=libc++
+
+# allow finding libc++
+-L/pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX/$TRIPLE/
+EOF
 
 fixelf
 archive
