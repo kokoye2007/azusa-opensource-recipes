@@ -101,6 +101,12 @@ EOF
 cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cxx.cfg" <<EOF
 --stdlib=libc++
 
+# fix clang include path order
+-nostdinc
+-isystem /pkg/main/${PKG}.data.${PVRF}/include/c++/v1
+-isystem /pkg/main/sys-libs.glibc.dev.linux.amd64/include
+-isystem /pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/include
+
 # allow finding libc++
 -L/pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX/$TRIPLE/
 EOF
