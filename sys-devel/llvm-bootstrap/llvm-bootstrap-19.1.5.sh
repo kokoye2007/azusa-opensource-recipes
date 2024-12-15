@@ -47,6 +47,7 @@ CMAKE_OPTS=(
 	-DCMAKE_CXX_FLAGS="${CPPFLAGS} -O2"
 	-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}"
 	-DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH}"
+	-DLLVM_INCLUDE_TESTS=OFF
 
 	-DZLIB_LIBRARY=/pkg/main/sys-libs.zlib.libs.${OS}.${ARCH}/lib$LIB_SUFFIX/libz.so
 	-DZLIB_INCLUDE_DIR=/pkg/main/sys-libs.zlib.dev.${OS}.${ARCH}/include
@@ -69,13 +70,13 @@ CMAKE_OPTS=(
 	-DCLANG_CONFIG_FILE_SYSTEM_DIR="/pkg/main/${PKG}.data.${PVRF}/config"
 
 	# ensure DEFAULT_SYSROOT is passed to the subsequent clang
-	-DCLANG_BOOTSTRAP_PASSTHROUGH="DEFAULT_SYSROOT;CMAKE_SYSTEM_INCLUDE_PATH;CMAKE_SYSTEM_LIBRARY_PATH;LLVM_HOST_TRIPLE;LLVM_LIBDIR_SUFFIX;ZLIB_LIBRARY;ZLIB_INCLUDE_DIR;LIBCXXABI_USE_LLVM_UNWINDER;CLANG_DEFAULT_CXX_STDLIB;CLANG_DEFAULT_RTLIB;CLANG_DEFAULT_UNWINDLIB;CLANG_CONFIG_FILE_SYSTEM_DIR"
+	-DCLANG_BOOTSTRAP_PASSTHROUGH="DEFAULT_SYSROOT;CMAKE_SYSTEM_INCLUDE_PATH;CMAKE_SYSTEM_LIBRARY_PATH;LLVM_HOST_TRIPLE;LLVM_LIBDIR_SUFFIX;ZLIB_LIBRARY;ZLIB_INCLUDE_DIR;LIBCXXABI_USE_LLVM_UNWINDER;CLANG_DEFAULT_CXX_STDLIB;CLANG_CONFIG_FILE_SYSTEM_DIR"
 )
 
 # do not use llvmbuild since we are building llvm itself
 # do not use docmake either since we want this to be contained in a data dir
 cmake -S "${S}" -B "${T}" -G Ninja -Wno-dev "${CMAKE_OPTS[@]}"
-ninja -j"$NPROC" -v stage2-distribution || /bin/bash -i
+ninja -j"$NPROC" -v stage2
 
 if [ x"$LIB_SUFFIX" != x ]; then
 	# pre-create a symlink for lib → lib$LIB_SUFFIX
@@ -83,7 +84,7 @@ if [ x"$LIB_SUFFIX" != x ]; then
 	ln -snf "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.data.${PVRF}/lib"
 fi
 
-DESTDIR="${D}" ninja -j"$NPROC" -v stage2-install-distribution
+DESTDIR="${D}" ninja -j"$NPROC" -v stage2-install
 
 mkdir -p "${D}/pkg/main/${PKG}.data.${PVRF}/config"
 echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang.cfg"
@@ -105,7 +106,8 @@ cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cxx.cfg" <<EOF
 -nostdinc
 -isystem /pkg/main/${PKG}.data.${PVRF}/include/c++/v1
 -isystem /pkg/main/sys-libs.glibc.dev.linux.amd64/include
--isystem /pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/include
+-isystem /pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/include
+-isystem /pkg/main/${PKG}.data.${PVRF}/include/${TRIPLE}/c++/v1
 
 # allow finding libc++
 -L/pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX/$TRIPLE/
