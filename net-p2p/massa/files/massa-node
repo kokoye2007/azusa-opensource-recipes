@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+# massa requires a writable pwd with some directories like base_config for massa-node
+# because /pkg is read-only we need to create that in $HOME/.config/massa
+MASSA_HOME="$HOME/.config/massa"
+
+if [ ! -d "$MASSA_HOME" ]; then
+	mkdir -p "$MASSA_HOME"
+fi
+
+if [ ! -f "$MASSA_HOME/password.txt" ]; then
+	# prepare a password for massa commandline
+	tr -dc 'A-Za-z0-9!?%=._' < /dev/urandom | head -c 16 >"$MASSA_HOME/password.txt"
+fi
+
+MASSA_CMD="$(basename "$0")"
+MASSA_PATH="$(dirname "$(dirname "$(realpath "$0")")")"
+
+case $MASSA_CMD in
+	massa-node|massa-client)
+		# ensure we have the dir
+		[ ! -d "$MASSA_HOME/$MASSA_CMD/config" ] && mkdir -p "$MASSA_HOME/$MASSA_CMD/config"
+		cd "$MASSA_HOME/$MASSA_CMD"
+		# force presence of base_config
+		ln -snf "$MASSA_PATH/$MASSA_CMD/base_config" "$MASSA_HOME/$MASSA_CMD/base_config"
+		exec "$MASSA_PATH/$MASSA_CMD/$MASSA_CMD" -p "$(cat "$MASSA_HOME/password.txt")" "$@"
+		;;
+	*)
+		echo "Unable to run $MASSA_CMD"
+		exit 1
+esac

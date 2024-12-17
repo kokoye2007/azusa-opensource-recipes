@@ -5,6 +5,19 @@ inherit llvm
 llvmget _llvm
 acheck
 
+cd "${S}/.."
+
+apatch "$FILESDIR/llvm-toolchain-override.patch"
+
+# See: https://github.com/llvm/llvm-project/pull/84572/files
+cat >>clang/tools/clang-fuzzer/dictionary/CMakeLists.txt <<EOF
+
+set_target_properties(clang-fuzzer-dictionary
+  PROPERTIES
+  LINKER_LANGUAGE CXX
+  )
+EOF
+
 cd "${T}"
 
 importpkg libxml-2.0 icu-uc sci-mathematics/z3 zlib sys-libs/llvm-libunwind sys-libs/libcxx sys-libs/libcxxabi app-arch/xz sys-libs/ncurses dev-lang/lua
@@ -25,9 +38,6 @@ rm -fr /pkg/main/${PKG}.data.${PVRF}/config
 # https://llvm.org/docs/CMake.html
 
 CMAKE_OPTS=(
-	-DCMAKE_INSTALL_PREFIX="/pkg/main/${PKG}.data.${PVRF}" # use data to avoid addition to PATH
-	-DCMAKE_BUILD_TYPE=Release
-
 	-DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;compiler-rt;lld;lldb;mlir;openmp;polly;bolt"
 	-DLLVM_TARGETS_TO_BUILD=all
 	-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind"
@@ -41,8 +51,10 @@ CMAKE_OPTS=(
 	-DLLVM_ENABLE_DOXYGEN=OFF
 	-DLLVM_ENABLE_SPHINX=ON
 
-	-DCMAKE_SYSTEM_INCLUDE_PATH="${CMAKE_SYSTEM_INCLUDE_PATH}"
-	-DCMAKE_SYSTEM_LIBRARY_PATH="${CMAKE_SYSTEM_LIBRARY_PATH}"
+	# saves a lot of space
+	-DLLVM_BUILD_LLVM_DYLIB=ON
+	-DLLVM_LINK_LLVM_DYLIB=ON
+	-DLLVM_VERSION_SUFFIX=+full
 
 	-DZLIB_LIBRARY=/pkg/main/sys-libs.zlib.libs.${OS}.${ARCH}/lib$LIB_SUFFIX/libz.so
 	-DZLIB_INCLUDE_DIR=/pkg/main/sys-libs.zlib.dev.${OS}.${ARCH}/include
@@ -67,16 +79,21 @@ CMAKE_OPTS=(
 
 # do not use llvmbuild since we are building llvm itself
 # do not use docmake either since we want this to be contained in a data dir
-cmake -S "${S}" -B "${T}" -G Ninja -Wno-dev "${CMAKE_OPTS[@]}"
-ninja -j"$NPROC" -v all
+#cmake -S "${S}" -B "${T}" -G Ninja -Wno-dev "${CMAKE_OPTS[@]}"
+#ninja -j"$NPROC" -v all
+
+mkdir -p "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX"
+mkdir -p "${D}/pkg/main/${PKG}.core.${PVRF}"
+ln -snf "${D}/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"
 
 if [ x"$LIB_SUFFIX" != x ]; then
 	# pre-create a symlink for lib → lib$LIB_SUFFIX
 	mkdir -p "${D}/pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX"
 	ln -snf "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.data.${PVRF}/lib"
+	ln -snf "lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib"
 fi
 
-DESTDIR="${D}" ninja -j"$NPROC" -v install
+#DESTDIR="${D}" ninja -j"$NPROC" -v install
 
 mkdir -p "${D}/pkg/main/${PKG}.data.${PVRF}/config"
 echo "@clang-common.cfg" >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang.cfg"
@@ -92,14 +109,18 @@ EOF
 cat >"${D}/pkg/main/${PKG}.data.${PVRF}/config/clang-cxx.cfg" <<EOF
 # fix clang include path order
 -nostdinc
--isystem /pkg/main/${PKG}.data.${PVRF}/include/c++/v1
+-isystem /pkg/main/${PKG}.core.${PVRF}/include/c++/v1
 -isystem /pkg/main/sys-libs.glibc.dev.linux.amd64/include
--isystem /pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/include
--isystem /pkg/main/${PKG}.data.${PVRF}/include/${CHOST}/c++/v1
+-isystem /pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX/clang/${PV/.*}/include
+-isystem /pkg/main/${PKG}.core.${PVRF}/include/${CHOST}/c++/v1
 
 # allow finding libc++
 -L/pkg/main/${PKG}.data.${PVRF}/lib$LIB_SUFFIX/$CHOST/
 EOF
+
+docmake "${CMAKE_OPTS[@]}"
+
+ln -snf "/pkg/main/${PKG}.libs.${PVRF}/lib$LIB_SUFFIX" "${D}/pkg/main/${PKG}.core.${PVRF}/lib$LIB_SUFFIX"
 
 fixelf
 archive

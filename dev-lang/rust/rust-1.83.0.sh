@@ -11,23 +11,23 @@ cd "rustc-${PV}-src"
 # https://github.com/rust-lang/rust/blob/master/config.example.toml
 # AArch64;AMDGPU;ARM;AVR;BPF;Hexagon;Lanai;LoongArch;Mips;MSP430;NVPTX;PowerPC;RISCV;Sparc;SystemZ;VE;WebAssembly;X86;XCore
 #
-# We use sys-devel/llvm-bootstrap since it's easier
-export PATH="/pkg/main/sys-devel.llvm-bootstrap.data/bin:$PATH"
+# We use sys-devel/llvm-full since it should be easier
+export PATH="/pkg/main/sys-devel.llvm-full.core/bin:$PATH"
 
 cat << EOF > config.toml
 change-id = 118703
 
 [llvm]
 # llvm won't be compiled by rust since we provide llvm-config in targets below
-download-ci-llvm = false
-optimize = true
-release-debuginfo = false
-assertions = false
-targets = "X86;AArch64;ARM;WebAssembly"
-experimental-targets = ""
+#download-ci-llvm = false
+#optimize = true
+#release-debuginfo = false
+#assertions = false
+#targets = "X86;AArch64;ARM;WebAssembly"
+#experimental-targets = ""
 
 # When using system llvm prefer shared libraries
-link-shared = true
+#link-shared = true
 
 [build]
 build-stage = 2
@@ -88,31 +88,31 @@ codegen-tests = false
 src-tarball = false
 compression-formats = ["xz"]
 
-[target.x86_64-unknown-linux-gnu]
-llvm-config = "/pkg/main/sys-devel.llvm-bootstrap.data/bin/llvm-config"
-ar = "ar"
-cc = "clang++"
-cxx = "clang++"
-linker = "clang++"
-ranlib = "ranlib"
-llvm-libunwind = "system"
-
-[target.i686-unknown-linux-gnu]
-llvm-config = "/pkg/main/sys-devel.llvm-bootstrap.data/bin/llvm-config"
-ar = "ar"
-cc = "clang++"
-cxx = "clang++"
-linker = "clang++"
-ranlib = "ranlib"
-llvm-libunwind = "system"
-
-[target.wasm32-unknown-unknown]
-linker = "lld"
-profiler = false
+#[target.x86_64-unknown-linux-gnu]
+#llvm-config = "/pkg/main/sys-devel.llvm-full.core/bin/llvm-config"
+#ar = "ar"
+#cc = "clang++"
+#cxx = "clang++"
+#linker = "clang++"
+#ranlib = "ranlib"
+#llvm-libunwind = "system"
+#
+#[target.i686-unknown-linux-gnu]
+#llvm-config = "/pkg/main/sys-devel.llvm-full.core/bin/llvm-config"
+#ar = "ar"
+#cc = "clang++"
+#cxx = "clang++"
+#linker = "clang++"
+#ranlib = "ranlib"
+#llvm-libunwind = "system"
+#
+#[target.wasm32-unknown-unknown]
+#linker = "lld"
+#profiler = false
 EOF
 
 export LLVM_LINK_SHARED=1
-export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(/pkg/main/sys-devel.llvm-bootstrap.data/bin/llvm-config --libdir)"
+export RUSTFLAGS="$RUSTFLAGS -C link-arg=-fuse-ld=lld -C link-arg=-lffi -Lnative=$(/pkg/main/sys-devel.llvm-full.core/bin/llvm-config --libdir)"
 export LIBGIT2_NO_VENDOR=1
 
 # this is a literally magic variable that gets through cargo cache, without it some
