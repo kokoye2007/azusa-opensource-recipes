@@ -1,16 +1,7 @@
-versions:
-    list:
-        - "1.11"
-        - 1.9.1
-    stable: "1.11"
-build:
-    - version: '*'
-      source:
-        - https://www.cabextract.org.uk/${P}.tar.gz
-      engine: autoconf
 files:
     cabextract-1.9.1.tar.gz:
         size: 469369
+        added: 2026-09-27T03:40:42.390346256+10:00
         hashes:
             sha1: a939b03822cf5a8fcc1677077915416f42a12784
             sha3-256: 07b77d0f08f4b2b359b0e69fa5cc3f39dc0df5d6f471a315f266b5bdbb0e9780
