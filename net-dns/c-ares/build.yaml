@@ -1,0 +1,9 @@
+versions:
+    list:
+        - "1.34.8"
+    stable: "1.34.8"
+build:
+    - version: '*'
+      source:
+        - https://github.com/c-ares/c-ares/releases/download/v${PV}/${P}.tar.gz
+      engine: autoconf

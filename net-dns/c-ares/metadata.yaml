@@ -1,0 +1,8 @@
+files:
+    c-ares-1.34.8.tar.gz:
+        size: 1036098
+        added: 2026-09-27T04:16:36.045229504+10:00
+        hashes:
+            sha1: cb8cf865cefedc9ec3229556939e63ac19b04da1
+            sha3-256: 8088b77aa3449043cddbf4e5787b5d0123d8525c97c37a4ed5f0294403c895d8
+            sha256: c222b6d681096f9444d2c4863d2c1174019e27cacca0a4a5c114d36dd7d7bf78
