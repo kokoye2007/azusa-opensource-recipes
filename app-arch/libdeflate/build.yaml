@@ -1,0 +1,9 @@
+versions:
+    list:
+        - "1.26"
+    stable: "1.26"
+build:
+    - version: '*'
+      source:
+        - https://github.com/ebiggers/libdeflate/archive/refs/tags/v${PV}.tar.gz
+      engine: cmake
