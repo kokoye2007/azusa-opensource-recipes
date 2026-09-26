@@ -1,0 +1,8 @@
+files:
+    libstatgrab-0.92.1.tar.gz:
+        size: 817531
+        added: 2026-09-27T04:18:08.800115763+10:00
+        hashes:
+            sha1: 1d93c4116b23fab61b6c36414976a924fb82efd8
+            sha3-256: 91f0f0fa61e28fbe001d07a633d5b865a77a3d8f4b8f98cfdd844a4a474e8af3
+            sha256: 5688aa4a685547d7174a8a373ea9d8ee927e766e3cc302bdee34523c2c5d6c11

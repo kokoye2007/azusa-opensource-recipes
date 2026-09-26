@@ -1,0 +1,11 @@
+versions:
+    list:
+        - "0.92.1"
+    stable: "0.92.1"
+build:
+    - version: '*'
+      source:
+        - http://www.mirrorservice.org/sites/ftp.i-scream.org/pub/i-scream/libstatgrab/${P}.tar.gz
+      engine: autoconf
+      arguments:
+        - --disable-static
