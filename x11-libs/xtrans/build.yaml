@@ -1,0 +1,9 @@
+versions:
+    list:
+        - "1.6.0"
+    stable: "1.6.0"
+build:
+    - version: '*'
+      source:
+        - https://xorg.freedesktop.org/archive/individual/lib/${P}.tar.xz
+      engine: autoconf
