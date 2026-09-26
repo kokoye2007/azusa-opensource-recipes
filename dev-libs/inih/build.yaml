@@ -1,0 +1,9 @@
+versions:
+    list:
+        - "62"
+    stable: "62"
+build:
+    - version: '*'
+      source:
+        - https://github.com/benhoyt/inih/archive/r${PV}.tar.gz
+      engine: meson
