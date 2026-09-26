@@ -1,0 +1,15 @@
+versions:
+  list:
+    - 1.98.1
+  stable: 1.98.1
+build:
+  - version: "*"
+    inputs:
+      - rust-compiler
+    env:
+      - RUST_COMPILER_INPUT=$APKG_INPUT_RUST_COMPILER
+    source: []
+    engine: none
+    preserve_lib: true
+    install_post:
+      - bash "${FILESDIR}/package-rust-compiler.sh" "$RUST_COMPILER_INPUT" "${D}/pkg/main/${PKG}.core.${PVRF}"
